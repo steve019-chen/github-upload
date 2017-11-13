@@ -42,4 +42,4 @@ mod 'telus_lib',
   :git => 'ssh://git@bitbucket.corp.sidclab:7999/puppet_prod/telus_lib.git'
 
 mod 'telus-spacewalk_migrate',
-  :git => 'ssh://git@localhost:7999/puppet_prod/telus-spacewalk_migrate.git'
+  :git => 'ssh://git@bitbucket.corp.sidclab:7999/puppet_prod/telus-spacewalk_migrate.git'
