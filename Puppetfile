@@ -37,10 +37,13 @@ mod 'puppetlabs-lvm',
 
 #TELUS custom modules
 mod 'puppet_agent_config',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git'
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
+  :tag => '2.0.0'
 
 mod 'telus_lib',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git'
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
+  :tag => '1.3.1'
 
 mod 'telus-spacewalk_migrate',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git'
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
+  :tag => '0.2.4'
