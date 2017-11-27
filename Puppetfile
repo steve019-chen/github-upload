@@ -34,7 +34,7 @@ mod 'puppetlabs-puppetdb',
 #Forge dirty modules
 mod 'puppetlabs-lvm',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/puppetlabs-lvm.git',
-  :tag => '1.0.1b'
+  :tag => '1.0.1d'
 
 #TELUS custom modules
 mod 'puppet_agent_config',
