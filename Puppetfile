@@ -31,9 +31,10 @@ mod 'puppetlabs-puppetdb',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppetdb.git',
   :tag => '5.1.2'
 
+#Forge dirty modules
 mod 'puppetlabs-lvm',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-lvm.git',
-  :tag => '1.0.0'
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/puppetlabs-lvm.git',
+  :tag => '1.0.1d'
 
 #TELUS custom modules
 mod 'puppet_agent_config',
