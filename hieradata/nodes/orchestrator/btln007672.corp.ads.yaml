@@ -5,7 +5,6 @@ lvm::volume_groups:
     physical_volumes:
       - /dev/sdb
       - /dev/sdc
-      - /dev/sdd
     logical_volumes:
       app01lv: {fs_type: ext4, size: 100G, mountpath: /ora/fs0000/app}
       app02lv: {fs_type: ext4, size: 100G, mountpath: /ora/fs0000/grid}
