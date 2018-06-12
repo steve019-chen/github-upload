@@ -1,7 +1,7 @@
 #Forge clean modules
 mod 'puppetlabs-stdlib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-stdlib.git',
-  :tag => '4.16.0'
+  :tag => '4.25.0'
 
 mod 'puppetlabs-apache', 
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-apache.git',
@@ -31,10 +31,17 @@ mod 'puppetlabs-puppetdb',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppetdb.git',
   :tag => '5.1.2'
 
-#Forge dirty modules
 mod 'puppetlabs-lvm',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/puppetlabs-lvm.git',
-  :tag => '1.0.1d'
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-lvm.git',
+  :tag => '1.0.1'
+
+mod 'puppetlabs-puppet_agent',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppet_agent.git',
+  :tag => '1.6.0'
+
+mod 'puppetlabs-transition',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
+  :tag => '0.1.1'
 
 #TELUS custom modules
 mod 'puppet_agent_config',

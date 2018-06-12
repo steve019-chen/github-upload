@@ -1,0 +1,11 @@
+---
+lvm::volume_groups:
+  appvg:
+    createonly: true
+    physical_volumes:
+      - /dev/mapper/360000970000196701484533030334536
+      - /dev/mapper/360000970000196701484533030334537
+    logical_volumes:
+      app01lv: {fs_type: ext4, size: 100G, mountpath: /ora/fs0000/app}
+      app02lv: {fs_type: ext4, size: 100G, mountpath: /ora/fs0000/grid}
+      app03lv: {fs_type: ext4, size: 100G, mountpath: /ora/fs0000/work}

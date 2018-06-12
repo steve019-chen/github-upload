@@ -1,0 +1,9 @@
+---
+lvm::volume_groups:
+  appvg:
+    createonly: true
+    physical_volumes:
+      - /dev/sdb
+    logical_volumes:
+       app02lv: {fs_type: ext4, size: 50G, mountpath: /work}
+       app01lv: {fs_type: ext4, size: 100G, mountpath: /apps}
