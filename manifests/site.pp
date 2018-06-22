@@ -14,20 +14,20 @@ node default {
 
 
 #20180620 - Many IDCs - Puppet 5 Upgrade 
-node btln001455,btln007077,btlp000563,btlp-test03,btlp-test04,btlp-test08,ln-test11,ln98167,ln99127,ln99248,lp97073,lp97068,lp98187,lp99709,
-testvm-rhel,tsln-test501,tsln-test503,tslp000576,tslp000743,tslp000744,tslp000745,tslp000746,tslp000748,btln003075,btln003076,btln003077,
-btln003078,btln003079,btln003080,btln003081,btln003082,btln003083,btln007672,btln007673,btlp004004,btlp004005,btlp006593,btlp006594,btlp007026,
-btlp007029,btlp007030,tslp001014,tslp001015,tslp001016,tslp001017,tslp001018,btln007362,btln007363,btln007364,btln007365,btln007366,btln007367,
-btln007368,btln007369,btln007370,btln007371,btln007546,btln007547,btlp006125,btlp006126,btlp006127,btlp006128,btlp006129,btlp006130,btlp006131,
-btlp006132,btlp006134,btlp006306,btlp006307,btlp006308,btlp006309,btlp006310,btlp006311,btlp006312,btlp006313,btlp006314,btlp006315,ln-test15,
-lp98085,lp98086,tslp000212,tslp000252,tslp000253,tslp000255,tslp000256,tslp000899,btln002979,btln002370,btln002978,lp99676,btln001372,btln002497,
-btln002811,btln002812,btln002813,btln002814,btlp001703,btlp002542,btlp002568,ln98159,ln98160,tslp000139,tslp000213 {
-  class {'::puppet_agent':
-    package_version => '5.5.1',
-    service_names   => ['puppet'],
-    manage_repo     => false,
-  }
-}
+# node btln001455,btln007077,btlp000563,btlp-test03,btlp-test04,btlp-test08,ln-test11,ln98167,ln99127,ln99248,lp97073,lp97068,lp98187,lp99709,
+# testvm-rhel,tsln-test501,tsln-test503,tslp000576,tslp000743,tslp000744,tslp000745,tslp000746,tslp000748,btln003075,btln003076,btln003077,
+# btln003078,btln003079,btln003080,btln003081,btln003082,btln003083,btln007672,btln007673,btlp004004,btlp004005,btlp006593,btlp006594,btlp007026,
+# btlp007029,btlp007030,tslp001014,tslp001015,tslp001016,tslp001017,tslp001018,btln007362,btln007363,btln007364,btln007365,btln007366,btln007367,
+# btln007368,btln007369,btln007370,btln007371,btln007546,btln007547,btlp006125,btlp006126,btlp006127,btlp006128,btlp006129,btlp006130,btlp006131,
+# btlp006132,btlp006134,btlp006306,btlp006307,btlp006308,btlp006309,btlp006310,btlp006311,btlp006312,btlp006313,btlp006314,btlp006315,ln-test15,
+# lp98085,lp98086,tslp000212,tslp000252,tslp000253,tslp000255,tslp000256,tslp000899,btln002979,btln002370,btln002978,lp99676,btln001372,btln002497,
+# btln002811,btln002812,btln002813,btln002814,btlp001703,btlp002542,btlp002568,ln98159,ln98160,tslp000139,tslp000213 {
+#   class {'::puppet_agent':
+#     package_version => '5.5.1',
+#     service_names   => ['puppet'],
+#     manage_repo     => false,
+#   }
+# }
 
 
 # #20180619 - KIDC - Puppet 5 Upgrade 
