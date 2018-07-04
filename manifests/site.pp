@@ -12,15 +12,6 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-#20180703 - Stragglers many IDCs - Puppet 5 Upgrade 
-node btln001959.corp.ads,btln007034.corp.ads,btlp006148.corp.ads,ln98483.corp.ads,ln98855.corp.ads,ln99094.corp.ads,ln99095.corp.ads,ln99117.corp.ads,
-ln99126.corp.ads,ln99727.corp.ads,ln99802.corp.ads,ln99803.corp.ads,lp99048.corp.ads,tslp000220.oss.ads,tslp000576.corptools.ads {
-  class {'::puppet_agent':
-    package_version => '5.5.1',
-    service_names   => ['puppet'],
-    manage_repo     => false,
-  }
-}
 
 #20180703 - ROFS many IDCs - Puppet 5 Upgrade 
 node ln98162.corp.ads,ln98179.ent.agt.ab.ca,ln98763.corp.ads,ln98854.corp.ads,ln98876.corp.ads,ln98970.corp.ads,ln98987.corp.ads,ln98988.corp.ads,
@@ -35,6 +26,16 @@ lp99536.corp.ads,lp99537.corp.ads,lp99606.corp.ads,lp99607.corp.ads,lp99608.corp
     manage_repo     => false,
   }
 }
+
+#20180703 - Stragglers many IDCs - Puppet 5 Upgrade 
+# node btln001959.corp.ads,btln007034.corp.ads,btlp006148.corp.ads,ln98483.corp.ads,ln98855.corp.ads,ln99094.corp.ads,ln99095.corp.ads,ln99117.corp.ads,
+# ln99126.corp.ads,ln99727.corp.ads,ln99802.corp.ads,ln99803.corp.ads,lp99048.corp.ads,tslp000220.oss.ads,tslp000576.corptools.ads {
+#   class {'::puppet_agent':
+#     package_version => '5.5.1',
+#     service_names   => ['puppet'],
+#     manage_repo     => false,
+#   }
+# }
 
 #20180620 - Many IDCs - Puppet 5 Upgrade 
 # node btln001455,btln007077,btlp000563,btlp-test03,btlp-test04,btlp-test08,ln-test11,ln98167,ln99127,ln99248,lp97073,lp97068,lp98187,lp99709,
