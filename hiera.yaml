@@ -1,0 +1,26 @@
+---
+version: 5
+defaults:
+  datadir: hieradata
+  data_hash: yaml_data
+hierarchy:
+  - name: "Eyaml hierarchy"
+    lookup_key: eyaml_lookup_key
+    paths:
+      - "nodes/%{trusted.certname}.eyaml"
+      - "common.eyaml"
+    options:
+      pkcs7_private_key: "/etc/puppetlabs/secure/keys/private_key.pkcs7.pem"
+      pkcs7_public_key: "/etc/puppetlabs/secure/keys/public_key.pkcs7.pem"
+
+  - name: "Per-node data (YAML version)"
+    path: "nodes/%{trusted.certname}.yaml"
+
+  - name: "Per-node data from orchestrator (YAML version)"
+    path: "nodes/orchestrator/%{trusted.certname}.yaml"
+
+  - name: "Kickstart data (YAML version)"
+    path: "KS.yaml"
+
+  - name: "Common data (YAML version)"
+    path: "common.yaml"
