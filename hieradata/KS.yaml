@@ -11,7 +11,7 @@
 ##
 ## Configuration file:    bug:/apps/kickstart/config
 ## Conversion script dir: /apps/Kickstart2Hiera
-## Conversion script:     ./ks2yaml.sh
+## Conversion script:     /apps/Kickstart2Hiera/ks2yaml.sh
 ## Author:                Steven Farkas
 ##
 ################################################################################
@@ -6099,8 +6099,9 @@ NETWORK::100-70-31-192:
  vlan:          1600
  netmask:       255.255.255.192
  router:        100.70.31.193
- boot_server:   none
- media_server:  none
+ boot_server:   btlp002429/100.70.31.202 
+ dhcp_server:   none
+ media_server:  btlp002429/100.70.31.202 
  depot_server:  none
 
 #-----------------------------------------------------------------------------#
