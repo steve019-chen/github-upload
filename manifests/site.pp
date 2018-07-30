@@ -633,5 +633,13 @@ lp99536.corp.ads,lp99537.corp.ads,lp99606.corp.ads,lp99607.corp.ads,lp99608.corp
 #   }
 # }
 
+#20180730 - t837836 - ASAPNOC PreProd test
+node btln007808,btln007809,btln007769,btln007770 {
+  file {'/data/puppet_test':
+    ensure => present,
+    content => "puppet test",
+  }
+}
+
 # lint:endignore
 
