@@ -499,6 +499,17 @@
 # Puppet:  (yes==install or no==don't_install)
 # As of Oct 13/2017 puppet is required for all BT and TS servers.
 #-----------------------------------------------------------------------------#
+#[OPTION_LIST] puppet.BT
+# #ACTION                   |DEFAULT| LABEL
+#  #no                       |       | no
+#  yes                      |   *   | yes
+#[OPTION_LIST] puppet.TS
+# #ACTION                   |DEFAULT| LABEL
+#  #no                       |       | no
+#  yes                      |   *   | yes
+#[OPTION_LIST] puppet.MITS
+# #ACTION                   |DEFAULT| LABEL
+#  no                       |   *   | no
 #-----------------------------------------------------------------------------#
 # Hadoop:  (yes==log to hadoop or no==don't log to hadoop)
 #-----------------------------------------------------------------------------#
@@ -602,14 +613,23 @@
 #  server_ip:    75.153.190.17
 #  version:  063005000
 ##############################################################
-##############################################################
-#[BMC_SERVER] wp41083
-#  server_ip:           142.178.180.91
-#  bmc_business_unit:       TCI
+#[RT_SERVER] tslp000088.corptools.ads # KIDC RT server 1 of 2 for BMC Patrol
+#  server_ip: 75.153.186.92
 #
-#[BMC_SERVER] bcepcapp02
-#  server_ip:       205.206.195.132
-#  bmc_business_unit:   QIDC
+#[RT_SERVER] tslp000089.corptools.ads # KIDC RT server 2 of 2 for BMC Patrol
+#  server_ip: 75.153.186.93
+#
+#[RT_SERVER] tslp000106.corptools.ads # QIDC RT server 1 of 2 for BMC Patrol
+#  server_ip: 75.153.182.152
+#
+#[RT_SERVER] tslp000107.corptools.ads # QIDC RT server 2 of 2 for BMC Patrol
+#  server_ip: 75.153.182.153
+#
+#[RT_SERVER] sedm1614cc.ent.agt.ab.ca # Toll8 RT server 1 of 2 for BMC Patrol
+#  server_ip: 142.178.20.150
+#
+#[RT_SERVER] bcbmc007.corp.ads        # Vancouver RT server 2 of 2 for BMC Patrol
+#  server_ip: 142.174.23.72
 #-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
 # Local account groups for TS if user authentication service is "ldap"
@@ -642,104 +662,6 @@
 # List of all fields int the config file
 #-----------------------------------------------------------------------------#
 #  dns_inutile # set to "yes" if DNS servers can not resolve internal names
-#  bkp_network
-#  bkp_ip
-#  bkp_netmask
-#  bkp_netmask_bits
-#  bkp_router
-#  bkp_routes
-#  bkp_test_ip
-#  bkp_fqn
-#  bkp_name
-#  bkp_mtu
-#  bkp_vlan
-#  bkp_aggr_mode
-#
-#  pub_network
-#  pub_ip
-#  pub_netmask
-#  pub_netmask_bits
-#  pub_router
-#  pub_routes
-#  pub_test_ip
-#  pub_fqn
-#  pub_name
-#  pub_mtu
-#  pub_vlan
-#  pub_aggr_mode
-#
-#  fe_network
-#  fe_ip
-#  fe_netmask
-#  fe_netmask_bits
-#  fe_router
-#  fe_routes
-#  fe_test_ip
-#  fe_fqn
-#  fe_name
-#  fe_mtu
-#  fe_vlan
-#  fe_aggr_mode
-#
-#  be_network
-#  be_ip
-#  be_netmask
-#  be_netmask_bits
-#  be_router
-#  be_routes
-#  be_test_ip
-#  be_fqn
-#  be_name
-#  be_mtu
-#  be_vlan
-#  be_aggr_mode
-#
-#  nas_network
-#  nas_ip
-#  nas_netmask
-#  nas_netmask_bits
-#  nas_router
-#  nas_routes
-#  nas_test_ip
-#  nas_fqn
-#  nas_name
-#  nas_mtu
-#  nas_vlan
-#  nas_aggr_mode
-#
-#  mgmt_network
-#  mgmt_ip
-#  mgmt_netmask
-#  mgmt_netmask_bits
-#  mgmt_router
-#  mgmt_routes
-#  mgmt_test_ip
-#  mgmt_name
-#  mgmt_fqn
-#  mgmt_vlan # we don't really support mgmt on a vlan
-#  mgmt_aggr_mode
-#
-#  ic_network
-#  ic_ip
-#  ic_netmask
-#  ic_netmask_bits
-#  ic_router
-#  ic_test_ip
-#  ic_name
-#  ic_mtu
-#  ic_vlan
-#  ic_aggr_mode
-#
-#  voip_network
-#  voip_ip
-#  voip_netmask
-#  voip_netmask_bits
-#  voip_router
-#  voip_test_ip
-#  voip_name
-#  voip_mtu
-#  voip_vlan
-#  voip_aggr_mode
 # [DISK_MODELS]   moved to defines file
 # [DISK_TEMPLATE] moved to defines file
 # [VMWARE_TOOLS]  moved to defines file
@@ -1449,15 +1371,22 @@ PROFILE::cway_bt_ten:
 # Toll8 BT PROFILES
 #-----------------------------------------------------------------------------#
 
-PROFILE::toll_bt_pci:
+PROFILE::toll_bt_cde:
  context:      PROFILE
- spacewalk_server:      tslp000746.corptools.ads 
- spacewalk_key:         1-bt-toll-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-tl-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
+ puppet_server:
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
  ntp:                   use_server
  ntp_servers:           142.178.70.59 142.178.150.87 
- ic_scope:              toll_bt_pci_ic
- mgmt_scope:            toll_bt_pci_oMgmt
- nas_scope:             toll_bt_pci_nas
+ ic_scope:              toll_bt_cde_ic
+ mgmt_scope:            toll_bt_cde_oMgmt
+ nas_scope:             toll_bt_cde_nas
  included: toll_bt
  puppet_server:         lp99605.corp.ads
  nbu_profile:           toll_bt
@@ -1697,10 +1626,17 @@ PROFILE::laird_ts:
 # Laird BT PROFILES
 #-----------------------------------------------------------------------------#
 
-PROFILE::laird_bt_pci:
+PROFILE::laird_bt_cde:
  context:      PROFILE
- spacewalk_server:      tslp000746.corptools.ads 
- spacewalk_key:         1-bt-laird-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-tl-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
+ puppet_server:
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
  included: laird_bt_ten
  bkp_scope:             laird_bt_bkp
  ic_scope:              laird_bt_ic
@@ -2133,15 +2069,19 @@ PROFILE::qidc_ts_oMgmt:
 # 
 #ZZZ
 
-PROFILE::qidc_tools_pci:
+
+PROFILE::qidc_tools_cde:
  context:      PROFILE
- satellite_key:         1-tl-qidc-pci
- spacewalk_key:         1-tl-qidc-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-tl-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
  puppet_server:
+ puppet:                no
  domain:                cde.telus.com
- bkp_domain:            corptools.ads
- dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
+ puppet:                no
  dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
+ dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
  included:               qidc_ts
  puppet_server:         tslp000443.corptools.ads
  site:                  QIDC
@@ -2277,22 +2217,20 @@ PROFILE::qidc_mits:
 
 # this profile is for stringray (PCI)
 # it should allow install from mini_ISO + full_ISO
-
-PROFILE::qidc_bt_fake:
- context:      PROFILE
- profile_description:  QIDC BT FAKE
- dns_servers:  142.168.92.61 142.168.92.62 142.168.92.63 
- site:                 QIDC
- env:                  BT
- satellite_server:     tslp000255.corptools.ads
- satellite_key:         1-bt-qidc
- spacewalk_server:      tslp000745.corptools.ads
- spacewalk_key:         1-bt-qidc
- ldap_server1:         uldap-qidc.corptools.ads 
- ldap_server2:         uldap-kidc.corptools.ads 
- tz_local:             Canada/Eastern
- ntp:                  use_server
- ntp_servers:          100.64.93.49 100.64.93.57
+#[PROFILE] qidc_bt_fake
+#  profile_description: QIDC BT FAKE
+#  dns_servers: 142.168.92.61 142.168.92.62 142.168.92.63 # corp.ads AD servers
+#  site:                        QIDC
+#  env:                 BT
+#  satellite_server:    tslp000255.corptools.ads
+#  satellite_key:         1-bt-qidc
+# spacewalk_server:     tslp000745.corptools.ads
+# spacewalk_key:         1-bt-qidc
+#  ldap_server1:                uldap-qidc.corptools.ads 
+#  ldap_server2:                uldap-kidc.corptools.ads 
+#  tz_local:            Canada/Eastern
+#  ntp:                 use_server
+#  ntp_servers:         100.64.93.49 100.64.93.57
 
 # this profile is for testing servers that only have a managment NIC.
 
@@ -2558,16 +2496,20 @@ PROFILE::qidc_bt_nonprod_be-nt:
  mail_relay:    qcmsg.tsl.telus.com
 
 
-PROFILE::qidc_bt_prod_pci:
+PROFILE::qidc_bt_prod_cde:
  context:      PROFILE
- profile_description:  QIDC BT Production PCI
- dns_servers:  75.153.182.21 75.153.182.22 75.153.182.23 
- dns_search:   corp.ads corptools.ads tsl.telus.com
- ntp_servers:  75.154.130.4 75.154.130.28 
- spacewalk_server:     tslp000746.corptools.ads 
- spacewalk_key:        1-bt-qidc-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-bt-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
  puppet_server:
- included:      qidc_bt_prod
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
+ dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
+ ntp_servers:           75.154.130.4 75.154.130.28 
+ included:               qidc_bt_prod
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
@@ -2593,16 +2535,20 @@ PROFILE::qidc_bt_prod_pci:
  mail_relay:    qcmsg.tsl.telus.com
 
 
-PROFILE::qidc_bt_nonprod_pci:
+PROFILE::qidc_bt_nonprod_cde:
  context:      PROFILE
- profile_description:  QIDC BT Non-Prod PCI
- dns_servers:  142.168.88.38 142.168.88.39 
- dns_search:   corp.ads corptools.ads tsl.telus.com
- ntp_servers:  75.154.130.4 75.154.130.28 
- spacewalk_server:     tslp000746.corptools.ads 
- spacewalk_key:        1-bt-qidc-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-bt-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
  puppet_server:
- included:      qidc_bt_nonprod
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
+ dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
+ ntp_servers:           75.154.130.4 75.154.130.28 
+ included:               qidc_bt_nonprod
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
@@ -3572,7 +3518,7 @@ NETWORK::142-178-12-0:
 
 NETWORK::142-178-29-224:
  context:      NETWORK
- scope:         toll_bt_pci 
+ scope:         toll_bt_cde 
  vlan:          20:21
  netmask:       255.255.255.224
  router:        142.178.29.225
@@ -3587,7 +3533,7 @@ NETWORK::142-178-29-224:
 
 NETWORK::142-178-22-0:
  context:      NETWORK
- scope:         toll_bt_pci 
+ scope:         toll_bt_cde 
  vlan: 7
  netmask: 255.255.255.128
  router:  142.178.22.1
@@ -3600,7 +3546,7 @@ NETWORK::142-178-22-0:
 
 NETWORK::100-78-191-128:
  context:      NETWORK
- scope:         toll_bt_pci 
+ scope:         toll_bt_cde 
  vlan:          814:815
  netmask:       255.255.255.224
  router:        100.78.191.129
@@ -3613,7 +3559,7 @@ NETWORK::100-78-191-128:
 
 NETWORK::100-78-191-32:
  context:      NETWORK
- scope:         toll_bt_pci_oMgmt
+ scope:         toll_bt_cde_oMgmt
  vlan:          808:809
  netmask:       255.255.255.224
  router:        100.78.191.33
@@ -3626,7 +3572,7 @@ NETWORK::100-78-191-32:
 
 NETWORK::100-78-190-128:
  context:      NETWORK
- scope:         toll_bt_pci
+ scope:         toll_bt_cde
  vlan:          850:851
  netmask:       255.255.255.224
  router:        100.78.190.129
@@ -3636,7 +3582,7 @@ NETWORK::100-78-190-128:
 
 NETWORK::100-78-190-192:
  context:      NETWORK
- scope:         toll_bt_pci_ic
+ scope:         toll_bt_cde_ic
  vlan:          870:871
  netmask:       255.255.255.224
  test_ip:       
@@ -3646,7 +3592,7 @@ NETWORK::100-78-190-192:
 
 NETWORK::100-78-191-160:
  context:      NETWORK
- scope:         toll_bt_pci_nas
+ scope:         toll_bt_cde_nas
  vlan:          870:871
  netmask:       255.255.255.224
  test_ip:       100.78.191.164 
@@ -6095,7 +6041,7 @@ NETWORK::100-70-34-224:
 
 NETWORK::100-70-31-192:
  context:      NETWORK
- scope:         qidc_tools_pci
+ scope:         qidc_tools_cde
  vlan:          1600
  netmask:       255.255.255.192
  router:        100.70.31.193
@@ -6111,7 +6057,7 @@ NETWORK::100-70-31-192:
 
 NETWORK::100-125-252-0:
  context:      NETWORK
- scope:         qidc_tools_pci
+ scope:         qidc_tools_cde
  vlan:          1600
  netmask:       255.255.255.192
  router:        100.125.252.1
@@ -6234,15 +6180,13 @@ NETWORK::172-16-0-0:
 #-----------------------------------------------------------------------------#
 
 ## this network does not exist.  It is used for kickstart from mini_ISO+full_ISO
-
-NETWORK::192-168-100-0:
- context:      FAKE_NETWORK
- scope:         qidc_bt_fake
- netmask:       255.255.255.0
- test_ip:       192.168.99.1
- boot_server:   none
- media_server:  none
- depot_server:  none
+#[FAKE_NETWORK]  192.168.100.0
+# scope:                qidc_bt_fake
+# netmask:      255.255.255.0
+# test_ip:      192.168.99.1
+# boot_server:   none
+# media_server:  none
+# depot_server:  none
 
 #-----------------------------------------------------------------------------#
 # QIDC BT - VLAN 1000:1001 - "BT prod iMgmt 1 of 2"
@@ -6467,7 +6411,7 @@ NETWORK::100-78-187-64:
 
 NETWORK::100-78-140-128:
  context:      PCI_NETWORK
- scope:         qidc_bt_nonprod_pci
+ scope:         qidc_bt_nonprod_cde
  vlan:          1400:1401
  netmask:       255.255.255.224
  router:        100.78.140.129
@@ -6477,7 +6421,7 @@ NETWORK::100-78-140-128:
 
 NETWORK::100-78-140-96:
  context:      PCI_NETWORK
- scope:         qidc_bt_nonprod_pci
+ scope:         qidc_bt_nonprod_cde
  vlan:          1390:1391
  netmask:       255.255.255.224
  router:        100.78.140.97
@@ -6489,7 +6433,7 @@ NETWORK::100-78-140-96:
 
 NETWORK::206-235-251-160:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          3008:3009
  netmask:       255.255.255.240
  router:        206.235.251.161
@@ -6499,7 +6443,7 @@ NETWORK::206-235-251-160:
 
 NETWORK::100-78-184-96:
  context:      PCI_NETWORK
- scope:         qidc_bt_nonprod_pci
+ scope:         qidc_bt_nonprod_cde
  vlan:          3018:3019
  netmask:       255.255.255.240
  router:        100.78.184.97
@@ -6510,7 +6454,7 @@ NETWORK::100-78-184-96:
 
 NETWORK::206-235-251-128:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          1020:1021
  netmask:       255.255.255.240
  router:        206.235.251.129
@@ -6520,7 +6464,7 @@ NETWORK::206-235-251-128:
 
 NETWORK::100-78-186-96:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          1340:1341
  netmask:       255.255.255.224
  router:        100.78.186.97
@@ -6529,7 +6473,7 @@ NETWORK::100-78-186-96:
 
 NETWORK::100-78-186-128:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          1350:1351
  netmask:       255.255.255.224
  router:        100.78.186.129
@@ -6538,7 +6482,7 @@ NETWORK::100-78-186-128:
 
 NETWORK::100-78-186-160:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          1360:1361
  netmask:       255.255.255.224
  router:        100.78.186.161
