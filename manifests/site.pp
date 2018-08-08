@@ -12,17 +12,6 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-#20180807 - Puppet 5 Upgrade - Perviously expired nodes that became active again
-# node btln007372.corp.ads,btlp000339.corp.ads,btlp006146.corp.ads,ln99614.tmi.telus.com,ln99619.tmi.telus.com,lp97769.tmi.telus.com,lp97771.corp.ads {
-#   class {'::puppet_agent':
-#     package_version => '5.5.1',
-#     service_names   => ['puppet'],
-#     manage_repo     => false,
-#   }
-# }
-
-
-
 #20180703 - ROFS many IDCs - Puppet 5 Upgrade 
 node ln98179.ent.agt.ab.ca,ln98970.corp.ads,ln98987.corp.ads,ln98988.corp.ads,ln98989.corp.ads,ln99037.corp.ads,ln99045.corp.ads,ln99056.corp.ads,ln99257.corp.ads,
 lp97019.corp.ads,lp97300.corp.ads,lp97301.corp.ads,lp97315.corp.ads,lp97513.corp.ads,lp97831.corp.ads,lp97854.corp.ads,lp97897.corp.ads,lp97922.corp.ads,lp97949.corp.ads,
@@ -34,6 +23,15 @@ lp99607.corp.ads,lp99608.corp.ads,lp99609.corp.ads {
     manage_repo     => false,
   }
 }
+
+#20180807 - Puppet 5 Upgrade - Perviously expired nodes that became active again
+# node btln007372.corp.ads,btlp000339.corp.ads,btlp006146.corp.ads,ln99614.tmi.telus.com,ln99619.tmi.telus.com,lp97769.tmi.telus.com,lp97771.corp.ads {
+#   class {'::puppet_agent':
+#     package_version => '5.5.1',
+#     service_names   => ['puppet'],
+#     manage_repo     => false,
+#   }
+# }
 
 #20180703 - Stragglers many IDCs - Puppet 5 Upgrade 
 # node btln001959.corp.ads,btln007034.corp.ads,btlp006148.corp.ads,ln98483.corp.ads,ln98855.corp.ads,ln99094.corp.ads,ln99095.corp.ads,ln99117.corp.ads,
