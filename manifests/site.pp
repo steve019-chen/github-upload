@@ -13,13 +13,13 @@ node default {
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 #20180807 - Puppet 5 Upgrade - Perviously expired nodes that became active again
-node btln007372.corp.ads,btlp000339.corp.ads,btlp006146.corp.ads,ln99614.tmi.telus.com,ln99619.tmi.telus.com,lp97769.tmi.telus.com,lp97771.corp.ads {
-  class {'::puppet_agent':
-    package_version => '5.5.1',
-    service_names   => ['puppet'],
-    manage_repo     => false,
-  }
-}
+# node btln007372.corp.ads,btlp000339.corp.ads,btlp006146.corp.ads,ln99614.tmi.telus.com,ln99619.tmi.telus.com,lp97769.tmi.telus.com,lp97771.corp.ads {
+#   class {'::puppet_agent':
+#     package_version => '5.5.1',
+#     service_names   => ['puppet'],
+#     manage_repo     => false,
+#   }
+# }
 
 
 
