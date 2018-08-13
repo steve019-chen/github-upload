@@ -8,6 +8,9 @@ node default {
 
   class { 'lvm': }
 
+# TELUS Lib module used for custom facts and functions
+  include telus_lib
+
 }
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
