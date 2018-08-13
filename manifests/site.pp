@@ -13,9 +13,9 @@ node default {
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 #20180703 - ROFS many IDCs - Puppet 5 Upgrade 
-node ln98179.ent.agt.ab.ca,ln98970.corp.ads,ln98987.corp.ads,ln98988.corp.ads,ln98989.corp.ads,ln99037.corp.ads,ln99045.corp.ads,ln99056.corp.ads,ln99257.corp.ads,
-lp97019.corp.ads,lp97300.corp.ads,lp97301.corp.ads,lp97315.corp.ads,lp97513.corp.ads,lp97831.corp.ads,lp97854.corp.ads,lp97897.corp.ads,lp97922.corp.ads,lp97949.corp.ads,
-lp97950.corp.ads,lp97952.corp.ads,lp97953.corp.ads,lp99311.ent.agt.ab.ca,lp99378.ent.agt.ab.ca,lp99535.corp.ads,lp99536.corp.ads,lp99537.corp.ads,lp99606.corp.ads,
+node ln98987.corp.ads,ln98988.corp.ads,ln98989.corp.ads,ln99045.corp.ads,ln99056.corp.ads,lp97019.corp.ads,lp97300.corp.ads,lp97301.corp.ads,
+lp97315.corp.ads,lp97513.corp.ads,lp97831.corp.ads,lp97854.corp.ads,lp97897.corp.ads,lp97922.corp.ads,lp97949.corp.ads,lp97950.corp.ads,
+lp97952.corp.ads,lp97953.corp.ads,lp99311.ent.agt.ab.ca,lp99378.ent.agt.ab.ca,lp99535.corp.ads,lp99536.corp.ads,lp99537.corp.ads,lp99606.corp.ads,
 lp99607.corp.ads,lp99608.corp.ads,lp99609.corp.ads {
   class {'::puppet_agent':
     package_version => '5.5.1',
