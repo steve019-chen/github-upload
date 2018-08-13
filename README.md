@@ -1,3 +1,4 @@
+
 Table of Contents
 =================
 
@@ -17,7 +18,7 @@ control-repo.
 
 All of the code that was previously in this repository still exists in separate repositories under the [Puppet Ramp Up Program namespace within Github](https://github.com/Puppet-RampUpProgram) and can be re-connected to an existing control-repo if that is required by adding the modules to the Puppetfile. Alternatively, if that previously opinionated control-repo is desired, [it still exists on Github under the Puppet Ramp Up Program namespace.](https://github.com/Puppet-RampUpProgram/control-repo) This control-repo project will remain a template for anyone who would like a minimal 'starter' template.
 
-# What You Get From This control-repo-sde
+# What You Get From This control-repo
 
 This repository is a template control-repo that can be used with r10k or Puppet Enterprise Code Manager.
 
