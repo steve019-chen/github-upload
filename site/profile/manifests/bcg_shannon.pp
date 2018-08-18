@@ -8,6 +8,11 @@
 #   - Install required packages
 #   - Configure application account
 #   - Create application directory
+# 
+# Prereqs:
+#   - /apps filesystem must exist
+#   - Optional, EPEL, and Software Collections channels must be added
+#
 
 class profile::bcg_shannon {
 
@@ -35,6 +40,9 @@ class profile::bcg_shannon {
                     'python36-devel',
                     'python2-crypto']
 
+  # Packages from Software Collections
+  $sc_packages = ['devtoolset-7']
+
 
   # Install latest channel packages
   package { $latest_packages:
@@ -51,10 +59,15 @@ class profile::bcg_shannon {
     ensure => present,
   }
 
+  #Install Software Collections Packages
+  package { $sc_packages:
+    ensure => present,
+  }
+
   # Create the BCGShannontool group
   group { 'BCGShannontool':
     ensure => present,
-    gid    => '16422',
+    gid    => '16414',
   }
 
   # Create the BCGShannontool application account
