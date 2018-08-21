@@ -87,6 +87,7 @@ class profile::bcg_shannon {
     group   => 'BCGShannontool',
     mode    => '0755',
     require => User['BCGShannontool'],
+	source  => 'puppet:///software/BCGShannontool/',
   }
 
 }
