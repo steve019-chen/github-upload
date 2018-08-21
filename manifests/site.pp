@@ -15,6 +15,9 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+node btln001313.corp.ads {
+class role::bcg_shannon
+}
 
 #20180703 - ROFS many IDCs - Puppet 5 Upgrade 
 node ln98162.corp.ads,ln98179.ent.agt.ab.ca,ln98763.corp.ads,ln98854.corp.ads,ln98876.corp.ads,ln98970.corp.ads,ln98987.corp.ads,ln98988.corp.ads,
