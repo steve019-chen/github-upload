@@ -14,7 +14,7 @@
 #   - Optional, EPEL, and Software Collections channels must be added
 #
 
-class profile::bcg_shannon {
+class profile::pr_bcg_shannon {
 
   # Packages from the OS channel available by default
   $latest_packages = ['alsa-lib',
