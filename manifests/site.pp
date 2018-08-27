@@ -6,12 +6,16 @@ node default {
   # LVM module used for creating non-rootvg filesystems
   class { 'lvm': }
 
-  # Telus custom facts and functions
+# TELUS Lib module used for custom facts and functions
   include telus_lib
 
 }
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
+
+node btln001313.corp.ads {
+class { 'role::bcg_shannon': }
+}
 
 #20180703 - ROFS many IDCs - Puppet 5 Upgrade 
 node ln98987.corp.ads,ln98988.corp.ads,ln98989.corp.ads,ln99045.corp.ads,ln99056.corp.ads,lp97019.corp.ads,lp97300.corp.ads,lp97301.corp.ads,
