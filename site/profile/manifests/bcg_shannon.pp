@@ -89,20 +89,4 @@ class profile::bcg_shannon {
     require => User['BCGShannontool'],
   }
 
-$install_path        = '/apps/BCGShannon'
-$package_name        = 'packageTest'
-$package_ensure      = '0.0.1'
-$archive_name        = "${package_name}-${package_ensure}.tar.gz"
-$package_source      = "puppet:///software/BCGShannontool/${archive_name}"
-
-archive { $archive_name:
-  path         => "/apps/${archive_name}",
-  source       => $package_source,
-  extract      => true,
-  extract_path => $install_path,
-  creates      => "${install_path}/${package_name}-${package_ensure}",
-  cleanup      => true,
-  require      => File['/apps/BCGShannon'],
-}
-
 }
