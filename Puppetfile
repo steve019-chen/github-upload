@@ -43,6 +43,10 @@ mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
   :tag => '0.1.1'
 
+# mod 'puppet-archive',
+#  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-archive.git',
+#  :tag => '3.1.1'
+
 #TELUS custom modules
 mod 'puppet_agent_config',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
