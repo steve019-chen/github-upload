@@ -43,6 +43,10 @@ mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
   :tag => '0.1.1'
 
+mod 'dynatrace-dynatraceoneagent',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
+  :tag => '0.3.0-1'
+
 #TELUS custom modules
 mod 'puppet_agent_config',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
