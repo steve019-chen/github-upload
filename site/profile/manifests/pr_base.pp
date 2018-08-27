@@ -4,7 +4,7 @@
 #
 # Parameters:
 #
-class profile::base {
+class profile::pr_base {
 
   #the base profile should include component modules that will be on all nodes
   class { 'puppet_agent_config::puppet_conf': }
