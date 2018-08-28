@@ -26,7 +26,7 @@ class profile::pr_dynatrace1agent {
   # Create the dyntrace user for application account
   user { 'dynatrace':
     uid      => '32996',
-    gid      => '16409',
+    gid      => 'dynatrace',
     shell    => '/bin/bash',
     password => pw_hash(lookup('bcg_shannon::app_account_password'), 'SHA-512','mysalt'),
     require  => Group['dynatrace'],
