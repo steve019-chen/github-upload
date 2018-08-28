@@ -43,8 +43,8 @@ class profile::pr_dynatrace1agent {
 
   
 	class { 'dynatraceoneagent':
-		  # download_link => 'https://142.174.115.8/e/56f21ab8-4f4b-4a14-9afb-bd493a8884ac/api/v1/deployment/installer/agent/unix/default/latest?Api-Token=ykJK2lC6S8eWmZwETfVYn&arch=x86&flavor=default',#this is the original
-		    download_link => 'puppet://master.localhost/modules/dynatraceoneagent/files/Dynatrace-OneAgent-Linux-1.149.213.sh',
+		  # download_link => 'https://142.174.115.8/e/56f21ab8-4f4b-4a14-9afb-bd493a8884ac/api/v1/deployment/installer/agent/unix/default/latest?Api-Token=ykJK2lC6S8eWmZwETfVYn&arch=x86&flavor=default',#this is the original2
+		    download_link => 'puppet://master.localhost/modules/dynatrace-dynatraceoneagent/files/Dynatrace-OneAgent-Linux-1.149.213.sh',
         user => 'dynatrace',
         require => File['/home/dynatrace'],
     		}
