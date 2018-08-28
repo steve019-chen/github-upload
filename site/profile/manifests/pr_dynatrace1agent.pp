@@ -13,20 +13,20 @@
 #   - Optional, EPEL, and Software Collections channels must be added
 #
 
-class profile::pr_dynatrace1agent {
+node ln99773, ln99826 class profile::pr_dynatrace1agent {
 
   # Packages from the OS channel available by default
 
   # Create the BCGShannontool group
   group { 'dynatrace':
     ensure => present,
-    gid    => '16409',
+    gid    => '100',
   }
 
-  # Create the BCGShannontool application account
+  # Create the dyntrace user for application account
   user { 'dynatrace':
-    uid      => '32996',
-    gid      => '16409',
+    uid      => '31206',
+    gid      => '100',
     shell    => '/bin/bash',
     password => pw_hash(lookup('dynatrace::app_account_password'), 'SHA-512','mysalt'),
     require  => Group['dynatrace'],
@@ -40,5 +40,13 @@ class profile::pr_dynatrace1agent {
     mode    => '0755',
     require => User['dynatrace'],
   }
+
+  
+	dynatrace-dynatraceoneagent { 'dynatraceoneagent':
+		  # download_link => 'https://142.174.115.8/e/56f21ab8-4f4b-4a14-9afb-bd493a8884ac/api/v1/deployment/installer/agent/unix/default/latest?Api-Token=ykJK2lC6S8eWmZwETfVYn&arch=x86&flavor=default',
+		    download_link => 'puppet://master.localhost/module/Dynatrace-OneAgent-Linux-1.147.185.sh',
+        user => 'dynatrace',
+    		}
+             
 
 }
