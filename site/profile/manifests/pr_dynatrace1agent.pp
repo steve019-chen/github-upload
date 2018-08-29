@@ -30,22 +30,15 @@ class profile::pr_dynatrace1agent {
     shell    => '/bin/bash',
     password => pw_hash(lookup('dynatrace::app_account_password'), 'SHA-512','mysalt'),
     require  => Group['dynatrace'],
-  }
-
-  # Create the application directory
-  file { ['/home/dynatrace']:
-    ensure  => directory,
-    owner   => 'dynatrace',
-    group   => 'dynatrace',
-    mode    => '0755',
-    require => User['dynatrace'],
+    managehome => true,
   }
 
 	class { 'dynatraceoneagent':
-		    download_link => 'puppet:///modules/dynatraceoneagent/Dynatrace-OneAgent-Linux-1.149.213.sh',
-        user => 'dynatrace',
-        require => File['/home/dynatrace'],
-    		}
+    download_link => 'puppet:///modules/dynatraceoneagent/Dynatrace-OneAgent-Linux-1.149.213.sh',
+    download_dir  => '/tmp',
+    user          => 'dynatrace',
+    require       => User['dynatrace'],
+    }
              
 
 }
