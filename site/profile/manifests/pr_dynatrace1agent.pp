@@ -1,23 +1,21 @@
-# Class: bcg_shannon
+# Class: pr_dynatrace1agent
 #
-# This class configures linux servers for Boston Consulting Group Shannon Project
+# This class perform  dynatrace one agent Installation
 #
 # Parameters:
 #
 # Actions:
 #   - Configure application account
 #   - Create application directory
-# 
+#   - Install Dynatrace One Agent on selected servers
 # Prereqs:
-#   - /apps filesystem must exist
-#   - Optional, EPEL, and Software Collections channels must be added
+#   - /home/ filesystem must exist
+#   - dynatrace one Agent Module Puppet and must be available in bitbucket 
 #
 
 class profile::pr_dynatrace1agent {
 
-  # Packages from the OS channel available by default
-
-  # Create the BCGShannontool group
+  # Create the dynatrace group
   group { 'dynatrace':
     ensure => present,
     gid    => '16409',
