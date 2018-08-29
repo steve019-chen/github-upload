@@ -10,7 +10,7 @@
 #   - Install Dynatrace One Agent on selected servers
 # Prereqs:
 #   - /home/ filesystem must exist
-#   - dynatrace one Agent Module must be installed
+#   - dynatrace one Agent Module Puppet and must be available in bitbucket 
 #
 
 class profile::pr_dynatrace1agent {
