@@ -5,12 +5,13 @@
 # Parameters:
 #
 # Actions:
-#   - Configure application account
-#   - Create application directory
+#   - Configure application account and group
+#   - Create home directory for application account
 #   - Install Dynatrace One Agent on selected servers
 # Prereqs:
 #   - /home/ filesystem must exist
-#   - dynatrace one Agent Module Puppet and must be available in bitbucket 
+#   - Dynatrace One agent Puppet Module must be available in Bitbucket 
+#   - Installer file should be placed in the modules/files directory
 #
 
 class profile::pr_dynatrace1agent {
@@ -21,7 +22,7 @@ class profile::pr_dynatrace1agent {
     gid    => '16409',
   }
 
-  # Create the dyntrace user for application account
+  # Create the dynatrace user for application account, set password and manage home directory
   user { 'dynatrace':
     uid      => '32996',
     gid      => 'dynatrace',
@@ -30,6 +31,8 @@ class profile::pr_dynatrace1agent {
     require  => Group['dynatrace'],
     managehome => true,
   }
+
+# Calling the module and passing a download location and source for the installation file
 
 	class { 'dynatraceoneagent':
     download_link => 'puppet:///modules/dynatraceoneagent/Dynatrace-OneAgent-Linux-1.149.213.sh',
