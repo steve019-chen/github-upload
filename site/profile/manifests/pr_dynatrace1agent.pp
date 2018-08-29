@@ -7,7 +7,7 @@
 # Actions:
 #   - Configure application account
 #   - Create application directory
-#   - Install Dynatrace One Agent 
+#   - Install Dynatrace One Agent on selected servers
 # Prereqs:
 #   - /home/ filesystem must exist
 #   - dynatrace one Agent Module must be installed
