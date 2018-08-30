@@ -15,7 +15,7 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-node ln99773.corp.ads, ln99826.corp.ads {
+node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads {
 class { 'role::rl_dynatrace': }
 }
 
