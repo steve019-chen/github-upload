@@ -20,6 +20,10 @@ btlp007105.corp.ads, btlp007106.corp.ads {
 class { 'role::rl_bcg_shannon': }
 }
 
+node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads {
+class { 'role::rl_dynatrace': }
+}
+
 #20180703 - ROFS many IDCs - Puppet 5 Upgrade 
 node ln98987.corp.ads,ln98988.corp.ads,ln98989.corp.ads,ln99045.corp.ads,ln99056.corp.ads,lp97019.corp.ads,lp97300.corp.ads,lp97301.corp.ads,
 lp97315.corp.ads,lp97513.corp.ads,lp97831.corp.ads,lp97854.corp.ads,lp97897.corp.ads,lp97922.corp.ads,lp97949.corp.ads,lp97950.corp.ads,
@@ -658,6 +662,14 @@ lp99607.corp.ads,lp99608.corp.ads,lp99609.corp.ads {
 #   # Telus custom facts and functions
 #   include telus_lib
 # }
+
+#20180730 - t837836 - ASAPNOC PreProd test
+node btln007808,btln007809,btln007769,btln007770 {
+  file {'/data/puppet_test':
+    ensure => present,
+    content => "puppet test",
+  }
+}
 
 # lint:endignore
 
