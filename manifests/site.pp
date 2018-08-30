@@ -20,7 +20,7 @@ btlp007105.corp.ads, btlp007106.corp.ads {
 class { 'role::rl_bcg_shannon': }
 }
 
-node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads {
+node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads, ln99773.corp.ads, ln99826.corp.ads {
 class { 'role::rl_dynatrace': }
 }
 
