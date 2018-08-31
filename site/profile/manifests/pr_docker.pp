@@ -17,4 +17,11 @@ class profile::pr_docker {
 
 include docker
 
+#20180730 - t837836 - ASAPNOC PreProd test
+file {'/data/puppet_test':
+#    ensure => absent,
+    ensure => present,
+    content => "puppet test",
+  }
+  
 }

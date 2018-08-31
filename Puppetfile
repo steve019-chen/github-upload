@@ -45,11 +45,11 @@ mod 'puppetlabs-transition',
 
 mod 'puppetlabs-translate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-translate.git',
-  :tag => '1.1.0'
+  :tag => '1.0.0'
 
 mod 'puppetlabs-powershell',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-powershell.git',
-  :tag => '2.0.0'
+  :tag => '2.1.5'
 
 mod 'puppetlabs-reboot',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-reboot.git',
@@ -57,7 +57,7 @@ mod 'puppetlabs-reboot',
 
 mod 'puppetlabs-docker',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-docker.git',
-  :tag => '1.0.5'
+  :tag => '1.2.0'
 
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
