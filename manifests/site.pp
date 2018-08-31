@@ -8,10 +8,16 @@ node default {
 
   class { 'lvm': }
 
+# TELUS Lib module used for custom facts and functions
+  include telus_lib
+
 }
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads {
+class { 'role::rl_dynatrace': }
+}
 
 #20180703 - ROFS many IDCs - Puppet 5 Upgrade 
 node ln98162.corp.ads,ln98179.ent.agt.ab.ca,ln98763.corp.ads,ln98854.corp.ads,ln98876.corp.ads,ln98970.corp.ads,ln98987.corp.ads,ln98988.corp.ads,
