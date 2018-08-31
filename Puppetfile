@@ -9,7 +9,7 @@ mod 'puppetlabs-apache',
 
 mod 'puppetlabs-apt',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-apt.git',
-  :tag => '2.4.0'
+  :tag => '4.1.0'
 
 mod 'puppetlabs-concat',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-concat.git',
@@ -42,6 +42,23 @@ mod 'puppetlabs-puppet_agent',
 mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
   :tag => '0.1.1'
+
+  mod 'puppetlabs-docker',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-docker.git',
+  :tag => '2.0.0'
+
+mod 'puppetlabs-translate',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-translate.git',
+  :tag => '2.0.0'
+
+mod 'puppetlabs-powershell',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-powershell.git',
+  :tag => '2.0.0'
+
+mod 'puppetlabs-reboot',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-reboot.git',
+  :tag => '2.0.0'
+
 
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
