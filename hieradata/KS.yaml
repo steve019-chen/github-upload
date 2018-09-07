@@ -1758,11 +1758,27 @@ PROFILE::laird_dr:
 #-----------------------------------------------------------------------------#
 # Laird MITS PROFILES
 #-----------------------------------------------------------------------------#
+
+PROFILE::laird_mits_oob:
+ context:      PROFILE
+ included:       laird_mits
+ env:                MITS
+ tz_local:            Canada/Eastern
+ ntp:                 use_server
+ ntp_servers:         209.171.33.3 209.171.33.4
+ domain:                telus.com
+ bkp_domain:
+ dns_servers:           
+ dns_search:              
+ mail_relay:    
+ site:         Laird
+ primary_nic_type: mgmt 
+ site:         Laird4
+
 # Laird MITS
 
 PROFILE::laird_mits:
  context:      PROFILE
- site:                Laird
  env:                MITS
  tz_local:            Canada/Eastern
  ntp:                 use_server
@@ -1772,6 +1788,7 @@ PROFILE::laird_mits:
  dns_servers:          
  dns_search:              
  mail_relay:   
+ site:         Laird
 
 
 #-----------------------------------------------------------------------------#
@@ -3042,6 +3059,16 @@ NETWORK::100-70-23-224:
  vlan:          1586
  netmask:       255.255.255.248
  router:        100.70.23.225
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1591 - "YODA OSS - ASCKUm - NPV Tool"
+
+NETWORK::100-125-253-144:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1591
+ netmask:       255.255.255.240
+ router:        100.125.253.145
 
 #-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 3002:3003 - "TS Storage (NAS)"
@@ -5109,7 +5136,7 @@ NETWORK::142-63-40-0:
  site:         Laird1
 
 #-----------------------------------------------------------------------------#
-# Laird?: MITS - no boot server
+# Laird1: MITS - no boot server
 
 NETWORK::10-7-64-0:
  context:      NETWORK
@@ -5118,7 +5145,17 @@ NETWORK::10-7-64-0:
  scope:      laird_mits
  boot_server:  none
  media_server: none
- site:         Laird1
+
+#-----------------------------------------------------------------------------#
+# Laird1: MITS OOB - no boot server
+
+NETWORK::10-45-0-0:
+ context:      NETWORK
+ netmask:      255.255.0.0
+ router:      10.45.255.254
+ scope:      laird_mits_oob
+ boot_server:  none
+ media_server: none
 
 #-----------------------------------------------------------------------------#
 # Laird4 Networks
@@ -6104,6 +6141,16 @@ NETWORK::100-70-23-160:
  vlan:          1589
  netmask:       255.255.255.248
  router:        100.70.23.161
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1591 - "YODA OSS - ASCKUm - NPV Tool"
+
+NETWORK::100-125-253-128:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1591
+ netmask:       255.255.255.240
+ router:        100.125.253.129
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 3002:3003 - "TS oStorage (NAS)"
