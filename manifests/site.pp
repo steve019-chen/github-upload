@@ -20,6 +20,11 @@ node btln007808.corp.ads, btln007809, btln007769.corp.ads, btln007770.corp.ads {
 class { 'role::rl_asapnoc': }
 }
 
+#20180907 - Project ASAPNOC Test machine
+node btln999924.corp.ads {
+class { 'role::rl_asapnoc': }
+}
+
 #20180830 - Adding Dynatrace One Agent
 node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads {
 class { 'role::rl_dynatrace': }
