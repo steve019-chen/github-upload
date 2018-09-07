@@ -21,10 +21,10 @@ class { 'docker':
 }
 
 #20180730 - t837836 - ASAPNOC PreProd test
-file {'/data/puppet_test':
+file {'/tmp/puppet_test':
 #    ensure => absent,
-    ensure => present,
+    ensure  => present,
     content => "puppet test",
   }
-  
+
 }
