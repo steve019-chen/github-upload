@@ -27,4 +27,20 @@ file {'/tmp/puppet_test':
     content => "puppet test",
   }
 
+# For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
+# Create the users group
+group { 'users':
+  ensure => present,
+  gid    => '100',
+}
+
+# Create the svc_prov user for application account, set password
+user { 'svc_prov':
+  uid      => '15993',
+  gid      => 'users',
+  shell    => '/bin/bash',
+  password => pw_hash(lookup('asapnoc::app_account_password'), 'SHA-512','mysalt'),
+  require  => Group['users'],
+}
+
 }
