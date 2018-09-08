@@ -4322,13 +4322,14 @@ NETWORK::142-178-220-0:
 
 NETWORK::142-178-221-0:
  context:      NETWORK
- netmask:     255.255.255.0
- router:     142.178.221.1
- scope:      toll_bt_ten
- domain:       corp.ads
- boot_server:  lp99705
- media_server: lp99705
- depot_server: lp99705
+ netmask:       255.255.255.0
+ router:        142.178.221.1
+ vlan:          225
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
 
 #-Edmonton VMware farm #4 --------------------#
 # IP helper added Jun 1/2011
@@ -4492,6 +4493,20 @@ NETWORK::142-178-95-192:
  media_server: lp99705
  depot_server: lp99705
 
+# Toll8 ??? network - VLAN 810
+# IP helper requested sep 7/2018 ICR 926777
+
+NETWORK::142-178-0-0:
+ context:      NETWORK
+ netmask:       255.255.255.0
+ router:        142.178.0.1
+ vlan:          810
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
+
 #-----------------------------------------------------------------------------#
 #-Edmonton Desktop VLAN - no boot server
 # This is added so Steven can install Linux on a desktop
@@ -4562,10 +4577,11 @@ NETWORK::192-168-34-0:
 NETWORK::192-168-35-0:
  context:      BKP_NETWORK
  scope:         toll_bt_bkp
+ vlan:          141
  site:          Toll8
- netmask:     255.255.255.0
- router:      192.168.35.254
- routes:      192.168.32.0/20,192.168.192.0/18
+ netmask:       255.255.255.0
+ router:        192.168.35.254
+ routes:        192.168.32.0/20,192.168.192.0/18
 
 #---------------------------------------------#
 # Edmonton Netbackup Network 3 of 18 #36
@@ -5286,7 +5302,7 @@ NETWORK::142-63-141-0:
  media_server: lp98989
 
 #-----------------------------------------------------------------------------#
-# Laird4 - VLAN 845: ON farm #6 (subnet 1 of 2)
+# Laird4 - VLAN 845: ON farm #6 (subnet 1 of 3)
 # IP helper requested May 18/2012 (ICR 481754) 
 
 NETWORK::142-63-43-0:
@@ -5299,7 +5315,7 @@ NETWORK::142-63-43-0:
  media_server: lp98989
 
 #-----------------------------------------------------------------------------#
-# Laird4 - VLAN 845: ON farm #6 (subnet 2 of 2)
+# Laird4 - VLAN 845: ON farm #6 (subnet 2 of 3)
 
 NETWORK::142-63-53-0:
  context:      NETWORK
@@ -5310,6 +5326,18 @@ NETWORK::142-63-53-0:
  boot_server:  lp98989
  media_server: lp98989
  ai_server:     xp0006/142.63.53.190
+
+#-----------------------------------------------------------------------------#
+# Laird4 - VLAN 845: ON farm #6 (subnet 3 of 3)
+
+NETWORK::142-63-135-0:
+ context:      NETWORK
+ scope:         laird_bt_ten
+ vlan:          845
+ netmask:       255.255.255.192
+ router:        142.63.135.1
+ boot_server:   lp98989
+ media_server:  lp98989
 
 
 #-----------------------------------------------------------------------------#
