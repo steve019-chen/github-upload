@@ -17,7 +17,23 @@ node default {
 
 node ln99877 {
 class { 'role::rl_dynatrace': }
+
+class { 'sudo':
+  purge               => false,
+  config_file_replace => false,
+  }
+ 
+sudo::conf { 'puppet_dynatrace1agent':
+  priority => 10,
+  content  => 'dynatrace ALL=NOPASSWD : /usr/sbin/service oneagent status, /usr/sbin/service oneagent stop, /usr/sbin/service oneagent start, /usr/bin/systemctl status oneagent, /usr/bin/systemctl stop oneagent, /usr/bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh',
+  require       => User['dynatrace'],
+  }
+ 
 }
+
+}
+
+
 
 #20180703 - ROFS many IDCs - Puppet 5 Upgrade 
 node ln98162.corp.ads,ln98179.ent.agt.ab.ca,ln98763.corp.ads,ln98854.corp.ads,ln98876.corp.ads,ln98970.corp.ads,ln98987.corp.ads,ln98988.corp.ads,
