@@ -28,9 +28,6 @@ sudo::conf { 'puppet_dynatrace1agent':
   content  => 'dynatrace ALL=NOPASSWD : /usr/sbin/service oneagent status, /usr/sbin/service oneagent stop, /usr/sbin/service oneagent start, /usr/bin/systemctl status oneagent, /usr/bin/systemctl stop oneagent, /usr/bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh',
   require       => User['dynatrace'],
   }
- 
-}
-
 }
 
 
