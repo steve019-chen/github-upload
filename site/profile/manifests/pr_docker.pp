@@ -44,11 +44,12 @@ user { 'svc_prov':
 }
 
 # Adding Sudo rules for docker
+# Do not change below 2 options, or original sudo file will get deleted
 class { 'sudo':
   purge               => false,
   config_file_replace => false,
   }
-
+# Include rules in “content”
 sudo::conf { 'puppet_docker':
   priority => 10,
   content  => 'svc_prov ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent *, /bin/docker, /sbin/service docker start, /sbin/service docker stop, /sbin/service docker restart, /sbin/service docker status, /usr/sbin/chkconfig docker on, /usr/sbin/chkconfig docker off',
