@@ -1758,11 +1758,27 @@ PROFILE::laird_dr:
 #-----------------------------------------------------------------------------#
 # Laird MITS PROFILES
 #-----------------------------------------------------------------------------#
+
+PROFILE::laird_mits_oob:
+ context:      PROFILE
+ included:       laird_mits
+ env:                MITS
+ tz_local:            Canada/Eastern
+ ntp:                 use_server
+ ntp_servers:         209.171.33.3 209.171.33.4
+ domain:                telus.com
+ bkp_domain:
+ dns_servers:           
+ dns_search:              
+ mail_relay:    
+ site:         Laird
+ primary_nic_type: mgmt 
+ site:         Laird4
+
 # Laird MITS
 
 PROFILE::laird_mits:
  context:      PROFILE
- site:                Laird
  env:                MITS
  tz_local:            Canada/Eastern
  ntp:                 use_server
@@ -1772,6 +1788,7 @@ PROFILE::laird_mits:
  dns_servers:          
  dns_search:              
  mail_relay:   
+ site:         Laird
 
 
 #-----------------------------------------------------------------------------#
@@ -3044,6 +3061,16 @@ NETWORK::100-70-23-224:
  router:        100.70.23.225
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1591 - "YODA OSS - ASCKUm - NPV Tool"
+
+NETWORK::100-125-253-144:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1591
+ netmask:       255.255.255.240
+ router:        100.125.253.145
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 3002:3003 - "TS Storage (NAS)"
 
 NETWORK::100-69-196-0:
@@ -4295,13 +4322,14 @@ NETWORK::142-178-220-0:
 
 NETWORK::142-178-221-0:
  context:      NETWORK
- netmask:     255.255.255.0
- router:     142.178.221.1
- scope:      toll_bt_ten
- domain:       corp.ads
- boot_server:  lp99705
- media_server: lp99705
- depot_server: lp99705
+ netmask:       255.255.255.0
+ router:        142.178.221.1
+ vlan:          225
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
 
 #-Edmonton VMware farm #4 --------------------#
 # IP helper added Jun 1/2011
@@ -4465,6 +4493,20 @@ NETWORK::142-178-95-192:
  media_server: lp99705
  depot_server: lp99705
 
+# Toll8 ??? network - VLAN 810
+# IP helper requested sep 7/2018 ICR 926777
+
+NETWORK::142-178-0-0:
+ context:      NETWORK
+ netmask:       255.255.255.0
+ router:        142.178.0.1
+ vlan:          810
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
+
 #-----------------------------------------------------------------------------#
 #-Edmonton Desktop VLAN - no boot server
 # This is added so Steven can install Linux on a desktop
@@ -4535,10 +4577,11 @@ NETWORK::192-168-34-0:
 NETWORK::192-168-35-0:
  context:      BKP_NETWORK
  scope:         toll_bt_bkp
+ vlan:          141
  site:          Toll8
- netmask:     255.255.255.0
- router:      192.168.35.254
- routes:      192.168.32.0/20,192.168.192.0/18
+ netmask:       255.255.255.0
+ router:        192.168.35.254
+ routes:        192.168.32.0/20,192.168.192.0/18
 
 #---------------------------------------------#
 # Edmonton Netbackup Network 3 of 18 #36
@@ -5109,7 +5152,7 @@ NETWORK::142-63-40-0:
  site:         Laird1
 
 #-----------------------------------------------------------------------------#
-# Laird?: MITS - no boot server
+# Laird1: MITS - no boot server
 
 NETWORK::10-7-64-0:
  context:      NETWORK
@@ -5118,7 +5161,17 @@ NETWORK::10-7-64-0:
  scope:      laird_mits
  boot_server:  none
  media_server: none
- site:         Laird1
+
+#-----------------------------------------------------------------------------#
+# Laird1: MITS OOB - no boot server
+
+NETWORK::10-45-0-0:
+ context:      NETWORK
+ netmask:      255.255.0.0
+ router:      10.45.255.254
+ scope:      laird_mits_oob
+ boot_server:  none
+ media_server: none
 
 #-----------------------------------------------------------------------------#
 # Laird4 Networks
@@ -5249,7 +5302,7 @@ NETWORK::142-63-141-0:
  media_server: lp98989
 
 #-----------------------------------------------------------------------------#
-# Laird4 - VLAN 845: ON farm #6 (subnet 1 of 2)
+# Laird4 - VLAN 845: ON farm #6 (subnet 1 of 3)
 # IP helper requested May 18/2012 (ICR 481754) 
 
 NETWORK::142-63-43-0:
@@ -5262,7 +5315,7 @@ NETWORK::142-63-43-0:
  media_server: lp98989
 
 #-----------------------------------------------------------------------------#
-# Laird4 - VLAN 845: ON farm #6 (subnet 2 of 2)
+# Laird4 - VLAN 845: ON farm #6 (subnet 2 of 3)
 
 NETWORK::142-63-53-0:
  context:      NETWORK
@@ -5273,6 +5326,18 @@ NETWORK::142-63-53-0:
  boot_server:  lp98989
  media_server: lp98989
  ai_server:     xp0006/142.63.53.190
+
+#-----------------------------------------------------------------------------#
+# Laird4 - VLAN 845: ON farm #6 (subnet 3 of 3)
+
+NETWORK::142-63-135-0:
+ context:      NETWORK
+ scope:         laird_bt_ten
+ vlan:          845
+ netmask:       255.255.255.192
+ router:        142.63.135.1
+ boot_server:   lp98989
+ media_server:  lp98989
 
 
 #-----------------------------------------------------------------------------#
@@ -6104,6 +6169,16 @@ NETWORK::100-70-23-160:
  vlan:          1589
  netmask:       255.255.255.248
  router:        100.70.23.161
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1591 - "YODA OSS - ASCKUm - NPV Tool"
+
+NETWORK::100-125-253-128:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1591
+ netmask:       255.255.255.240
+ router:        100.125.253.129
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 3002:3003 - "TS oStorage (NAS)"
