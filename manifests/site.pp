@@ -17,17 +17,6 @@ node default {
 
 node ln99877 {
 class { 'role::rl_dynatrace': }
-
-class { 'sudo':
-  purge               => false,
-  config_file_replace => false,
-  }
-
-sudo::conf { 'puppet_dynatrace1agent':
-  priority => 10,
-  content  => 'dynatrace ALL=NOPASSWD : /usr/sbin/service oneagent status, /usr/sbin/service oneagent stop, /usr/sbin/service oneagent start, /usr/bin/systemctl status oneagent, /usr/bin/systemctl stop oneagent, /usr/bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh',
-  require  => User['dynatrace'],
-  }
 }
 
 
