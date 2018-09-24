@@ -54,7 +54,7 @@ mod 'saz_puppet-sudo',
   #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
-  :tag => '0.3.0e'
+  :ref => 'emerson-dynatrace1agent'
 
 #TELUS custom modules
 mod 'puppet_agent_config',
