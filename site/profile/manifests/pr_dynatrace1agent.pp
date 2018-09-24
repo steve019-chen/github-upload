@@ -45,6 +45,7 @@ class { 'dynatraceoneagent':
 # Do not change below 2 options, or original sudo file will get deleted
 # Always ensure that purge => false, config_file_replace => false 
 
+
 class { 'sudo':
   purge               => false,
   config_file_replace => false,
