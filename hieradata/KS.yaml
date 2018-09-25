@@ -4507,6 +4507,36 @@ NETWORK::142-178-0-0:
  media_server:  lp99705
  depot_server:  lp99705
 
+# Toll8 prod network - VLAN 1800
+# This network requested by Angela Sept/2018 for new builds.
+# IP helper requested sep 24/2018 ICR 929822
+
+NETWORK::100-78-144-0:
+ context:      NETWORK
+ netmask:       255.255.252.0
+ router:        100.78.144.1
+ vlan:          1800
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
+
+# Toll8 iMgmt network - VLAN 1900
+# This network requested by Angela Sept/2018 for iLOs on new builds.
+# IP helper requested sep 24/2018 ICR 929822 (but probably not needed)
+
+NETWORK::100-78-148-0:
+ context:      NETWORK
+ netmask:       255.255.252.0
+ router:        100.78.148.1
+ vlan:          1900
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
+
 #-----------------------------------------------------------------------------#
 #-Edmonton Desktop VLAN - no boot server
 # This is added so Steven can install Linux on a desktop
@@ -5509,6 +5539,34 @@ NETWORK::142-63-188-0:
  scope:      laird_bt_ten
  boot_server:  lp98989
  media_server: lp98989
+
+# Laird4 prod network - VLAN 1800
+# This network requested by Angela Sept/2018 for new builds.
+# IP helper requested sep 24/2018 ICR 929825
+
+NETWORK::100-78-152-0:
+ context:      NETWORK
+ netmask:       255.255.252.0
+ router:        100.78.152.1
+ vlan:          1800
+ scope:         laird_bt_ten
+ domain:        corp.ads
+ boot_server:   lp98989
+ media_server:  lp98989
+
+# Laird4 iMgmt network - VLAN 1900
+# This network requested by Angela Sept/2018 for iLOs on new builds.
+# IP helper requested sep 24/2018 ICR 929825 (but probably not needed)
+
+NETWORK::100-78-156-0:
+ context:      NETWORK
+ netmask:       255.255.252.0
+ router:        100.78.156.1
+ vlan:          1900
+ scope:         laird_bt_ten
+ domain:        corp.ads
+ boot_server:   lp98989
+ media_server:  lp98989
 
 
 #---------------------------------------------#
