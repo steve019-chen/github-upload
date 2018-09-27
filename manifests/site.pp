@@ -13,6 +13,10 @@ node default {
 
 }
 
+node btln007801.corp.ads {
+  #include patrol_upgrade
+}
+
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads {

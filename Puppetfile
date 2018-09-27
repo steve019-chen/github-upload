@@ -60,3 +60,19 @@ mod 'telus_lib',
 mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
   :tag => '0.2.4'
+
+mod 'patrol_upgrade',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
+  :ref => 'master'
+
+mod 'patrol_discovery',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_discovery.git',
+  :ref => 'master'
+
+mod 'puppet-archive',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-archive.git',
+  :tag => '3.2.0'
+
+mod 'geoffwilliams-download_and_do',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/geoffwilliams-download_and_do.git',
+  :tag => "0.9.2"
