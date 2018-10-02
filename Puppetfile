@@ -45,11 +45,11 @@ mod 'puppetlabs-transition',
 
 mod 'puppet-archive',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-archive.git',
-  :tag => '3.2.0'
+  :tag => 'v3.2.0'
 
 mod 'geoffwilliams-download_and_do',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/download_and_do.git',
-  :tag => "0.9.2"
+  :tag => "v0.9.2"
 
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
