@@ -45,12 +45,12 @@ class profile::pr_dynatrace1agent {
         user          => 'dynatrace',
         require       => User['dynatrace'],
         }
-    
+
     cron { 'Dynatrace1agent old log cleanup':
       command => "/usr/bin/find ${path} -type f -mtime +${days_to_keep} -exec rm {} \\; 2> /dev/null",
       hour    => 10,
       minute  => 0,
-      user    => dynatrace,
+      user    => root,
     }
     # Adding Sudo rules for  dynatrace user
     # Do not change below 2 options, or original sudo file will get deleted
