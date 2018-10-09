@@ -20,7 +20,7 @@ btlp007105.corp.ads, btlp007106.corp.ads {
 class { 'role::rl_bcg_shannon': }
 }
 
-node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads, ln99773.corp.ads, 
+node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads, ln99773.corp.ads,
 ln99826.corp.ads, btln001649.corp.ads,btln001650.corp.ads,btln002025.corp.ads,btln002026.corp.ads,
 btln002027.corp.ads,btln002028.corp.ads,btln007399.corp.ads,btln007401.corp.ads,btln007402.corp.ads,
 ln99694.corp.ads,ln99695.corp.ads,ln99696.corp.ads,ln99734.corp.ads,ln99735.corp.ads,ln99778.corp.ads,
@@ -57,4 +57,3 @@ lp97952.corp.ads,lp97953.corp.ads,lp99378.ent.agt.ab.ca,lp99537.corp.ads,lp99606
 # }
 
 # lint:endignore
-
