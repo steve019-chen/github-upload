@@ -43,10 +43,6 @@ mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
   :tag => '0.1.1'
 
-mod 'puppet-logrotate',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-logrotate.git',
-  :tag => 'v3.3.0'
-
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
