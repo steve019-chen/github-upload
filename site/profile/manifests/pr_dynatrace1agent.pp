@@ -51,20 +51,8 @@ class profile::pr_dynatrace1agent {
       hour    => 10,
       minute  => 0,
       user    => root,
-    }
-    # Adding Sudo rules for  dynatrace user
-    # Do not change below 2 options, or original sudo file will get deleted
-    # Always ensure that purge => false, config_file_replace => false 
-    class { 'sudo':
-      purge               => false,
-      config_file_replace => false,
-      }
+    } 
     # lint:ignore:140chars
-    sudo::conf { 'puppet_dynatrace1agent':
-      priority => 10,
-      content  => 'dynatrace ALL=NOPASSWD : /usr/sbin/service oneagent status, /usr/sbin/service oneagent stop, /usr/sbin/service oneagent start, /usr/bin/systemctl status oneagent, /usr/bin/systemctl stop oneagent, /usr/bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh',
-      require  => User['dynatrace'],
-      }
-      # lint:endignore
+    # lint:endignore
   }
 }
