@@ -46,12 +46,15 @@ class profile::pr_dynatrace1agent {
         require       => User['dynatrace'],
         }
 
+    # Setup cron job that runs everyday to clean up logs older than <days_to_keep> 
+    # Actions by the cron job will be sent to default system logs
+
     cron { 'Dynatrace1agent old log cleanup':
-      command => "/usr/bin/find ${path} -type f -mtime +${days_to_keep} -exec rm {} \\; 2> /dev/null",
+      command => "/usr/bin/find ${path} -type f -mtime +${days_to_keep} -exec rm {} \\;",
       hour    => 10,
       minute  => 0,
       user    => root,
-    } 
+    }
     # lint:ignore:140chars
     # lint:endignore
   }
