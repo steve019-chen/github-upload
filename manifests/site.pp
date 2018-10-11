@@ -32,8 +32,8 @@ btln007569.corp.ads,btln007570.corp.ads,ln98312.corp.ads,ln98319.corp.ads,ln9832
 ln98556.corp.ads,ln98557.corp.ads,ln99227.corp.ads,ln99228.corp.ads,ln99229.corp.ads,ln99230.corp.ads,
 ln99254.corp.ads,ln99665.corp.ads,ln99666.corp.ads,ln99667.corp.ads,ln99770.corp.ads,ln99771.corp.ads,
 ln99822.corp.ads,ln99823.corp.ads,ln99824.corp.ads,ln99147.corp.ads,ln99148.corp.ads,btln000011.corp.ads,
-btln000012.corp.ads,lp99161.corp.ads,lp99162.corp.ads,
-ln98279.corp.ads,ln98280.corp.ads {
+btln000012.corp.ads,lp99161.corp.ads,lp99162.corp.ads,ln98279.corp.ads,ln98280.corp.ads
+{
 class { 'role::rl_dynatrace': }
 }
 
