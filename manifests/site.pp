@@ -20,19 +20,14 @@ btlp007105.corp.ads, btlp007106.corp.ads {
 class { 'role::rl_bcg_shannon': }
 }
 
-node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads, ln99773.corp.ads,
-ln99826.corp.ads, btln001649.corp.ads,btln001650.corp.ads,btln002025.corp.ads,btln002026.corp.ads,
-btln002027.corp.ads,btln002028.corp.ads,btln007399.corp.ads,btln007401.corp.ads,btln007402.corp.ads,
-ln99694.corp.ads,ln99695.corp.ads,ln99696.corp.ads,ln99734.corp.ads,ln99735.corp.ads,ln99778.corp.ads,
-ln99779.corp.ads,ln99784.corp.ads,ln99785.corp.ads,ln99788.corp.ads,ln99833.corp.ads,ln99834.corp.ads,
-ln99835.corp.ads,btln000045.corp.ads,btln000046.corp.ads,btln000047.corp.ads,btln000048.corp.ads,
-btln001604.corp.ads,btln001605.corp.ads,btln002031.corp.ads,btln002032.corp.ads,btln002042.corp.ads,
-btln007253.corp.ads,btln007254.corp.ads,btln007528.corp.ads,btln007529.corp.ads,btln007568.corp.ads,
-btln007569.corp.ads,btln007570.corp.ads,ln98312.corp.ads,ln98319.corp.ads,ln98320.corp.ads,ln98321.corp.ads,
-ln98556.corp.ads,ln98557.corp.ads,ln99227.corp.ads,ln99228.corp.ads,ln99229.corp.ads,ln99230.corp.ads,
-ln99254.corp.ads,ln99665.corp.ads,ln99666.corp.ads,ln99667.corp.ads,ln99770.corp.ads,ln99771.corp.ads,
-ln99822.corp.ads,ln99823.corp.ads,ln99824.corp.ads,ln99147.corp.ads,ln99148.corp.ads,btln000011.corp.ads,
-btln000012.corp.ads {
+node btln007523,btln007524,btln007717,btln007718,ln99773,ln99826, btln001649,btln001650,btln002025,btln002026,
+btln002027,btln002028,btln007399,btln007401,btln007402,ln99694,ln99695,ln99696,ln99734,ln99735,ln99778,
+ln99779,ln99784,ln99785,ln99788,ln99833,ln99834,ln99835,btln000045,btln000046,btln000047,btln000048,
+btln001604,btln001605,btln002031,btln002032,btln002042,btln007253,btln007254,btln007528,btln007529,btln007568,
+btln007569,btln007570,ln98312,ln98319,ln98320,ln98321,ln98556,ln98557,ln99227,ln99228,ln99229,ln99230,
+ln99254,ln99665,ln99666,ln99667,ln99770,ln99771,ln99822,ln99823,ln99824,ln99147,ln99148,btln000011,
+btln000012,lp99161,lp99162,ln98279,ln98280
+{
 class { 'role::rl_dynatrace': }
 }
 
