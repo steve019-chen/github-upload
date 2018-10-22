@@ -63,7 +63,7 @@ mod 'puppet_agent_config',
 
 mod 'telus_lib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
-  :tag => '2.0.0'
+  :reg => 'patrol_info'
 
 mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
@@ -72,7 +72,3 @@ mod 'telus-spacewalk_migrate',
 #mod 'patrol_upgrade',
 #  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
 #  :ref => 'master'
-
-mod 'patrol_discovery',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_discovery.git',
-  :ref => 'master'
