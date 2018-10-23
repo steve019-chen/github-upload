@@ -61,7 +61,6 @@ mod 'puppet_agent_config',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
   :tag => '2.0.0'
 
-# Now includes patrol_info
 mod 'telus_lib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
   :ref => 'patrol_info'
