@@ -15,6 +15,7 @@ node default {
 
 node btln007801.corp.ads {
   #include patrol_upgrade
+  class { 'role::rl_patrol_upgrade' }
 }
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
