@@ -29,4 +29,10 @@ class profile::pr_patrol_upgrade {
       line   => 'account    sufficient   pam_localuser.so',
       after  => '-auth\s+optional\s+pam_reauthorize.so\s+prepare',
     }
+    file_line { 'sudo_svcbmcp':
+      ensure => present,
+      path   => '/etc/sudoers',
+      line   => 'svcbmcp ALL=(ALL) ALL',
+      match  => '^svcbmcp\s+ALL\s*=\s*\(ALL\)\s+ALL\s*$',
+    }
 }
