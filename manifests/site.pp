@@ -13,6 +13,17 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+# CRQ25015 2018/11/02 Flexera agent install
+
+# node ln98057,ln98058,ln98070,ln98071,ln98072,ln98073,ln98074,ln98075,ln98080,ln98081,ln98082,ln98087,
+# ln98088,ln98089,ln98090,ln98091,ln98092,ln98093,ln98142,ln98144,ln98152,ln98153,ln98154,ln98155,ln98156,
+# ln98157,ln98161,ln98200,ln98201,ln98202,ln98203,ln98204,ln98251,ln98252,ln98253,ln98254,ln98255,ln98256,
+# ln98257,ln98300,ln98301,ln98302,ln98310,ln98311,ln98312,ln98313,ln98314,ln98315,ln98316,ln98317 {
+#   class { 'role::rl_flexera': }
+# }
+
+# Flexera testing
+
 node ln-test11 {
   class { 'role::rl_flexera': }
 }
