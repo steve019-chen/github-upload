@@ -22,12 +22,6 @@ node default {
 #   class { 'role::rl_flexera': }
 # }
 
-# Flexera testing
-
-node ln-test11 {
-  class { 'role::rl_flexera': }
-}
-
 node btlp007087.corp.ads, btlp007088.corp.ads, btlp007089.corp.ads, btlp007090.corp.ads, btlp007091.corp.ads, btlp007092.corp.ads,
 btlp007093.corp.ads, btlp007094.corp.ads, btlp007095.corp.ads, btlp007096.corp.ads, btlp007097.corp.ads, btlp007098.corp.ads,
 btlp007099.corp.ads, btlp007100.corp.ads, btlp007101.corp.ads, btlp007102.corp.ads, btlp007103.corp.ads, btlp007104.corp.ads,
