@@ -63,4 +63,4 @@ mod 'telus-spacewalk_migrate',
 
 mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
-  :tag => '0.2.6'
+  :tag => '0.2.7'
