@@ -13,6 +13,12 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+# Flexera testing
+
+node ln-test11 {
+  class { 'role::rl_flexera': }
+}
+
 # CRQ25015 2018/11/02 Flexera agent install
 
 # node ln98057,ln98058,ln98070,ln98071,ln98072,ln98073,ln98074,ln98075,ln98080,ln98081,ln98082,ln98087,
