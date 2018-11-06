@@ -61,6 +61,6 @@ mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
   :tag => '0.2.4'
 
-#mod 'patrol_upgrade',
-#  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-#  :ref => 'master'
+mod 'patrol_upgrade',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
+  :ref => 'master'
