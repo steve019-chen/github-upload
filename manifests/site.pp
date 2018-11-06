@@ -14,7 +14,6 @@ node default {
 }
 
 node btln007801.corp.ads,btln007803.corp.ads {
-  #include patrol_upgrade
   class { 'role::rl_patrol_upgrade': }
 }
 
