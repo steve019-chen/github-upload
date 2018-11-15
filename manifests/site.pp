@@ -19,7 +19,7 @@ node ln-test11 {
   class { 'role::rl_flexera': }
 }
 
-# 20181116 CRQ27050 Flexera agent install NP 315 SIDC servers
+# 20181116 CRQ27050 Flexera agent install NP 315 SIDC servers - moved to 20181120
 
 # node btln002362,btln002363,btln002364,btln002365,btln002371,btln002372,btln002373,btln002374,btln002375,
 # btln002376,btln002377,btln002380,btln002381,btln002384,btln002385,btln002404,btln002405,btln002410,btln002411,
