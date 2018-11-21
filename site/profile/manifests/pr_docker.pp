@@ -59,7 +59,7 @@ sudo::conf { 'puppet_docker':
 # proxy settings
 file {'/etc/systemd/system/docker.srvice.d/http-proxy.conf':
     ensure  => present,
-    content => '[Service] /n Environment="HTTP_PROXY=http://pac.tsl.telus.com:8080/"',
+    content => "[Service]",
   }
 
 }
