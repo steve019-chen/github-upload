@@ -1,4 +1,4 @@
-# Class: bcg_shannon
+# Class: pr_bcg_shannon
 #
 # This class configures linux servers for Boston Consulting Group Shannon Project
 #
@@ -72,12 +72,13 @@ class profile::pr_bcg_shannon {
 
   # Create the BCGShannontool application account
   user { 'BCGShannontool':
-    uid      => '33003',
-    gid      => 'BCGShannontool',
-    groups   => 'remotelogin',
-    shell    => '/bin/bash',
-    password => pw_hash(lookup('bcg_shannon::app_account_password'), 'SHA-512','mysalt'),
-    require  => Group['BCGShannontool'],
+    uid        => '33003',
+    gid        => 'BCGShannontool',
+    groups     => 'remotelogin',
+    shell      => '/bin/bash',
+    managehome => yes,
+    password   => pw_hash(lookup('bcg_shannon::app_account_password'), 'SHA-512','mysalt'),
+    require    => Group['BCGShannontool'],
   }
 
   # Create the application directory
