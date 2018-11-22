@@ -11,6 +11,10 @@ node default {
 
 }
 
+node btln007801.corp.ads,btln007803.corp.ads {
+  class { 'role::rl_patrol_upgrade': }
+}
+
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 # Flexera testing
