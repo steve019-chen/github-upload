@@ -11,7 +11,7 @@ node default {
 
 }
 
-node btln007801.corp.ads,btln007803.corp.ads {
+node ln98074,ln99606,ln99030,btln000004,ln98170,btln000001,ln98276,ln99556,btln002500,btln002517 {
   class { 'role::rl_patrol_upgrade': }
 }
 
