@@ -61,14 +61,6 @@ mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
   :tag => '0.2.4'
 
-mod 'patrol_upgrade',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-  :tag => '1.0.0'
-
-mod 'saz_puppet-sudo',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
-  :tag => 'v5.0.0'
-
 mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
   :tag => '0.2.7'
