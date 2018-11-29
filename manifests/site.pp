@@ -11,9 +11,10 @@ node default {
 
 }
 
-node ln98074,ln99606,ln99030,btln000004,ln98170,btln000001,ln98276,ln99556,btln002500,btln002517 {
-  class { 'role::rl_patrol_upgrade': }
-}
+# Scheduled for deployment on Dec 4
+# node ln98074,ln99606,ln99030,btln000004,ln98170,btln000001,ln98276,ln99556,btln002500,btln002517 {
+#   class { 'role::rl_patrol_upgrade': }
+# }
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
