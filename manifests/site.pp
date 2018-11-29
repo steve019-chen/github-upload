@@ -11,6 +11,11 @@ node default {
 
 }
 
+# Scheduled for deployment on Dec 4
+# node ln98074,ln99606,ln99030,btln000004,ln98170,btln000001,ln98276,ln99556,btln002500,btln002517 {
+#   class { 'role::rl_patrol_upgrade': }
+# }
+
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 # Flexera testing
@@ -262,7 +267,7 @@ btln000012,ln99161,ln99162,ln98279,ln98280,ln99231,ln99232,ln99233,ln99234,ln983
 btlp006328,btlp006329,btlp006330,btlp006331,btlp006332,btlp006333,btlp006334,btlp006335,btln000406,btln000409,
 btln000408,ln98434,ln99217,ln98435,ln99216,ln98438,btln001602,btln001603,btln002029,btln002030,btln002041,
 btln007255,btln007256,btln007530,btln007531,btln007571,btln007572,btln007573,ln98315,ln98317,ln98318,ln98559,
-ln99663,ln99664,ln99772,ln99825,ln99827
+ln99663,ln99664,ln99772,ln99825,ln99827,ln99641,ln99642
 {
 class { 'role::rl_dynatrace': }
 }
