@@ -55,8 +55,12 @@ mod 'puppet_agent_config',
 
 mod 'telus_lib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
-  :tag => '2.1.0'
+  :tag => '2.4.0'
 
 mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
   :tag => '0.2.4'
+
+mod 'telus-flexnet_agent_install',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
+  :tag => '0.2.7'
