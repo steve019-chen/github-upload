@@ -64,7 +64,8 @@ mod 'telus-spacewalk_migrate',
 
 mod 'patrol_upgrade',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-  :tag => '1.0.0'
+#  :tag => '1.0.0'
+  :ref => 'master'
 
 mod 'saz_puppet-sudo',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
