@@ -1,5 +1,5 @@
 node default {
-#new change
+
   # Puppet agent custom settings
   class { 'puppet_agent_config::puppet_conf': }
 
