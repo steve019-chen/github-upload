@@ -840,6 +840,7 @@ PROFILE::kidc_tools:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -866,6 +867,7 @@ PROFILE::kidc_ts_oMgmt:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -892,6 +894,7 @@ PROFILE::kidc_ts_iMgmt:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -919,6 +922,7 @@ PROFILE::kidc_ts_pub:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -943,6 +947,7 @@ PROFILE::kidc_ts:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -1104,6 +1109,7 @@ PROFILE::kidc_bt_prod_pwan:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1134,6 +1140,7 @@ PROFILE::kidc_bt_nonprod_pwan:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1165,6 +1172,7 @@ PROFILE::kidc_bt_prod_be-tr:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1196,6 +1204,7 @@ PROFILE::kidc_bt_nonprod_be-tr:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1228,6 +1237,7 @@ PROFILE::kidc_bt_prod_be-nt:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1260,6 +1270,7 @@ PROFILE::kidc_bt_nonprod_be-nt:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1287,6 +1298,7 @@ PROFILE::kidc_bt_nonprod:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1314,6 +1326,7 @@ PROFILE::kidc_bt_prod:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1335,6 +1348,7 @@ PROFILE::kidc_bt:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1359,6 +1373,7 @@ PROFILE::cway_bt_ten:
  spacewalk_key:         1-bt-cway
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Pacific
  ntp:                 use_server
  ntp_servers:         142.174.53.246 142.178.70.59
@@ -1398,6 +1413,7 @@ PROFILE::toll_bt_cde:
  spacewalk_key:         1-bt-toll
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Mountain
  ntp:                 use_router
  ntp_servers:         142.178.33.1 142.178.233.1
@@ -1425,6 +1441,7 @@ PROFILE::toll_bt_ten:
  spacewalk_key:         1-bt-toll
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Mountain
  ntp:                 use_router
  ntp_servers:         142.178.33.1 142.178.233.1
@@ -1449,6 +1466,7 @@ PROFILE::toll_bt:
  spacewalk_key:         1-bt-toll
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Mountain
  ntp:                 use_router
  ntp_servers:         142.178.33.1 142.178.233.1
@@ -1475,6 +1493,7 @@ PROFILE::mainwire_ts:
  domain:               telus.net
  dns_servers:         192.168.81.11 192.168.81.12
  dns_search:              telus.net
+ flexera_server:        btwp013742.corp.ads
  mail_relay:
 
 
@@ -1488,6 +1507,7 @@ PROFILE::mainwire_bt_ten:
  spacewalk_key:         1-bt-mwir
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:              Canada/Mountain
  ntp:                   use_router
  ntp_servers:           142.178.33.1 142.178.233.1
@@ -1511,6 +1531,7 @@ PROFILE::cidc_bt_ten:
  spacewalk_key:         1-bt-cidc
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Mountain
  ntp:                 use_router
  ntp_servers:         142.178.33.1 142.178.233.1
@@ -1533,6 +1554,7 @@ PROFILE::len_werry_ts:
  env:                  TS
  ldap_server1:         uldap-west.tsl.telus.com
  ldap_server2:         uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  satellite_server:     lp98086.corp.ads
  satellite_key:        1-ts-lwer
  spacewalk_server:     lp98188.corp.ads
@@ -1561,6 +1583,7 @@ PROFILE::3030_bt_ten:
  spacewalk_key:         1-bt-3030
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:              Canada/Mountain
  ntp:                   use_server
  ntp_servers:           142.178.70.59 142.178.150.87
@@ -1585,6 +1608,7 @@ PROFILE::marmac_bt_ten:
  spacewalk_key:     1-bt-marm
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:            Canada/Eastern
  ntp:                   use_server
  ntp_servers:          10.33.244.199 172.23.116.100
@@ -1613,6 +1637,7 @@ PROFILE::laird_ts:
  spacewalk_key:         1-ts-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           75.154.130.28 75.154.130.29
@@ -1652,6 +1677,7 @@ PROFILE::laird_bt_cde:
  spacewalk_key:         1-bt-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           142.63.37.17 142.63.128.100
@@ -1678,6 +1704,7 @@ PROFILE::laird_bt_bkp:
  spacewalk_key:         1-bt-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           142.63.37.17 142.63.128.100
@@ -1706,6 +1733,7 @@ PROFILE::laird_bt_ten:
  spacewalk_key:         1-bt-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           142.63.37.17 142.63.128.100
@@ -1730,6 +1758,7 @@ PROFILE::laird_bt:
  spacewalk_key:         1-bt-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           142.63.37.17 142.63.128.100
@@ -1808,6 +1837,7 @@ PROFILE::consilium_bt_lab:
  ntp_servers:       172.23.5.38 
  ldap_server1:       uldap-east.tsl.telus.com
  ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -1832,6 +1862,7 @@ PROFILE::consilium_bt_lab_be_nt:
  ntp_servers:       172.23.5.38 
  ldap_server1:       uldap-east.tsl.telus.com
  ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -1861,6 +1892,7 @@ PROFILE::consilium_bt_lab_pwan:
  ntp_servers:       172.23.5.38 
  ldap_server1:       uldap-east.tsl.telus.com
  ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -1889,6 +1921,7 @@ PROFILE::consilium_bt_ten:
  ntp_servers:       172.23.5.38 
  ldap_server1:       uldap-east.tsl.telus.com
  ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -1912,6 +1945,7 @@ PROFILE::consilium_bt:
  ntp_servers:       172.23.5.38 
  ldap_server1:      uldap-east.tsl.telus.com
  ldap_server2:      uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -2019,6 +2053,7 @@ PROFILE::qidc_tools:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2045,6 +2080,7 @@ PROFILE::qidc_ts_iMgmt:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2072,6 +2108,7 @@ PROFILE::qidc_ts_oMgmt:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2109,6 +2146,7 @@ PROFILE::qidc_tools_cde:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2136,6 +2174,7 @@ PROFILE::qidc_ts_pub:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2161,6 +2200,7 @@ PROFILE::qidc_ts:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2300,6 +2340,7 @@ PROFILE::qidc_bt_prod_extranet:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2332,6 +2373,7 @@ PROFILE::qidc_bt_prod_pwan:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2363,6 +2405,7 @@ PROFILE::qidc_bt_nonprod_pwan:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2394,6 +2437,7 @@ PROFILE::qidc_bt_prod_be-tr:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2425,6 +2469,7 @@ PROFILE::qidc_bt_nonprod_be-tr:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2471,6 +2516,7 @@ PROFILE::qidc_bt_prod_be-nt:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2503,6 +2549,7 @@ PROFILE::qidc_bt_nonprod_be-nt:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2542,6 +2589,7 @@ PROFILE::qidc_bt_prod_cde:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2581,6 +2629,7 @@ PROFILE::qidc_bt_nonprod_cde:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2617,6 +2666,7 @@ PROFILE::qidc_bt_nonprod:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2644,6 +2694,7 @@ PROFILE::qidc_bt_prod:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2666,6 +2717,7 @@ PROFILE::qidc_bt:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2691,6 +2743,7 @@ PROFILE::ridc_bt_ten:
  spacewalk_key:         1-bt-ridc
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:             Canada/Eastern
  ntp:                  use_server
  ntp_servers:          142.168.234.88 142.168.234.112
@@ -6846,7 +6899,7 @@ NETWORK::100-65-32-0:
  vlan:          1010:1011
  site:          QIDC
  netmask:       255.255.224.0
- test_ip:       100.65.35.61 
+ test_ip:       100.65.37.85 
  mtu:           9000
 
 #---------------------------------------------#
