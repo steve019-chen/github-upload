@@ -49,15 +49,15 @@ sudo::conf { 'puppet_docker':
   require  => User['svc_prov'],
   }
 
-#20180730 - t837836 - ASAPNOC PreProd test
-file {'/tmp/puppet_test':
+file {'/etc/systemd/system/docker.service.d/puppet_test':
     ensure  => absent,
     content => "puppet test",
   } 
 
-file {'/etc/systemd/system/docker.service.d/puppet_test':
+# proxy settings
+file {'/etc/systemd/system/docker.service.d/http-proxy.conf':
     ensure  => present,
-    content => "puppet test",
-  } 
+    content => "[Service]",
+  }
 
 }
