@@ -20,13 +20,6 @@ class { 'docker':
   version                     => '1.12.0-1.0.2.el7',
 }
 
-#20180730 - t837836 - ASAPNOC PreProd test
-file {'/tmp/puppet_test':
-#    ensure => absent,
-    ensure  => present,
-    content => "puppet test",
-  }
-
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
 group { 'users':
@@ -56,10 +49,10 @@ sudo::conf { 'puppet_docker':
   require  => User['svc_prov'],
   }
 
-# proxy settings
-file {'/etc/systemd/system/docker.srvice.d/http-proxy.conf':
+#20180730 - t837836 - ASAPNOC PreProd test
+file {'/tmp/puppet_test':
     ensure  => present,
-    content => "[Service]",
-  }
+    content => "puppet test",
+  }  
 
 }
