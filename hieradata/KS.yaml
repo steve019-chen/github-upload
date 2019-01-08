@@ -3324,6 +3324,17 @@ NETWORK::100-66-176-0:
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2224 - "BT non-prod PWAN4"
+
+NETWORK::100-66-180-0:
+ context:      PWAN_NETWORK
+ scope:         kidc_bt_nonprod_pwan
+ vlan:          2224
+ netmask:       255.255.252.0
+ router:        100.66.180.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
 # KIDC BT - VLAN 2012:2013 - "VDI" (Treat like PWAN)
 
 NETWORK::142-174-205-0:
