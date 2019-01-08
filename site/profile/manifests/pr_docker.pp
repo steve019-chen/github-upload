@@ -51,8 +51,13 @@ sudo::conf { 'puppet_docker':
 
 #20180730 - t837836 - ASAPNOC PreProd test
 file {'/tmp/puppet_test':
+    ensure  => absent,
+    content => "puppet test",
+  } 
+
+file {'/etc/systemd/system/docker.service.d/puppet_test':
     ensure  => present,
     content => "puppet test",
-  }  
+  } 
 
 }
