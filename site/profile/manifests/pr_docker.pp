@@ -58,8 +58,8 @@ file {'/etc/systemd/system/docker.service.d/puppet_test':
 file {'/etc/systemd/system/docker.service.d/http-proxy.conf':
     ensure  => present,
     content => '[Service]
-                Environment="HTTP_PROXY=http://pac.tsl.telus.com:8080/",
-                Environment="HTTPS_PROXY=http://pac.tsl.telus.com:8080/"',
+    Environment="HTTP_PROXY=http://pac.tsl.telus.com:8080/"
+    Environment="HTTPS_PROXY=http://pac.tsl.telus.com:8080/"',
   }
 
 }
