@@ -20,13 +20,6 @@ class { 'docker':
   version                     => '1.12.0-1.0.2.el7',
 }
 
-#20180730 - t837836 - ASAPNOC PreProd test
-file {'/tmp/puppet_test':
-#    ensure => absent,
-    ensure  => present,
-    content => "puppet test",
-  }
-
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
 group { 'users':
@@ -55,5 +48,11 @@ sudo::conf { 'puppet_docker':
   content  => 'svc_prov ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent *, /bin/docker, /sbin/service docker start, /sbin/service docker stop, /sbin/service docker restart, /sbin/service docker status, /usr/sbin/chkconfig docker on, /usr/sbin/chkconfig docker off',
   require  => User['svc_prov'],
   }
+
+#20180730 - t837836 - ASAPNOC PreProd test
+file {'/tmp/puppet_test':
+    ensure  => present,
+    content => "puppet test",
+  }  
 
 }
