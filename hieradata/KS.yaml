@@ -1958,11 +1958,64 @@ PROFILE::consilium_bt:
  aggr_mode:         active_passive
 
 
+
+PROFILE::consilium_sidc_lab_be-nt:
+ context:      PROFILE
+ nas_scope:            consilium_sidc_lab_oStorage
+ mgmt_scope:           consilium_sidc_lab_oMgmt
+ bkp_scope:            consilium_sidc_lab_bkp
+ fe_scope:             consilium_sidc_lab_fe
+ primary_nic_type:     be
+ included:              consilium_sidc_lab
+ dns_servers:       10.128.249.11 10.128.249.12
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server
+ ntp_servers:       10.128.249.1
+ ldap_server1:          lbtslp000058.corptools.sidclab
+ ldap_server2:
+ satellite_server:  
+ satellite_key:     
+ spacewalk_server:
+ spacewalk_key: 
+ domain:            corp.sidclab
+ bkp_domain:
+ dns_search:        corp.sidclab corptools.sidclab
+ mail_relay:
+ puppet_server: lbbtlp810000.corp.sidclab
+
+
 PROFILE::consilium_sidc_lab_pwan:
  context:      PROFILE
- nas_scope:    consilium_sidc_lab_oStorage
- mgmt_scope:   consilium_sidc_lab_oMgmt
- bkp_scope:    consilium_sidc_lab_bkp
+ nas_scope:            consilium_sidc_lab_oStorage
+ mgmt_scope:           consilium_sidc_lab_oMgmt
+ bkp_scope:            consilium_sidc_lab_bkp
+ ic_scope:             consilium_sidc_lab_oInterconnect
+ included:              consilium_sidc_lab
+ dns_servers:       10.128.249.11 10.128.249.12
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server
+ ntp_servers:       10.128.249.1
+ ldap_server1:          lbtslp000058.corptools.sidclab
+ ldap_server2:
+ satellite_server:  
+ satellite_key:     
+ spacewalk_server:
+ spacewalk_key: 
+ domain:            corp.sidclab
+ bkp_domain:
+ dns_search:        corp.sidclab corptools.sidclab
+ mail_relay:
+ puppet_server: lbbtlp810000.corp.sidclab
+
+
+PROFILE::consilium_sidc_lab:
+ context:      PROFILE
  dns_servers:       10.128.249.11 10.128.249.12
  nbu_profile:       consilium_bt 
  site:              Consilium
@@ -5698,7 +5751,7 @@ NETWORK::209-91-70-0:
  depot_server:  lbtslp000058/209.91.70.27
 
 #---------------------------------------------#
-# Consilium SIDC Lab - VLAN 1004:1005 - oMgmt
+# Consilium SIDC Lab - VLAN 1005 - oMgmt
 
 NETWORK::10-128-64-0:
  context:      NETWORK
@@ -5722,7 +5775,7 @@ NETWORK::10-128-249-0:
  router:        10.128.249.1
 
 #---------------------------------------------#
-# Consilium SIDC Lab - VLAN 1008:1009 - oStorage
+# Consilium SIDC Lab - VLAN 1009 - oStorage
 
 NETWORK::10-128-0-0:
  context:      NETWORK
@@ -5732,14 +5785,43 @@ NETWORK::10-128-0-0:
  test_ip:       10.128.0.30 
 
 #---------------------------------------------#
-# Consilium SIDC Lab - VLAN 1016:1017 - backup
+# Consilium SIDC Lab - VLAN 1017 - backup
 
 NETWORK::10-128-32-0:
  context:      NETWORK
  scope: consilium_sidc_lab_bkp
  vlan:          1016:1017
  netmask:       255.255.224.0
- test_ip:       
+ test_ip:       10.128.32.1 
+
+#---------------------------------------------#
+# Consilium SIDC Lab - VLAN 2202 - BT BE-NT (back-end non-trusted DMZ)
+
+NETWORK::10-128-222-0:
+ context:      NETWORK
+ scope: consilium_sidc_lab_be-nt
+ vlan:          2202
+ netmask:       255.255.255.0
+ router:        10.128.222.1
+
+#---------------------------------------------#
+# Consilium SIDC Lab - VLAN 2205 - BT FE (front-end DMZ)
+
+NETWORK::172-18-128-0:
+ context:      NETWORK
+ scope: consilium_sidc_lab_fe
+ vlan:          2205
+ netmask:       255.255.255.128
+ router:        172.18.128.1
+
+#---------------------------------------------#
+# Consilium SIDC Lab - VLAN 1208 - Interconnect
+
+NETWORK::10-128-246-0:
+ context:      NETWORK
+ scope: consilium_sidc_lab_oInterconnect
+ vlan:          1208
+ netmask:       255.255.254.0
 
 ###############################################################################
 # Consilium BT TEN Networks
