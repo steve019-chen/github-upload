@@ -43,6 +43,10 @@ mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
   :tag => '0.1.1'
 
+mod 'saz_puppet-sudo',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
+  :tag => 'v5.0.0'
+
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
@@ -64,3 +68,7 @@ mod 'telus-spacewalk_migrate',
 mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
   :tag => '0.2.7'
+
+# mod 'patrol_upgrade',
+#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
+#   :tag => '1.1.0'
