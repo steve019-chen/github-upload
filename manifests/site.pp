@@ -11,13 +11,13 @@ node default {
 
 }
 
-# CRQ30148 : Scheduled for deployment on Dec 12
-# node ln98074, ln99030, ln98276,btln000002, btln002502, btln002561 {
-#   class { 'role::rl_patrol_upgrade': }
-# }
+
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+node ln98551 {
+  include role::rl_diversio
+}
 
 # 20190124 CRQ32950 Flexera BT PR 500 hosts
 
