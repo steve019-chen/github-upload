@@ -13,7 +13,7 @@ mod 'puppetlabs-apt',
 
 mod 'puppetlabs-concat',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-concat.git',
-  :tag => '2.2.1'
+  :tag => '3.0.0'
 
 mod 'puppetlabs-firewall',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-firewall.git',
@@ -46,6 +46,11 @@ mod 'puppetlabs-transition',
 mod 'saz_puppet-sudo',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
   :tag => 'v5.0.0'
+
+mod 'puppet-nginx',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-nginx.git',
+  :tag => '0.15.0'
+
 
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
