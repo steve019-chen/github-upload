@@ -49,7 +49,7 @@ mod 'saz_puppet-sudo',
 
 mod 'puppet-nginx',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-nginx.git',
-  :tag => '0.15.0'
+  :tag => 'v0.15.0'
 
 
 #Forge dirty modules
