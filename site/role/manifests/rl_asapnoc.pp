@@ -13,6 +13,7 @@
 #Role for defining ASAPNOC project servers 
 class role::rl_asapnoc {
   include profile::pr_docker
+  include profile::pr_apache
 
   #All roles should include the base profile
   include profile::pr_base

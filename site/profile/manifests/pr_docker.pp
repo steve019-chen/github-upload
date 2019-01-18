@@ -49,11 +49,6 @@ sudo::conf { 'puppet_docker':
   require  => User['svc_prov'],
   }
 
-file {'/etc/systemd/system/docker.service.d/puppet_test':
-    ensure  => absent,
-    content => "puppet test",
-  } 
-
 # proxy settings
 file {'/etc/systemd/system/docker.service.d/http-proxy.conf':
     ensure  => present,
