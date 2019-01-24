@@ -20,6 +20,11 @@ class { 'docker':
   version                     => '1.12.0-1.0.2.el7',
 }
 
+class {'docker::compose':
+  ensure => present,
+  version => '1.9.0',
+}
+
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
 group { 'users':
