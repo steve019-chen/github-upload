@@ -1,19 +1,19 @@
-# Class: docker
-#
-# This class installs docker and its required packages
+# This profile contains the configuration for the ASAPNOC application servers
 #
 # Parameters:
 #
 # Actions:
-#   - Install required packages
+#   - Install required packages for docker and configure docker (proxy settings, ...)
 #   - Configure application account
 #   - Create application directory
+#   - Install apache
+#   - Add sudo rules
 # 
-# Prereqs:
+# Prereqs for docker:
 #   - Optional, EPEL, and Software Collections channels must be added in Spacewalk
 #
 
-class profile::pr_docker {
+class profile::pr_asapnoc {
 
 class { 'docker':
   use_upstream_package_source => false,
@@ -41,7 +41,11 @@ user { 'svc_prov':
   require  => Group['users'],
 }
 
-# Adding Sudo rules for docker
+# apache
+class { 'apache':
+}
+
+# Adding Sudo rules for docker and apache
 # Do not change below 2 options, or original sudo file will get deleted
 class { 'sudo':
   purge               => false,
@@ -54,7 +58,7 @@ sudo::conf { 'puppet_docker':
   require  => User['svc_prov'],
   }
 
-# proxy settings
+# docker proxy settings
 file {'/etc/systemd/system/docker.service.d/http-proxy.conf':
     ensure  => present,
     content => '[Service]
