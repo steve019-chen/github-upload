@@ -21,6 +21,7 @@ class { 'docker':
 }
 
 class {'docker::compose':
+  use_upstream_package_source => false,
   ensure => present,
   version => '1.9.0',
 }
