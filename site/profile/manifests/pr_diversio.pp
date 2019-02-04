@@ -10,14 +10,14 @@ class {'sudo':
 
 class profile::pr_diversio {
  package {"nginx":
- ensure   => 'required',
+ ensure   => 'latest',
  }
 
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
   priority => 10,
-  content  => 'infra ALL=NOPASSWD : /sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
+  content  => 'infra ALL=NOPASSWD : /bin/sh, /sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
   }
 }
-
+#
 #
