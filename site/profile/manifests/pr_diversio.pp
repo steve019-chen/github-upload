@@ -19,5 +19,5 @@ sudo::conf { 'puppet_nginx':
   content  => 'infra ALL=NOPASSWD : /bin/sh, /sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
   }
 }
-
+#
 #
