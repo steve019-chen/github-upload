@@ -20,3 +20,4 @@ sudo::conf { 'puppet_nginx':
   require  => User['infra'],
   }
 }
+#
