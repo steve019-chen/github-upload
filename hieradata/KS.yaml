@@ -3488,7 +3488,7 @@ NETWORK::216-7-220-0:
 
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 3)"
+# KIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 4)"
 
 NETWORK::216-7-222-128:
  context:      DMZ_NETWORK
@@ -3499,7 +3499,7 @@ NETWORK::216-7-222-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 3)"
+# KIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 4)"
 
 NETWORK::216-7-220-128:
  context:      DMZ_NETWORK
@@ -3510,7 +3510,7 @@ NETWORK::216-7-220-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 3 of 3) - Octopus"
+# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 3 of 4) - Octopus"
 
 NETWORK::100-70-41-128:
  context:      DMZ_NETWORK
@@ -3518,6 +3518,17 @@ NETWORK::100-70-41-128:
  vlan:          2401
  netmask:       255.255.255.240
  router:        100.70.41.129
+ routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 4) - for reverse proxy"
+
+NETWORK::100-125-162-160:
+ context:      DMZ_NETWORK
+ scope:         kidc_bt_prod_be-nt
+ vlan:          2402
+ netmask:       255.255.255.240
+ router:        100.125.162.161
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
@@ -3531,7 +3542,7 @@ NETWORK::64-114-0-0:
  router:        64.114.0.1
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2004:2005 - "BT prod FE1 (front-end DMZ 1 of 2)"
+# KIDC BT - VLAN 2004:2005 - "BT prod FE1 (front-end DMZ 1 of 3)"
 
 NETWORK::64-114-1-0:
  context:      DMZ_NETWORK
@@ -3541,7 +3552,7 @@ NETWORK::64-114-1-0:
  router:        64.114.1.1
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2024:2025 - "BT prod FE2 (front-end DMZ 2 of 2)"
+# KIDC BT - VLAN 2024:2025 - "BT prod FE2 (front-end DMZ 2 of 3)"
 
 NETWORK::208-181-254-0:
  context:      DMZ_NETWORK
@@ -3549,6 +3560,17 @@ NETWORK::208-181-254-0:
  vlan:          2024:2025
  netmask:       255.255.255.128
  router:        208.181.254.1   
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 36:37 - "BT prod FE2 (front-end DMZ 3 of 3) for reverse proxy"
+# this vlan might not get used directly by Linux servers
+
+NETWORK::207-194-85-0:
+ context:      DMZ_NETWORK
+ scope:          kidc_bt_prod_fe
+ vlan:           36:37
+ netmask:        255.255.255.192
+ router: 207.194.85.1
 
 #---------------------------------------------#
 # KIDC BT - VLAN 1010:1011 - "BT non-prod oStorage"
