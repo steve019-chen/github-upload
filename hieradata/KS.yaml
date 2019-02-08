@@ -2780,6 +2780,26 @@ PROFILE::qidc_bt:
  bkp_suffix:    -bkp
  mail_relay:    qcmsg.tsl.telus.com
 
+#-----------------------------------------------------------------------------#
+# 4 jab (Jules-A-Brillant) Rimouski (office space)
+# Added for latptop install
+#-----------------------------------------------------------------------------#
+
+PROFILE::jab-ten-desktop:
+ context:      PROFILE
+ site:                 JAB
+ env:                  BT
+ ldap_server1:         uldap-east.tsl.telus.com
+ ldap_server2:         uldap-west.tsl.telus.com
+ tz_local:             Canada/Eastern
+ ntp:                  use_server
+ ntp_servers:          142.168.234.88 142.168.234.112
+ domain:              corp.ads
+ bkp_domain:          corp.ads
+ dns_servers:          142.168.100.48 142.168.100.49
+ dns_search:              corp.ads
+ mail_relay:   qcmsg.tsl.telus.com
+
 
 #-----------------------------------------------------------------------------#
 # RIDC BT PROFILES
@@ -7147,6 +7167,17 @@ NETWORK::100-65-253-0:
  netmask:       255.255.255.0
  mtu:           9000
 
+###############################################################################
+# 4 jab (Jules-A-Brillant) Rimouski office
+###############################################################################
+
+NETWORK::142-168-216-0:
+ context:      NETWORK
+ scope: jab-ten-desktop
+ netmask:       255.255.252.0
+ router:       142.168.216.90
+ boot_server: none
+ media_server: lp98989
 
 ###############################################################################
 # RIDC networks
