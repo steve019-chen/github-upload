@@ -3530,7 +3530,7 @@ NETWORK::216-7-220-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 3 of 4) - Octopus"
+# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 3 of 4) - Octopus-DMZ1 (TS network space)"
 
 NETWORK::100-70-41-128:
  context:      DMZ_NETWORK
@@ -3541,7 +3541,7 @@ NETWORK::100-70-41-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 4) - for reverse proxy"
+# KIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 4) - Octopus-DMZ2 (TS network space)"
 
 NETWORK::100-125-162-160:
  context:      DMZ_NETWORK
@@ -6974,7 +6974,7 @@ NETWORK::216-7-221-0:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
-# QIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 2)"
+# QIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 4)"
 
 NETWORK::216-7-223-128:
  context:      DMZ_NETWORK
@@ -6985,7 +6985,7 @@ NETWORK::216-7-223-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
-# QIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 2)"
+# QIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 4)"
 
 NETWORK::216-7-221-128:
  context:      DMZ_NETWORK
@@ -6993,6 +6993,21 @@ NETWORK::216-7-221-128:
  vlan:          2222
  netmask:       255.255.255.128
  router:        216.7.221.129
+ routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
+
+#-----------------------------------------------------------------------------#
+# QIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 4) - Octopus-DMZ2 (TS network space)"
+# TBA
+
+#-----------------------------------------------------------------------------#
+# QIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 4) - Octopus-DMZ2 (TS network space)"
+
+NETWORK::100-125-162-64:
+ context:      DMZ_NETWORK
+ scope:         qidc_bt_prod_be-nt
+ vlan:          2402
+ netmask:       255.255.255.240
+ router:        100.125.162.65
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
