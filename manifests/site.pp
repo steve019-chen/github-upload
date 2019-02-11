@@ -18,6 +18,95 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+# 20190212 CRQ36195 Flexera clean-up 224 PR hosts
+
+node btlp007037,btlp007038,btlp007046,btlp007048,btlp007064,btlp007077,btlp007080,btlp007129,btlp007130,btlp007132,btlp007213,
+btlp007238,btlp007239,btlp007245,btlp007246,btlp007248,btlp007250,btlp007251,btlp007255,btlp007276,btlp007277,btlp007278,lp97008,
+lp97019,lp97024,lp97025,lp97026,lp97027,lp97029,lp97030,lp97084,lp97085,lp97086,lp97088,lp97090,lp97092,lp97093,lp97097,lp97098,
+lp97105,lp97106,lp97180,lp97181,lp97324,lp97366,lp97367,lp97368,lp97375,lp97378,lp97379,lp97383,lp97401,lp97428,lp97429,lp97430,
+lp97431,lp97438,lp97439,lp97441,lp97442,lp97444,lp97448,lp97451,lp97512,lp97572,lp97574,lp97608,lp97703,lp97704,lp97835,lp97897,
+lp97906,lp97919,lp97922,lp97923,lp97924,lp97927,lp97948,lp98032,lp98086,lp98088,lp98101,lp98151,lp98161,lp98182,lp98183,lp98184,
+lp98185,lp99052,lp99053,lp99314,lp99315,lp99316,lp99435,lp99468,lp99469,lp99470,lp99471,lp99472,lp99473,lp99480,lp99484,lp99485,
+lp99533,lp99534,lp99535,lp99536,lp99561,lp99587,lp99589,lp99591,lp99595,lp99596,lp99597,lp99599,lp99601,lp99610,lp99679,lp99705,
+lp99712,lp99713,pqmgt008,tqpjobs6,tqpldap11,tqpldap12,tslp000005,tslp000008,tslp000009,tslp000023,tslp000025,tslp000046,tslp000114,
+tslp000210,tslp000211,tslp000237,tslp000238,tslp000239,tslp000240,tslp000247,tslp000262,tslp000264,tslp000265,tslp000267,tslp000268,
+tslp000272,tslp000273,tslp000287,tslp000300,tslp000301,tslp000366,tslp000367,tslp000369,tslp000370,tslp000375,tslp000378,tslp000411,
+tslp000412,tslp000423,tslp000424,tslp000425,tslp000430,tslp000434,tslp000435,tslp000440,tslp000444,tslp000446,tslp000513,tslp000515,
+tslp000516,tslp000518,tslp000532,tslp000540,tslp000541,tslp000543,tslp000544,tslp000545,tslp000546,tslp000563,tslp000564,tslp000568,
+tslp000570,tslp000575,tslp000612,tslp000615,tslp000616,tslp000631,tslp000632,tslp000668,tslp000669,tslp000672,tslp000673,tslp000674,
+tslp000684,tslp000685,tslp000687,tslp000688,tslp000694,tslp000710,tslp000725,tslp000736,tslp000743,tslp000744,tslp000746,tslp000747,
+tslp000750,tslp000777,tslp000778,tslp000785,tslp000786,tslp000927,tslp000928,tslp000929,tslp000930,tslp000931,tslp000962,tslp001014,
+tslp001015,tslp001019,tslp001020,tslp001023,tslp001028,tslp001148,xp30053,xp30054 {
+
+  case $facts['timezone'] {
+  'UTC','GMT','UCT': {
+    schedule { 'CRQ Maintenance Window':
+      range  => '6-11',
+      period => daily,
+      repeat => 12,
+    }
+  }
+  'EDT': {
+    schedule { 'CRQ Maintenance Window':
+      range  => '2-7',
+      period => daily,
+      repeat => 12,
+    }
+  }
+  'EST': {
+    schedule { 'CRQ Maintenance Window':
+      range  => '1-6',
+      period => daily,
+      repeat => 12,
+    }
+  }
+  'MDT': {
+    schedule { 'CRQ Maintenance Window':
+      range  => '0-5',
+      period => daily,
+      repeat => 12,
+    }
+  }
+  'MST': {
+    schedule { 'CRQ Maintenance Window':
+      range  => '23-4',
+      period => daily,
+      repeat => 12,
+    }
+  }
+  'PDT': {
+    schedule { 'CRQ Maintenance Window':
+      range  => '23-4',
+      period => daily,
+      repeat => 12,
+    }
+  }
+  'PST': {
+    schedule { 'CRQ Maintenance Window':
+      range  => '22-3',
+      period => daily,
+      repeat => 12,
+    }
+  }
+  default: {
+    notify { 'Unknown Time Zone':
+      message => 'Unknown Time Zone, not running the Flexera agent install'
+    }
+  }
+}
+
+file { '/root/.puppet_flag_flexera_routes':
+    ensure   => absent,
+    schedule => 'CRQ Maintenance Window',
+  }
+
+file { '/root/.puppet_flag_flexera_installed':
+    ensure   => absent,
+    schedule => 'CRQ Maintenance Window',
+  }
+
+}
+
 # 20190205 CRQ33540 Flexera BT NP 345 hosts
 
 # node ln98982,ln98985,ln98986,ln98987,ln98988,ln98989,ln98996,ln98998,ln99000,ln99001,ln99002,ln99003,ln99004,
