@@ -16,7 +16,9 @@ class profile::pr_diversio {
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
   priority => 10,
-  content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
+  #content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
+  content  => 'infra ALL=NOPASSWD : /sbin/service nginx *',
+
   }
 
 #include localhost configuration
