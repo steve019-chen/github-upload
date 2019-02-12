@@ -32,7 +32,7 @@ host {'localhost':
  file {lookup("nginx_log_dirs"):
   ensure => "directory",
   owner  => "infra",
-  group  => "group"
+  group  => "infra"
  }
 
 }
