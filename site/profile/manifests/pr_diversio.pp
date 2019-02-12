@@ -38,16 +38,22 @@ host {'localhost':
 file { '/etc/nginx/conf.d/upstream.conf':
   ensure => "present",
   content => "",
+  owner  => "infra",
+  group  => "infra"
 }
 
 file { '/etc/nginx/conf.d/ssl_server.conf':
   ensure => "present",
   content => "",
+  owner  => "infra",
+  group  => "infra"
 }
 
 file { '/etc/nginx/conf.d/nonssl_server.conf':
   ensure => "present",
   content => "",
+  owner  => "infra",
+  group  => "infra"
 }
 
 }
