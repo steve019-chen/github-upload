@@ -9,19 +9,23 @@ class {'sudo':
   }
 
 class profile::pr_diversio {
-  package {"nginx":
-  ensure   => '1.14.2',
-}
-
-class {'sudo':
-  purge               => false,
-  config_file_replace => false,
-  }
+ package {"nginx":
+ ensure   => '1.14.2',
+ }
 
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
   priority => 10,
-  content  => 'infra ALL=NOPASSWD : /usr/sbin/nginx *, /opt/puppetlabs/bin/puppet agent *, /sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status, /bin/yum remove nginx',
+  content  => 'infra ALL=NOPASSWD : /sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
   }
+
+#include localhost configuration
+host {'localhost':
+  ensure => 'present',
+  ip => '127.0.0.1',
+  host_aliases => ['xmlschema.tmi.telus.com', 'xmlschema'],
+  target => '/etc/hosts',
+ }
+
 }
 
