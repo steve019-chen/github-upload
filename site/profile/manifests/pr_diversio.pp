@@ -36,15 +36,18 @@ host {'localhost':
  }
 
 file { '/etc/nginx/conf.d/upstream.conf':
-  ensure => "/etc/nginx/conf.d/upstream.conf",
+  ensure => "present",
+  content => "",
 }
 
 file { '/etc/nginx/conf.d/ssl_server.conf':
-  ensure => "/etc/nginx/conf.d/ssl_server.conf",
+  ensure => "present",
+  content => "",
 }
 
 file { '/etc/nginx/conf.d/nonssl_server.conf':
-  ensure => "/etc/nginx//conf.d/nonssl_server.conf",
+  ensure => "present",
+  content => "",
 }
 
 }
