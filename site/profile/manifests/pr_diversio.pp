@@ -35,16 +35,16 @@ host {'localhost':
   group  => "infra"
  }
 
-file { '/etc/nginx/upstream.conf':
-  ensure => '/etc/nginx/upstream.conf',
+file { '/etc/nginx/conf.d/upstream.conf':
+  ensure => "/etc/nginx/conf.d/upstream.conf",
 }
 
-file { '/etc/nginx/ssl_server.conf':
-  ensure => '/etc/nginx/ssl_server.conf',
+file { '/etc/nginx/conf.d/ssl_server.conf':
+  ensure => "/etc/nginx/conf.d/ssl_server.conf",
 }
 
-file { '/etc/nginx/nonssl_server.conf':
-  ensure => '/etc/nginx/nonssl_server.conf',
+file { '/etc/nginx/conf.d/nonssl_server.conf':
+  ensure => "/etc/nginx//conf.d/nonssl_server.conf",
 }
 
 }
