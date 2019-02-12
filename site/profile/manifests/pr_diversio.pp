@@ -17,7 +17,7 @@ class profile::pr_diversio {
 sudo::conf { 'puppet_nginx':
   priority => 10,
   #content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
-  content  => 'infra ALL=NOPASSWD : /sbin/service nginx *, /bin/vi /etc/nginx/*',
+  content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t, /sbin/service nginx *, /bin/vi /etc/nginx/*',
 
   }
 
@@ -35,8 +35,16 @@ host {'localhost':
   group  => "infra"
  }
 
-file { '/etc/inetd.conf':
-  ensure => '/etc/inet/inetd.conf',
+file { '/etc/nginx/upstream.conf':
+  ensure => '/etc/nginx/upstream.conf',
+}
+
+file { '/etc/nginx/ssl_server.conf':
+  ensure => '/etc/nginx/ssl_server.conf',
+}
+
+file { '/etc/nginx/nonssl_server.conf':
+  ensure => '/etc/nginx/nonssl_server.conf',
 }
 
 }
