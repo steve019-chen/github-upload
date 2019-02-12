@@ -17,7 +17,7 @@ class profile::pr_diversio {
 sudo::conf { 'puppet_nginx':
   priority => 10,
   #content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
-  content  => 'infra ALL=NOPASSWD : /sbin/service nginx *',
+  content  => 'infra ALL=NOPASSWD : /sbin/service nginx *, /bin/vi /etc/nginx/conf.d',
 
   }
 
@@ -34,5 +34,9 @@ host {'localhost':
   owner  => "infra",
   group  => "infra"
  }
+
+file { '/etc/inetd.conf':
+  ensure => '/etc/inet/inetd.conf',
+}
 
 }
