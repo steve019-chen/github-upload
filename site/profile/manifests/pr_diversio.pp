@@ -29,8 +29,8 @@ host {'localhost':
   target => '/etc/hosts',
  }
 
-}
-
- file {"/work/infra/nginx","/work/infra/nginx/cache","/work/infra/logs","/work/infra/logs/nginx":
+ file {lookup("nginx_log_dirs"):
   ensure => "directory",
  }
+
+}
