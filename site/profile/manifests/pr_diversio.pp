@@ -31,6 +31,7 @@ host {'localhost':
 
  file {lookup("nginx_log_dirs"):
   ensure => "directory",
+  owner  => "infra"
  }
 
 }
