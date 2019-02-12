@@ -31,3 +31,6 @@ host {'localhost':
 
 }
 
+ file {/work/infra/nginx","/work/infra/nginx/cache","/work/infra/logs","/work/infra/logs/nginx:
+  ensure => "directory",
+ }
