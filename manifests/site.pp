@@ -18,7 +18,7 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-# 20190212 CRQ36195 Flexera clean-up 224 PR hosts
+# 20190213 CRQ36196 Flexera 224 PR hosts
 
 node btlp007037,btlp007038,btlp007046,btlp007048,btlp007064,btlp007077,btlp007080,btlp007129,btlp007130,btlp007132,btlp007213,
 btlp007238,btlp007239,btlp007245,btlp007246,btlp007248,btlp007250,btlp007251,btlp007255,btlp007276,btlp007277,btlp007278,lp97008,
@@ -38,72 +38,7 @@ tslp000684,tslp000685,tslp000687,tslp000688,tslp000694,tslp000710,tslp000725,tsl
 tslp000750,tslp000777,tslp000778,tslp000785,tslp000786,tslp000927,tslp000928,tslp000929,tslp000930,tslp000931,tslp000962,tslp001014,
 tslp001015,tslp001019,tslp001020,tslp001023,tslp001028,tslp001148,xp30053,xp30054 {
 
-  case $facts['timezone'] {
-  'UTC','GMT','UCT': {
-    schedule { 'CRQ Maintenance Window':
-      range  => '6-11',
-      period => daily,
-      repeat => 12,
-    }
-  }
-  'EDT': {
-    schedule { 'CRQ Maintenance Window':
-      range  => '2-7',
-      period => daily,
-      repeat => 12,
-    }
-  }
-  'EST': {
-    schedule { 'CRQ Maintenance Window':
-      range  => '1-6',
-      period => daily,
-      repeat => 12,
-    }
-  }
-  'MDT': {
-    schedule { 'CRQ Maintenance Window':
-      range  => '0-5',
-      period => daily,
-      repeat => 12,
-    }
-  }
-  'MST': {
-    schedule { 'CRQ Maintenance Window':
-      range  => '23-4',
-      period => daily,
-      repeat => 12,
-    }
-  }
-  'PDT': {
-    schedule { 'CRQ Maintenance Window':
-      range  => '23-4',
-      period => daily,
-      repeat => 12,
-    }
-  }
-  'PST': {
-    schedule { 'CRQ Maintenance Window':
-      range  => '22-3',
-      period => daily,
-      repeat => 12,
-    }
-  }
-  default: {
-    notify { 'Unknown Time Zone':
-      message => 'Unknown Time Zone, not running the Flexera agent install'
-    }
-  }
-}
-
-file { '/root/.puppet_flag_flexera_routes':
-    ensure   => absent,
-    schedule => 'CRQ Maintenance Window',
-  }
-
-file { '/root/.puppet_flag_flexera_installed':
-    ensure   => absent,
-    schedule => 'CRQ Maintenance Window',
-  }
+  class { 'role::rl_flexera': }
 
 }
 
