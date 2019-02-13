@@ -1,4 +1,4 @@
 ---
 message: "This node is using common data"
-nginx_log_dirs: ["/work/infra/nginx","/work/infra/nginx/cache","/work/infra/logs","/work/infra/logs/nginx"]
+nginx_log_dirs: ["/work/infra/nginx","/work/infra/nginx/cache","/work/infra/logs","/work/infra/logs/nginx","/etc/nginx/html","/etc/nginx/html/srv","/etc/nginx/html/srv/policies"]
 nginx_version: '1.14.2'
