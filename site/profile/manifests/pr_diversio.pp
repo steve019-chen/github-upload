@@ -49,6 +49,13 @@ file { '/etc/nginx/conf.d/ssl_server.conf':
   group  => "infra"
 }
 
+file { '/etc/nginx/html/srv/policies/Saml1.1-SenderVouches.xml':
+  ensure => "present",
+  content => "",
+  owner  => "infra",
+  group  => "infra"
+}
+
 file { '/etc/nginx/conf.d/nonssl_server.conf':
   ensure => "present",
   content => "",
@@ -57,3 +64,4 @@ file { '/etc/nginx/conf.d/nonssl_server.conf':
 }
 
 }
+#
