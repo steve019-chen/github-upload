@@ -11,7 +11,7 @@
 ##
 ## Configuration file:    bug:/apps/kickstart/config
 ## Conversion script dir: /apps/Kickstart2Hiera
-## Conversion script:     ./ks2yaml.sh
+## Conversion script:     /apps/Kickstart2Hiera/ks2yaml.sh
 ## Author:                Steven Farkas
 ##
 ################################################################################
@@ -499,6 +499,17 @@
 # Puppet:  (yes==install or no==don't_install)
 # As of Oct 13/2017 puppet is required for all BT and TS servers.
 #-----------------------------------------------------------------------------#
+#[OPTION_LIST] puppet.BT
+# #ACTION                   |DEFAULT| LABEL
+#  #no                       |       | no
+#  yes                      |   *   | yes
+#[OPTION_LIST] puppet.TS
+# #ACTION                   |DEFAULT| LABEL
+#  #no                       |       | no
+#  yes                      |   *   | yes
+#[OPTION_LIST] puppet.MITS
+# #ACTION                   |DEFAULT| LABEL
+#  no                       |   *   | no
 #-----------------------------------------------------------------------------#
 # Hadoop:  (yes==log to hadoop or no==don't log to hadoop)
 #-----------------------------------------------------------------------------#
@@ -602,14 +613,23 @@
 #  server_ip:    75.153.190.17
 #  version:  063005000
 ##############################################################
-##############################################################
-#[BMC_SERVER] wp41083
-#  server_ip:           142.178.180.91
-#  bmc_business_unit:       TCI
+#[RT_SERVER] tslp000088.corptools.ads # KIDC RT server 1 of 2 for BMC Patrol
+#  server_ip: 75.153.186.92
 #
-#[BMC_SERVER] bcepcapp02
-#  server_ip:       205.206.195.132
-#  bmc_business_unit:   QIDC
+#[RT_SERVER] tslp000089.corptools.ads # KIDC RT server 2 of 2 for BMC Patrol
+#  server_ip: 75.153.186.93
+#
+#[RT_SERVER] tslp000106.corptools.ads # QIDC RT server 1 of 2 for BMC Patrol
+#  server_ip: 75.153.182.152
+#
+#[RT_SERVER] tslp000107.corptools.ads # QIDC RT server 2 of 2 for BMC Patrol
+#  server_ip: 75.153.182.153
+#
+#[RT_SERVER] sedm1614cc.ent.agt.ab.ca # Toll8 RT server 1 of 2 for BMC Patrol
+#  server_ip: 142.178.20.150
+#
+#[RT_SERVER] bcbmc007.corp.ads        # Vancouver RT server 2 of 2 for BMC Patrol
+#  server_ip: 142.174.23.72
 #-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
 # Local account groups for TS if user authentication service is "ldap"
@@ -642,104 +662,6 @@
 # List of all fields int the config file
 #-----------------------------------------------------------------------------#
 #  dns_inutile # set to "yes" if DNS servers can not resolve internal names
-#  bkp_network
-#  bkp_ip
-#  bkp_netmask
-#  bkp_netmask_bits
-#  bkp_router
-#  bkp_routes
-#  bkp_test_ip
-#  bkp_fqn
-#  bkp_name
-#  bkp_mtu
-#  bkp_vlan
-#  bkp_aggr_mode
-#
-#  pub_network
-#  pub_ip
-#  pub_netmask
-#  pub_netmask_bits
-#  pub_router
-#  pub_routes
-#  pub_test_ip
-#  pub_fqn
-#  pub_name
-#  pub_mtu
-#  pub_vlan
-#  pub_aggr_mode
-#
-#  fe_network
-#  fe_ip
-#  fe_netmask
-#  fe_netmask_bits
-#  fe_router
-#  fe_routes
-#  fe_test_ip
-#  fe_fqn
-#  fe_name
-#  fe_mtu
-#  fe_vlan
-#  fe_aggr_mode
-#
-#  be_network
-#  be_ip
-#  be_netmask
-#  be_netmask_bits
-#  be_router
-#  be_routes
-#  be_test_ip
-#  be_fqn
-#  be_name
-#  be_mtu
-#  be_vlan
-#  be_aggr_mode
-#
-#  nas_network
-#  nas_ip
-#  nas_netmask
-#  nas_netmask_bits
-#  nas_router
-#  nas_routes
-#  nas_test_ip
-#  nas_fqn
-#  nas_name
-#  nas_mtu
-#  nas_vlan
-#  nas_aggr_mode
-#
-#  mgmt_network
-#  mgmt_ip
-#  mgmt_netmask
-#  mgmt_netmask_bits
-#  mgmt_router
-#  mgmt_routes
-#  mgmt_test_ip
-#  mgmt_name
-#  mgmt_fqn
-#  mgmt_vlan # we don't really support mgmt on a vlan
-#  mgmt_aggr_mode
-#
-#  ic_network
-#  ic_ip
-#  ic_netmask
-#  ic_netmask_bits
-#  ic_router
-#  ic_test_ip
-#  ic_name
-#  ic_mtu
-#  ic_vlan
-#  ic_aggr_mode
-#
-#  voip_network
-#  voip_ip
-#  voip_netmask
-#  voip_netmask_bits
-#  voip_router
-#  voip_test_ip
-#  voip_name
-#  voip_mtu
-#  voip_vlan
-#  voip_aggr_mode
 # [DISK_MODELS]   moved to defines file
 # [DISK_TEMPLATE] moved to defines file
 # [VMWARE_TOOLS]  moved to defines file
@@ -918,6 +840,7 @@ PROFILE::kidc_tools:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -944,6 +867,7 @@ PROFILE::kidc_ts_oMgmt:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -970,6 +894,7 @@ PROFILE::kidc_ts_iMgmt:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -997,6 +922,7 @@ PROFILE::kidc_ts_pub:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -1021,6 +947,7 @@ PROFILE::kidc_ts:
  spacewalk_key:         1-ts-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:              Canada/Pacific
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -1182,6 +1109,7 @@ PROFILE::kidc_bt_prod_pwan:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1212,6 +1140,7 @@ PROFILE::kidc_bt_nonprod_pwan:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1243,6 +1172,7 @@ PROFILE::kidc_bt_prod_be-tr:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1274,6 +1204,7 @@ PROFILE::kidc_bt_nonprod_be-tr:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1306,6 +1237,7 @@ PROFILE::kidc_bt_prod_be-nt:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1338,6 +1270,7 @@ PROFILE::kidc_bt_nonprod_be-nt:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1365,6 +1298,7 @@ PROFILE::kidc_bt_nonprod:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1392,6 +1326,7 @@ PROFILE::kidc_bt_prod:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1413,6 +1348,7 @@ PROFILE::kidc_bt:
  spacewalk_key:         1-bt-kidc
  ldap_server1:          uldap-kidc.corptools.ads 
  ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
  tz_local:      Canada/Pacific
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -1437,6 +1373,7 @@ PROFILE::cway_bt_ten:
  spacewalk_key:         1-bt-cway
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Pacific
  ntp:                 use_server
  ntp_servers:         142.174.53.246 142.178.70.59
@@ -1449,15 +1386,22 @@ PROFILE::cway_bt_ten:
 # Toll8 BT PROFILES
 #-----------------------------------------------------------------------------#
 
-PROFILE::toll_bt_pci:
+PROFILE::toll_bt_cde:
  context:      PROFILE
- spacewalk_server:      tslp000746.corptools.ads 
- spacewalk_key:         1-bt-toll-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-tl-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
+ puppet_server:
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
  ntp:                   use_server
  ntp_servers:           142.178.70.59 142.178.150.87 
- ic_scope:              toll_bt_pci_ic
- mgmt_scope:            toll_bt_pci_oMgmt
- nas_scope:             toll_bt_pci_nas
+ ic_scope:              toll_bt_cde_ic
+ mgmt_scope:            toll_bt_cde_oMgmt
+ nas_scope:             toll_bt_cde_nas
  included: toll_bt
  puppet_server:         lp99605.corp.ads
  nbu_profile:           toll_bt
@@ -1469,6 +1413,7 @@ PROFILE::toll_bt_pci:
  spacewalk_key:         1-bt-toll
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Mountain
  ntp:                 use_router
  ntp_servers:         142.178.33.1 142.178.233.1
@@ -1496,6 +1441,7 @@ PROFILE::toll_bt_ten:
  spacewalk_key:         1-bt-toll
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Mountain
  ntp:                 use_router
  ntp_servers:         142.178.33.1 142.178.233.1
@@ -1520,6 +1466,7 @@ PROFILE::toll_bt:
  spacewalk_key:         1-bt-toll
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Mountain
  ntp:                 use_router
  ntp_servers:         142.178.33.1 142.178.233.1
@@ -1546,6 +1493,7 @@ PROFILE::mainwire_ts:
  domain:               telus.net
  dns_servers:         192.168.81.11 192.168.81.12
  dns_search:              telus.net
+ flexera_server:        btwp013742.corp.ads
  mail_relay:
 
 
@@ -1559,6 +1507,7 @@ PROFILE::mainwire_bt_ten:
  spacewalk_key:         1-bt-mwir
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:              Canada/Mountain
  ntp:                   use_router
  ntp_servers:           142.178.33.1 142.178.233.1
@@ -1582,6 +1531,7 @@ PROFILE::cidc_bt_ten:
  spacewalk_key:         1-bt-cidc
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:            Canada/Mountain
  ntp:                 use_router
  ntp_servers:         142.178.33.1 142.178.233.1
@@ -1604,6 +1554,7 @@ PROFILE::len_werry_ts:
  env:                  TS
  ldap_server1:         uldap-west.tsl.telus.com
  ldap_server2:         uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  satellite_server:     lp98086.corp.ads
  satellite_key:        1-ts-lwer
  spacewalk_server:     lp98188.corp.ads
@@ -1632,6 +1583,7 @@ PROFILE::3030_bt_ten:
  spacewalk_key:         1-bt-3030
  ldap_server1:          uldap-west.tsl.telus.com
  ldap_server2:          uldap-east.tsl.telus.com
+ flexera_server:        btwp013742.corp.ads
  tz_local:              Canada/Mountain
  ntp:                   use_server
  ntp_servers:           142.178.70.59 142.178.150.87
@@ -1656,6 +1608,7 @@ PROFILE::marmac_bt_ten:
  spacewalk_key:     1-bt-marm
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:            Canada/Eastern
  ntp:                   use_server
  ntp_servers:          10.33.244.199 172.23.116.100
@@ -1684,6 +1637,7 @@ PROFILE::laird_ts:
  spacewalk_key:         1-ts-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           75.154.130.28 75.154.130.29
@@ -1697,10 +1651,17 @@ PROFILE::laird_ts:
 # Laird BT PROFILES
 #-----------------------------------------------------------------------------#
 
-PROFILE::laird_bt_pci:
+PROFILE::laird_bt_cde:
  context:      PROFILE
- spacewalk_server:      tslp000746.corptools.ads 
- spacewalk_key:         1-bt-laird-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-tl-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
+ puppet_server:
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
  included: laird_bt_ten
  bkp_scope:             laird_bt_bkp
  ic_scope:              laird_bt_ic
@@ -1716,6 +1677,7 @@ PROFILE::laird_bt_pci:
  spacewalk_key:         1-bt-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           142.63.37.17 142.63.128.100
@@ -1742,6 +1704,7 @@ PROFILE::laird_bt_bkp:
  spacewalk_key:         1-bt-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           142.63.37.17 142.63.128.100
@@ -1770,6 +1733,7 @@ PROFILE::laird_bt_ten:
  spacewalk_key:         1-bt-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           142.63.37.17 142.63.128.100
@@ -1794,6 +1758,7 @@ PROFILE::laird_bt:
  spacewalk_key:         1-bt-lair
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           142.63.37.17 142.63.128.100
@@ -1822,11 +1787,27 @@ PROFILE::laird_dr:
 #-----------------------------------------------------------------------------#
 # Laird MITS PROFILES
 #-----------------------------------------------------------------------------#
+
+PROFILE::laird_mits_oob:
+ context:      PROFILE
+ included:       laird_mits
+ env:                MITS
+ tz_local:            Canada/Eastern
+ ntp:                 use_server
+ ntp_servers:         209.171.33.3 209.171.33.4
+ domain:                telus.com
+ bkp_domain:
+ dns_servers:           
+ dns_search:              
+ mail_relay:    
+ site:         Laird
+ primary_nic_type: mgmt 
+ site:         Laird4
+
 # Laird MITS
 
 PROFILE::laird_mits:
  context:      PROFILE
- site:                Laird
  env:                MITS
  tz_local:            Canada/Eastern
  ntp:                 use_server
@@ -1836,6 +1817,7 @@ PROFILE::laird_mits:
  dns_servers:          
  dns_search:              
  mail_relay:   
+ site:         Laird
 
 
 #-----------------------------------------------------------------------------#
@@ -1855,6 +1837,7 @@ PROFILE::consilium_bt_lab:
  ntp_servers:       172.23.5.38 
  ldap_server1:       uldap-east.tsl.telus.com
  ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -1879,6 +1862,7 @@ PROFILE::consilium_bt_lab_be_nt:
  ntp_servers:       172.23.5.38 
  ldap_server1:       uldap-east.tsl.telus.com
  ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -1908,6 +1892,7 @@ PROFILE::consilium_bt_lab_pwan:
  ntp_servers:       172.23.5.38 
  ldap_server1:       uldap-east.tsl.telus.com
  ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -1936,6 +1921,7 @@ PROFILE::consilium_bt_ten:
  ntp_servers:       172.23.5.38 
  ldap_server1:       uldap-east.tsl.telus.com
  ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -1959,6 +1945,7 @@ PROFILE::consilium_bt:
  ntp_servers:       172.23.5.38 
  ldap_server1:      uldap-east.tsl.telus.com
  ldap_server2:      uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  satellite_server:  lp98085.corp.ads
  satellite_key:     1-bt-cons
  spacewalk_server:  lp98187.corp.ads
@@ -1971,11 +1958,64 @@ PROFILE::consilium_bt:
  aggr_mode:         active_passive
 
 
+
+PROFILE::consilium_sidc_lab_be-nt:
+ context:      PROFILE
+ nas_scope:            consilium_sidc_lab_oStorage
+ mgmt_scope:           consilium_sidc_lab_oMgmt
+ bkp_scope:            consilium_sidc_lab_bkp
+ fe_scope:             consilium_sidc_lab_fe
+ primary_nic_type:     be
+ included:              consilium_sidc_lab
+ dns_servers:       10.128.249.11 10.128.249.12
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server
+ ntp_servers:       10.128.249.1
+ ldap_server1:          lbtslp000058.corptools.sidclab
+ ldap_server2:
+ satellite_server:  
+ satellite_key:     
+ spacewalk_server:
+ spacewalk_key: 
+ domain:            corp.sidclab
+ bkp_domain:
+ dns_search:        corp.sidclab corptools.sidclab
+ mail_relay:
+ puppet_server: lbbtlp810000.corp.sidclab
+
+
 PROFILE::consilium_sidc_lab_pwan:
  context:      PROFILE
- nas_scope:    consilium_sidc_lab_oStorage
- mgmt_scope:   consilium_sidc_lab_oMgmt
- bkp_scope:    consilium_sidc_lab_bkp
+ nas_scope:            consilium_sidc_lab_oStorage
+ mgmt_scope:           consilium_sidc_lab_oMgmt
+ bkp_scope:            consilium_sidc_lab_bkp
+ ic_scope:             consilium_sidc_lab_oInterconnect
+ included:              consilium_sidc_lab
+ dns_servers:       10.128.249.11 10.128.249.12
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server
+ ntp_servers:       10.128.249.1
+ ldap_server1:          lbtslp000058.corptools.sidclab
+ ldap_server2:
+ satellite_server:  
+ satellite_key:     
+ spacewalk_server:
+ spacewalk_key: 
+ domain:            corp.sidclab
+ bkp_domain:
+ dns_search:        corp.sidclab corptools.sidclab
+ mail_relay:
+ puppet_server: lbbtlp810000.corp.sidclab
+
+
+PROFILE::consilium_sidc_lab:
+ context:      PROFILE
  dns_servers:       10.128.249.11 10.128.249.12
  nbu_profile:       consilium_bt 
  site:              Consilium
@@ -2066,6 +2106,7 @@ PROFILE::qidc_tools:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2092,6 +2133,7 @@ PROFILE::qidc_ts_iMgmt:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2119,6 +2161,7 @@ PROFILE::qidc_ts_oMgmt:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2133,15 +2176,19 @@ PROFILE::qidc_ts_oMgmt:
 # 
 #ZZZ
 
-PROFILE::qidc_tools_pci:
+
+PROFILE::qidc_tools_cde:
  context:      PROFILE
- satellite_key:         1-tl-qidc-pci
- spacewalk_key:         1-tl-qidc-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-tl-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
  puppet_server:
+ puppet:                no
  domain:                cde.telus.com
- bkp_domain:            corptools.ads
- dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
+ puppet:                no
  dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
+ dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
  included:               qidc_ts
  puppet_server:         tslp000443.corptools.ads
  site:                  QIDC
@@ -2152,6 +2199,7 @@ PROFILE::qidc_tools_pci:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2179,6 +2227,7 @@ PROFILE::qidc_ts_pub:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2204,6 +2253,7 @@ PROFILE::qidc_ts:
  spacewalk_key:         1-ts-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:              Canada/Eastern
  ntp:                   use_server
  ntp_servers:           100.64.93.49 100.64.93.57
@@ -2277,22 +2327,20 @@ PROFILE::qidc_mits:
 
 # this profile is for stringray (PCI)
 # it should allow install from mini_ISO + full_ISO
-
-PROFILE::qidc_bt_fake:
- context:      PROFILE
- profile_description:  QIDC BT FAKE
- dns_servers:  142.168.92.61 142.168.92.62 142.168.92.63 
- site:                 QIDC
- env:                  BT
- satellite_server:     tslp000255.corptools.ads
- satellite_key:         1-bt-qidc
- spacewalk_server:      tslp000745.corptools.ads
- spacewalk_key:         1-bt-qidc
- ldap_server1:         uldap-qidc.corptools.ads 
- ldap_server2:         uldap-kidc.corptools.ads 
- tz_local:             Canada/Eastern
- ntp:                  use_server
- ntp_servers:          100.64.93.49 100.64.93.57
+#[PROFILE] qidc_bt_fake
+#  profile_description: QIDC BT FAKE
+#  dns_servers: 142.168.92.61 142.168.92.62 142.168.92.63 # corp.ads AD servers
+#  site:                        QIDC
+#  env:                 BT
+#  satellite_server:    tslp000255.corptools.ads
+#  satellite_key:         1-bt-qidc
+# spacewalk_server:     tslp000745.corptools.ads
+# spacewalk_key:         1-bt-qidc
+#  ldap_server1:                uldap-qidc.corptools.ads 
+#  ldap_server2:                uldap-kidc.corptools.ads 
+#  tz_local:            Canada/Eastern
+#  ntp:                 use_server
+#  ntp_servers:         100.64.93.49 100.64.93.57
 
 # this profile is for testing servers that only have a managment NIC.
 
@@ -2345,6 +2393,7 @@ PROFILE::qidc_bt_prod_extranet:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2377,6 +2426,7 @@ PROFILE::qidc_bt_prod_pwan:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2408,6 +2458,7 @@ PROFILE::qidc_bt_nonprod_pwan:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2439,6 +2490,7 @@ PROFILE::qidc_bt_prod_be-tr:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2470,6 +2522,7 @@ PROFILE::qidc_bt_nonprod_be-tr:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2516,6 +2569,7 @@ PROFILE::qidc_bt_prod_be-nt:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2548,6 +2602,7 @@ PROFILE::qidc_bt_nonprod_be-nt:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2558,16 +2613,20 @@ PROFILE::qidc_bt_nonprod_be-nt:
  mail_relay:    qcmsg.tsl.telus.com
 
 
-PROFILE::qidc_bt_prod_pci:
+PROFILE::qidc_bt_prod_cde:
  context:      PROFILE
- profile_description:  QIDC BT Production PCI
- dns_servers:  75.153.182.21 75.153.182.22 75.153.182.23 
- dns_search:   corp.ads corptools.ads tsl.telus.com
- ntp_servers:  75.154.130.4 75.154.130.28 
- spacewalk_server:     tslp000746.corptools.ads 
- spacewalk_key:        1-bt-qidc-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-bt-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
  puppet_server:
- included:      qidc_bt_prod
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
+ dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
+ ntp_servers:           75.154.130.4 75.154.130.28 
+ included:               qidc_bt_prod
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
@@ -2583,6 +2642,7 @@ PROFILE::qidc_bt_prod_pci:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2593,16 +2653,20 @@ PROFILE::qidc_bt_prod_pci:
  mail_relay:    qcmsg.tsl.telus.com
 
 
-PROFILE::qidc_bt_nonprod_pci:
+PROFILE::qidc_bt_nonprod_cde:
  context:      PROFILE
- profile_description:  QIDC BT Non-Prod PCI
- dns_servers:  142.168.88.38 142.168.88.39 
- dns_search:   corp.ads corptools.ads tsl.telus.com
- ntp_servers:  75.154.130.4 75.154.130.28 
- spacewalk_server:     tslp000746.corptools.ads 
- spacewalk_key:        1-bt-qidc-pci
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-bt-qidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
  puppet_server:
- included:      qidc_bt_nonprod
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
+ dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
+ ntp_servers:           75.154.130.4 75.154.130.28 
+ included:               qidc_bt_nonprod
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
@@ -2618,6 +2682,7 @@ PROFILE::qidc_bt_nonprod_pci:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2654,6 +2719,7 @@ PROFILE::qidc_bt_nonprod:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2681,6 +2747,7 @@ PROFILE::qidc_bt_prod:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2703,6 +2770,7 @@ PROFILE::qidc_bt:
  spacewalk_key:         1-bt-qidc
  ldap_server1:          uldap-qidc.corptools.ads 
  ldap_server2:          uldap-kidc.corptools.ads 
+ flexera_server:        tswp000377.oss.ads
  tz_local:      Canada/Eastern
  ntp:           use_server
  ntp_servers:   100.64.93.49 100.64.93.57
@@ -2728,6 +2796,7 @@ PROFILE::ridc_bt_ten:
  spacewalk_key:         1-bt-ridc
  ldap_server1:          uldap-east.tsl.telus.com
  ldap_server2:          uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
  tz_local:             Canada/Eastern
  ntp:                  use_server
  ntp_servers:          142.168.234.88 142.168.234.112
@@ -3098,6 +3167,26 @@ NETWORK::100-70-23-224:
  router:        100.70.23.225
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1591 - "YODA OSS - ASCKUm - NPV Tool"
+
+NETWORK::100-125-253-144:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1591
+ netmask:       255.255.255.240
+ router:        100.125.253.145
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1627 - "OSS-Polling for Falcon TOCP"
+
+NETWORK::100-125-165-0:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1591
+ netmask:       255.255.255.0
+ router:        100.125.165.1
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 3002:3003 - "TS Storage (NAS)"
 
 NETWORK::100-69-196-0:
@@ -3298,6 +3387,17 @@ NETWORK::100-66-176-0:
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2224 - "BT non-prod PWAN4"
+
+NETWORK::100-66-180-0:
+ context:      PWAN_NETWORK
+ scope:         kidc_bt_nonprod_pwan
+ vlan:          2224
+ netmask:       255.255.252.0
+ router:        100.66.180.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
 # KIDC BT - VLAN 2012:2013 - "VDI" (Treat like PWAN)
 
 NETWORK::142-174-205-0:
@@ -3388,7 +3488,7 @@ NETWORK::216-7-220-0:
 
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 3)"
+# KIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 4)"
 
 NETWORK::216-7-222-128:
  context:      DMZ_NETWORK
@@ -3399,7 +3499,7 @@ NETWORK::216-7-222-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 3)"
+# KIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 4)"
 
 NETWORK::216-7-220-128:
  context:      DMZ_NETWORK
@@ -3410,7 +3510,7 @@ NETWORK::216-7-220-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 3 of 3) - Octopus"
+# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 3 of 4) - Octopus"
 
 NETWORK::100-70-41-128:
  context:      DMZ_NETWORK
@@ -3418,6 +3518,17 @@ NETWORK::100-70-41-128:
  vlan:          2401
  netmask:       255.255.255.240
  router:        100.70.41.129
+ routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 4) - for reverse proxy"
+
+NETWORK::100-125-162-160:
+ context:      DMZ_NETWORK
+ scope:         kidc_bt_prod_be-nt
+ vlan:          2402
+ netmask:       255.255.255.240
+ router:        100.125.162.161
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22
 
 #-----------------------------------------------------------------------------#
@@ -3431,7 +3542,7 @@ NETWORK::64-114-0-0:
  router:        64.114.0.1
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2004:2005 - "BT prod FE1 (front-end DMZ 1 of 2)"
+# KIDC BT - VLAN 2004:2005 - "BT prod FE1 (front-end DMZ 1 of 3)"
 
 NETWORK::64-114-1-0:
  context:      DMZ_NETWORK
@@ -3441,7 +3552,7 @@ NETWORK::64-114-1-0:
  router:        64.114.1.1
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2024:2025 - "BT prod FE2 (front-end DMZ 2 of 2)"
+# KIDC BT - VLAN 2024:2025 - "BT prod FE2 (front-end DMZ 2 of 3)"
 
 NETWORK::208-181-254-0:
  context:      DMZ_NETWORK
@@ -3449,6 +3560,17 @@ NETWORK::208-181-254-0:
  vlan:          2024:2025
  netmask:       255.255.255.128
  router:        208.181.254.1   
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 36:37 - "BT prod FE2 (front-end DMZ 3 of 3) for reverse proxy"
+# this vlan might not get used directly by Linux servers
+
+NETWORK::207-194-85-0:
+ context:      DMZ_NETWORK
+ scope:          kidc_bt_prod_fe
+ vlan:           36:37
+ netmask:        255.255.255.192
+ router: 207.194.85.1
 
 #---------------------------------------------#
 # KIDC BT - VLAN 1010:1011 - "BT non-prod oStorage"
@@ -3572,7 +3694,7 @@ NETWORK::142-178-12-0:
 
 NETWORK::142-178-29-224:
  context:      NETWORK
- scope:         toll_bt_pci 
+ scope:         toll_bt_cde 
  vlan:          20:21
  netmask:       255.255.255.224
  router:        142.178.29.225
@@ -3587,7 +3709,7 @@ NETWORK::142-178-29-224:
 
 NETWORK::142-178-22-0:
  context:      NETWORK
- scope:         toll_bt_pci 
+ scope:         toll_bt_cde 
  vlan: 7
  netmask: 255.255.255.128
  router:  142.178.22.1
@@ -3600,7 +3722,7 @@ NETWORK::142-178-22-0:
 
 NETWORK::100-78-191-128:
  context:      NETWORK
- scope:         toll_bt_pci 
+ scope:         toll_bt_cde 
  vlan:          814:815
  netmask:       255.255.255.224
  router:        100.78.191.129
@@ -3613,7 +3735,7 @@ NETWORK::100-78-191-128:
 
 NETWORK::100-78-191-32:
  context:      NETWORK
- scope:         toll_bt_pci_oMgmt
+ scope:         toll_bt_cde_oMgmt
  vlan:          808:809
  netmask:       255.255.255.224
  router:        100.78.191.33
@@ -3626,7 +3748,7 @@ NETWORK::100-78-191-32:
 
 NETWORK::100-78-190-128:
  context:      NETWORK
- scope:         toll_bt_pci
+ scope:         toll_bt_cde
  vlan:          850:851
  netmask:       255.255.255.224
  router:        100.78.190.129
@@ -3636,7 +3758,7 @@ NETWORK::100-78-190-128:
 
 NETWORK::100-78-190-192:
  context:      NETWORK
- scope:         toll_bt_pci_ic
+ scope:         toll_bt_cde_ic
  vlan:          870:871
  netmask:       255.255.255.224
  test_ip:       
@@ -3646,7 +3768,7 @@ NETWORK::100-78-190-192:
 
 NETWORK::100-78-191-160:
  context:      NETWORK
- scope:         toll_bt_pci_nas
+ scope:         toll_bt_cde_nas
  vlan:          870:871
  netmask:       255.255.255.224
  test_ip:       100.78.191.164 
@@ -4349,13 +4471,14 @@ NETWORK::142-178-220-0:
 
 NETWORK::142-178-221-0:
  context:      NETWORK
- netmask:     255.255.255.0
- router:     142.178.221.1
- scope:      toll_bt_ten
- domain:       corp.ads
- boot_server:  lp99705
- media_server: lp99705
- depot_server: lp99705
+ netmask:       255.255.255.0
+ router:        142.178.221.1
+ vlan:          225
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
 
 #-Edmonton VMware farm #4 --------------------#
 # IP helper added Jun 1/2011
@@ -4519,6 +4642,50 @@ NETWORK::142-178-95-192:
  media_server: lp99705
  depot_server: lp99705
 
+# Toll8 ??? network - VLAN 810
+# IP helper requested sep 7/2018 ICR 926777
+
+NETWORK::142-178-0-0:
+ context:      NETWORK
+ netmask:       255.255.255.0
+ router:        142.178.0.1
+ vlan:          810
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
+
+# Toll8 prod network - VLAN 1800
+# This network requested by Angela Sept/2018 for new builds.
+# IP helper requested sep 24/2018 ICR 929822
+
+NETWORK::100-78-144-0:
+ context:      NETWORK
+ netmask:       255.255.252.0
+ router:        100.78.144.1
+ vlan:          1800
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
+
+# Toll8 iMgmt network - VLAN 1900
+# This network requested by Angela Sept/2018 for iLOs on new builds.
+# IP helper requested sep 24/2018 ICR 929822 (but probably not needed)
+
+NETWORK::100-78-148-0:
+ context:      NETWORK
+ netmask:       255.255.252.0
+ router:        100.78.148.1
+ vlan:          1900
+ scope:         toll_bt_ten
+ domain:        corp.ads
+ boot_server:   lp99705
+ media_server:  lp99705
+ depot_server:  lp99705
+
 #-----------------------------------------------------------------------------#
 #-Edmonton Desktop VLAN - no boot server
 # This is added so Steven can install Linux on a desktop
@@ -4589,10 +4756,11 @@ NETWORK::192-168-34-0:
 NETWORK::192-168-35-0:
  context:      BKP_NETWORK
  scope:         toll_bt_bkp
+ vlan:          141
  site:          Toll8
- netmask:     255.255.255.0
- router:      192.168.35.254
- routes:      192.168.32.0/20,192.168.192.0/18
+ netmask:       255.255.255.0
+ router:        192.168.35.254
+ routes:        192.168.32.0/20,192.168.192.0/18
 
 #---------------------------------------------#
 # Edmonton Netbackup Network 3 of 18 #36
@@ -5163,7 +5331,7 @@ NETWORK::142-63-40-0:
  site:         Laird1
 
 #-----------------------------------------------------------------------------#
-# Laird?: MITS - no boot server
+# Laird1: MITS - no boot server
 
 NETWORK::10-7-64-0:
  context:      NETWORK
@@ -5172,7 +5340,17 @@ NETWORK::10-7-64-0:
  scope:      laird_mits
  boot_server:  none
  media_server: none
- site:         Laird1
+
+#-----------------------------------------------------------------------------#
+# Laird1: MITS OOB - no boot server
+
+NETWORK::10-45-0-0:
+ context:      NETWORK
+ netmask:      255.255.0.0
+ router:      10.45.255.254
+ scope:      laird_mits_oob
+ boot_server:  none
+ media_server: none
 
 #-----------------------------------------------------------------------------#
 # Laird4 Networks
@@ -5303,7 +5481,7 @@ NETWORK::142-63-141-0:
  media_server: lp98989
 
 #-----------------------------------------------------------------------------#
-# Laird4 - VLAN 845: ON farm #6 (subnet 1 of 2)
+# Laird4 - VLAN 845: ON farm #6 (subnet 1 of 3)
 # IP helper requested May 18/2012 (ICR 481754) 
 
 NETWORK::142-63-43-0:
@@ -5316,7 +5494,7 @@ NETWORK::142-63-43-0:
  media_server: lp98989
 
 #-----------------------------------------------------------------------------#
-# Laird4 - VLAN 845: ON farm #6 (subnet 2 of 2)
+# Laird4 - VLAN 845: ON farm #6 (subnet 2 of 3)
 
 NETWORK::142-63-53-0:
  context:      NETWORK
@@ -5327,6 +5505,18 @@ NETWORK::142-63-53-0:
  boot_server:  lp98989
  media_server: lp98989
  ai_server:     xp0006/142.63.53.190
+
+#-----------------------------------------------------------------------------#
+# Laird4 - VLAN 845: ON farm #6 (subnet 3 of 3)
+
+NETWORK::142-63-135-0:
+ context:      NETWORK
+ scope:         laird_bt_ten
+ vlan:          845
+ netmask:       255.255.255.192
+ router:        142.63.135.1
+ boot_server:   lp98989
+ media_server:  lp98989
 
 
 #-----------------------------------------------------------------------------#
@@ -5499,6 +5689,34 @@ NETWORK::142-63-188-0:
  boot_server:  lp98989
  media_server: lp98989
 
+# Laird4 prod network - VLAN 1800
+# This network requested by Angela Sept/2018 for new builds.
+# IP helper requested sep 24/2018 ICR 929825
+
+NETWORK::100-78-152-0:
+ context:      NETWORK
+ netmask:       255.255.252.0
+ router:        100.78.152.1
+ vlan:          1800
+ scope:         laird_bt_ten
+ domain:        corp.ads
+ boot_server:   lp98989
+ media_server:  lp98989
+
+# Laird4 iMgmt network - VLAN 1900
+# This network requested by Angela Sept/2018 for iLOs on new builds.
+# IP helper requested sep 24/2018 ICR 929825 (but probably not needed)
+
+NETWORK::100-78-156-0:
+ context:      NETWORK
+ netmask:       255.255.252.0
+ router:        100.78.156.1
+ vlan:          1900
+ scope:         laird_bt_ten
+ domain:        corp.ads
+ boot_server:   lp98989
+ media_server:  lp98989
+
 
 #---------------------------------------------#
 # Laird Netbackup Network - VLAN 808
@@ -5565,7 +5783,7 @@ NETWORK::209-91-70-0:
  depot_server:  lbtslp000058/209.91.70.27
 
 #---------------------------------------------#
-# Consilium SIDC Lab - VLAN 1004:1005 - oMgmt
+# Consilium SIDC Lab - VLAN 1005 - oMgmt
 
 NETWORK::10-128-64-0:
  context:      NETWORK
@@ -5589,7 +5807,7 @@ NETWORK::10-128-249-0:
  router:        10.128.249.1
 
 #---------------------------------------------#
-# Consilium SIDC Lab - VLAN 1008:1009 - oStorage
+# Consilium SIDC Lab - VLAN 1009 - oStorage
 
 NETWORK::10-128-0-0:
  context:      NETWORK
@@ -5599,14 +5817,43 @@ NETWORK::10-128-0-0:
  test_ip:       10.128.0.30 
 
 #---------------------------------------------#
-# Consilium SIDC Lab - VLAN 1016:1017 - backup
+# Consilium SIDC Lab - VLAN 1017 - backup
 
 NETWORK::10-128-32-0:
  context:      NETWORK
  scope: consilium_sidc_lab_bkp
  vlan:          1016:1017
  netmask:       255.255.224.0
- test_ip:       
+ test_ip:       10.128.32.1 
+
+#---------------------------------------------#
+# Consilium SIDC Lab - VLAN 2202 - BT BE-NT (back-end non-trusted DMZ)
+
+NETWORK::10-128-222-0:
+ context:      NETWORK
+ scope: consilium_sidc_lab_be-nt
+ vlan:          2202
+ netmask:       255.255.255.0
+ router:        10.128.222.1
+
+#---------------------------------------------#
+# Consilium SIDC Lab - VLAN 2205 - BT FE (front-end DMZ)
+
+NETWORK::172-18-128-0:
+ context:      NETWORK
+ scope: consilium_sidc_lab_fe
+ vlan:          2205
+ netmask:       255.255.255.128
+ router:        172.18.128.1
+
+#---------------------------------------------#
+# Consilium SIDC Lab - VLAN 1208 - Interconnect
+
+NETWORK::10-128-246-0:
+ context:      NETWORK
+ scope: consilium_sidc_lab_oInterconnect
+ vlan:          1208
+ netmask:       255.255.254.0
 
 ###############################################################################
 # Consilium BT TEN Networks
@@ -6095,12 +6342,13 @@ NETWORK::100-70-34-224:
 
 NETWORK::100-70-31-192:
  context:      NETWORK
- scope:         qidc_tools_pci
+ scope:         qidc_tools_cde
  vlan:          1600
  netmask:       255.255.255.192
  router:        100.70.31.193
- boot_server:   none
- media_server:  none
+ boot_server:   btlp002429/100.70.31.202 
+ dhcp_server:   none
+ media_server:  btlp002429/100.70.31.202 
  depot_server:  none
 
 #-----------------------------------------------------------------------------#
@@ -6110,7 +6358,7 @@ NETWORK::100-70-31-192:
 
 NETWORK::100-125-252-0:
  context:      NETWORK
- scope:         qidc_tools_pci
+ scope:         qidc_tools_cde
  vlan:          1600
  netmask:       255.255.255.192
  router:        100.125.252.1
@@ -6157,6 +6405,16 @@ NETWORK::100-70-23-160:
  vlan:          1589
  netmask:       255.255.255.248
  router:        100.70.23.161
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1591 - "YODA OSS - ASCKUm - NPV Tool"
+
+NETWORK::100-125-253-128:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1591
+ netmask:       255.255.255.240
+ router:        100.125.253.129
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 3002:3003 - "TS oStorage (NAS)"
@@ -6233,15 +6491,13 @@ NETWORK::172-16-0-0:
 #-----------------------------------------------------------------------------#
 
 ## this network does not exist.  It is used for kickstart from mini_ISO+full_ISO
-
-NETWORK::192-168-100-0:
- context:      FAKE_NETWORK
- scope:         qidc_bt_fake
- netmask:       255.255.255.0
- test_ip:       192.168.99.1
- boot_server:   none
- media_server:  none
- depot_server:  none
+#[FAKE_NETWORK]  192.168.100.0
+# scope:                qidc_bt_fake
+# netmask:      255.255.255.0
+# test_ip:      192.168.99.1
+# boot_server:   none
+# media_server:  none
+# depot_server:  none
 
 #-----------------------------------------------------------------------------#
 # QIDC BT - VLAN 1000:1001 - "BT prod iMgmt 1 of 2"
@@ -6466,7 +6722,7 @@ NETWORK::100-78-187-64:
 
 NETWORK::100-78-140-128:
  context:      PCI_NETWORK
- scope:         qidc_bt_nonprod_pci
+ scope:         qidc_bt_nonprod_cde
  vlan:          1400:1401
  netmask:       255.255.255.224
  router:        100.78.140.129
@@ -6476,7 +6732,7 @@ NETWORK::100-78-140-128:
 
 NETWORK::100-78-140-96:
  context:      PCI_NETWORK
- scope:         qidc_bt_nonprod_pci
+ scope:         qidc_bt_nonprod_cde
  vlan:          1390:1391
  netmask:       255.255.255.224
  router:        100.78.140.97
@@ -6488,7 +6744,7 @@ NETWORK::100-78-140-96:
 
 NETWORK::206-235-251-160:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          3008:3009
  netmask:       255.255.255.240
  router:        206.235.251.161
@@ -6498,7 +6754,7 @@ NETWORK::206-235-251-160:
 
 NETWORK::100-78-184-96:
  context:      PCI_NETWORK
- scope:         qidc_bt_nonprod_pci
+ scope:         qidc_bt_nonprod_cde
  vlan:          3018:3019
  netmask:       255.255.255.240
  router:        100.78.184.97
@@ -6509,7 +6765,7 @@ NETWORK::100-78-184-96:
 
 NETWORK::206-235-251-128:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          1020:1021
  netmask:       255.255.255.240
  router:        206.235.251.129
@@ -6519,7 +6775,7 @@ NETWORK::206-235-251-128:
 
 NETWORK::100-78-186-96:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          1340:1341
  netmask:       255.255.255.224
  router:        100.78.186.97
@@ -6528,7 +6784,7 @@ NETWORK::100-78-186-96:
 
 NETWORK::100-78-186-128:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          1350:1351
  netmask:       255.255.255.224
  router:        100.78.186.129
@@ -6537,7 +6793,7 @@ NETWORK::100-78-186-128:
 
 NETWORK::100-78-186-160:
  context:      PCI_NETWORK
- scope:         qidc_bt_prod_pci
+ scope:         qidc_bt_prod_cde
  vlan:          1360:1361
  netmask:       255.255.255.224
  router:        100.78.186.161
@@ -6768,7 +7024,7 @@ NETWORK::100-65-32-0:
  vlan:          1010:1011
  site:          QIDC
  netmask:       255.255.224.0
- test_ip:       100.65.32.15
+ test_ip:       100.65.37.85 
  mtu:           9000
 
 #---------------------------------------------#
