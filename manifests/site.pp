@@ -11,11 +11,6 @@ node default {
 
 }
 
-# CRQ30148 : Scheduled for deployment on Dec 12
-# node ln98074, ln99030, ln98276,btln000002, btln002502, btln002561 {
-#   class { 'role::rl_patrol_upgrade': }
-# }
-
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 # BCG Shannon project 
@@ -44,8 +39,8 @@ class { 'role::rl_dynatrace': }
 }
 
 
-#20190207 - ROFS many IDCs - Puppet 5 Upgrade 
-node lp97854,btln000540,btln007178,btln007198,btlp000347,ln99668,lp97772,tslp000269
+#20190213 - CRQ37097 : ROFS many IDCs - Puppet 5 Upgrade 
+node btlp000812
 {
   class {'::puppet_agent':
     package_version => '5.5.1',
