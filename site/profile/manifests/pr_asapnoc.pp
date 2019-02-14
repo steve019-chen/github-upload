@@ -18,8 +18,7 @@ class profile::pr_asapnoc {
 class { 'docker':
   use_upstream_package_source => false,
   version                     => '1.12.0-1.0.2.el7',
-  HTTP_PROXY                  => http://pac.tsl.telus.com:8080/,
-  HTTPS_PROXY                 => http://pac.tsl.telus.com:8080/,
+  proxy                       => http://pac.tsl.telus.com:8080/,
 }
 
 class {'docker::compose':
