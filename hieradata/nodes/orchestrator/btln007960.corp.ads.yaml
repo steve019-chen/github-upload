@@ -1,0 +1,11 @@
+---
+lvm::volume_groups:
+  appvg:
+    createonly: true
+    physical_volumes:
+      - /dev/sdb
+    logical_volumes:
+      app01lv: {fs_type: ext4, size: 30G, mountpath: /oracle}
+      app04lv: {fs_type: ext4, size: 100G, mountpath: /oracle/SP1}
+      app03lv: {fs_type: ext4, size: 30G, mountpath: /oracle/SP1/112_64}
+      app02lv: {fs_type: ext4, size: 5G, mountpath: /tmp}
