@@ -45,7 +45,7 @@ user { 'svc_prov':
 
 # apache
 class { 'apache':
-#  version => 2.4.6,
+  version => 2.4.6,
 }
 
 # Adding Sudo rules for docker and apache
