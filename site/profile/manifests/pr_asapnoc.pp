@@ -24,7 +24,7 @@ class { 'docker':
 class {'docker::compose':
   ensure  => present,
   version => '1.9.0',
-  proxy   => 'https://pac.tsl.telus.com:8080',
+  proxy   => https://pac.tsl.telus.com:8080,
 }
 
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
