@@ -18,7 +18,6 @@ class profile::pr_asapnoc {
 class { 'docker':
   use_upstream_package_source => false,
   version                     => '1.12.0-1.0.2.el7',
-  proxy                       => http://pac.tsl.telus.com:8080/,
 }
 
 class {'docker::compose':
@@ -62,11 +61,10 @@ sudo::conf { 'puppet_docker':
   }
 
 # docker proxy settings
-#file {'/etc/systemd/system/docker.service.d/http-proxy.conf':
-#    ensure  => present,
-#    ensure  => absent,    
-#    content => '[Service]
-#Environment="HTTP_PROXY=http://pac.tsl.telus.com:8080/" "HTTPS_PROXY=http://pac.tsl.telus.com:8080/"',
-#  }
+file {'/etc/systemd/system/docker.service.d/http-proxy.conf':
+    ensure  => present,
+    content => '[Service]
+Environment="HTTP_PROXY=http://pac.tsl.telus.com:8080/" "HTTPS_PROXY=http://pac.tsl.telus.com:8080/"',
+  }
 
 }
