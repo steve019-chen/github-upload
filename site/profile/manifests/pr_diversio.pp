@@ -63,5 +63,26 @@ file { '/etc/nginx/conf.d/nonssl_server.conf':
   group  => "infra"
 }
 
+file { '/etc/nginx/ldap/daemon/backend-sample-app.py':
+  ensure => "present",
+  content => "",
+  owner  => "infra",
+  group  => "infra"
+}
+
+file { '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon.py':
+  ensure => "present",
+  content => "",
+  owner  => "infra",
+  group  => "infra"
+}
+
+file { '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon-ctl-rh.sh':
+  ensure => "present",
+  content => "",
+  owner  => "infra",
+  group  => "infra"
+}
+
 }
 ####
