@@ -5,10 +5,10 @@
 # Parameters:
 #
 # Actions:
-#   - <insert text>
+#   - please check pr_asapnoc.pp for more details
 # 
 # Prereqs:
-#   - <insert text>
+#   - please check pr_asapnoc.pp for more details
 #
 #Role for defining ASAPNOC project servers 
 class role::rl_asapnoc {
