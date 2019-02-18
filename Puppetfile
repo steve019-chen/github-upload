@@ -1,7 +1,7 @@
 #Forge clean modules
 mod 'puppetlabs-stdlib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-stdlib.git',
-  :tag => '4.25.0'
+  :tag => '5.2.0'
 
 mod 'puppetlabs-apache', 
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-apache.git',
@@ -9,7 +9,7 @@ mod 'puppetlabs-apache',
 
 mod 'puppetlabs-apt',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-apt.git',
-  :tag => '4.1.0'
+  :tag => '6.3.0'
 
 mod 'puppetlabs-concat',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-concat.git',
@@ -21,11 +21,11 @@ mod 'puppetlabs-firewall',
 
 mod 'puppetlabs-inifile',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-inifile.git',
-  :tag => '1.6.0'
+  :tag => '2.5.0'
 
 mod 'puppetlabs-postgresql',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-postgresql.git',
-  :tag => '4.9.0'
+  :tag => '5.12.1'
 
 mod 'puppetlabs-puppetdb',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppetdb.git',
@@ -37,7 +37,7 @@ mod 'puppetlabs-lvm',
 
 mod 'puppetlabs-puppet_agent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppet_agent.git',
-  :tag => '1.6.0'
+  :tag => '2.0.1'
 
 mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
