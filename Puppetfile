@@ -1,7 +1,7 @@
 #Forge clean modules
 mod 'puppetlabs-stdlib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-stdlib.git',
-  :tag => '4.25.0'
+  :tag => '4.25.1'
 
 mod 'puppetlabs-apache', 
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-apache.git',
@@ -9,7 +9,7 @@ mod 'puppetlabs-apache',
 
 mod 'puppetlabs-apt',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-apt.git',
-  :tag => '2.4.0'
+  :tag => '6.3.0'
 
 mod 'puppetlabs-concat',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-concat.git',
@@ -37,11 +37,27 @@ mod 'puppetlabs-lvm',
 
 mod 'puppetlabs-puppet_agent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppet_agent.git',
-  :tag => '1.6.0'
+  :tag => '1.7.0'
 
 mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
   :tag => '0.1.1'
+
+mod 'puppetlabs-translate',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-translate.git',
+  :tag => '1.0.0'
+
+mod 'puppetlabs-powershell',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-powershell.git',
+  :tag => '2.1.5'
+
+mod 'puppetlabs-reboot',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-reboot.git',
+  :tag => '2.0.0'
+
+mod 'puppetlabs-docker',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-docker.git',
+  :tag => '1.1.0'
 
 mod 'saz_puppet-sudo',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
