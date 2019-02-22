@@ -17,7 +17,7 @@ node default {
 
 node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
 {
-  include { 'role::rl_asapnoc': }
+  include role::rl_asapnoc
 }
 
 # BCG Shannon project 
