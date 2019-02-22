@@ -47,13 +47,13 @@ class { 'role::rl_dynatrace': }
 
 
 #20190213 - CRQ37097 : ROFS many IDCs - Puppet 5 Upgrade 
-node btlp000812
-{
-  class {'::puppet_agent':
-    package_version => '5.5.1',
-    service_names   => ['puppet'],
-    manage_repo     => false,
-  }
-}
+# node btlp000812
+# {
+#   class {'::puppet_agent':
+#     package_version => '5.5.1',
+#     service_names   => ['puppet'],
+#     manage_repo     => false,
+#   }
+# }
 
 # lint:endignore
