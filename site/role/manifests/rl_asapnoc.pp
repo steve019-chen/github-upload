@@ -10,11 +10,14 @@
 # Prereqs:
 #   - please check pr_asapnoc.pp for more details
 #
-#Role for defining ASAPNOC project servers 
+# Role for defining ASAPNOC project servers 
+
 class role::rl_asapnoc {
+
+  # All roles should include the base profile
+
+  include profile::pr_base
   include profile::pr_asapnoc
 
-  #All roles should include the base profile
-  include profile::pr_base
 
 }
