@@ -13,6 +13,13 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+#CRQ37712 #20190222 - Project ASAPNOC
+
+node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
+{
+class { 'role::rl_asapnoc': }
+}
+
 # BCG Shannon project 
 
 node btlp007087, btlp007088,btlp007089,btlp007090,btlp007091,btlp007092,btlp007093,btlp007094,btlp007095,btlp007096,
