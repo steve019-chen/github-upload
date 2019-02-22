@@ -49,13 +49,9 @@ mod 'dynatrace-dynatraceoneagent',
   :tag => '0.3.0e'
 
 #TELUS custom modules
-# mod 'puppet_agent_config',
-#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
-#   :tag => '2.0.0'
-
 mod 'puppet_agent_config',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
-  :ref => 'windows-splay'
+  :tag => '2.1.0'
 
 mod 'telus_lib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
