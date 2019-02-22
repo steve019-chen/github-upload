@@ -18,7 +18,7 @@ node default {
 node ln98551 {
   include role::rl_diversio
 }
-##
+###
 
 # 20190124 CRQ32950 Flexera BT PR 500 hosts
 
