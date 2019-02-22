@@ -10,7 +10,7 @@
 #   - Add sudo rules
 # 
 # Prereqs for docker:
-#   - Optional, EPEL, and Software Collections channels must be added in Spacewalk
+#   - Addons for Oracle Linux 7 (x86_64) channel must be added in Spacewalk
 #
 
 class profile::pr_asapnoc {
