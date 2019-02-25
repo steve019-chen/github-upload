@@ -7,7 +7,6 @@ nginx::nginx_error_log: '/work/infra/logs/error.log'
 nginx::package_name: 'nginx-1.14.2'
 nginx::worker_connections: 1024
 nginx::nginx_error_log_severity: 'warn'
-#nginx::log_format:######
 nginx::resource::server: 'main'
 nginx::http_format_log: 'main'
-##
+nginx::log_format main: {"$remote_addr"}
