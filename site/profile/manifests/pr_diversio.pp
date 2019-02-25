@@ -16,13 +16,13 @@ class profile::pr_diversio {
 
 include nginx
 
-class { 'nginx':
+nginx::resource::server{ 
   log_format =>
     {
-      'logstash_json' => 'escape=json \'{ "$request"}'
+      'logstash_json' => 'escape=json \'{ "$request"}',
     }
 }
-#
+##
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
   priority => 10,
