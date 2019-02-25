@@ -19,10 +19,10 @@ include nginx
 class { 'nginx':
   log_format =>
     {
-      'logstash_json' => 'escape=json \'{ '$remote_addr - $remote_user [$time_local] "$request"'} 
+      'logstash_json' => 'escape=json \'{ "$request"}'
     }
 }
-
+#
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
   priority => 10,
