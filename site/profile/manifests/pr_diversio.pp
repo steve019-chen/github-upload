@@ -16,7 +16,7 @@ class profile::pr_diversio {
 
 include nginx
 
-nginx::resource::server{ 
+nginx::resource:server { 
   log_format =>
     {
       'logstash_json' => 'escape=json \'{ "$request"}',
