@@ -13,7 +13,7 @@ class {'sudo':
 # ensure   => '1.14.2',
 # }
 
-include include nginx
+include nginx
 
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
