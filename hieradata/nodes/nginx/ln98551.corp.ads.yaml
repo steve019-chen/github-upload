@@ -7,4 +7,4 @@ nginx::nginx_error_log: '/work/infra/logs/error.log'
 nginx::package_name: 'nginx-1.14.2'
 nginx::worker_connections: 1024
 nginx::nginx_error_log_severity: 'warn'
-#nginx::log_format:
+#nginx::log_format:######
