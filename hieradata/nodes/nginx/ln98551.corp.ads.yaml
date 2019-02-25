@@ -9,4 +9,4 @@ nginx::worker_connections: 1024
 nginx::nginx_error_log_severity: 'warn'
 nginx::resource::server: 'main'
 nginx::http_format_log: 'main'
-nginx::log_format main: {"$remote_addr"}
+nginx::log_format : {'remote_addr'= "$remote_addr"}
