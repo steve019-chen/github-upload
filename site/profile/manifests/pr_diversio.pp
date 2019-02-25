@@ -13,7 +13,15 @@ class profile::pr_diversio {
 # ensure   => '1.14.2',
 # }
 
+
 include nginx
+
+class { 'nginx':
+  log_format =>
+    {
+      'logstash_json' => 'escape=json \'{ '$remote_addr - $remote_user [$time_local] "$request"'} 
+    }
+}
 
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
