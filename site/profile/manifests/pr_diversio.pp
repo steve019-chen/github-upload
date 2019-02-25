@@ -12,6 +12,7 @@ class {'sudo':
 # package {"nginx":
 # ensure   => '1.14.2',
 # }
+#
 
 include nginx
 
