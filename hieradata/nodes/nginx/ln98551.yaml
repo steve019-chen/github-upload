@@ -1,7 +1,7 @@
 ---
 nginx_log_dirs: ["/work/infra/nginx","/work/infra/nginx/cache","/work/infra/logs","/work/infra/logs/nginx"]
 nginx_version: '1.14.2'
-nginx::daemon_user: 'dynatrace'
+nginx::daemon_user: 'infra'
 nginx::http_access_log: '/work/infra/logs/nginx/access_log'
 nginx::nginx_error_log: '/work/infra/logs/error.log'
 nginx::package_name: 'nginx-1.14.2'
