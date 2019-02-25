@@ -8,10 +8,12 @@ class {'sudo':
   config_file_replace => false,
   }
 
-class profile::pr_diversio {
- package {"nginx":
- ensure   => '1.14.2',
- }
+#class profile::pr_diversio {
+# package {"nginx":
+# ensure   => '1.14.2',
+# }
+
+include include nginx
 
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
