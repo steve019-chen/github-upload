@@ -8,3 +8,4 @@ nginx::package_name: 'nginx-1.14.2'
 nginx::worker_connections: 1024
 nginx::nginx_error_log_severity: 'warn'
 #nginx::log_format:######
+nginx::resource::server: 'main'
