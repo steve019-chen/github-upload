@@ -17,6 +17,9 @@ nginx::keepalive_requests: '100'
 nginx::confd_only: true
 nginx::nginx_servers:
   'nonssl_server':
+    listen_port: 80
+    server_name: ['ln98551.corp.ads']
     proxy: 'http://127.0.0.1:8888'
 
 ###
+
