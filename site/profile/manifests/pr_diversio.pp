@@ -17,6 +17,7 @@ class profile::pr_diversio {
 include nginx
 nginx::resource::server { 'ssl_server':
   listen_port => 443,
+  ssl         => false,
   server_name => ['ln98551.corp.ads'],
 }
 
