@@ -113,5 +113,12 @@ file { '/etc/nginx/nginx.conf':
     owner     => 'infra',
     group      => 'infra',
 }
+
+
+file { '/etc/nginx/conf.d/default.conf':
+    ensure    => present,
+    purge     => true,
+}
+
 }
 ##########
