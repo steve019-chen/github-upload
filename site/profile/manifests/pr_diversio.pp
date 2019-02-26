@@ -109,4 +109,4 @@ file { '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon-ctl-rh.sh':
 }
 
 }
-#####
+######
