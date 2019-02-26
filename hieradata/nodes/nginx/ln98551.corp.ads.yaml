@@ -10,5 +10,5 @@ nginx::nginx_error_log_severity: 'warn'
 nginx::resource::server: 'main'
 nginx::http_format_log: 'main'
 #nginx::log_format: { main escape= json '$remote_addr $remote_user $request' '$status $body_bytes_sent $http_referer' }
-proxy_cache_path: ['/work/infra/nginx/cache/' 'auth_cache:10m']
+nginx::proxy_cache_path: ['/work/infra/nginx/cache/', 'auth_cache:10m']
 ####
