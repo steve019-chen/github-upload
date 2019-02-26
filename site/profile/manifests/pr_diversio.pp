@@ -24,7 +24,7 @@ nginx::resource::server { 'nonssl_server':
   listen_port => 80,
   server_name => ['ln98551.corp.ads'],
 }
-##
+###
 #nginx::resource:server { 
 #  log_format =>
 #    {
