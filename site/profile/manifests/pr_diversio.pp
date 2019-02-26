@@ -108,10 +108,10 @@ file { '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon-ctl-rh.sh':
   replace => "no",
 }
 
-file { '/etc/nginx/nginx.conf' :
+file { '/etc/nginx/nginx.conf':
     ensure    => present,
     owner     => 'infra',
     group      => 'infra',
     require     => [ User['infra'], Group['infra'], ],
 }
-#######
+########
