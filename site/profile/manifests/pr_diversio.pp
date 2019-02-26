@@ -17,9 +17,9 @@ class profile::pr_diversio {
 include nginx
 nginx::resource::server { 'test':
   listen_port => 80,
-  server_name => ['ln98551']
+  server_name => ['ln98551'],
   proxy       => 'http://localhost:5601',
-  access_log  => '/work/infra/logs/nginx/host.access.log'
+  access_log  => '/work/infra/logs/nginx/host.access.log',
 }
 
 #nginx::resource:server { 
