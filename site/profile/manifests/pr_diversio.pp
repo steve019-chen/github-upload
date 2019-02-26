@@ -119,5 +119,11 @@ file { '/etc/nginx/conf.d/default.conf':
     purge     => true,
 }
 
+exec { 'remove /etc/nginx/conf.d/default.conf file ':
+     command  => "/bin/rm /etc/nginx/conf.d/default.conf",
+     require  => File['/etc/nginx/conf.d/default.conf'],
+}
+
+
 }
 ##########
