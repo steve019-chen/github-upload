@@ -14,12 +14,12 @@ class profile::pr_diversio {
 # }
 
 
-include nginx
-nginx::resource::server { 'ssl_server':
-  listen_port => 443,
-  ssl         => false,
-  server_name => ['ln98551.corp.ads'],
-}
+#include nginx
+#nginx::resource::server { 'ssl_server':
+#  listen_port => 443,
+#  ssl         => false,
+#  server_name => ['ln98551.corp.ads'],
+#}
 
 
 ######
@@ -108,5 +108,10 @@ file { '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon-ctl-rh.sh':
   replace => "no",
 }
 
+file { '/etc/nginx/nginx.conf' :
+    ensure    => present,
+    owner     => 'infra',
+    group      => 'infra',
+    require     => [ User['infra'], Group['infra'], ],
 }
-######
+#######
