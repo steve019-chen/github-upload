@@ -116,7 +116,6 @@ file { '/etc/nginx/nginx.conf':
 
 
 file { '/etc/nginx/conf.d/default.conf':
-    ensure    => present,
     purge     => true,
 }
 
