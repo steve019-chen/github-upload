@@ -114,4 +114,5 @@ file { '/etc/nginx/nginx.conf':
     group      => 'infra',
     require     => [ User['infra'], Group['infra'], ],
 }
+}
 ##########
