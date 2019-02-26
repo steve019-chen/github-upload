@@ -112,7 +112,6 @@ file { '/etc/nginx/nginx.conf':
     ensure    => present,
     owner     => 'infra',
     group      => 'infra',
-    require     => [ User['infra'], Group['infra'], ],
 }
 }
 ##########
