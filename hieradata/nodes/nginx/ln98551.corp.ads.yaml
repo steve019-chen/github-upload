@@ -12,3 +12,8 @@ nginx::http_format_log: 'main'
 #nginx::log_format: { main escape= json '$remote_addr $remote_user $request' '$status $body_bytes_sent $http_referer' }
 nginx::proxy_cache_path: '/work/infra/nginx/cache/'
 nginx::proxy_cache_keys_zone: 'auth_cache:10m'
+nginx::keepalive_timeout: '65s'
+ngin::keepalive_requests: '100'
+nginx:resources::server:listen_port: '80'
+nginx:resources::server:access_log: '/work/infra/logs/nginx/host.access.log'
+nginx:resources::server:format_log: 'main'
