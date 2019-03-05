@@ -1,3 +1,0 @@
-Make an update in this file to force a build.
-For example, increment a counter or insert a datestamp
-Date: 2019-03-04 12:50:41 MST
