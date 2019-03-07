@@ -14,8 +14,7 @@ node default {
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 # 20190307 CRQ39668 - Patrol Upgrade NonProd group 3
-#node btln000378.corp.ads,btln000704.corp.ads,ln98078.corp.ads,ln98282.corp.ads
-node btln007801.corp.ads,btln007803.corp.ads,btln999923.corp.ads
+node btln000378.corp.ads,btln000704.corp.ads,ln98078.corp.ads,ln98282.corp.ads
 {
   class { 'role::rl_patrol_upgrade': }
 }
