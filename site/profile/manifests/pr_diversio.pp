@@ -14,7 +14,7 @@ class profile::pr_diversio {
 # }
 
 
-#include nginx
+include nginx
 #nginx::resource::server { 'ssl_server':
 #  listen_port => 443,
 #  ssl         => false,
@@ -34,17 +34,17 @@ class profile::pr_diversio {
 sudo::conf { 'puppet_nginx':
   priority => 10,
   #content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
-  content  => 'infra ALL=NOPASSWD : /bin/vi /etc/hosts, /usr/sbin/nginx *, /bin/vi /etc/sysconfig/iptables, /sbin/iptables-save > /etc/sysconfig/iptables,/sbin/service iptables restart, /sbin/iptables-save *, /opt/puppetlabs/bin/puppet agent -t, /sbin/service nginx *, /bin/vi /etc/nginx/conf.d *, /bin/vi /etc/nginx/nginx.conf, /sbin/iptables *, /bin/vi /etc/nginx/html/srv/policies/Saml1.1-SenderVouches.xml',
-#
+  content  => 'infra ALL=NOPASSWD :  /bin/vi /etc/hosts, /usr/sbin/nginx *, /bin/vi /etc/sysconfig/iptables, /sbin/iptables-save > /etc/sysconfig/iptables,/sbin/service iptables restart, /sbin/iptables-save *, /opt/puppetlabs/bin/puppet agent -t, /sbin/service nginx *, /bin/vi /etc/nginx/conf.d *, /bin/vi /etc/nginx/nginx.conf, /sbin/iptables *, /bin/vi /etc/nginx/html/srv/policies/Saml1.1-SenderVouches.xml',
+##
   }
 
 #include localhost configuration
-host {'localhost':
-  ensure => 'present',
-  ip => '127.0.0.1',
-  host_aliases => ['xmlschema.tmi.telus.com', 'xmlschema'],
-  target => '/etc/hosts',
- }
+#host {'localhost':
+#  ensure => 'present',
+#  ip => '127.0.0.1',
+#  host_aliases => ['xmlschema.tmi.telus.com', 'xmlschema'],
+#  target => '/etc/hosts',
+# }
 
  #file {lookup("nginx_log_dirs"):
  # ensure => "directory",
