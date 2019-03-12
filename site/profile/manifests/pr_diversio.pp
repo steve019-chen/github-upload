@@ -9,9 +9,9 @@ class {'sudo':
   }
 
 class profile::pr_diversio {
-# package {"nginx":
-# ensure   => '1.14.2',
-# }
+ package {"nginx":
+ ensure   => '1.14.2',
+ }
 
 
 include nginx
