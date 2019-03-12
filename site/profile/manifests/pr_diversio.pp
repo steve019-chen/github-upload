@@ -51,6 +51,7 @@ sudo::conf { 'puppet_nginx':
   owner  => "infra",
   group  => "infra"
  }
+ #
 
 file { '/etc/nginx/conf.d/upstream.conf':
   ensure => "present",
