@@ -39,12 +39,13 @@ sudo::conf { 'puppet_nginx':
   }
 
 #include localhost configuration
-#host {'localhost':
-#  ensure => 'present',
-#  ip => '127.0.0.1',
-#  host_aliases => ['xmlschema.tmi.telus.com', 'xmlschema'],
-#  target => '/etc/hosts',
-# }
+host {'localhost':
+  ensure => 'present',
+  ip => '127.0.0.1',
+  host_aliases => ['xmlschema.tmi.telus.com', 'xmlschema'],
+  target => '/etc/hosts',
+ }
+ #
 
  file {lookup("nginx_log_dirs"):
   ensure => "directory",
