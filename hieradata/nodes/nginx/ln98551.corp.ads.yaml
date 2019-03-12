@@ -1,23 +1,23 @@
 ---
-nginx::daemon_user: 'infra'
-nginx::http_access_log: '/work/infra/logs/nginx/access_log'
-nginx::nginx_error_log: '/work/infra/logs/error.log'
+#nginx::daemon_user: 'infra'
+#nginx::http_access_log: '/work/infra/logs/nginx/access_log'
+#nginx::nginx_error_log: '/work/infra/logs/error.log'
 #nginx::package_name: 'nginx-1.14.2'
-nginx::worker_connections: 1024
-nginx::nginx_error_log_severity: 'warn'
-nginx::resource::server: 'main'
-nginx::http_format_log: 'main'
+#nginx::worker_connections: 1024
+#nginx::nginx_error_log_severity: 'warn'
+#nginx::resource::server: 'main'
+#nginx::http_format_log: 'main'
 #nginx::log_format: { main escape= json '$remote_addr $remote_user $request' '$status $body_bytes_sent $http_referer' }
-nginx::proxy_cache_path: '/work/infra/nginx/cache/'
-nginx::proxy_cache_keys_zone: 'auth_cache:10m'
-nginx::keepalive_timeout: '65s'
-nginx::keepalive_requests: '100'
-nginx::confd_only: true
-nginx::nginx_servers:
-  'nonssl_server':
-    listen_port: 80
-    server_name: ['ln98551.corp.ads']
-    proxy: 'http://127.0.0.1:8888'
+#nginx::proxy_cache_path: '/work/infra/nginx/cache/'
+#nginx::proxy_cache_keys_zone: 'auth_cache:10m'
+#nginx::keepalive_timeout: '65s'
+#nginx::keepalive_requests: '100'
+#nginx::confd_only: true
+#nginx::nginx_servers:
+ # 'nonssl_server':
+ #   listen_port: 80
+ #   server_name: ['ln98551.corp.ads']
+ #   proxy: 'http://127.0.0.1:8888'
 
 ###
 
