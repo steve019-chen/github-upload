@@ -46,11 +46,11 @@ sudo::conf { 'puppet_nginx':
 #  target => '/etc/hosts',
 # }
 
- #file {lookup("nginx_log_dirs"):
- # ensure => "directory",
- # owner  => "infra",
- # group  => "infra"
- #}
+ file {lookup("nginx_log_dirs"):
+  ensure => "directory",
+  owner  => "infra",
+  group  => "infra"
+ }
 
 file { '/etc/nginx/conf.d/upstream.conf':
   ensure => "present",
