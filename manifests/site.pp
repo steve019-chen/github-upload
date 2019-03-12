@@ -15,10 +15,10 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-node ln98551,ln99235,ln99236,ln99615,ln99616 {
+node ln98551,ln99615,ln99616 {
   include role::rl_diversio
 }
-####
+#####
 
 # 20190124 CRQ32950 Flexera BT PR 500 hosts
 
