@@ -8,7 +8,7 @@ class {'sudo':
   config_file_replace => false,
   }
 
-#class profile::pr_diversio {
+class profile::pr_diversio {
  #package {"nginx":
  #ensure   => '1.14.2',
  #}
