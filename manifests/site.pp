@@ -19,6 +19,12 @@ node btln000378.corp.ads,btln000704.corp.ads,ln98078.corp.ads,ln98282.corp.ads
   class { 'role::rl_patrol_upgrade': }
 }
 
+# 20190312 - Patrol ROFS module testing - Initial
+node ln99878
+{
+  class { 'role::rl_patrol_rofs': }
+}
+
 # 20190222 CRQ37712 - Project ASAPNOC
 
 node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
