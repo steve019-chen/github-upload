@@ -85,6 +85,6 @@ mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
   :tag => '0.2.7'
 
-# mod 'patrol_upgrade',
-#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-#   :tag => '1.1.0'
+mod 'patrol_upgrade',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
+  :tag => '1.3.0'

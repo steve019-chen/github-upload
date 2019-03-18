@@ -13,6 +13,12 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+# 20190320 CRQ41702 - Patrol Upgrade Group 4
+node ln98004.ent.agt.ab.ca,ln98070.corp.ads,ln98071.corp.ads,ln98072.corp.ads,ln98073.corp.ads,ln98075.corp.ads,
+ln98078.corp.ads,ln98092.ent.agt.ab.ca,ln98282.corp.ads {
+  class { 'role::rl_patrol_upgrade': }
+}
+
 # 20190222 CRQ37712 - Project ASAPNOC
 
 node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
