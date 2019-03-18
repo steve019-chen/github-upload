@@ -14,8 +14,7 @@ node default {
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 # 20190320 CRQ41702 - Patrol Upgrade Group 4
-node ln98004.ent.agt.ab.ca,ln98070.corp.ads,ln98071.corp.ads,ln98072.corp.ads,ln98073.corp.ads,ln98075.corp.ads,
-ln98078.corp.ads,ln98092.ent.agt.ab.ca,ln98282.corp.ads {
+node ln98004,ln98070,ln98071,ln98072,ln98073,ln98075,ln98078,ln98092,ln98282 {
   class { 'role::rl_patrol_upgrade': }
 }
 
