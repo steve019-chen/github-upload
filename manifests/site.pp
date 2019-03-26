@@ -13,6 +13,13 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+# 2019/03/27 CRQ42385 - Automated patrol upgrade group 5
+node ln98170, ln98059, ln98136, ln98137, ln98120, ln98126, ln98127, ln98128, ln98129, ln98130,
+ln98131, ln98132, ln98133, ln98134, ln98135, ln98138, ln98139, ln98142, ln98144, ln98147
+{
+  class { 'role::rl_patrol_upgrade': }
+}
+
 # 20190222 CRQ37712 - Project ASAPNOC
 
 node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
