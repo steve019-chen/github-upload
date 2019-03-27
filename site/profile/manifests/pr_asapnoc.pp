@@ -17,7 +17,7 @@ class profile::pr_asapnoc {
 
 class { 'docker':
   use_upstream_package_source => false,
-  version                     => '1.12.0-1.0.2.el7',
+  version                     => '17.03.1.ce-3.0.1.el7',
   proxy                       => 'http://pac.tsl.telus.com:8080',
 }
 
