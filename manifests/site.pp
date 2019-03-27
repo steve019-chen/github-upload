@@ -15,7 +15,7 @@ node default {
 
 #CRQ37712 #20190222 - Project ASAPNOC
 
-node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
+node btln999924
 {
 class { 'role::rl_asapnoc': }
 }
