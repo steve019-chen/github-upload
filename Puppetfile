@@ -57,7 +57,7 @@ mod 'puppetlabs-reboot',
 
 mod 'puppetlabs-docker',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-docker.git',
-  :tag => '1.1.0'
+  :tag => '3.3.0'
 
 mod 'saz_puppet-sudo',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
