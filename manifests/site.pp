@@ -20,7 +20,7 @@ node btln000378.corp.ads,btln000704.corp.ads,ln98078.corp.ads,ln98282.corp.ads
 }
 
 # 20190312 - Patrol ROFS module testing - Initial
-node ln99878
+node ln99878, btln002502, btln001563,lp99674,qadev115
 {
   class { 'role::rl_patrol_rofs': }
 }
