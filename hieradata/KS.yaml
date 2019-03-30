@@ -5762,15 +5762,27 @@ NETWORK::172-29-96-0:
  media_server: lp98989/172.29.96.100
 
 #---------------------------------------------#
-# This network may not be fully reachable from the TEN
-# Laird Storage Network - VLAN 402
+# Laird Storage Network - VLAN 402 - subnet 1 of 2
+# (VLAN shared with subnets 142.63.135.224 & 100.125.92.0)
+# This subnet may be routable.
 
 NETWORK::142-63-135-224:
  context:      NAS_NETWORK
  scope:         laird_bt_nas
  netmask:       255.255.255.224
  vlan:          402
- router:        142.63.135.225
+ test_ip:       142.63.135.225 
+ mtu:           9000
+
+#---------------------------------------------#
+# Laird Storage Network - VLAN 402 - subnet 2 of 2
+# (VLAN shared with subnets 142.63.135.224 & 100.125.92.0)
+
+NETWORK::100-125-92-0:
+ context:      NAS_NETWORK
+ scope:         laird_bt_nas
+ netmask:       255.255.252.0
+ vlan:          402
  mtu:           9000
 
 #---------------------------------------------#
