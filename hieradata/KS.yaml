@@ -5195,8 +5195,10 @@ NETWORK::172-23-96-0:
  router:      172.23.96.1
  ipmp_favour:  b
  scope:      marmac_bt_ten
+ vlan:  96
  boot_server:  aphid
  media_server: aphid
+ ai_server:     xp0006/142.63.53.190
 
 #-----------------------------------------------------------------------------#
 
@@ -5206,8 +5208,10 @@ NETWORK::172-23-100-0:
  router:      172.23.100.1
  ipmp_favour:  a
  scope:      marmac_bt_ten
+ vlan:  100
  boot_server:  aphid
  media_server: aphid
+ ai_server:     xp0006/142.63.53.190
 
 #-----------------------------------------------------------------------------#
 
@@ -5219,6 +5223,7 @@ NETWORK::172-23-116-0:
  scope:      marmac_bt_ten
  boot_server:  aphid
  media_server: aphid
+ ai_server:     xp0006/142.63.53.190
 
 #-----------------------------------------------------------------------------#
 
@@ -5228,8 +5233,10 @@ NETWORK::172-23-104-0:
  router:      172.23.104.1
  ipmp_favour:  b
  scope:      marmac_bt_ten
+ vlan:  104
  boot_server:  aphid
  media_server: aphid
+ ai_server:     xp0006/142.63.53.190
 
 #-----------------------------------------------------------------------------#
 
@@ -5239,8 +5246,10 @@ NETWORK::172-23-108-0:
  router:      172.23.108.1
  ipmp_favour:  b
  scope:      marmac_bt_ten
+ vlan:  108
  boot_server:  aphid
  media_server: aphid
+ ai_server:     xp0006/142.63.53.190
 
 #-----------------------------------------------------------------------------#
 
@@ -5252,6 +5261,7 @@ NETWORK::172-23-112-0:
  scope:      marmac_bt_ten
  boot_server:  aphid
  media_server: aphid
+ ai_server:     xp0006/142.63.53.190
 
 #-----------------------------------------------------------------------------#
 # Marmac KB network - VLAN 300 - aka "ESX_UCS_PROD"
@@ -5752,15 +5762,27 @@ NETWORK::172-29-96-0:
  media_server: lp98989/172.29.96.100
 
 #---------------------------------------------#
-# This network may not be fully reachable from the TEN
-# Laird Storage Network - VLAN 402
+# Laird Storage Network - VLAN 402 - subnet 1 of 2
+# (VLAN shared with subnets 142.63.135.224 & 100.125.92.0)
+# This subnet may be routable.
 
 NETWORK::142-63-135-224:
  context:      NAS_NETWORK
  scope:         laird_bt_nas
  netmask:       255.255.255.224
  vlan:          402
- router:        142.63.135.225
+ test_ip:       142.63.135.225 
+ mtu:           9000
+
+#---------------------------------------------#
+# Laird Storage Network - VLAN 402 - subnet 2 of 2
+# (VLAN shared with subnets 142.63.135.224 & 100.125.92.0)
+
+NETWORK::100-125-92-0:
+ context:      NAS_NETWORK
+ scope:         laird_bt_nas
+ netmask:       255.255.252.0
+ vlan:          402
  mtu:           9000
 
 #---------------------------------------------#
