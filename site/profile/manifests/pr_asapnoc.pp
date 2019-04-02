@@ -32,6 +32,7 @@ class profile::pr_asapnoc {
 
   gpg_key { 'DOCKER-CE':
     path => '/etc/pki/rpm-gpg/RPM-GPG-KEY-DOCKER-CE',
+    require => file['RPM-GPG-KEY-DOCKER-CE'],
   }
 
 
@@ -39,12 +40,14 @@ class { 'docker':
   use_upstream_package_source => false,
   version                     => '18.09.3-3.el7',
   proxy                       => 'http://pac.tsl.telus.com:8080',
+  require                     => gpg_key['DOCKER-CE'],
 }
 
 class {'docker::compose':
   ensure  => present,
   version => '1.9.0',
   proxy   => 'https://pac.tsl.telus.com:8080',
+  require => gpg_key['DOCKER-CE'],
 }
 
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
