@@ -15,8 +15,28 @@
 
 class profile::pr_asapnoc {
 
+  # rhn_channel { 'docker-ce-rhel7-x86_64':
+  #   ensure   => present,
+  #   username => 'svcpuppet',
+  #   password => lookup('rhn_channel::password'),
+  # }
+
+  telus_lib::spacewalk_channel { 'docker-ce-rhel7-x86_64': }
+
+  # Install Docker-ce GPG Key
+  file { 'RPM-GPG-KEY-DOCKER-CE':
+    ensure => present,
+    path   => '/etc/pki/rpm-gpg/RPM-GPG-KEY-DOCKER-CE',
+    source => 'puppet:///modules/telus_lib/RPM-GPG-KEY-DOCKER-CE',
+  }
+
+  gpg_key { 'DOCKER-CE':
+    path => '/etc/pki/rpm-gpg/RPM-GPG-KEY-DOCKER-CE',
+  }
+
+
 class { 'docker':
-  use_upstream_package_source => true,
+  use_upstream_package_source => false,
   version                     => '18.09.3-3.el7',
   proxy                       => 'http://pac.tsl.telus.com:8080',
 }
