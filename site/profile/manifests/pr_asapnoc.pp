@@ -54,10 +54,16 @@ class {'docker::compose':
 # yum install -y yum-plugin-versionlock 
 
 package {'versionlock':
-  name     => 'yum-plugin-versionlock',
-  ensure   => present,
+  name   => 'yum-plugin-versionlock',
+  ensure => present,
 }
 
+file {'dockerversion lock':
+  path  => '/etc/yum/pluginconf.d/versionlock.list​'
+  ensure => present,
+  content => '3:docker-ce-18.09.3-3.el7.*'
+  require => Package['versionlock'],
+}
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
 group { 'users':
