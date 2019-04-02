@@ -50,6 +50,14 @@ class {'docker::compose':
   require => Gpg_key['DOCKER-CE'],
 }
 
+# Would ideally like to install yum versionlock plugin and set a lock for docker
+# yum install -y yum-plugin-versionlock 
+
+package {'versionlock':
+  name     => 'yum-plugin-versionlock',
+  ensure   => present,
+}
+
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
 group { 'users':
