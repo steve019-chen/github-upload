@@ -61,7 +61,7 @@ package {'versionlock':
 file {'dockerversion_lock':
   path  => '/etc/yum/pluginconf.d/versionlock.list​',
   ensure => present,
-  content => '3:docker-ce-18.09.3-3.el7.*'
+  content => '3:docker-ce-18.09.3-3.el7.*',
   require => Package['versionlock'],
 }
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
