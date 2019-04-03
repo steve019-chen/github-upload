@@ -7331,7 +7331,11 @@ NETWORK::192-168-92-0:
 #  73.182.194.28        klmplbc01
 
 # Wireless OSS:
-#  10.33.244.199        ???????? # (reachable from some TEN IPs)
+#  10.33.244.199        name_unknown # Marmac (reachable from some TEN IPs)
+#  10.10.245.199        name_unknown # Hood
+#  10.163.244.199       name_unknown # Barlow
+#  10.103.244.199       name_unknown # Pitfield
+#  10.153.244.199       name_unknown # Gilmore
 
 # 100.64.93.49  # anycast SIDC
 # 100.64.93.57  # anycast SIDC
