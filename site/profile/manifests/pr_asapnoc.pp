@@ -58,8 +58,8 @@ package {'versionlock':
   ensure => present,
 }
 
-file {'dockerversion lock':
-  path  => '/etc/yum/pluginconf.d/versionlock.list​'
+file {'dockerversion_lock':
+  path  => '/etc/yum/pluginconf.d/versionlock.list​',
   ensure => present,
   content => '3:docker-ce-18.09.3-3.el7.*'
   require => Package['versionlock'],
