@@ -63,6 +63,10 @@ mod 'saz_puppet-sudo',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
   :tag => 'v5.0.0'
 
+mod 'puppet-yum',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-yum.git',
+  :tag => 'v3.1.1'
+
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
