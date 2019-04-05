@@ -1423,7 +1423,7 @@ PROFILE::toll_bt_cde:
  dns_search:         corp.ads ent.agt.ab.ca tmi.telus.com tsl.telus.com
  bkp_suffix:          -ge
  mail_relay:            abmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
 
 
 PROFILE::toll_bt_ten:
@@ -1451,7 +1451,7 @@ PROFILE::toll_bt_ten:
  dns_search:         corp.ads ent.agt.ab.ca tmi.telus.com tsl.telus.com
  bkp_suffix:          -ge
  mail_relay:            abmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
 
 
 PROFILE::toll_bt:
@@ -1476,7 +1476,7 @@ PROFILE::toll_bt:
  dns_search:         corp.ads ent.agt.ab.ca tmi.telus.com tsl.telus.com
  bkp_suffix:          -ge
  mail_relay:            abmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
 
 
 #-----------------------------------------------------------------------------#
@@ -1620,7 +1620,7 @@ PROFILE::marmac_bt_ten:
  mail_relay:      onmsg.tsl.telus.com
  bkp_scope:            marmac_bt_bkp
  nas_scope:            marmac_bt_nas
- aggr_mode:         active_passive
+ aggr_mode:         lacp
 
 #-----------------------------------------------------------------------------#
 # Laird TS PROFILES
@@ -1687,7 +1687,7 @@ PROFILE::laird_bt_cde:
  dns_search:            corp.ads tmi.telus.com ent.agt.ab.ca tsl.telus.com
  bkp_suffix:            -bkp1
  mail_relay:            onmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
 
 # this profile is solely for building lp98989 over the backup network.
 
@@ -1714,7 +1714,7 @@ PROFILE::laird_bt_bkp:
  dns_search:            corp.ads tmi.telus.com ent.agt.ab.ca tsl.telus.com
  bkp_suffix:            -bkp1
  mail_relay:            onmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
 
 
 PROFILE::laird_bt_ten:
@@ -1743,7 +1743,7 @@ PROFILE::laird_bt_ten:
  dns_search:            corp.ads tmi.telus.com ent.agt.ab.ca tsl.telus.com
  bkp_suffix:            -bkp1
  mail_relay:            onmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
 
 
 PROFILE::laird_bt:
@@ -1768,7 +1768,7 @@ PROFILE::laird_bt:
  dns_search:            corp.ads tmi.telus.com ent.agt.ab.ca tsl.telus.com
  bkp_suffix:            -bkp1
  mail_relay:            onmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
 
 
 PROFILE::laird_dr:
@@ -1847,7 +1847,7 @@ PROFILE::consilium_bt_lab:
  dns_servers:       172.23.5.244 172.23.116.244
  dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
  mail_relay:        onmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
  puppet_server: latex.tmi.telus.com
 
 
@@ -1872,7 +1872,7 @@ PROFILE::consilium_bt_lab_be_nt:
  dns_servers:       172.23.5.244 172.23.116.244
  dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
  mail_relay:        onmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
  puppet_server: latex.tmi.telus.com
  bkp_scope:     consilium_bt_lab_bkp
  fe_scope:      consilium_bt_lab_fe
@@ -1902,7 +1902,7 @@ PROFILE::consilium_bt_lab_pwan:
  dns_servers:       172.23.5.244 172.23.116.244
  dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
  mail_relay:        onmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
  bkp_suffix:   -bkp
  mgmt_scope:   consilium_bt_lab_mgmt
  nas_scope:    consilium_bt_lab_nas
@@ -1931,7 +1931,7 @@ PROFILE::consilium_bt_ten:
  dns_servers:       172.23.5.244 172.23.116.244
  dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
  mail_relay:        onmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
  puppet_server:         lp99604.corp.ads
 
 
@@ -1955,7 +1955,7 @@ PROFILE::consilium_bt:
  dns_servers:       172.23.5.244 172.23.116.244
  dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
  mail_relay:        onmsg.tsl.telus.com
- aggr_mode:         active_passive
+ aggr_mode:         lacp
 
 
 
