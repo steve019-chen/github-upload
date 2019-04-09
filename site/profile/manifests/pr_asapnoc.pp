@@ -50,20 +50,29 @@ class {'docker::compose':
   require => Gpg_key['DOCKER-CE'],
 }
 
+# Utilizing puppet-yum module for yum plugin install
+yum::plugin { 'versionlock':
+  ensure => present,
+}
+
+yum::versionlock { '3:docker-ce-18.09.3-3.el7.*':
+  ensure  => present,
+}
+
 # Would ideally like to install yum versionlock plugin and set a lock for docker
 # yum install -y yum-plugin-versionlock 
 
-package {'versionlock':
-  name   => 'yum-plugin-versionlock',
-  ensure => present,
-}
+# package {'versionlock':
+#   name   => 'yum-plugin-versionlock',
+#   ensure => present,
+# }
 
-file {'dockerversion_lock':
-  path  => '/etc/yum/pluginconf.d/versionlock.list​',
-  ensure => present,
-  content => '3:docker-ce-18.09.3-3.el7.*',
-  require => Package['versionlock'],
-}
+# file {'dockerversion_lock':
+#   path  => '/etc/yum/pluginconf.d/versionlock.list​',
+#   ensure => present,
+#   content => '3:docker-ce-18.09.3-3.el7.*',
+#   require => Package['versionlock'],
+# }
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
 group { 'users':
