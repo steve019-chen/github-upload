@@ -50,8 +50,21 @@ class {'docker::compose':
 }
 
 # Utilizing puppet-yum module for installing and setting versionlock plugin and locking docker version
-yum::versionlock { '3:docker-ce-18.09.3-3.el7.*':
+# yum::versionlock { '3:docker-ce-18.09.3-3.el7.*':
+#   ensure  => present,
+# }
+
+package {'versionlock':
+  name   => 'yum-plugin-versionlock',
+  ensure => present,
+}
+
+file {'dockerversion_lock':
   ensure  => present,
+  path    => '/etc/yum/pluginconf.d/versionlock.list​',
+  content => '0:docker-ce-18.09.3-3.el7.*',
+  replace => false,
+  require => Package['versionlock'],
 }
 
 file_line { 'yum_versionlock_config':
