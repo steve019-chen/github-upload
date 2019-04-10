@@ -3,14 +3,17 @@
 # Parameters:
 #
 # Actions:
+#   - Subscribe the machine to Docker channel in Spacewalk
+#   - Download then install gpg keys for repo
 #   - Install required packages for docker and configure docker (proxy settings, ...)
+#   - Lock docker version, so it does not get updated automatically during patching cycles
 #   - Configure application account
 #   - Create application directory
 #   - Install apache
 #   - Add sudo rules
 # 
 # Prereqs for docker:
-#   - Addons for Oracle Linux 7 (x86_64) channel must be added in Spacewalk
+#   - docker-ce-rhel7-x86_64 channel must exist in Spacewalk
 #
 
 class profile::pr_asapnoc {
@@ -30,6 +33,7 @@ class profile::pr_asapnoc {
     require => File['RPM-GPG-KEY-DOCKER-CE'],
   }
 
+# Install docker
 class { 'docker':
   use_upstream_package_source => false,
   version                     => '18.09.3-3.el7',
@@ -37,6 +41,7 @@ class { 'docker':
   require                     => Gpg_key['DOCKER-CE'],
 }
 
+# Install docker compose
 class {'docker::compose':
   ensure  => present,
   version => '1.9.0',
@@ -49,7 +54,7 @@ yum::versionlock { '3:docker-ce-18.09.3-3.el7.*':
   ensure  => present,
 }
 
-# For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
+# For reference, as provided by Novo request: svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
 group { 'users':
   ensure => present,
