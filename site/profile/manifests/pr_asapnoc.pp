@@ -15,15 +15,10 @@
 
 class profile::pr_asapnoc {
 
-  # rhn_channel { 'docker-ce-rhel7-x86_64':
-  #   ensure   => present,
-  #   username => 'svcpuppet',
-  #   password => lookup('rhn_channel::password'),
-  # }
-
+  # Ensuring server is subscribed to recieve packages from spacewalk for Docker
   telus_lib::spacewalk_channel { 'docker-ce-rhel7-x86_64': }
 
-  # Install Docker-ce GPG Key
+  # Download and Install Docker-ce GPG Key
   file { 'RPM-GPG-KEY-DOCKER-CE':
     ensure => present,
     path   => '/etc/pki/rpm-gpg/RPM-GPG-KEY-DOCKER-CE',
@@ -34,7 +29,6 @@ class profile::pr_asapnoc {
     path    => '/etc/pki/rpm-gpg/RPM-GPG-KEY-DOCKER-CE',
     require => File['RPM-GPG-KEY-DOCKER-CE'],
   }
-
 
 class { 'docker':
   use_upstream_package_source => false,
@@ -50,29 +44,11 @@ class {'docker::compose':
   require => Gpg_key['DOCKER-CE'],
 }
 
-# Utilizing puppet-yum module for yum plugin install
-# yum::plugin { 'versionlock':
-#   ensure => present,
-# }
-
+# Utilizing puppet-yum module for installing and setting versionlock plugin and locking docker version
 yum::versionlock { '3:docker-ce-18.09.3-3.el7.*':
   ensure  => present,
 }
 
-# Would ideally like to install yum versionlock plugin and set a lock for docker
-# yum install -y yum-plugin-versionlock 
-
-# package {'versionlock':
-#   name   => 'yum-plugin-versionlock',
-#   ensure => present,
-# }
-
-# file {'dockerversion_lock':
-#   path  => '/etc/yum/pluginconf.d/versionlock.list​',
-#   ensure => present,
-#   content => '3:docker-ce-18.09.3-3.el7.*',
-#   require => Package['versionlock'],
-# }
 # For reference svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
 group { 'users':
