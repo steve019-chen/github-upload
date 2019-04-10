@@ -72,7 +72,7 @@ file_line { 'yum_versionlock_config':
   path    => '/etc/yum/pluginconf.d/versionlock.conf',
   line    => 'show_hint = 0',
   match   => 'show_hint = 1',
-  require => Package['yum-plugin-versionlock'],
+  require => Package['versionlock'],
 }
 # For reference, as provided by Novo request: svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
