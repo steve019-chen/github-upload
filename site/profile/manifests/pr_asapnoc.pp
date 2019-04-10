@@ -51,9 +51,9 @@ class {'docker::compose':
 }
 
 # Utilizing puppet-yum module for yum plugin install
-yum::plugin { 'versionlock':
-  ensure => present,
-}
+# yum::plugin { 'versionlock':
+#   ensure => present,
+# }
 
 yum::versionlock { '3:docker-ce-18.09.3-3.el7.*':
   ensure  => present,
