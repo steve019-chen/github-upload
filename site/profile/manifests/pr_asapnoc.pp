@@ -55,10 +55,11 @@ yum::versionlock { '3:docker-ce-18.09.3-3.el7.*':
 }
 
 file_line { 'yum_versionlock_config':
-  ensure => present,
-  path   => '/etc/yum/pluginconf.d/versionlock.conf',
-  line   => 'show_hint = 0',
-  match  => 'show_hint = 1',
+  ensure  => present,
+  path    => '/etc/yum/pluginconf.d/versionlock.conf',
+  line    => 'show_hint = 0',
+  match   => 'show_hint = 1',
+  require => Package['yum-plugin-versionlock'],
 }
 # For reference, as provided by Novo request: svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
