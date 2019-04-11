@@ -67,7 +67,7 @@ package {'versionlock':
 #   require => Package['versionlock'],
 # }
 
-$apptolock01 = 'docker-ce-18.09'
+$apptolock01 = 'docker-ce-18.09.3-3'
 exec { "yum versionlock ${apptolock01}":
   path   => '/bin:/usr/bin:/usr/sbin:/bin',
   unless => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q ${apptolock01} > /dev/null",
