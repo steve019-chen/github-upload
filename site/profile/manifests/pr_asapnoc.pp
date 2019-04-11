@@ -59,13 +59,21 @@ package {'versionlock':
   ensure => present,
 }
 
-file {'dockerversion_lock':
-  ensure  => present,
-  path    => '/etc/yum/pluginconf.d/versionlock.list',
-  content => '0:docker-ce-19.09.3-3.el7.*',
-  replace => false,
-  require => Package['versionlock'],
+# file {'dockerversion_lock':
+#   ensure  => present,
+#   path    => '/etc/yum/pluginconf.d/versionlock.list',
+#   content => '0:docker-ce-18.09.3-3.el7.*',
+#   replace => false,
+#   require => Package['versionlock'],
+# }
+
+$apptolock01 = 'docker-ce-18.09'
+exec { "yum versionlock ${apptolock01}":
+  path   => '/bin:/usr/bin:/usr/sbin:/bin',
+  unless => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q ${apptolock01} > /dev/null",
 }
+
+
 
 file_line { 'yum_versionlock_config':
   ensure  => present,
