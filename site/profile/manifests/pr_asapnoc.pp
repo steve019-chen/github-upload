@@ -76,11 +76,12 @@ exec { "yum versionlock ${apptolock01}":
 
 
 file_line { 'yum_versionlock_config':
-  ensure  => present,
-  path    => '/etc/yum/pluginconf.d/versionlock.conf',
-  line    => 'show_hint = 0',
-  match   => 'show_hint = 1',
-  require => Package['versionlock'],
+  ensure             => present,
+  path               => '/etc/yum/pluginconf.d/versionlock.conf',
+  line               => 'show_hint = 0',
+  match              => 'show_hint = 1',
+  append_on_no_match => false,
+  require            => Package['versionlock'],
 }
 # For reference, as provided by Novo request: svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
