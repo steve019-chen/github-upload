@@ -65,7 +65,7 @@ file { $nginx_log_dirs:
   '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon.py',
   '/etc/nginx/nginx.conf',]
   
-file { $nginx_log_dirs:
+file { $nginx_conf_files:
   ensure => 'present',
   owner => 'infra',
   group => 'infra',
