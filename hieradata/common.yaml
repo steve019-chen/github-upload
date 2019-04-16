@@ -1,5 +1,5 @@
 ---
 message: "This node is using common data"
-nginx_log_dirs: ["/work/infra/nginx","/work/infra/nginx/cache","/etc/nginx/ldap/","/etc/nginx/ldap/daemon/","/work/infra/logs","/work/infra/logs/nginx","/etc/nginx/html","/etc/nginx/html/srv","/etc/nginx/html/srv/policies"]
-nginx::package_name: 'nginx-1.14.2'
+#nginx_log_dirs: ["/work/infra/nginx","/work/infra/nginx/cache","/etc/nginx/ldap/","/etc/nginx/ldap/daemon/","/work/infra/logs","/work/infra/logs/nginx","/etc/nginx/html","/etc/nginx/html/srv","/etc/nginx/html/srv/policies"]
+#nginx::package_name: 'nginx-1.14.2'
 ####

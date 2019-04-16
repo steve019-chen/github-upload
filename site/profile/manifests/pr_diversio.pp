@@ -3,10 +3,6 @@
 # This class installs and configures NGINX for Diversio project
 #
 
-class {'sudo':
-  purge               => false,
-  config_file_replace => false,
-  }
 
 class profile::pr_diversio {
  package {"nginx":
@@ -30,6 +26,12 @@ class profile::pr_diversio {
 #    }
 #}
 ##
+
+class {'sudo':
+  purge               => false,
+  config_file_replace => false,
+  }
+
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
   priority => 10,
@@ -38,82 +40,42 @@ sudo::conf { 'puppet_nginx':
 ##
   }
 
-#include localhost configuration
-host {'localhost':
+
+ $nginx_log_dirs = [ '/work/infra/nginx',
+  '/work/infra/nginx/cache',
+  '/etc/nginx/ldap/',
+  '/etc/nginx/ldap/daemon/',
+  '/work/infra/logs',
+  '/work/infra/logs/nginx',
+  '/etc/nginx/html',
+  '/etc/nginx/html/srv',
+  '/etc/nginx/html/srv/policies',]
+
+file { $nginx_log_dirs:
+  ensure => 'directory',
+  owner => 'infra',
+  group => 'infra',
+}
+
+ $nginx_conf_files = [ '/etc/nginx/conf.d/upstream.conf',
+  '/etc/nginx/conf.d/ssl_server.conf',
+  '/etc/nginx/html/srv/policies/Saml1.1-SenderVouches.xml',
+  '/etc/nginx/conf.d/nonssl_server.conf',
+  '/etc/nginx/ldap/daemon/backend-sample-app.py',
+  '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon.py',
+  '/etc/nginx/nginx.conf',]
+  
+file { $nginx_log_dirs:
   ensure => 'present',
-  ip => '127.0.0.1',
-  host_aliases => ['xmlschema.tmi.telus.com', 'xmlschema'],
-  target => '/etc/hosts',
- }
- #
-
- file {lookup("nginx_log_dirs"):
-  ensure => "directory",
-  owner  => "infra",
-  group  => "infra"
- }
- #
-
-file { '/etc/nginx/conf.d/upstream.conf':
-  ensure => "present",
-  content => "",
-  owner  => "infra",
-  group  => "infra",
-  replace => "no",
-}
-
-file { '/etc/nginx/conf.d/ssl_server.conf':
-  ensure => "present",
-  content => "",
-  owner  => "infra",
-  group  => "infra",
-  replace => "no",
-}
-
-file { '/etc/nginx/html/srv/policies/Saml1.1-SenderVouches.xml':
-  ensure => "present",
-  content => "",
-  owner  => "infra",
-  group  => "infra",
-  replace => "no",
-}
-
-file { '/etc/nginx/conf.d/nonssl_server.conf':
-  ensure => "present",
-  content => "",
-  owner  => "infra",
-  group  => "infra",
-  replace => "no",
-}
-
-file { '/etc/nginx/ldap/daemon/backend-sample-app.py':
-  ensure => "present",
-  content => "",
-  owner  => "infra",
-  group  => "infra",
-  replace => "no",
-}
-
-file { '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon.py':
-  ensure => "present",
-  content => "",
-  owner  => "infra",
-  group  => "infra",
-  replace => "no",
+  owner => 'infra',
+  group => 'infra',
 }
 
 file { '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon-ctl-rh.sh':
   ensure => "present",
-  content => "",
   owner  => "infra",
   group  => "infra",
-  replace => "no",
-}
-
-file { '/etc/nginx/nginx.conf':
-    ensure    => present,
-    owner     => 'infra',
-    group      => 'infra',
+  mode   => "0755",
 }
 
 
@@ -121,11 +83,5 @@ file { '/etc/nginx/conf.d/default.conf':
     ensure     => absent,
 }
 
-#exec { 'remove /etc/nginx/conf.d/default.conf file ':
-#     command  => "/bin/rm /etc/nginx/conf.d/default.conf",
-#     require  => File['/etc/nginx/conf.d/default.conf'],
-#}
-
-
 }
-###########
+
