@@ -16,32 +16,8 @@ class profile::pr_diversio {
   # Configure sudo rules for Diversio
   sudo::conf { 'puppet_nginx':
     priority => 10,
-    content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
-  }
-
-<<<<<<< HEAD
-# Include rules in “content”
-sudo::conf { 'puppet_nginx':
-  priority => 10,
-  content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
-##
-=======
-  # Create NGINX log directories
-  $nginx_log_dirs = [ '/work/infra/nginx',
-    '/work/infra/nginx/cache',
-    '/etc/nginx/ldap/',
-    '/etc/nginx/ldap/daemon/',
-    '/work/infra/logs',
-    '/work/infra/logs/nginx',
-    '/etc/nginx/html',
-    '/etc/nginx/html/srv',
-    '/etc/nginx/html/srv/policies',]
-
-  file { $nginx_log_dirs:
-    ensure => 'directory',
-    owner  => 'infra',
-    group  => 'infra',
->>>>>>> 83419198c436bc2b0bababde9b27baeda11b2409
+    #content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
+    content  => 'infra ALL=NOPASSWD :  /bin/vi /etc/hosts, /usr/sbin/nginx *, /bin/vi /etc/sysconfig/iptables, /sbin/iptables-save > /etc/sysconfig/iptables,/sbin/service iptables restart, /sbin/iptables-save *, /opt/puppetlabs/bin/puppet agent -t, /sbin/service nginx *, /bin/vi /etc/nginx/conf.d *, /bin/vi /etc/nginx/nginx.conf, /sbin/iptables *, /bin/vi /etc/nginx/html/srv/policies/Saml1.1-SenderVouches.xml',
   }
 
   # Create NGINX config files
