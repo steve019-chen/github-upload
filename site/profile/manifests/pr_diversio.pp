@@ -35,8 +35,7 @@ class {'sudo':
 # Include rules in “content”
 sudo::conf { 'puppet_nginx':
   priority => 10,
-  #content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
-  content  => 'infra ALL=NOPASSWD :  /bin/vi /etc/hosts, /usr/sbin/nginx *, /bin/vi /etc/sysconfig/iptables, /sbin/iptables-save > /etc/sysconfig/iptables,/sbin/service iptables restart, /sbin/iptables-save *, /opt/puppetlabs/bin/puppet agent -t, /sbin/service nginx *, /bin/vi /etc/nginx/conf.d *, /bin/vi /etc/nginx/nginx.conf, /sbin/iptables *, /bin/vi /etc/nginx/html/srv/policies/Saml1.1-SenderVouches.xml',
+  content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
 ##
   }
 
