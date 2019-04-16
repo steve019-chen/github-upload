@@ -3450,6 +3450,17 @@ NETWORK::100-66-160-0:
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2018:2019 - "BT prod PWAN4"
+
+NETWORK::100-66-164-0:
+ context:      PWAN_NETWORK
+ scope:         kidc_bt_prod_pwan
+ vlan:          2018:2019
+ netmask:       255.255.252.0
+ router:        100.66.164.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
 # BE-TR is deprecated as per Neil McKellar. No profile defined. Do not use.
 # KIDC BT - VLAN 2006:2007 - "BT non-prod BE-TR (back-end trusted DMZ)"
 
