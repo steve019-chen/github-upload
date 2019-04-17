@@ -19,6 +19,23 @@ class profile::pr_diversio {
     content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
   }
 
+  # Create NGINX log directories
+  $nginx_log_dirs = [ '/work/infra/nginx',
+    '/work/infra/nginx/cache',
+    '/etc/nginx/ldap/',
+    '/etc/nginx/ldap/daemon/',
+    '/work/infra/logs',
+    '/work/infra/logs/nginx',
+    '/etc/nginx/html',
+    '/etc/nginx/html/srv',
+    '/etc/nginx/html/srv/policies',]
+
+  file { $nginx_log_dirs:
+    ensure => 'directory',
+    owner  => 'infra',
+    group  => 'infra',
+  }
+
   # Create NGINX config files
   $nginx_conf_files = [ '/etc/nginx/conf.d/upstream.conf',
     '/etc/nginx/conf.d/ssl_server.conf',
