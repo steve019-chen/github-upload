@@ -21,7 +21,7 @@ class profile::pr_asapnoc {
 telus_lib::spacewalk_channel { 'docker': }
 telus_lib::spacewalk_channel { 'nginx': }
 
-# Install nginx
+# Install nginx test
 package {'nginx':
   ensure   => '1.14.2',
 }
