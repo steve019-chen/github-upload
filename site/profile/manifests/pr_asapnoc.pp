@@ -31,7 +31,7 @@ class { 'docker':
   use_upstream_package_source => false,
   version                     => '18.09.3-3.el7',
   proxy                       => 'http://pac.tsl.telus.com:8080',
-  require                     => Gpg_key['DOCKER-CE'],
+#  require                     => Gpg_key['DOCKER-CE'],
 }
 
 # Install docker compose
