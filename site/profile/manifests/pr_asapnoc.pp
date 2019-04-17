@@ -18,23 +18,13 @@
 
 class profile::pr_asapnoc {
 
-  telus_lib::spacewalk_channel { 'docker': }
+telus_lib::spacewalk_channel { 'docker': }
+telus_lib::spacewalk_channel { 'nginx': }
 
-
-  # Ensuring server is subscribed to recieve packages from spacewalk for Docker
-  # telus_lib::spacewalk_channel { 'docker-ce-rhel7-x86_64': }
-
-  # Download and Install Docker-ce GPG Key
-  # file { 'RPM-GPG-KEY-DOCKER-CE':
-  #   ensure => present,
-  #   path   => '/etc/pki/rpm-gpg/RPM-GPG-KEY-DOCKER-CE',
-  #   source => 'puppet:///modules/telus_lib/RPM-GPG-KEY-DOCKER-CE',
-  # }
-
-  # gpg_key { 'DOCKER-CE':
-  #   path    => '/etc/pki/rpm-gpg/RPM-GPG-KEY-DOCKER-CE',
-  #   require => File['RPM-GPG-KEY-DOCKER-CE'],
-  # }
+# Install nginx
+package {'nginx':
+  ensure   => '1.14.2',
+}
 
 # Install docker
 class { 'docker':
@@ -52,41 +42,11 @@ class {'docker::compose':
 }
 
 # Utilizing the versionlock defined type created in telus_lib module
-telus_lib::versionlock { "docker-ce": }
+telus_lib::versionlock { 'docker-ce': }
+telus_lib::versionlock { 'nginx':
+  require => Package['nginx'],
+}
 
-# Utilizing puppet-yum module for installing and setting versionlock plugin and locking docker version
-# yum::versionlock { '3:docker-ce-18.09.3-3.el7.*':
-#   ensure  => present,
-# }
-
-# package {'yum-plugin-versionlock':
-#   ensure => present,
-# }
-
-# file {'dockerversion_lock':
-#   ensure  => present,
-#   path    => '/etc/yum/pluginconf.d/versionlock.list',
-#   content => '0:docker-ce-18.09.3-3.el7.*',
-#   replace => false,
-#   require => Package['versionlock'],
-# }
-
-# $apptolock01 = 'docker-ce'
-# exec { "yum versionlock ${apptolock01}":
-#   path   => '/bin:/usr/bin:/usr/sbin:/bin',
-#   unless => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q ${apptolock01} > /dev/null",
-# }
-
-
-
-# file_line { 'yum_versionlock_config':
-#   ensure             => present,
-#   path               => '/etc/yum/pluginconf.d/versionlock.conf',
-#   line               => 'show_hint = 0',
-#   match              => 'show_hint = 1',
-#   append_on_no_match => false,
-#   require            => Package['versionlock'],
-# }
 # For reference, as provided by Novo request: svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
 group { 'users':
