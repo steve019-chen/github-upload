@@ -63,10 +63,6 @@ mod 'saz_puppet-sudo',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
   :tag => 'v5.0.0'
 
-mod 'puppet-nginx',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-nginx.git',
-  :tag => 'v0.15.0'
-
 mod 'puppet-gpg_key',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-gpg_key.git',
   :tag => '0.1.0'
