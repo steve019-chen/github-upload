@@ -4,16 +4,53 @@
 #
 
 class profile::pr_diversio {
-  package {'nginx':
-  ensure   => '1.14.2',
+
+  $nginx_package = 'nginx-1.14.2'
+
+  # Install NGINX GPG Key
+  file { 'RPM-GPG-KEY-NGINX':
+    ensure => present,
+    path   => '/etc/pki/rpm-gpg/RPM-GPG-KEY-NGINX',
+    source => 'puppet:///modules/telus_lib/RPM-GPG-KEY-NGINX',
   }
 
+  gpg_key { 'NGINX':
+    path => '/etc/pki/rpm-gpg/RPM-GPG-KEY-NGINX',
+  }
+
+  # Install NGINX package
+  package {'nginx':
+    ensure  => '1.14.2',
+    require => Gpg_key['NGINX'],
+  }
+
+
+  #Add version lock to nginx package
+  package {'yum-plugin-versionlock':
+    ensure => present,
+  }
+
+  exec { "yum versionlock ${nginx_package}":
+    path    => '/bin:/usr/bin:/usr/sbin:/bin',
+    unless  => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q ${nginx_package} > /dev/null",
+    require => Package['yum-plugin-versionlock'],
+  }
+
+  file_line { 'yum_versionlock_config':
+    ensure             => present,
+    path               => '/etc/yum/pluginconf.d/versionlock.conf',
+    line               => 'show_hint = 0',
+    match              => 'show_hint = 1',
+    append_on_no_match => false,
+    require            => Package['yum-plugin-versionlock'],
+  }
+
+  # Configure sudo rules for Diversio
   class {'sudo':
     purge               => false,
     config_file_replace => false,
     }
 
-  # Configure sudo rules for Diversio
   sudo::conf { 'puppet_nginx':
     priority => 10,
     #content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest,/sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status',
