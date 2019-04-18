@@ -11,7 +11,15 @@ node default {
 
 }
 
+
+
 # lint:ignore:unquoted_node_name lint:ignore:140chars
+
+node ln98551 
+{
+  include role::rl_diversio
+}
+
 
 # 2019/04/03 CRQ43521 - Patrol upgrade group 7.2
 # node ln98279,ln98280,ln98312,ln98315,ln98316,ln98317,ln98318,ln98319,ln98320,ln98321,ln98434,ln98435,
