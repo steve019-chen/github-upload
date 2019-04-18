@@ -68,9 +68,10 @@ class profile::pr_diversio {
     '/etc/nginx/html/srv/policies',]
 
   file { $nginx_log_dirs:
-    ensure => 'directory',
-    owner  => 'infra',
-    group  => 'infra',
+    ensure  => 'directory',
+    owner   => 'infra',
+    group   => 'infra',
+    require => Package['nginx'],
   }
 
   # Create NGINX config files
@@ -83,16 +84,18 @@ class profile::pr_diversio {
     '/etc/nginx/nginx.conf',]
 
   file { $nginx_conf_files:
-    ensure => 'present',
-    owner  => 'infra',
-    group  => 'infra',
+    ensure  => 'present',
+    owner   => 'infra',
+    group   => 'infra',
+    require => Package['nginx'],
   }
 
   file { '/etc/nginx/ldap/daemon/nginx-ldap-auth-daemon-ctl-rh.sh':
-    ensure => 'present',
-    owner  => 'infra',
-    group  => 'infra',
-    mode   => '0755',
+    ensure  => 'present',
+    owner   => 'infra',
+    group   => 'infra',
+    mode    => '0755',
+    require => File[$nginx_log_dirs],
   }
 
   file { '/etc/nginx/conf.d/default.conf':
