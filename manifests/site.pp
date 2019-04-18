@@ -13,11 +13,21 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-#CRQ37712 #20190222 - Project ASAPNOC
+# 2019/04/03 CRQ43521 - Patrol upgrade group 7.2
+# node ln98279,ln98280,ln98312,ln98315,ln98316,ln98317,ln98318,ln98319,ln98320,ln98321,ln98434,ln98435,
+# ln98438,ln98556,ln98557,ln98559,ln99147,ln99148,ln99216,ln99217,ln99227,ln99228,ln99229,ln99230,
+# ln99231,ln99232,ln99233,ln99234,ln99254,ln99641,ln99642,ln99694,ln99695,ln99696,ln99734,ln99735,
+# ln99770,ln99771,ln99772,ln99773,ln99779,ln99784,ln99785,ln99788,ln99822,ln99823,ln99824,ln99825,
+# ln99826,ln99827,ln99833,ln99834,ln99835
+# {
+#   class { 'role::rl_patrol_upgrade': }
+# }
+
+# 20190222 CRQ37712 - Project ASAPNOC
 
 node btln999924,btln999923
 {
-class { 'role::rl_asapnoc': }
+  include role::rl_asapnoc
 }
 
 # BCG Shannon project 
@@ -40,20 +50,20 @@ btln000012,ln99161,ln99162,ln98279,ln98280,ln99231,ln99232,ln99233,ln99234,ln983
 btlp006328,btlp006329,btlp006330,btlp006331,btlp006332,btlp006333,btlp006334,btlp006335,btln000406,btln000409,
 btln000408,ln98434,ln99217,ln98435,ln99216,ln98438,btln001602,btln001603,btln002029,btln002030,btln002041,
 btln007255,btln007256,btln007530,btln007531,btln007571,btln007572,btln007573,ln98315,ln98317,ln98318,ln98559,
-ln99663,ln99664,ln99772,ln99825,ln99827,ln99641,ln99642,btln007390,btln007388
+ln99663,ln99664,ln99772,ln99825,ln99827,ln99641,ln99642,btln007390,btln007388,btln003020,ln99235,ln99236,btln001256,btln001257,ln99712
 {
 class { 'role::rl_dynatrace': }
 }
 
 
 #20190213 - CRQ37097 : ROFS many IDCs - Puppet 5 Upgrade 
-node btlp000812
-{
-  class {'::puppet_agent':
-    package_version => '5.5.1',
-    service_names   => ['puppet'],
-    manage_repo     => false,
-  }
-}
+# node btlp000812
+# {
+#   class {'::puppet_agent':
+#     package_version => '5.5.1',
+#     service_names   => ['puppet'],
+#     manage_repo     => false,
+#   }
+# }
 
 # lint:endignore

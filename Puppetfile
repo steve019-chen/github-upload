@@ -63,9 +63,9 @@ mod 'saz_puppet-sudo',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
   :tag => 'v5.0.0'
 
-mod 'puppet-yum',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-yum.git',
-  :tag => 'v3.1.1'
+mod 'puppet-gpg_key',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-gpg_key.git',
+  :tag => '0.1.0'
 
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
@@ -75,7 +75,7 @@ mod 'dynatrace-dynatraceoneagent',
 #TELUS custom modules
 mod 'puppet_agent_config',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
-  :tag => '2.0.0'
+  :tag => '2.3.1'
 
 mod 'telus_lib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
@@ -89,6 +89,7 @@ mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
   :tag => '0.2.7'
 
-# mod 'patrol_upgrade',
-#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-#   :tag => '1.1.0'
+# March 18, 2019 : CRQ41372
+mod 'patrol_upgrade',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
+  :tag => '1.3.0'
