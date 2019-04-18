@@ -20,7 +20,7 @@ node default {
 # }
 #####
 
-node ln98551 {
+node ln98551, ln-test11 {
   include role::rl_diversio
 }
 
