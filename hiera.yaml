@@ -19,9 +19,6 @@ hierarchy:
   - name: "Per-node data from orchestrator (YAML version)"
     path: "nodes/orchestrator/%{trusted.certname}.yaml"
 
-  - name: "Per-node data from nginx (YAML version)"
-    path: "nodes/nginx/%{trusted.certname}.yaml"
-
   - name: "Kickstart data (YAML version)"
     path: "KS.yaml"
 

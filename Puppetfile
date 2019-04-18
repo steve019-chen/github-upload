@@ -13,7 +13,7 @@ mod 'puppetlabs-apt',
 
 mod 'puppetlabs-concat',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-concat.git',
-  :tag => '3.0.0'
+  :tag => '2.2.1'
 
 mod 'puppetlabs-firewall',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-firewall.git',
