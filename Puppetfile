@@ -1,7 +1,7 @@
 #Forge clean modules
 mod 'puppetlabs-stdlib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-stdlib.git',
-  :tag => '4.25.0'
+  :tag => '4.25.1'
 
 mod 'puppetlabs-apache', 
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-apache.git',
@@ -9,7 +9,7 @@ mod 'puppetlabs-apache',
 
 mod 'puppetlabs-apt',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-apt.git',
-  :tag => '2.4.0'
+  :tag => '6.3.0'
 
 mod 'puppetlabs-concat',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-concat.git',
@@ -37,11 +37,27 @@ mod 'puppetlabs-lvm',
 
 mod 'puppetlabs-puppet_agent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppet_agent.git',
-  :tag => '1.6.0'
+  :tag => '1.7.0'
 
 mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
   :tag => '0.1.1'
+
+mod 'puppetlabs-translate',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-translate.git',
+  :tag => '1.0.0'
+
+mod 'puppetlabs-powershell',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-powershell.git',
+  :tag => '2.1.5'
+
+mod 'puppetlabs-reboot',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-reboot.git',
+  :tag => '2.0.0'
+
+mod 'puppetlabs-docker',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-docker.git',
+  :tag => '1.1.0'
 
 mod 'saz_puppet-sudo',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
@@ -51,6 +67,9 @@ mod 'puppet-nginx',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-nginx.git',
   :tag => 'v0.15.0'
 
+mod 'puppet-gpg_key',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-gpg_key.git',
+  :tag => '0.1.0'
 
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
@@ -60,11 +79,11 @@ mod 'dynatrace-dynatraceoneagent',
 #TELUS custom modules
 mod 'puppet_agent_config',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
-  :tag => '2.0.0'
+  :tag => '2.3.1'
 
 mod 'telus_lib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
-  :tag => '2.8.0'
+  :tag => '2.8.1'
 
 mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
@@ -74,6 +93,7 @@ mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
   :tag => '0.2.7'
 
-# mod 'patrol_upgrade',
-#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-#   :tag => '1.1.0'
+# March 18, 2019 : CRQ41372
+mod 'patrol_upgrade',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
+  :tag => '1.3.0'
