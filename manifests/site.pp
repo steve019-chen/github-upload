@@ -20,13 +20,13 @@ node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
   include role::rl_diversio
 }
 
- # 2019/04/22 CRQ45306 - Patrol upgrade group 8
-node ln98077,ln98090,ln98093,ln98155,ln98156,ln98157,ln98158,ln98163,ln98178,
-ln98200,ln98201,ln98202,ln98203,ln98204,ln98252,ln98253,ln98254,ln98255,
-ln98256,ln98260
-{
-  class { 'role::rl_patrol_upgrade': }
-}
+# # 2019/04/22 CRQ45306 - Patrol upgrade group 8
+# node ln98077,ln98090,ln98093,ln98155,ln98156,ln98157,ln98158,ln98163,ln98178,
+# ln98200,ln98201,ln98202,ln98203,ln98204,ln98252,ln98253,ln98254,ln98255,
+# ln98256,ln98260
+# {
+#   class { 'role::rl_patrol_upgrade': }
+# }
 
 # 20190222 CRQ37712 - Project ASAPNOC
 
