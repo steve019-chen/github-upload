@@ -21,19 +21,12 @@
 class profile::pr_asapnoc {
 
 telus_lib::spacewalk_channel { 'docker': }
-telus_lib::spacewalk_channel { 'nginx': }
-
-# Install nginx test
-package {'nginx':
-  ensure   => '1.14.2',
-}
 
 # Install docker
 class { 'docker':
   use_upstream_package_source => false,
   version                     => '18.09.3-3.el7',
   proxy                       => 'http://pac.tsl.telus.com:8080',
-#  require                     => Gpg_key['DOCKER-CE'],
 }
 
 # Install docker compose
@@ -43,11 +36,15 @@ class {'docker::compose':
   proxy   => 'https://pac.tsl.telus.com:8080',
 }
 
-# Utilizing the versionlock defined type created in telus_lib module
-telus_lib::versionlock { 'docker-ce': }
-telus_lib::versionlock { 'nginx':
-  require => Package['nginx'],
+# Install apache
+
+class { 'apache':
+  apache_version => '2.4.6',
 }
+
+# Utilizing the versionlock defined type created in telus_lib module
+$versionlock_apps = ['docker-ce','apache',]
+telus_lib::versionlock { $versionlock_apps : }
 
 # For reference, as provided by Novo request: svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
@@ -66,12 +63,6 @@ user { 'svc_prov':
   password   => pw_hash(lookup('asapnoc::app_account_password'), 'SHA-512','mysalt'),
   managehome => true,
   require    => Group['users'],
-}
-
-# Install apache
-
-class { 'apache':
-  apache_version => '2.4.6',
 }
 
 # Adding Sudo rules for docker and apache

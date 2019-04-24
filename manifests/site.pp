@@ -11,14 +11,19 @@ node default {
 
 }
 
+
+
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-# 2019/04/03 CRQ43521 - Patrol upgrade group 7.2
-# node ln98279,ln98280,ln98312,ln98315,ln98316,ln98317,ln98318,ln98319,ln98320,ln98321,ln98434,ln98435,
-# ln98438,ln98556,ln98557,ln98559,ln99147,ln99148,ln99216,ln99217,ln99227,ln99228,ln99229,ln99230,
-# ln99231,ln99232,ln99233,ln99234,ln99254,ln99641,ln99642,ln99694,ln99695,ln99696,ln99734,ln99735,
-# ln99770,ln99771,ln99772,ln99773,ln99779,ln99784,ln99785,ln99788,ln99822,ln99823,ln99824,ln99825,
-# ln99826,ln99827,ln99833,ln99834,ln99835
+node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
+{
+  include role::rl_diversio
+}
+
+# # 2019/04/22 CRQ45306 - Patrol upgrade group 8
+# node ln98077,ln98090,ln98093,ln98155,ln98156,ln98157,ln98158,ln98163,ln98178,
+# ln98200,ln98201,ln98202,ln98203,ln98204,ln98252,ln98253,ln98254,ln98255,
+# ln98256,ln98260
 # {
 #   class { 'role::rl_patrol_upgrade': }
 # }
