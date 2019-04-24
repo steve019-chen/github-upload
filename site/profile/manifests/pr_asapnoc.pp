@@ -7,6 +7,7 @@
 #   - Download then install gpg keys for repo
 #   - Install required packages for docker and configure docker (proxy settings, ...)
 #   - Lock docker version, so it does not get updated automatically during patching cycles
+#   - Lock apache version, so it does not get updated automatically during patching cycles
 #   - Configure application account
 #   - Create application account home directory
 #   - Install apache
