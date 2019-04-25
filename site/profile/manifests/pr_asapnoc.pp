@@ -7,7 +7,6 @@
 #   - Download then install gpg keys for repo
 #   - Install required packages for docker and configure docker (proxy settings, ...)
 #   - Lock docker version, so it does not get updated automatically during patching cycles
-#   - Lock apache version, so it does not get updated automatically during patching cycles
 #   - Configure application account
 #   - Create application account home directory
 #   - Install apache
@@ -35,7 +34,11 @@ file { $key_file:
 gpg_key { $key_name:
   path    => "/etc/pki/rpm-gpg/${key_file}",
 }
+
 # Install docker
+# Note: proxy just sets the configuration after installing docker
+# this does not get used when downloading the package, this proxy 
+# is used when connecting to docker hub to download the images
 class { 'docker':
   use_upstream_package_source => false,
   version                     => '18.09.3-3.el7',
@@ -51,30 +54,18 @@ class {'docker::compose':
 }
 
 # Install apache
+class { 'apache':}
 
-class { 'apache':
-  apache_version => '2.4.6',
-}
-
-# Utilizing the versionlock defined type created in telus_lib module
-
-#Add version lock to docker and apache package
+#Add version lock to docker package
 package {'yum-plugin-versionlock':
   ensure => present,
 }
 
-exec { "yum versionlock docker-ce":
+exec { 'yum versionlock docker-ce':
   path    => '/bin:/usr/bin:/usr/sbin:/bin',
-  unless  => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce > /dev/null",
+  unless  => 'cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce > /dev/null',
   require => Package['yum-plugin-versionlock'],
 }
-
-# Adding version lock for Apache
-exec { "yum versionlock httpd":
-    path    => '/bin:/usr/bin:/usr/sbin:/bin',
-    unless  => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q httpd > /dev/null",
-    require => Package['yum-plugin-versionlock'],
-  }
 
 file_line { 'yum_versionlock_config':
   ensure             => present,
