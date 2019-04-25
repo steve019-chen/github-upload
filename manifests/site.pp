@@ -30,7 +30,7 @@ node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
 
 # 20190222 CRQ37712 - Project ASAPNOC
 
-node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
+node btln999924,btln999923
 {
   include role::rl_asapnoc
 }
