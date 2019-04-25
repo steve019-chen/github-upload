@@ -15,6 +15,7 @@
 # 
 # Prereqs for docker:
 #   - docker-ce-rhel7-x86_64 channel must exist in Spacewalk
+#   - Manually add machines to the docker channel in Spacewalk
 #
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
