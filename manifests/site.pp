@@ -28,9 +28,9 @@ node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
 #   class { 'role::rl_patrol_upgrade': }
 # }
 
-# 20190222 CRQ37712 - Project ASAPNOC
+# 20190425 CRQ45615 - Project ASAPNOC
 
-node btln999924,btln999923
+node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
 {
   include role::rl_asapnoc
 }
