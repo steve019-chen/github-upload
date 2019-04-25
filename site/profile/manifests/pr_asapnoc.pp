@@ -22,13 +22,25 @@
 
 class profile::pr_asapnoc {
 
-telus_lib::spacewalk_channel { 'docker': }
+# Download and Install GPG Key
+$key_file = 'RPM-GPG-KEY-DOCKER-CE'
+$key_name = 'DOCKER-CE'
 
+file { $key_file:
+  ensure => present,
+  path   => "/etc/pki/rpm-gpg/${key_file}",
+  source => "puppet:///modules/telus_lib/${key_file}",
+}
+
+gpg_key { $key_name:
+  path    => "/etc/pki/rpm-gpg/${key_file}",
+}
 # Install docker
 class { 'docker':
   use_upstream_package_source => false,
   version                     => '18.09.3-3.el7',
   proxy                       => 'http://pac.tsl.telus.com:8080',
+  require                     => Gpg_key[$key_name],
 }
 
 # Install docker compose
@@ -45,8 +57,34 @@ class { 'apache':
 }
 
 # Utilizing the versionlock defined type created in telus_lib module
-$versionlock_apps = ['docker-ce','apache',]
-telus_lib::versionlock { $versionlock_apps : }
+
+#Add version lock to docker and apache package
+package {'yum-plugin-versionlock':
+  ensure => present,
+}
+
+exec { "yum versionlock docker-ce":
+  path    => '/bin:/usr/bin:/usr/sbin:/bin',
+  unless  => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce > /dev/null",
+  require => Package['yum-plugin-versionlock'],
+}
+
+# Adding version lock for Apache
+exec { "yum versionlock httpd":
+    path    => '/bin:/usr/bin:/usr/sbin:/bin',
+    unless  => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q httpd > /dev/null",
+    require => Package['yum-plugin-versionlock'],
+  }
+
+file_line { 'yum_versionlock_config':
+  ensure             => present,
+  path               => '/etc/yum/pluginconf.d/versionlock.conf',
+  line               => 'show_hint = 0',
+  match              => 'show_hint = 1',
+  append_on_no_match => false,
+  require            => Package['yum-plugin-versionlock'],
+}
+
 
 # For reference, as provided by Novo request: svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
 # Create the users group
