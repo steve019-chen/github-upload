@@ -724,6 +724,14 @@
 #  #media_protocol:      nfs
 #  boot_protocol:       http
 #  media_protocol:      http
+#[SERVER] kickstart-koala                   # Burnaby lab
+#  server_ip:           142.174.170.60
+#  server_port:         23 # note: port 23 is redirected to port 1078 with iptables
+#  js_base:             /apps/kickstart
+#  os_base:             /work/media
+#  #dhcp_server_type:    isc
+#  boot_protocol:       http
+#  media_protocol:      http
 #-----------------------------------------------------------------------------#
 # former PCI kickstart/jumpstart server for Larid.
 # this server is no longer supported.
@@ -1479,39 +1487,41 @@ PROFILE::toll_bt:
 #-----------------------------------------------------------------------------#
 # Mainwire TS PROFILES
 #-----------------------------------------------------------------------------#
+#[PROFILE] mainwire_ts
+#  site:                Mainwire
+#  env:                TS
+#  tz_local:            Canada/Mountain
+#  ntp:                 use_server
+#  ntp_servers:         127.0.0.1
+#  domain:              telus.net
+#  #nbu_domain:         telus.net
+#  dns_servers:         192.168.81.11 192.168.81.12
+#  dns_search:              telus.net
+# flexera_server:        btwp013742.corp.ads
+#  #nbu_master:          none
+#  #accounts_on_misc:    no
+#  #nbu:                 no
+#  #bmc_server:          
+#  mail_relay:
+#  #net_types:
 
-PROFILE::mainwire_ts:
- context:      PROFILE
- site:                Mainwire
- env:                TS
- tz_local:            Canada/Mountain
- ntp:                 use_server
- ntp_servers:         127.0.0.1
- domain:               telus.net
- dns_servers:         192.168.81.11 192.168.81.12
- dns_search:              telus.net
- flexera_server:        btwp013742.corp.ads
- mail_relay:
-
-
-PROFILE::mainwire_bt_ten:
- context:      PROFILE
- site:                  Mainwire
- env:                   BT
- satellite_server:      lp98086.corp.ads
- satellite_key:         1-bt-mw
- spacewalk_server:      lp98188.corp.ads
- spacewalk_key:         1-bt-mwir
- ldap_server1:          uldap-west.tsl.telus.com
- ldap_server2:          uldap-east.tsl.telus.com
- flexera_server:        btwp013742.corp.ads
- tz_local:              Canada/Mountain
- ntp:                   use_router
- ntp_servers:           142.178.33.1 142.178.233.1
- domain:                ent.agt.ab.ca
- dns_servers:           142.178.55.133 142.178.4.50
- dns_search:            corp.ads ent.agt.ab.ca tmi.telus.com tsl.telus.com
- mail_relay:            abmsg.tsl.telus.com
+#[PROFILE] mainwire_bt_ten
+# site:                 Mainwire
+# env:                  BT
+# satellite_server:     lp98086.corp.ads
+# satellite_key:         1-bt-mw
+# spacewalk_server:     lp98188.corp.ads
+# spacewalk_key:         1-bt-mwir
+# ldap_server1:         uldap-west.tsl.telus.com
+# ldap_server2:         uldap-east.tsl.telus.com
+# flexera_server:        btwp013742.corp.ads
+# tz_local:             Canada/Mountain
+# ntp:                  use_router
+# ntp_servers:          142.178.33.1 142.178.233.1
+# domain:               ent.agt.ab.ca
+# dns_servers:          142.178.55.133 142.178.4.50
+# dns_search:           corp.ads ent.agt.ab.ca tmi.telus.com tsl.telus.com
+# mail_relay:           abmsg.tsl.telus.com
 
 #-----------------------------------------------------------------------------#
 # CIDC BT PROFILES
@@ -2830,68 +2840,56 @@ PROFILE::ridc_bt_ten:
 
 #-----------------------------------------------------------------------------#
 # Vancouver - VLAN 201: lab
-
-NETWORK::142-174-170-0:
- context:      NETWORK
- scope:         burnaby_lab
- vlan:          201
- netmask:      255.255.255.128
- router:      142.174.170.1
- boot_server:  kickstart-koala
- media_server: na01
- depot_server: none
-
-# Vancouver - VLAN 101: lab
-
-NETWORK::142-174-171-0:
- context:      NETWORK
- scope:         burnaby_lab
- vlan:          101
- netmask:      255.255.255.192
- router:      142.174.171.1
- boot_server:  kickstart-koala
- media_server: na01
- depot_server: none
-
+#[NETWORK]  142.174.170.0
+# scope:                burnaby_lab
+# vlan:         201
+# netmask:      255.255.255.128
+# router:      142.174.170.1
+# boot_server:  kickstart-koala
+# media_server: na01
+# depot_server: none
+#
+## Vancouver - VLAN 101: lab
+#[NETWORK]  142.174.171.0
+# scope:                burnaby_lab
+# vlan:         101
+# netmask:      255.255.255.192
+# router:      142.174.171.1
+# boot_server:  kickstart-koala
+# media_server: na01
+# depot_server: none
+#
 # Vancouver - VLAN 500: lab
-
-NETWORK::100-50-0-0:
- context:      NAS_NETWORK
- scope:         burnaby_lab_nas
- vlan:          500
- netmask:       255.255.0.0
- router:        100.50.0.1
+#[NAS_NETWORK]  100.50.0.0
+# scope:                burnaby_lab_nas
+# vlan:         500
+# netmask:       255.255.0.0
+# router:       100.50.0.1
 
 # Vancouver - VLAN 510: lab
 # this is managment network as per documenation, but it is treated here as a backup network
-
-NETWORK::100-51-0-0:
- context:      NAS_NETWORK
- scope:         burnaby_lab_bkp
- vlan:          510
- netmask:       255.255.0.0
- router:        100.51.0.1
+#[NAS_NETWORK]  100.51.0.0
+# scope:                burnaby_lab_bkp
+# vlan:         510
+# netmask:       255.255.0.0
+# router:       100.51.0.1
 
 # Vancouver - VLAN 520: lab
-
-NETWORK::100-52-0-0:
- context:      VMOTION_NETWORK
- scope:         burnaby_lab_ic
- vlan:          520
- netmask:       255.255.0.0
- router:        100.52.0.1
+#[VMOTION_NETWORK]      100.52.0.0
+# scope:                burnaby_lab_ic
+# vlan:         520
+# netmask:       255.255.0.0
+# router:       100.52.0.1
 
 #-----------------------------------------------------------------------------#
 # Vancouver - VLAN ???: lab
-
-NETWORK::100-51-0-0:
- context:      NETWORK
- netmask:      255.255.0.0
- router:       100.51.0.1
- scope:      burnaby_lab
- boot_server:  none
- media_server: na01
- depot_server: none
+#[NETWORK]      100.51.0.0
+# netmask:      255.255.0.0
+# router:       100.51.0.1
+# scope:      burnaby_lab
+# boot_server:  none
+# media_server: na01
+# depot_server: none
 
 #---------------------------------------------#
 # Canada Way (Vancouver)
@@ -3895,7 +3893,7 @@ NETWORK::142-178-66-0:
  depot_server: lp99705
 
 #---------------------------------------------#
-# Toll 8
+# Toll 8 (or is this possibly mainwire?)
 # IP helper added April 20/2012 (ICR 472006)
 
 NETWORK::142-178-250-128:
@@ -5004,14 +5002,12 @@ NETWORK::11-128-33-0:
 #---------------------------------------------#
 # Edmonton Netbackup Network 4 of 4
 # This maybe for Windows.  Not sure.
-
-NETWORK::11-128-33-0:
- context:      BKP_NETWORK
- scope:         toll_bt_bkp
- site:          Toll8
- netmask:     255.255.255.0
- router:      11.128.33.254
- routes:      11.128.1.0/24
+#[BKP_NETWORK] 11.128.33.0
+# scope:                toll_bt_bkp
+# site:         Toll8
+#netmask:     255.255.255.0
+#router:      11.128.33.254
+#routes:      11.128.1.0/24
 
 
 
@@ -5021,24 +5017,20 @@ NETWORK::11-128-33-0:
 #---------------------------------------------#
 # Addition of this network was requested by Kevin Strike.  March 2013.
 # This is much doubt as to whether this will work.
+#[NETWORK] 192.168.83.0  # telus.net
+#netmask: 255.255.255.0
+#router:  192.168.83.1
+#boot_server:  none
+#media_server: lp99705
+#depot_server: none
+#scope:      mainwire_ts
 
-NETWORK::192-168-83-0:
- context:      NETWORK
- netmask: 255.255.255.0
- router:  192.168.83.1
- boot_server:  none
- media_server: lp99705
- depot_server: none
- scope:      mainwire_ts
-
-
-NETWORK::142-178-250-128:
- context:      NETWORK
- netmask: 255.255.255.128
- router:  142.178.250.129
- boot_server:  none
- media_server: lp99705
- scope:      mainwire_bt_ten
+#[NETWORK] 142.178.250.128
+#netmask: 255.255.255.128
+#router:  142.178.250.129
+#boot_server:  none
+#media_server: lp99705
+#scope:      mainwire_bt_ten
 
 
 ###############################################################################
