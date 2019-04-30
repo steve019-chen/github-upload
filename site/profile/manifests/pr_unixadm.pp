@@ -29,6 +29,7 @@ user { 'unixt4':
   uid        => '53535',
   gid        => 'unixt4',
   shell      => '/bin/bash',
+  groups     => [5050],	
   password   => '*LK*',
   managehome => true,
   require    => Group['unixt4'],
