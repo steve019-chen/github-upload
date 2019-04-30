@@ -23,7 +23,7 @@ group { 'unixt4':
   gid    => '53535',
 }
 
-# Create the svc_prov user for application account, set password
+# Create the unixt4 user for application account, set password
 
 user { 'unixt4':
   uid        => '53535',
