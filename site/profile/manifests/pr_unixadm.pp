@@ -29,7 +29,7 @@ user { 'unixt4':
   uid        => '53535',
   gid        => 'unixt4',
   shell      => '/bin/bash',
-  password   => pw_hash('changeme'),
+  password   => 'changeme',
   managehome => true,
   require    => Group['unixt4'],
 }
