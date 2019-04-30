@@ -33,5 +33,11 @@ user { 'unixt4':
   managehome => true,
   require    => Group['unixt4'],
 }
+ssh_authorized_key { 'unixt4@ln99052':
+  ensure => present,
+  user   => 'unixt4',
+  type   => 'ssh-rsa',
+  key    => 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0Ou2HuF2wwGuLR3kZtco9K6LdIsFpoaLhNlIveLqoqnuYsCIwDIjwNawgep35B/koQyika6zcVY7SNsj5rSOzfpsoA6NvTxcNfdfOakCbBQCLQfza3P1EBuQutVagcYAuukyM14LRTACDKBSnV8b46AvW5DE9c1po6iIAq22dsNGIHcNn17CnXI9WA9fEy1S7+ioGPPjwOz+UkXzxaOr9InwO9/kxLBcBLfGfMIvYW8TPPXTGw8+VNwJg9g5ZodaMR6JKGccOxL+mj4EWTOc56s/diRarbkGky78I1eg7JyQWtDKNvAz7cQ1eANUdDa7LOSHDgfR8n5uDD4wp+tBqw== unixt4@ln99052',
+}
 
 }
