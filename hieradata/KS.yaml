@@ -2214,6 +2214,7 @@ PROFILE::qidc_ts_pub:
  mgmt_scope:            qidc_ts_oMgmt
  nas_scope:             qidc_ts_nas
  bkp_scope:             qidc_ts_bkp
+ ic_scope:              qidc_ts_ic
  included:               qidc_ts
  puppet_server:         tslp000443.corptools.ads
  site:                  QIDC
