@@ -23,13 +23,14 @@ group { 'unixt4':
   gid    => '53535',
 }
 
+# ToDo: Create an if statement to check if remotelogin is present
 # Create the unixt4 user for application account, set password
 
 user { 'unixt4':
   uid        => '53535',
   gid        => 'unixt4',
   shell      => '/bin/bash',
-  groups     => ["remotelogin"],	
+  groups     => 'remotelogin',	
   password   => '*LK*',
   managehome => true,
   require    => Group['unixt4'],
