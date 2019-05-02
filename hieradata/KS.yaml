@@ -1906,6 +1906,7 @@ PROFILE::consilium_bt_lab_pwan:
  mgmt_scope:   consilium_bt_lab_mgmt
  nas_scope:    consilium_bt_lab_nas
  bkp_scope:    consilium_bt_lab_bkp
+ ic_scope:     consilium_bt_lab_ic
  puppet_server: latex.tmi.telus.com
 
 
@@ -5957,6 +5958,18 @@ NETWORK::172-23-39-0:
  media_server: aphid
 
 #---------------------------------------------#
+# Consilium 14 floor fake IC network for KVM
+# This only exists as a private network within server acrylic
+# subnet and vlan number are not assigned by network team!
+
+NETWORK::192-168-95-0:
+ context:      FAKE_NETWORK
+ scope:         consilium_bt_lab_ic
+ vlan:          959 
+ netmask:       255.255.255.0
+ test_ip:       192.168.95.20 
+
+#---------------------------------------------#
 # Consilium 14 floor fake BE_NT network for KVM
 # This only exists as a private network within server acrylic
 # subnet and vlan number are not assigned by network team!
@@ -6482,6 +6495,7 @@ NETWORK::100-65-250-0:
  scope:         qidc_ts_ic
  vlan:          3209
  netmask:       255.255.254.0
+ test_ip:       100.65.250.30 
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
