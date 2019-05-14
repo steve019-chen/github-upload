@@ -383,6 +383,9 @@
 # SElinux for RHEL_7
 #-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
+# SElinux for RHEL_8
+#-----------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
 # Etrust: to install or not to install (yes==install or no==don't_install)
 #-----------------------------------------------------------------------------#
 #[OPTION_LIST] etrust.BT
@@ -722,6 +725,14 @@
 #  os_base:             /jumpstart/media
 #  #boot_protocol:       tftp
 #  #media_protocol:      nfs
+#  boot_protocol:       http
+#  media_protocol:      http
+#[SERVER] kickstart-koala                   # Burnaby lab
+#  server_ip:           142.174.170.60
+#  server_port:         23 # note: port 23 is redirected to port 1078 with iptables
+#  js_base:             /apps/kickstart
+#  os_base:             /work/media
+#  #dhcp_server_type:    isc
 #  boot_protocol:       http
 #  media_protocol:      http
 #-----------------------------------------------------------------------------#
@@ -1479,39 +1490,41 @@ PROFILE::toll_bt:
 #-----------------------------------------------------------------------------#
 # Mainwire TS PROFILES
 #-----------------------------------------------------------------------------#
+#[PROFILE] mainwire_ts
+#  site:                Mainwire
+#  env:                TS
+#  tz_local:            Canada/Mountain
+#  ntp:                 use_server
+#  ntp_servers:         127.0.0.1
+#  domain:              telus.net
+#  #nbu_domain:         telus.net
+#  dns_servers:         192.168.81.11 192.168.81.12
+#  dns_search:              telus.net
+# flexera_server:        btwp013742.corp.ads
+#  #nbu_master:          none
+#  #accounts_on_misc:    no
+#  #nbu:                 no
+#  #bmc_server:          
+#  mail_relay:
+#  #net_types:
 
-PROFILE::mainwire_ts:
- context:      PROFILE
- site:                Mainwire
- env:                TS
- tz_local:            Canada/Mountain
- ntp:                 use_server
- ntp_servers:         127.0.0.1
- domain:               telus.net
- dns_servers:         192.168.81.11 192.168.81.12
- dns_search:              telus.net
- flexera_server:        btwp013742.corp.ads
- mail_relay:
-
-
-PROFILE::mainwire_bt_ten:
- context:      PROFILE
- site:                  Mainwire
- env:                   BT
- satellite_server:      lp98086.corp.ads
- satellite_key:         1-bt-mw
- spacewalk_server:      lp98188.corp.ads
- spacewalk_key:         1-bt-mwir
- ldap_server1:          uldap-west.tsl.telus.com
- ldap_server2:          uldap-east.tsl.telus.com
- flexera_server:        btwp013742.corp.ads
- tz_local:              Canada/Mountain
- ntp:                   use_router
- ntp_servers:           142.178.33.1 142.178.233.1
- domain:                ent.agt.ab.ca
- dns_servers:           142.178.55.133 142.178.4.50
- dns_search:            corp.ads ent.agt.ab.ca tmi.telus.com tsl.telus.com
- mail_relay:            abmsg.tsl.telus.com
+#[PROFILE] mainwire_bt_ten
+# site:                 Mainwire
+# env:                  BT
+# satellite_server:     lp98086.corp.ads
+# satellite_key:         1-bt-mw
+# spacewalk_server:     lp98188.corp.ads
+# spacewalk_key:         1-bt-mwir
+# ldap_server1:         uldap-west.tsl.telus.com
+# ldap_server2:         uldap-east.tsl.telus.com
+# flexera_server:        btwp013742.corp.ads
+# tz_local:             Canada/Mountain
+# ntp:                  use_router
+# ntp_servers:          142.178.33.1 142.178.233.1
+# domain:               ent.agt.ab.ca
+# dns_servers:          142.178.55.133 142.178.4.50
+# dns_search:           corp.ads ent.agt.ab.ca tmi.telus.com tsl.telus.com
+# mail_relay:           abmsg.tsl.telus.com
 
 #-----------------------------------------------------------------------------#
 # CIDC BT PROFILES
@@ -1896,6 +1909,7 @@ PROFILE::consilium_bt_lab_pwan:
  mgmt_scope:   consilium_bt_lab_mgmt
  nas_scope:    consilium_bt_lab_nas
  bkp_scope:    consilium_bt_lab_bkp
+ ic_scope:     consilium_bt_lab_ic
  puppet_server: latex.tmi.telus.com
 
 
@@ -2204,6 +2218,7 @@ PROFILE::qidc_ts_pub:
  mgmt_scope:            qidc_ts_oMgmt
  nas_scope:             qidc_ts_nas
  bkp_scope:             qidc_ts_bkp
+ ic_scope:              qidc_ts_ic
  included:               qidc_ts
  puppet_server:         tslp000443.corptools.ads
  site:                  QIDC
@@ -2830,68 +2845,56 @@ PROFILE::ridc_bt_ten:
 
 #-----------------------------------------------------------------------------#
 # Vancouver - VLAN 201: lab
-
-NETWORK::142-174-170-0:
- context:      NETWORK
- scope:         burnaby_lab
- vlan:          201
- netmask:      255.255.255.128
- router:      142.174.170.1
- boot_server:  kickstart-koala
- media_server: na01
- depot_server: none
-
-# Vancouver - VLAN 101: lab
-
-NETWORK::142-174-171-0:
- context:      NETWORK
- scope:         burnaby_lab
- vlan:          101
- netmask:      255.255.255.192
- router:      142.174.171.1
- boot_server:  kickstart-koala
- media_server: na01
- depot_server: none
-
+#[NETWORK]  142.174.170.0
+# scope:                burnaby_lab
+# vlan:         201
+# netmask:      255.255.255.128
+# router:      142.174.170.1
+# boot_server:  kickstart-koala
+# media_server: na01
+# depot_server: none
+#
+## Vancouver - VLAN 101: lab
+#[NETWORK]  142.174.171.0
+# scope:                burnaby_lab
+# vlan:         101
+# netmask:      255.255.255.192
+# router:      142.174.171.1
+# boot_server:  kickstart-koala
+# media_server: na01
+# depot_server: none
+#
 # Vancouver - VLAN 500: lab
-
-NETWORK::100-50-0-0:
- context:      NAS_NETWORK
- scope:         burnaby_lab_nas
- vlan:          500
- netmask:       255.255.0.0
- router:        100.50.0.1
+#[NAS_NETWORK]  100.50.0.0
+# scope:                burnaby_lab_nas
+# vlan:         500
+# netmask:       255.255.0.0
+# router:       100.50.0.1
 
 # Vancouver - VLAN 510: lab
 # this is managment network as per documenation, but it is treated here as a backup network
-
-NETWORK::100-51-0-0:
- context:      NAS_NETWORK
- scope:         burnaby_lab_bkp
- vlan:          510
- netmask:       255.255.0.0
- router:        100.51.0.1
+#[NAS_NETWORK]  100.51.0.0
+# scope:                burnaby_lab_bkp
+# vlan:         510
+# netmask:       255.255.0.0
+# router:       100.51.0.1
 
 # Vancouver - VLAN 520: lab
-
-NETWORK::100-52-0-0:
- context:      VMOTION_NETWORK
- scope:         burnaby_lab_ic
- vlan:          520
- netmask:       255.255.0.0
- router:        100.52.0.1
+#[VMOTION_NETWORK]      100.52.0.0
+# scope:                burnaby_lab_ic
+# vlan:         520
+# netmask:       255.255.0.0
+# router:       100.52.0.1
 
 #-----------------------------------------------------------------------------#
 # Vancouver - VLAN ???: lab
-
-NETWORK::100-51-0-0:
- context:      NETWORK
- netmask:      255.255.0.0
- router:       100.51.0.1
- scope:      burnaby_lab
- boot_server:  none
- media_server: na01
- depot_server: none
+#[NETWORK]      100.51.0.0
+# netmask:      255.255.0.0
+# router:       100.51.0.1
+# scope:      burnaby_lab
+# boot_server:  none
+# media_server: na01
+# depot_server: none
 
 #---------------------------------------------#
 # Canada Way (Vancouver)
@@ -3895,7 +3898,7 @@ NETWORK::142-178-66-0:
  depot_server: lp99705
 
 #---------------------------------------------#
-# Toll 8
+# Toll 8 (or is this possibly mainwire?)
 # IP helper added April 20/2012 (ICR 472006)
 
 NETWORK::142-178-250-128:
@@ -5004,14 +5007,12 @@ NETWORK::11-128-33-0:
 #---------------------------------------------#
 # Edmonton Netbackup Network 4 of 4
 # This maybe for Windows.  Not sure.
-
-NETWORK::11-128-33-0:
- context:      BKP_NETWORK
- scope:         toll_bt_bkp
- site:          Toll8
- netmask:     255.255.255.0
- router:      11.128.33.254
- routes:      11.128.1.0/24
+#[BKP_NETWORK] 11.128.33.0
+# scope:                toll_bt_bkp
+# site:         Toll8
+#netmask:     255.255.255.0
+#router:      11.128.33.254
+#routes:      11.128.1.0/24
 
 
 
@@ -5021,24 +5022,20 @@ NETWORK::11-128-33-0:
 #---------------------------------------------#
 # Addition of this network was requested by Kevin Strike.  March 2013.
 # This is much doubt as to whether this will work.
+#[NETWORK] 192.168.83.0  # telus.net
+#netmask: 255.255.255.0
+#router:  192.168.83.1
+#boot_server:  none
+#media_server: lp99705
+#depot_server: none
+#scope:      mainwire_ts
 
-NETWORK::192-168-83-0:
- context:      NETWORK
- netmask: 255.255.255.0
- router:  192.168.83.1
- boot_server:  none
- media_server: lp99705
- depot_server: none
- scope:      mainwire_ts
-
-
-NETWORK::142-178-250-128:
- context:      NETWORK
- netmask: 255.255.255.128
- router:  142.178.250.129
- boot_server:  none
- media_server: lp99705
- scope:      mainwire_bt_ten
+#[NETWORK] 142.178.250.128
+#netmask: 255.255.255.128
+#router:  142.178.250.129
+#boot_server:  none
+#media_server: lp99705
+#scope:      mainwire_bt_ten
 
 
 ###############################################################################
@@ -5964,6 +5961,18 @@ NETWORK::172-23-39-0:
  media_server: aphid
 
 #---------------------------------------------#
+# Consilium 14 floor fake IC network for KVM
+# This only exists as a private network within server acrylic
+# subnet and vlan number are not assigned by network team!
+
+NETWORK::192-168-95-0:
+ context:      FAKE_NETWORK
+ scope:         consilium_bt_lab_ic
+ vlan:          959 
+ netmask:       255.255.255.0
+ test_ip:       192.168.95.20 
+
+#---------------------------------------------#
 # Consilium 14 floor fake BE_NT network for KVM
 # This only exists as a private network within server acrylic
 # subnet and vlan number are not assigned by network team!
@@ -6163,9 +6172,9 @@ NETWORK::75-153-158-0:
  vlan:          1592
  netmask:       255.255.255.0
  router:        75.153.158.1
- boot_server:   tslp000011/75.153.182.32
- media_server:  tslp000011/75.153.182.32
- depot_server:  tslp000011/75.153.182.32
+ boot_server:   tslp000011/75.153.158.100
+ media_server:  tslp000011/75.153.158.100
+ depot_server:  tslp000011/75.153.158.100
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 1555:1558 - "oMgmt"
@@ -6377,6 +6386,16 @@ NETWORK::100-70-34-224:
  router:        100.70.34.225
 
 #-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1652 - "AC2 script servers" 
+
+NETWORK::100-125-167-216:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1652
+ netmask:       255.255.255.248
+ router:        100.125.167.217
+
+#-----------------------------------------------------------------------------#
 # this vlan (1600) has muliple community vlans (including 1607)
 # this vlan contains the stingray windows + Linux JPs, AD, + radius.
 # QIDC TS - VLAN 1600 - "PCI CDE managment" 
@@ -6489,6 +6508,7 @@ NETWORK::100-65-250-0:
  scope:         qidc_ts_ic
  vlan:          3209
  netmask:       255.255.254.0
+ test_ip:       100.65.250.32 
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
@@ -6883,7 +6903,6 @@ NETWORK::100-66-148-0:
  netmask:       255.255.252.0
  router:        100.66.148.1
  mtu:           9000
- aggr_mode:     lacp
 
 #-----------------------------------------------------------------------------#
 # QIDC BT - VLAN 2223 - "BT non-prod ICO"
@@ -7336,6 +7355,9 @@ NETWORK::192-168-92-0:
 #  10.163.244.199       name_unknown # Barlow
 #  10.103.244.199       name_unknown # Pitfield
 #  10.153.244.199       name_unknown # Gilmore
+
+# KIDC
+#  100.64.37.135        kmlpbcnute01 # KIDC Timehub blade 
 
 # 100.64.93.49  # anycast SIDC
 # 100.64.93.57  # anycast SIDC
