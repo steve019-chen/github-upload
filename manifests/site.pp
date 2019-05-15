@@ -15,7 +15,7 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
+node ln98551,btln007486,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
 {
   include role::rl_diversio
 }
