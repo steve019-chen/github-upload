@@ -5752,7 +5752,7 @@ NETWORK::172-29-96-0:
  vlan:          808
  site:          Laird4
  netmask:       255.255.248.0
- test_ip:       172.29.96.17 
+ test_ip:       172.29.96.100 
  boot_server:  lp98989/172.29.96.100
  media_server: lp98989/172.29.96.100
 
@@ -6406,9 +6406,9 @@ NETWORK::100-70-31-192:
  vlan:          1600
  netmask:       255.255.255.192
  router:        100.70.31.193
- boot_server:   btlp002429/100.70.31.202 
+ boot_server:   none
  dhcp_server:   none
- media_server:  btlp002429/100.70.31.202 
+ media_server:  none
  depot_server:  none
 
 #-----------------------------------------------------------------------------#
