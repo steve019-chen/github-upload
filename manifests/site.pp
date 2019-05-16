@@ -11,21 +11,32 @@ node default {
 
 }
 
+
+
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-# 20190307 CRQ39668 - Patrol Upgrade NonProd group 3
-node btln000378.corp.ads,btln000704.corp.ads,ln98078.corp.ads,ln98282.corp.ads
-{
-  class { 'role::rl_patrol_upgrade': }
-}
 
-# 20190312 - Patrol ROFS module testing - Initial
-node ln99878, btln002502, btln001563,lp99674,qadev115
+# 20190516 CRQ49076 - Patrol ROFS module testing - Initial
+node btln000075,btln000397,btln007170,btln000941,ln98875,ln98618,ln99917,ln99845,ln99605,ln99180
 {
   class { 'role::rl_patrol_rofs': }
 }
 
 # 20190222 CRQ37712 - Project ASAPNOC
+node ln98551,btln007486,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
+{
+  include role::rl_diversio
+}
+
+# # 2019/04/22 CRQ45306 - Patrol upgrade group 8
+# node ln98077,ln98090,ln98093,ln98155,ln98156,ln98157,ln98158,ln98163,ln98178,
+# ln98200,ln98201,ln98202,ln98203,ln98204,ln98252,ln98253,ln98254,ln98255,
+# ln98256,ln98260
+# {
+#   class { 'role::rl_patrol_upgrade': }
+# }
+
+# 20190425 CRQ45615 - Project ASAPNOC
 
 node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
 {
@@ -52,7 +63,7 @@ btln000012,ln99161,ln99162,ln98279,ln98280,ln99231,ln99232,ln99233,ln99234,ln983
 btlp006328,btlp006329,btlp006330,btlp006331,btlp006332,btlp006333,btlp006334,btlp006335,btln000406,btln000409,
 btln000408,ln98434,ln99217,ln98435,ln99216,ln98438,btln001602,btln001603,btln002029,btln002030,btln002041,
 btln007255,btln007256,btln007530,btln007531,btln007571,btln007572,btln007573,ln98315,ln98317,ln98318,ln98559,
-ln99663,ln99664,ln99772,ln99825,ln99827,ln99641,ln99642,btln007390,btln007388,btln003020,ln99235,ln99236
+ln99663,ln99664,ln99772,ln99825,ln99827,ln99641,ln99642,btln007390,btln007388,btln003020,ln99235,ln99236,btln001256,btln001257,ln99712
 {
 class { 'role::rl_dynatrace': }
 }

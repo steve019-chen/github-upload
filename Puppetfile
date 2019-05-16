@@ -57,11 +57,15 @@ mod 'puppetlabs-reboot',
 
 mod 'puppetlabs-docker',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-docker.git',
-  :tag => '1.1.0'
+  :tag => '3.3.0'
 
 mod 'saz_puppet-sudo',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/saz_puppet-sudo.git',
   :tag => 'v5.0.0'
+
+mod 'puppet-gpg_key',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-gpg_key.git',
+  :tag => '0.1.0'
 
 #Forge dirty modules
 mod 'dynatrace-dynatraceoneagent',
@@ -71,11 +75,11 @@ mod 'dynatrace-dynatraceoneagent',
 #TELUS custom modules
 mod 'puppet_agent_config',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
-  :tag => '2.2.0'
+  :tag => '2.3.1'
 
 mod 'telus_lib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
-  :tag => '2.7.0'
+  :tag => '2.8.2'
 
 mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
@@ -84,7 +88,8 @@ mod 'telus-spacewalk_migrate',
 mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
   :tag => '0.2.7'
-
+  
+# March 18, 2019 : CRQ41372
 mod 'patrol_upgrade',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
   :tag => '1.2.1'
