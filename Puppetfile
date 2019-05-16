@@ -47,14 +47,6 @@ mod 'puppetlabs-translate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-translate.git',
   :tag => '1.0.0'
 
-mod 'puppetlabs-powershell',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-powershell.git',
-  :tag => '2.1.5'
-
-mod 'puppetlabs-reboot',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-reboot.git',
-  :tag => '2.0.0'
-
 mod 'puppetlabs-docker',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-docker.git',
   :tag => '3.3.0'
@@ -67,7 +59,56 @@ mod 'puppet-gpg_key',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-gpg_key.git',
   :tag => '0.1.0'
 
+# Windows modules
+mod 'puppetlabs-acl',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-acl.git',
+  :tag => '2.1.0'
+
+mod 'puppetlabs-chocolatey',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-chocolatey.git',
+  :tag => '3.1.1'
+
+mod 'puppetlabs-dsc_lite',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-dsc_lite.git',
+  :tag => '1.2.0'
+
+mod 'puppetlabs-iis',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-iis.git',
+  :tag => '4.5.0'
+
+mod 'puppetlabs-powershell',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-powershell.git',
+  :tag => '2.2.0'
+
+mod 'puppetlabs-reboot',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-reboot.git',
+  :tag => '2.1.2'
+
+mod 'puppetlabs-registry',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-registry.git',
+  :tag => '2.1.0'
+
+mod 'puppetlabs-wsus_client',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-wsus_client.git',
+  :tag => '1.1.0'
+
+mod 'puppet-download_file',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-download_file.git',
+  :tag => 'v3.2.0'
+
+mod 'puppet-windows_env',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-windows_env.git',
+  :tag => 'v3.2.0'
+
+mod 'puppet-windowsfeature',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-windowsfeature.git',
+  :tag => 'v3.2.2'
+
 #Forge dirty modules
+mod 'dylanratcliffe-windows_disk_facts',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dylanratcliffe-windows_disk_facts.git',
+  :tag => 'v0.2.6d'
+
 mod 'dynatrace-dynatraceoneagent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
   :tag => '0.3.1d'
