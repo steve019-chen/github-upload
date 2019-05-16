@@ -5752,7 +5752,7 @@ NETWORK::172-29-96-0:
  vlan:          808
  site:          Laird4
  netmask:       255.255.248.0
- test_ip:       172.29.96.17 
+ test_ip:       172.29.96.100 
  boot_server:  lp98989/172.29.96.100
  media_server: lp98989/172.29.96.100
 
