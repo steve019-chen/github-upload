@@ -383,6 +383,9 @@
 # SElinux for RHEL_7
 #-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
+# SElinux for RHEL_8
+#-----------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
 # Etrust: to install or not to install (yes==install or no==don't_install)
 #-----------------------------------------------------------------------------#
 #[OPTION_LIST] etrust.BT
@@ -5749,7 +5752,7 @@ NETWORK::172-29-96-0:
  vlan:          808
  site:          Laird4
  netmask:       255.255.248.0
- test_ip:       172.29.96.17 
+ test_ip:       172.29.96.100 
  boot_server:  lp98989/172.29.96.100
  media_server: lp98989/172.29.96.100
 
@@ -6403,9 +6406,9 @@ NETWORK::100-70-31-192:
  vlan:          1600
  netmask:       255.255.255.192
  router:        100.70.31.193
- boot_server:   btlp002429/100.70.31.202 
+ boot_server:   none
  dhcp_server:   none
- media_server:  btlp002429/100.70.31.202 
+ media_server:  none
  depot_server:  none
 
 #-----------------------------------------------------------------------------#
@@ -7352,6 +7355,9 @@ NETWORK::192-168-92-0:
 #  10.163.244.199       name_unknown # Barlow
 #  10.103.244.199       name_unknown # Pitfield
 #  10.153.244.199       name_unknown # Gilmore
+
+# KIDC
+#  100.64.37.135        kmlpbcnute01 # KIDC Timehub blade 
 
 # 100.64.93.49  # anycast SIDC
 # 100.64.93.57  # anycast SIDC
