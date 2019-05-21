@@ -20,7 +20,7 @@ node btln000075,btln000397,btln007170,btln000941,ln98875,ln98618,ln99917,ln99845
 }
 
 # 20190222 CRQ37712 - Project Diversio
-node ln98551,btln007486,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
+node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
 {
   include role::rl_diversio
 }
