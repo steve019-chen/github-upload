@@ -1829,9 +1829,9 @@ PROFILE::laird_mits:
 # Consilium BT PROFILES
 #-----------------------------------------------------------------------------#
 
-# everything except KVM VMs on acrylic
+# everything except KVM VMs on acrylic (and maybe one VMs on acrylic)
 
-PROFILE::consilium_bt_lab:
+PROFILE::consilium_bt_lab_ten:
  context:      PROFILE
  included:       consilium_bt
  nbu_profile:       consilium_bt 
@@ -1852,7 +1852,10 @@ PROFILE::consilium_bt_lab:
  dns_servers:       172.23.5.244 172.23.116.244
  dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
  mail_relay:        onmsg.tsl.telus.com
- puppet_server: latex.tmi.telus.com
+ bkp_suffix:    -bkp
+ nas_scope:    consilium_bt_lab_nas
+ bkp_scope:    consilium_bt_lab_bkp
+ ic_scope:     consilium_bt_lab_ic
 
 
 PROFILE::consilium_bt_lab_be_nt:
@@ -1910,7 +1913,6 @@ PROFILE::consilium_bt_lab_pwan:
  nas_scope:    consilium_bt_lab_nas
  bkp_scope:    consilium_bt_lab_bkp
  ic_scope:     consilium_bt_lab_ic
- puppet_server: latex.tmi.telus.com
 
 
 PROFILE::consilium_bt_ten:
@@ -5923,7 +5925,7 @@ NETWORK::172-23-59-0:
 
 NETWORK::142-63-253-128:
  context:      NETWORK
- scope:         consilium_bt_lab
+ scope:         consilium_bt_lab_ten
  vlan:          10
  netmask:       255.255.255.128
  router:        142.63.253.129
