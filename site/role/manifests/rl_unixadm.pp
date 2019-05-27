@@ -1,14 +1,15 @@
-# Class: Role <insert name>
+# Class: Role rl_unixadm
 #
-# This Role defines the profiles required by servers part of the <insert name / project>
+# This Role defines the profiles required to deploy accounts to all linux machiens
 #
 # Parameters:
-#
+#   - None
 # Actions:
-#   - <insert text>
+#   - Creates 2 groups : unixt4 and remotelogin
+#   - Create 1 user : unixt4 with SSH access only
 # 
 # Prereqs:
-#   - <insert text>
+#   - Jump point server has the required keys
 #
 class role::rl_unixadm {
 

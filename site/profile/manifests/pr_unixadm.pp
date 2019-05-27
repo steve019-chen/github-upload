@@ -1,15 +1,17 @@
 # Class: Profile pr_unixadm
 #
-# This Role defines the profiles required by servers part of the <insert name / project>
-#
-# Parameters: No parameters
+# This Profile is in place for the national Unix team to have an account 
+# that they can use to connect to all linux machines via an ssh key setup
+# and limited to a jump point box
+# Parameters: 
+#   - None
 #
 # Actions:
 #   - Creates 2 groups : unixt4 and remotelogin
-#   - Create 1 user : unixt4
+#   - Create 1 user : unixt4 with SSH access only
 # 
 # Prereqs:
-#   - <insert text>
+#   - Jump point server has the required keys
 #
 class profile::pr_unixadm {
 
@@ -43,12 +45,12 @@ user { 'unixt4':
 }
 # lint:ignore:140chars
 # Create ssh key with the public key and limit connection from ln99052
-ssh_authorized_key { 'unixt4@ln99052':
-  ensure => present,
-  user   => 'unixt4',
-  type   => 'ssh-rsa',
+ssh_authorized_key { 'unixt4':
+  ensure  => present,
+  user    => 'unixt4',
+  type    => 'ssh-rsa',
   options => 'from="142.63.43.98"',
-  key    => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA0Ou2HuF2wwGuLR3kZtco9K6LdIsFpoaLhNlIveLqoqnuYsCIwDIjwNawgep35B/koQyika6zcVY7SNsj5rSOzfpsoA6NvTxcNfdfOakCbBQCLQfza3P1EBuQutVagcYAuukyM14LRTACDKBSnV8b46AvW5DE9c1po6iIAq22dsNGIHcNn17CnXI9WA9fEy1S7+ioGPPjwOz+UkXzxaOr9InwO9/kxLBcBLfGfMIvYW8TPPXTGw8+VNwJg9g5ZodaMR6JKGccOxL+mj4EWTOc56s/diRarbkGky78I1eg7JyQWtDKNvAz7cQ1eANUdDa7LOSHDgfR8n5uDD4wp+tBqw==',
+  key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA0Ou2HuF2wwGuLR3kZtco9K6LdIsFpoaLhNlIveLqoqnuYsCIwDIjwNawgep35B/koQyika6zcVY7SNsj5rSOzfpsoA6NvTxcNfdfOakCbBQCLQfza3P1EBuQutVagcYAuukyM14LRTACDKBSnV8b46AvW5DE9c1po6iIAq22dsNGIHcNn17CnXI9WA9fEy1S7+ioGPPjwOz+UkXzxaOr9InwO9/kxLBcBLfGfMIvYW8TPPXTGw8+VNwJg9g5ZodaMR6JKGccOxL+mj4EWTOc56s/diRarbkGky78I1eg7JyQWtDKNvAz7cQ1eANUdDa7LOSHDgfR8n5uDD4wp+tBqw==',
 }
 # lint:endignore
 
