@@ -13,7 +13,7 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-node btln001313,btln001267
+node btln001313,btln001267, ln98960, ln97058, ln98017, ln98021, lp99611, btln002506, btln000392, tslp000008
 {
   include role::rl_unixadm
 }
