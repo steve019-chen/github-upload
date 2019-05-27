@@ -5,6 +5,7 @@ lvm::volume_groups:
     physical_volumes:
       - /dev/sdb
       - /dev/sdc
+      - /dev/sdd
+      - /dev/sde
     logical_volumes:
-      app01lv: {fs_type: ext4, size: 200G, mountpath: /apps}
-      app02lv: {fs_type: ext4, size: 250G, mountpath: /work}
+      app01lv: {fs_type: ext4, size: 1232G, mountpath: /work/infra}

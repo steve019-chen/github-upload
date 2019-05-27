@@ -383,6 +383,9 @@
 # SElinux for RHEL_7
 #-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
+# SElinux for RHEL_8
+#-----------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
 # Etrust: to install or not to install (yes==install or no==don't_install)
 #-----------------------------------------------------------------------------#
 #[OPTION_LIST] etrust.BT
@@ -1826,9 +1829,9 @@ PROFILE::laird_mits:
 # Consilium BT PROFILES
 #-----------------------------------------------------------------------------#
 
-# everything except KVM VMs on acrylic
+# everything except KVM VMs on acrylic (and maybe one VMs on acrylic)
 
-PROFILE::consilium_bt_lab:
+PROFILE::consilium_bt_lab_ten:
  context:      PROFILE
  included:       consilium_bt
  nbu_profile:       consilium_bt 
@@ -1849,7 +1852,10 @@ PROFILE::consilium_bt_lab:
  dns_servers:       172.23.5.244 172.23.116.244
  dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
  mail_relay:        onmsg.tsl.telus.com
- puppet_server: latex.tmi.telus.com
+ bkp_suffix:    -bkp
+ nas_scope:    consilium_bt_lab_nas
+ bkp_scope:    consilium_bt_lab_bkp
+ ic_scope:     consilium_bt_lab_ic
 
 
 PROFILE::consilium_bt_lab_be_nt:
@@ -1906,7 +1912,7 @@ PROFILE::consilium_bt_lab_pwan:
  mgmt_scope:   consilium_bt_lab_mgmt
  nas_scope:    consilium_bt_lab_nas
  bkp_scope:    consilium_bt_lab_bkp
- puppet_server: latex.tmi.telus.com
+ ic_scope:     consilium_bt_lab_ic
 
 
 PROFILE::consilium_bt_ten:
@@ -2214,6 +2220,7 @@ PROFILE::qidc_ts_pub:
  mgmt_scope:            qidc_ts_oMgmt
  nas_scope:             qidc_ts_nas
  bkp_scope:             qidc_ts_bkp
+ ic_scope:              qidc_ts_ic
  included:               qidc_ts
  puppet_server:         tslp000443.corptools.ads
  site:                  QIDC
@@ -5747,7 +5754,7 @@ NETWORK::172-29-96-0:
  vlan:          808
  site:          Laird4
  netmask:       255.255.248.0
- test_ip:       172.29.96.17 
+ test_ip:       172.29.96.100 
  boot_server:  lp98989/172.29.96.100
  media_server: lp98989/172.29.96.100
 
@@ -5918,7 +5925,7 @@ NETWORK::172-23-59-0:
 
 NETWORK::142-63-253-128:
  context:      NETWORK
- scope:         consilium_bt_lab
+ scope:         consilium_bt_lab_ten
  vlan:          10
  netmask:       255.255.255.128
  router:        142.63.253.129
@@ -5954,6 +5961,18 @@ NETWORK::172-23-39-0:
  scope:      consilium_bt_ten
  boot_server:  none
  media_server: aphid
+
+#---------------------------------------------#
+# Consilium 14 floor fake IC network for KVM
+# This only exists as a private network within server acrylic
+# subnet and vlan number are not assigned by network team!
+
+NETWORK::192-168-95-0:
+ context:      FAKE_NETWORK
+ scope:         consilium_bt_lab_ic
+ vlan:          959 
+ netmask:       255.255.255.0
+ test_ip:       192.168.95.20 
 
 #---------------------------------------------#
 # Consilium 14 floor fake BE_NT network for KVM
@@ -6155,9 +6174,9 @@ NETWORK::75-153-158-0:
  vlan:          1592
  netmask:       255.255.255.0
  router:        75.153.158.1
- boot_server:   tslp000011/75.153.182.32
- media_server:  tslp000011/75.153.182.32
- depot_server:  tslp000011/75.153.182.32
+ boot_server:   tslp000011/75.153.158.100
+ media_server:  tslp000011/75.153.158.100
+ depot_server:  tslp000011/75.153.158.100
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 1555:1558 - "oMgmt"
@@ -6369,6 +6388,16 @@ NETWORK::100-70-34-224:
  router:        100.70.34.225
 
 #-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1652 - "AC2 script servers" 
+
+NETWORK::100-125-167-216:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1652
+ netmask:       255.255.255.248
+ router:        100.125.167.217
+
+#-----------------------------------------------------------------------------#
 # this vlan (1600) has muliple community vlans (including 1607)
 # this vlan contains the stingray windows + Linux JPs, AD, + radius.
 # QIDC TS - VLAN 1600 - "PCI CDE managment" 
@@ -6379,9 +6408,9 @@ NETWORK::100-70-31-192:
  vlan:          1600
  netmask:       255.255.255.192
  router:        100.70.31.193
- boot_server:   btlp002429/100.70.31.202 
+ boot_server:   none
  dhcp_server:   none
- media_server:  btlp002429/100.70.31.202 
+ media_server:  none
  depot_server:  none
 
 #-----------------------------------------------------------------------------#
@@ -6481,6 +6510,7 @@ NETWORK::100-65-250-0:
  scope:         qidc_ts_ic
  vlan:          3209
  netmask:       255.255.254.0
+ test_ip:       100.65.250.32 
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
@@ -6875,7 +6905,6 @@ NETWORK::100-66-148-0:
  netmask:       255.255.252.0
  router:        100.66.148.1
  mtu:           9000
- aggr_mode:     lacp
 
 #-----------------------------------------------------------------------------#
 # QIDC BT - VLAN 2223 - "BT non-prod ICO"
@@ -7328,6 +7357,9 @@ NETWORK::192-168-92-0:
 #  10.163.244.199       name_unknown # Barlow
 #  10.103.244.199       name_unknown # Pitfield
 #  10.153.244.199       name_unknown # Gilmore
+
+# KIDC
+#  100.64.37.135        kmlpbcnute01 # KIDC Timehub blade 
 
 # 100.64.93.49  # anycast SIDC
 # 100.64.93.57  # anycast SIDC
