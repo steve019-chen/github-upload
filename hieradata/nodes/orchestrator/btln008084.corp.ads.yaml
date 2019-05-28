@@ -1,0 +1,11 @@
+---
+lvm::volume_groups:
+  appvg:
+    createonly: true
+    physical_volumes:
+      - /dev/sdb
+    logical_volumes:
+      app01lv: {fs_type: ext4, size: 100G, mountpath: /opt/apps/fabric}
+      app04lv: {fs_type: ext4, size: 50G, mountpath: /opt/apps/fabric/cassandra}
+      app02lv: {fs_type: ext4, size: 50G, mountpath: /opt/apps/fabric/k2view}
+      app03lv: {fs_type: ext4, size: 100G, mountpath: /opt/apps/fabric/k2view/storage}
