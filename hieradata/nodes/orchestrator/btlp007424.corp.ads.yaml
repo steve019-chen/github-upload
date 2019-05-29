@@ -1,11 +1,14 @@
 ---
 lvm::volume_groups:
   appvg:
-    createonly: true
+    createonly: false
     physical_volumes:
       - /dev/sdb
       - /dev/sdc
       - /dev/sdd
+      - /dev/sde
+      - /dev/sdf
+      - /dev/sdg
     logical_volumes:
       app01lv: {fs_type: ext4, size: 100G, mountpath: /apps}
-      app02lv: {fs_type: ext4, size: 1000G, mountpath: /work}
+      app02lv: {fs_type: ext4, size: 2000G, mountpath: /work}
