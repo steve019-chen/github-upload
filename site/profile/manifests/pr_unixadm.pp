@@ -39,7 +39,7 @@ user { 'unixt4':
   gid        => 'unixt4',
   shell      => '/bin/bash',
   groups     => 'remotelogin',
-  password   => pw_hash(lookup('unixt4::password'), 'SHA-512','mysalt'),
+  password   => '*LK*',
   managehome => true,
   require    => Group['unixt4','remotelogin'],
 }
