@@ -20,19 +20,7 @@ btlp007105.corp.ads, btlp007106.corp.ads {
 class { 'role::rl_bcg_shannon': }
 }
 
-node btln007523.corp.ads,btln007524.corp.ads,btln007717.corp.ads,btln007718.corp.ads, ln99773.corp.ads,
-ln99826.corp.ads, btln001649.corp.ads,btln001650.corp.ads,btln002025.corp.ads,btln002026.corp.ads,
-btln002027.corp.ads,btln002028.corp.ads,btln007399.corp.ads,btln007401.corp.ads,btln007402.corp.ads,
-ln99694.corp.ads,ln99695.corp.ads,ln99696.corp.ads,ln99734.corp.ads,ln99735.corp.ads,ln99778.corp.ads,
-ln99779.corp.ads,ln99784.corp.ads,ln99785.corp.ads,ln99788.corp.ads,ln99833.corp.ads,ln99834.corp.ads,
-ln99835.corp.ads,btln000045.corp.ads,btln000046.corp.ads,btln000047.corp.ads,btln000048.corp.ads,
-btln001604.corp.ads,btln001605.corp.ads,btln002031.corp.ads,btln002032.corp.ads,btln002042.corp.ads,
-btln007253.corp.ads,btln007254.corp.ads,btln007528.corp.ads,btln007529.corp.ads,btln007568.corp.ads,
-btln007569.corp.ads,btln007570.corp.ads,ln98312.corp.ads,ln98319.corp.ads,ln98320.corp.ads,ln98321.corp.ads,
-ln98556.corp.ads,ln98557.corp.ads,ln99227.corp.ads,ln99228.corp.ads,ln99229.corp.ads,ln99230.corp.ads,
-ln99254.corp.ads,ln99665.corp.ads,ln99666.corp.ads,ln99667.corp.ads,ln99770.corp.ads,ln99771.corp.ads,
-ln99822.corp.ads,ln99823.corp.ads,ln99824.corp.ads,ln99147.corp.ads,ln99148.corp.ads,btln000011.corp.ads,
-btln000012.corp.ads {
+node ln99670{
 class { 'role::rl_dynatrace': }
 }
 
