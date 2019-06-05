@@ -17,6 +17,18 @@
 #
 
 class profile::pr_dynatrace1agent {
+
+  class {'sudo':
+    purge               => false,
+    config_file_replace => false,
+    }
+
+  # Configure sudo rules for dynatrace
+  sudo::conf { 'puppet_dynatrace':
+    priority => 10,
+    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t ',
+    }
+
   if $facts['kernel'] == 'Linux' {
     $path = '/opt/dynatrace/oneagent/log'
     $days_to_keep = 14
