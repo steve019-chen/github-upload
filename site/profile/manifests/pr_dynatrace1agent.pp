@@ -28,6 +28,7 @@ class profile::pr_dynatrace1agent {
     priority => 10,
     content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh ',
     }
+  
 
   if $facts['kernel'] == 'Linux' {
     $path = '/opt/dynatrace/oneagent/log'
