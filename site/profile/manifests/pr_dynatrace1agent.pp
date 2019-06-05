@@ -26,7 +26,7 @@ class profile::pr_dynatrace1agent {
   # Configure sudo rules for dynatrace
   sudo::conf { 'puppet_dynatrace':
     priority => 10,
-    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t ',
+    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t, systemctl stop oneagent, systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh ',
     }
 
   if $facts['kernel'] == 'Linux' {
