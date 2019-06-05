@@ -92,7 +92,7 @@ mod 'telus-flexnet_agent_install',
 # May 23, 2019 : CRQ49762
 mod 'patrol_upgrade',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-  :tag => '1.4.0'
+  :tag => '1.5.0'
 
 mod 'patrol_rofs',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_rofs.git',
