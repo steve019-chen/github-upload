@@ -2954,6 +2954,19 @@ NETWORK::75-153-159-0:
  depot_server:  tslp000058/75.153.159.18
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1646 - "BMC Monitoring" Treat same as tools
+
+NETWORK::75-156-196-128:
+ context:      NETWORK
+ scope:         kidc_tools
+ vlan:          1646
+ netmask:       255.255.255.192
+ router:        75.156.196.129
+ boot_server:   tslp000058/75.153.186.62
+ media_server:  tslp000058/75.153.186.62
+ depot_server:  tslp000058/75.153.186.62
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 1555:1558 - TS oMgmt (for OS)
 
 NETWORK::75-153-164-0:
@@ -6007,7 +6020,7 @@ NETWORK::192-168-96-128:
 NETWORK::192-168-97-0:
  context:      FAKE_NETWORK
  scope:         consilium_bt_lab_pwan
- vlan:          97 
+ vlan:          97:2 
  netmask:       255.255.255.0
  mtu:           9000
  router:        192.168.97.20
@@ -6020,7 +6033,7 @@ NETWORK::192-168-97-0:
 NETWORK::192-168-98-0:
  context:      FAKE_NETWORK
  scope:         consilium_bt_lab_nas
- vlan:          98 
+ vlan:          3:98 
  netmask:       255.255.255.0
  test_ip:       192.168.98.20
  mtu:           9000
@@ -6177,6 +6190,19 @@ NETWORK::75-153-158-0:
  boot_server:   tslp000011/75.153.158.100
  media_server:  tslp000011/75.153.158.100
  depot_server:  tslp000011/75.153.158.100
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1646 - "BMC Monitoring" Treat same as tools
+
+NETWORK::75-156-196-192:
+ context:      NETWORK
+ scope:         kidc_tools
+ vlan:          1646
+ netmask:       255.255.255.192
+ router:        75.156.196.193
+ boot_server:   tslp000011/75.153.182.32
+ media_server:  tslp000011/75.153.182.32
+ depot_server:  tslp000011/75.153.182.32
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 1555:1558 - "oMgmt"
