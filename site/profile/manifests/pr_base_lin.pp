@@ -15,7 +15,7 @@ class profile::pr_base_lin {
 
   # Limiting deployment of unixadm profile to linux machines in KIDC non prod (btln002494) and SDE master (btln007206)
   # and in future QIDC non prod (btln000197)
-  if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads'] )
+  if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads','btln000197.corp.ads'] )
   { include profile::pr_unixadm }
 
 }
