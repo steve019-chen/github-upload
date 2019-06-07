@@ -28,7 +28,7 @@ class profile::pr_dynatrace1agent {
     priority => 10,
     content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent',
     }
-  
+
   if $facts['kernel'] == 'Linux' {
     $path = '/opt/dynatrace/oneagent/log'
     $days_to_keep = 14
@@ -52,7 +52,7 @@ class profile::pr_dynatrace1agent {
     # Calling the module and passing a download location and source for the installation file
 
     class { 'dynatraceoneagent':
-        download_link => 'puppet:///modules/dynatraceoneagent/Dynatrace-OneAgent-Linux-1.167.176.sh',
+        download_link => 'puppet:///software/dynatraceoneagent/common/Dynatrace-OneAgent-Linux-1.167.176.sh',
         download_dir  => '/tmp',
         user          => 'dynatrace',
         require       => User['dynatrace'],
