@@ -13,10 +13,22 @@
 #   - Only runs on Linux hosts
 #   - /home/ filesystem must exist
 #   - Dynatrace One agent Puppet Module must be available in Bitbucket 
-#   - Installer file should be placed in the modules/files directory
+#   - Installer file should be placed on the regional masters /software/dynatraceoneagent/common directory
 #
-
+#
 class profile::pr_dynatrace1agent {
+
+  class {'sudo':
+    purge               => false,
+    config_file_replace => false,
+    }
+
+  # Configure sudo rules for dynatrace
+  sudo::conf { 'puppet_dynatrace':
+    priority => 10,
+    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent',
+    }
+
   if $facts['kernel'] == 'Linux' {
     $path = '/opt/dynatrace/oneagent/log'
     $days_to_keep = 14
@@ -37,10 +49,10 @@ class profile::pr_dynatrace1agent {
       managehome => true,
     }
 
-    # Calling the module and passing a download location and source for the installation file
+    # Calling the module and passing a download location and source for the installation file##
 
     class { 'dynatraceoneagent':
-        download_link => 'puppet:///modules/dynatraceoneagent/Dynatrace-OneAgent-Linux-1.149.213.sh',
+        download_link => 'puppet:///software/dynatraceoneagent/common/Dynatrace-OneAgent-Linux-1.167.176.sh',
         download_dir  => '/tmp',
         user          => 'dynatrace',
         require       => User['dynatrace'],
