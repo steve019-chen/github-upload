@@ -15,7 +15,7 @@
 #   - Dynatrace One agent Puppet Module must be available in Bitbucket 
 #   - Installer file should be placed on the regional masters /software/dynatraceoneagent/common directory
 #
-
+#
 class profile::pr_dynatrace1agent {
 
   class {'sudo':
@@ -26,7 +26,7 @@ class profile::pr_dynatrace1agent {
   # Configure sudo rules for dynatrace
   sudo::conf { 'puppet_dynatrace':
     priority => 10,
-    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent',
+    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent',
     }
 
   if $facts['kernel'] == 'Linux' {
@@ -49,10 +49,11 @@ class profile::pr_dynatrace1agent {
       managehome => true,
     }
 
-    # Calling the module and passing a download location and source for the installation file
+    # Calling the module and passing a download location and source for the installation file##
 
     class { 'dynatraceoneagent':
-        download_link => 'puppet:///software/dynatraceoneagent/common/Dynatrace-OneAgent-Linux-1.167.176.sh',
+        #download_link => 'puppet:///software/dynatraceoneagent/common/Dynatrace-OneAgent-Linux-1.167.176.sh',
+        download_link => 'http://jty656.dynatrace-managed.com/e/56f21ab8-4f4b-4a14-9afb-bd493a8884ac/api/v1/deployment/installer/agent/unix/default/latest?Api-Token=ykJK2lC6S8eWmZwETfVYn&arch=x86&flavor=default',
         download_dir  => '/tmp',
         user          => 'dynatrace',
         require       => User['dynatrace'],
