@@ -13,7 +13,7 @@
 #   - Only runs on Linux hosts
 #   - /home/ filesystem must exist
 #   - Dynatrace One agent Puppet Module must be available in Bitbucket 
-#   - Installer file should be placed in the modules/files directory
+#   - Installer file should be placed on the regional masters /software/dynatraceoneagent/common directory
 #
 
 class profile::pr_dynatrace1agent {
