@@ -15,7 +15,7 @@
 #   - Dynatrace One agent Puppet Module must be available in Bitbucket 
 #   - Installer file should be placed in the modules/files directory
 #
-
+#
 class profile::pr_dynatrace1agent {
 
   class {'sudo':
@@ -26,7 +26,7 @@ class profile::pr_dynatrace1agent {
   # Configure sudo rules for dynatrace
   sudo::conf { 'puppet_dynatrace':
     priority => 10,
-    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent',
+    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent',
     }
 
   if $facts['kernel'] == 'Linux' {
