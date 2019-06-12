@@ -2962,7 +2962,7 @@ NETWORK::75-156-196-128:
  vlan:          1646
  netmask:       255.255.255.192
  router:        75.156.196.129
- boot_server:   tslp000058/75.153.186.62
+ boot_server:   none
  media_server:  tslp000058/75.153.186.62
  depot_server:  tslp000058/75.153.186.62
 
@@ -6196,11 +6196,11 @@ NETWORK::75-153-158-0:
 
 NETWORK::75-156-196-192:
  context:      NETWORK
- scope:         kidc_tools
+ scope:         qidc_tools
  vlan:          1646
  netmask:       255.255.255.192
  router:        75.156.196.193
- boot_server:   tslp000011/75.153.182.32
+ boot_server:   none
  media_server:  tslp000011/75.153.182.32
  depot_server:  tslp000011/75.153.182.32
 
