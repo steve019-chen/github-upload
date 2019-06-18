@@ -2958,7 +2958,7 @@ NETWORK::75-153-159-0:
 
 NETWORK::75-156-196-128:
  context:      NETWORK
- scope:         kidc_tools
+ scope:         kidc_ts_pub 
  vlan:          1646
  netmask:       255.255.255.192
  router:        75.156.196.129
@@ -6196,7 +6196,7 @@ NETWORK::75-153-158-0:
 
 NETWORK::75-156-196-192:
  context:      NETWORK
- scope:         qidc_tools
+ scope:         qidc_ts_pub 
  vlan:          1646
  netmask:       255.255.255.192
  router:        75.156.196.193
