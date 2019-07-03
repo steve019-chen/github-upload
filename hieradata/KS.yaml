@@ -1961,6 +1961,10 @@ PROFILE::consilium_bt:
  mail_relay:        onmsg.tsl.telus.com
 
 
+# this profile for building oMgmt-only servers
+#[PROFILE] consilium_sidc_lab_oMgmt
+#  include:             consilium_sidc_lab
+
 
 PROFILE::consilium_sidc_lab_be-nt:
  context:      PROFILE
@@ -2060,6 +2064,30 @@ PROFILE::consilium_sidc_lab_tools:
  dns_search:        corptools.sidclab corp.sidclab
  mail_relay:
  puppet_server:        lbbtlp810000.corp.sidclab
+
+# this profile for building oMgmt-only servers
+
+PROFILE::consilium_sidc_lab_oMgmt:
+ context:      PROFILE
+ included:              consilium_sidc_lab
+ dns_servers:       10.128.249.11 10.128.249.12
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server
+ ntp_servers:       10.128.249.1
+ ldap_server1:          lbtslp000058.corptools.sidclab
+ ldap_server2:
+ satellite_server:  
+ satellite_key:     
+ spacewalk_server:
+ spacewalk_key: 
+ domain:            corp.sidclab
+ bkp_domain:
+ dns_search:        corp.sidclab corptools.sidclab
+ mail_relay:
+ puppet_server: lbbtlp810000.corp.sidclab
 
 # this profile for building oMgmt-only servers
 #[PROFILE] consilium_sidc_lab_oMgmt
