@@ -1,2 +1,47 @@
 ---
 message_specific: "This data is meant for Btln007803 Rhel 5 machine"
+local_users::add::groups:
+  admin: {}
+  git:
+    gid: 15002
+  a:
+    gid: 8901
+  b:
+    gid: 8902
+  c:
+    gid: 8903
+local_users::remove::groups:
+  - thesmiths
+  - builders
+local_users::ignore::groups:
+  - ftp
+  - root
+  - users
+local_users::add::users:
+  jblogs:
+    uid: 1029
+    comment: Joe Blogs -test account
+    expiry: none
+    groups: ['a','b','c']
+    auth_keys: 
+      - 'jblogs@imac.local'
+  bsmith:
+    uid: 1051
+    comment: Bill Smith -test account
+    expiry: none
+    groups: ['a']
+    mode: '0700'
+    auth_keys: 
+      - 'bsmith@linux-9g92.site'
+  bsmith0:
+    uid: 1052
+    comment: Bill Smith 0
+    mode: '0700'
+  root:
+    expiry: none
+  svscan:
+    uid: 3049
+    gid: users
+    expiry: none
+    comment: Security team scan
+    mode: '0700'
