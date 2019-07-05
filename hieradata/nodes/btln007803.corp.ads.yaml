@@ -54,6 +54,7 @@ local_users::add::users:
     uid: 3049
     gid: users
     expiry: none
+    password: 'Letmein'
     base_dir: '/opt/apps'
     comment: Security team scan
     mode: '0700'
