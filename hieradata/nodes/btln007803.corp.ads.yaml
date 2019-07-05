@@ -54,7 +54,7 @@ local_users::add::users:
     uid: 3049
     gid: users
     expiry: none
-    password: Letmein
+    password: pw_hash(lookup('asapnoc::app_account_password'), 'SHA-512','mysalt')
     base_dir: '/opt/apps'
     comment: Security team scan
     mode: '0700'
