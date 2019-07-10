@@ -54,7 +54,7 @@ local_users::add::users:
     uid: 3049
     gid: users
     expiry: none
-    password: 'Telus2019!
+    password: 'Telus2019!'
     base_dir: '/opt/apps'
     comment: Security team scan
     mode: '0700'
