@@ -16,7 +16,10 @@
 #   - Installer file should be placed in the modules/files directory
 #
 #
-class profile::pr_dynatrace1agent {
+class profile::pr_dynatrace1agent (
+  Enum['common','dv-env','st-env','pr-env'] $enviroment = 'common',
+)
+ {
 
   class {'sudo':
     purge               => false,
@@ -52,8 +55,8 @@ class profile::pr_dynatrace1agent {
     # Calling the module and passing a download location and source for the installation file##
 
     class { 'dynatraceoneagent':
-        #download_link => 'puppet:///software/dynatraceoneagent/common/Dynatrace-OneAgent-Linux-1.167.176.sh',
-        download_link => 'http://jty656.dynatrace-managed.com/e/56f21ab8-4f4b-4a14-9afb-bd493a8884ac/api/v1/deployment/installer/agent/unix/default/latest?Api-Token=ykJK2lC6S8eWmZwETfVYn&arch=x86&flavor=default',
+        download_link => 'puppet:///software/dynatraceoneagent/$environment/Dynatrace-OneAgent-Linux-1.171.226.sh',
+        #download_link => 'http://jty656.dynatrace-managed.com/e/56f21ab8-4f4b-4a14-9afb-bd493a8884ac/api/v1/deployment/installer/agent/unix/default/latest?Api-Token=ykJK2lC6S8eWmZwETfVYn&arch=x86&flavor=default',
         download_dir  => '/tmp',
         user          => 'dynatrace',
         require       => User['dynatrace'],
