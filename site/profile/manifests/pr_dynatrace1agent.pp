@@ -15,7 +15,7 @@
 #   - Dynatrace One agent Puppet Module must be available in Bitbucket 
 #   - Installer file should be placed in the modules/files directory
 #
-#
+##
 #
 class profile::pr_dynatrace1agent (
   Enum['common','dv-env','st-env','pr-env'] $enviroment = 'common',

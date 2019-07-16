@@ -67,7 +67,7 @@ mod 'puppet-gpg_key',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-gpg_key.git',
   :tag => '0.1.0'
 
-#Forge dirty modules
+#Forge dirty modules#
 #mod 'dynatrace-dynatraceoneagent',
 # :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
 #  :tag => '0.4.1d'
@@ -90,7 +90,7 @@ mod 'telus-spacewalk_migrate',
 
 mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
-  :tag => '0.2.7'
+  :tag => '0.2.7'g
   
 # May 23, 2019 : CRQ49762
 mod 'patrol_upgrade',
