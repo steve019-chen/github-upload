@@ -75,14 +75,14 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
-            mail to: 'shaun.mcevoy@telus.com',
-                subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
+            mail to: 'shaun.mcevoy@telus.com, daruvin.sood@telus.com',
+                subject: "[SDE] Jenkins Successful Pipeline: ${currentBuild.fullDisplayName}",
                 body: "${env.BUILD_URL} ran successfully.  RSPEC Testing: ${rspec_status}"
         }
         failure {
             echo 'I failed :('
-            mail to: 'shaun.mcevoy@telus.com',
-                subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+            mail to: 'shaun.mcevoy@telus.com, daruvin.sood@telus.com',
+                subject: "[SDE] Jenkins Failed Pipeline: ${currentBuild.fullDisplayName}",
                 body: "Something is wrong with ${env.BUILD_URL}.  RSPEC Testing: ${rspec_status}"
         }
     }
