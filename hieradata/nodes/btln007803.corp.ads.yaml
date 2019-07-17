@@ -32,7 +32,7 @@ local_users::add::users:
   jblogs:
     uid: 1029
     comment: Joe Blogs -test account
-    expiry: none
+    expiry: 90
     groups: ['a','b','c']
     auth_keys: 
       - 'jblogs@imac.local'
