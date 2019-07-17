@@ -53,7 +53,7 @@ class profile::pr_dynatrace1agent (
       managehome => true,
     }
 
-    # Calling the module and passing a download location and source for the installation file####
+    # Calling the module and passing a download location and source for the installation file#####
 
     class { 'dynatraceoneagent':
         download_link => 'puppet:///software/dynatraceoneagent/common/Dynatrace-OneAgent-Linux-1.167.176.sh',
