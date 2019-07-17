@@ -7,7 +7,7 @@ pipeline {
                 sh ''' 
                 #!/bin/bash
                 source ~/.profile
-                source $(rvm 2.4.4 do rvm env --path)
+                source $(rvm 2.4.6 do rvm env --path)
                 proxyon
                 bundle install --path=.bundle/gems/
                 proxyoff
@@ -20,7 +20,7 @@ pipeline {
                 sh ''' 
                 #!/bin/bash
                 source ~/.profile
-                source $(rvm 2.4.4 do rvm env --path)
+                source $(rvm 2.4.6 do rvm env --path)
                 bundle exec puppet parser validate manifests/
                 '''
             }
@@ -31,7 +31,7 @@ pipeline {
                 sh '''
                 #!/bin/bash
                 source ~/.profile
-                source $(rvm 2.4.4 do rvm env --path)
+                source $(rvm 2.4.6 do rvm env --path)
                 bundle exec puppet-lint --no-autoloader_layout-check manifests/*.pp
                 '''
             }
@@ -55,7 +55,7 @@ pipeline {
                         script: '''\
                             #!/bin/bash \
                             source ~/.profile \
-                            source $(rvm 2.4.4 do rvm env --path) \
+                            source $(rvm 2.4.6 do rvm env --path) \
                             proxyon \
                             bundle exec rake spec \
                             proxyoff \
