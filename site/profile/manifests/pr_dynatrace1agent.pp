@@ -30,7 +30,7 @@ class profile::pr_dynatrace1agent (
   # Configure sudo rules for dynatrace
   sudo::conf { 'puppet_dynatrace':
     priority => 10,
-    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent',
+    content  => 'infra ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent, /bin/rm -rf /var/lib/dynatrace/oneagent/agent/config',
     }
 
   if $facts['kernel'] == 'Linux' {
