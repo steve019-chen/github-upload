@@ -47,7 +47,7 @@ class { 'role::rl_bcg_shannon': }
 
 # Dynatrace agent SDE test
 node ln99670 {
-class { 'role::rl_dynatrace': }
+class { 'role::rl_dynatrace_st': }
 }
 
 
