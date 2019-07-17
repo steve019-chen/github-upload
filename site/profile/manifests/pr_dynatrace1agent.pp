@@ -55,7 +55,7 @@ class profile::pr_dynatrace1agent (
 
     # Calling the module and passing a download location and source for the installation file#
     $installer_location = "puppet:///software/dynatraceoneagent/${enviroment}/Dynatrace-OneAgent-Linux-1.171.226.sh"
-    notify {${installer_location}:}
+    notify {$installer_location:}
     class { 'dynatraceoneagent':
         download_link => $installer_location,
         #download_link => 'http://jty656.dynatrace-managed.com/e/56f21ab8-4f4b-4a14-9afb-bd493a8884ac/api/v1/deployment/installer/agent/unix/default/latest?Api-Token=ykJK2lC6S8eWmZwETfVYn&arch=x86&flavor=default',
