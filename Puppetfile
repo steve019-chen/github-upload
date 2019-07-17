@@ -67,13 +67,15 @@ mod 'puppet-gpg_key',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-gpg_key.git',
   :tag => '0.1.0'
 
-#Forge dirty modules##
+#Forge dirty modules###
 #mod 'dynatrace-dynatraceoneagent',
 # :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
 #  :tag => '0.4.1d'
 mod 'dynatrace-dynatraceoneagent',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
-  :href => 'updateinstaller'
+#  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
+#  :href => 'updateinstaller'
+   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
+   :tag => '0.5.1d'
 
 #TELUS custom modules
 mod 'puppet_agent_config',
