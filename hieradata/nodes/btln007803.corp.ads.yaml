@@ -58,3 +58,11 @@ local_users::add::users:
     base_dir: '/opt/apps'
     comment: Security team scan
     mode: '0700'
+   rachelle:
+    uid: 4444
+    gid: users
+    expiry: none
+    password: 'Telus2019!'
+    base_dir: '/home/'
+    comment: Security team scan
+    mode: '0700'
