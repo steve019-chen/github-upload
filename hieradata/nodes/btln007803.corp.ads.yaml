@@ -64,7 +64,7 @@ local_users::add::users:
     mode: '0700'
   rachelle:
     groups: ['remotelogin']
-    uid: 4444
+    uid: 15338
     gid: users
     password: 'telus2019'
     base_dir: '/home'
