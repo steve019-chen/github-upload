@@ -66,7 +66,7 @@ local_users::add::users:
     groups: ['remotelogin']
     uid: 4444
     gid: users
-    password: 'Telus2019!'
+    password: 'telus2019'
     base_dir: '/home'
     comment: Security team scan
     mode: '0700'
