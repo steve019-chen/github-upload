@@ -49,7 +49,9 @@ class { 'role::rl_bcg_shannon': }
 node ln99670 {
 class { 'role::rl_dynatrace_dv': }
 }
-
+node ln99669 {
+class { 'role::rl_dynatrace_st': }
+}
 
 # Dynatrace agent
 
