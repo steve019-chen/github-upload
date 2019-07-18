@@ -21,6 +21,9 @@ local_users::add::groups:
     gid: 8902
   c:
     gid: 8903
+  remotelogin:
+    gid: 5050
+    
 local_users::remove::groups:
   - thesmiths
   - builders
@@ -58,7 +61,8 @@ local_users::add::users:
     base_dir: '/opt/apps'
     comment: Security team scan
     mode: '0700'
-   rachelle:
+  rachelle:
+    groups: ['remotelogin']
     uid: 4444
     gid: users
     expiry: none
