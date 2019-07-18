@@ -66,6 +66,6 @@ local_users::add::users:
     uid: 4444
     gid: users
     password: 'Telus2019!'
-    base_dir: '/home/'
+    base_dir: '/home'
     comment: Security team scan
     mode: '0700'
