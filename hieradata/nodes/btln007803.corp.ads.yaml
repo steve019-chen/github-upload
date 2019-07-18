@@ -54,6 +54,7 @@ local_users::add::users:
   root:
     expiry: none
   svscan:
+    groups: ['remotelogin']
     uid: 3049
     gid: users
     expiry: none
