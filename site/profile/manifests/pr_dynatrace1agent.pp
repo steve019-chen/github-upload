@@ -58,6 +58,10 @@ class profile::pr_dynatrace1agent (
       minute  => 0,
       user    => root,
     }
+    # Changing file mode upon request of SA's to that the .sh file is not editable
+    file { '/opt/dynatrace/oneagent/agent':
+      mode  => 'g-w',
+    }
 
     class {'sudo':
     purge               => false,

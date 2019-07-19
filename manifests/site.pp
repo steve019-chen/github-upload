@@ -75,17 +75,6 @@ btlp007107,btlp007108,btlp007109,btlp007110,btlp007111,btlp007112,btlp007113,btl
 class { 'role::rl_bcg_shannon': }
 }
 
-<<<<<<< HEAD
-# Dynatrace agent SDE test
-node ln99670 {
-class { 'role::rl_dynatrace_dv': }
-}
-node ln99669 {
-class { 'role::rl_dynatrace_st': }
-}
-
-=======
->>>>>>> b79f7adaf564e93841bd845c2b1cc235e99f8f6d
 # Dynatrace agent
 
 node btln007523,btln007524,btln007717,btln007718,ln99773,ln99826, btln001649,btln001650,btln002025,btln002026,
