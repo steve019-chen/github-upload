@@ -21,6 +21,9 @@ local_users::add::groups:
     gid: 8902
   c:
     gid: 8903
+  remotelogin:
+    gid: 5050
+    
 local_users::remove::groups:
   - thesmiths
   - builders
@@ -51,10 +54,18 @@ local_users::add::users:
   root:
     expiry: none
   svscan:
+    groups: ['remotelogin']
     uid: 3049
     gid: users
     expiry: none
     password: 'Telus2019!'
     base_dir: '/opt/apps'
+    comment: Security team scan
+    mode: '0700'
+  rachelle:
+    groups: ['remotelogin']
+    uid: 15338
+    gid: users
+    base_dir: '/home'
     comment: Security team scan
     mode: '0700'
