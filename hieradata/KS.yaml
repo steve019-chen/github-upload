@@ -1961,6 +1961,10 @@ PROFILE::consilium_bt:
  mail_relay:        onmsg.tsl.telus.com
 
 
+# this profile for building oMgmt-only servers
+#[PROFILE] consilium_sidc_lab_oMgmt
+#  include:             consilium_sidc_lab
+
 
 PROFILE::consilium_sidc_lab_be-nt:
  context:      PROFILE
@@ -2060,6 +2064,30 @@ PROFILE::consilium_sidc_lab_tools:
  dns_search:        corptools.sidclab corp.sidclab
  mail_relay:
  puppet_server:        lbbtlp810000.corp.sidclab
+
+# this profile for building oMgmt-only servers
+
+PROFILE::consilium_sidc_lab_oMgmt:
+ context:      PROFILE
+ included:              consilium_sidc_lab
+ dns_servers:       10.128.249.11 10.128.249.12
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server
+ ntp_servers:       10.128.249.1
+ ldap_server1:          lbtslp000058.corptools.sidclab
+ ldap_server2:
+ satellite_server:  
+ satellite_key:     
+ spacewalk_server:
+ spacewalk_key: 
+ domain:            corp.sidclab
+ bkp_domain:
+ dns_search:        corp.sidclab corptools.sidclab
+ mail_relay:
+ puppet_server: lbbtlp810000.corp.sidclab
 
 # this profile for building oMgmt-only servers
 #[PROFILE] consilium_sidc_lab_oMgmt
@@ -2954,6 +2982,16 @@ NETWORK::75-153-159-0:
  depot_server:  tslp000058/75.153.159.18
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1646 - "BMC Monitoring" Treat same as tools
+
+NETWORK::75-156-196-128:
+ context:      NETWORK
+ scope:         kidc_ts_pub 
+ vlan:          1646
+ netmask:       255.255.255.192
+ router:        75.156.196.129
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 1555:1558 - TS oMgmt (for OS)
 
 NETWORK::75-153-164-0:
@@ -3157,6 +3195,16 @@ NETWORK::100-70-33-224:
  vlan:          1598
  netmask:       255.255.255.240
  router:        100.70.33.225
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1589 - "LCD GOnet"
+
+NETWORK::100-70-23-176:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1589
+ netmask:       255.255.255.248
+ router:        100.70.23.177
 
 #-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 1608 - "Nokia HAL OAM prod net"
@@ -6007,7 +6055,7 @@ NETWORK::192-168-96-128:
 NETWORK::192-168-97-0:
  context:      FAKE_NETWORK
  scope:         consilium_bt_lab_pwan
- vlan:          97 
+ vlan:          97:2 
  netmask:       255.255.255.0
  mtu:           9000
  router:        192.168.97.20
@@ -6020,7 +6068,7 @@ NETWORK::192-168-97-0:
 NETWORK::192-168-98-0:
  context:      FAKE_NETWORK
  scope:         consilium_bt_lab_nas
- vlan:          98 
+ vlan:          3:98 
  netmask:       255.255.255.0
  test_ip:       192.168.98.20
  mtu:           9000
@@ -6177,6 +6225,16 @@ NETWORK::75-153-158-0:
  boot_server:   tslp000011/75.153.158.100
  media_server:  tslp000011/75.153.158.100
  depot_server:  tslp000011/75.153.158.100
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1646 - "BMC Monitoring" Treat same as tools
+
+NETWORK::75-156-196-192:
+ context:      NETWORK
+ scope:         qidc_ts_pub 
+ vlan:          1646
+ netmask:       255.255.255.192
+ router:        75.156.196.193
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 1555:1558 - "oMgmt"
