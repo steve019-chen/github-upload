@@ -10,24 +10,6 @@ node default {
 node btln007803, btln999923, btln007564
 {
   include profile::pr_svcscan
-
-  # Adding Sudo rules for docker and apache
-  # Do not change below 2 options, or original sudo file will get deleted
-
-
-class { 'sudo':
-  purge               => false,
-  config_file_replace => false,
-  }
-
-# Include rules in “content”
-
-sudo::conf { 'puppet_rachelle':
-  priority => 10,
-  content  => 'rachelle ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug',
-  require  => User['rachelle'],
-  }
-
 }
 
 # 20190528  - Patrol ROFS module Non-prod - change4 - CRQ50447
