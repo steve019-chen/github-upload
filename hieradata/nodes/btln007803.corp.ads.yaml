@@ -55,9 +55,9 @@ local_users::add::users:
     base_dir: '/opt/apps'
     comment: Security team scan
     mode: '0700'
-  rachelle:
+  test01:
     groups: ['remotelogin']
-    uid: 15338
+    uid: 22334
     gid: users
     base_dir: '/home'
     expiry: none
