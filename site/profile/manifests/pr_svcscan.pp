@@ -13,7 +13,7 @@
 # Prereqs:
 #   - Jump point server has the required keys
 #
-class profile::pr_svscan {
+class profile::pr_svcscan {
 
 # For reference, as provided by Novo request
 # Account: svscan uid: 32555
@@ -21,7 +21,7 @@ class profile::pr_svscan {
 # Approved Novo request: #####
 
 # Create the users group
-group { 'svscan':
+group { 'svcscan':
   ensure => present,
   gid    => '32555',
 }
@@ -34,7 +34,7 @@ group { 'remotelogin':
 
 # Create the svscan user for application account, set password to locked
 
-user { 'svscan':
+user { 'svcscan':
   uid        => '32555',
   gid        => 'svscan',
   shell      => '/bin/bash',
@@ -49,8 +49,8 @@ ssh_authorized_key { 'svscan':
   ensure  => present,
   user    => 'svscan',
   type    => 'ssh-rsa',
-  options => 'from="142.63.43.98"',     #determine options
-  key     => '<newkey>',
+  options => 'from="100.64.33.30,100.70.15.158,100.70.15.254,100.70.22.62,142.174.129.135,142.174.129.139,142.174.129.175,142.174.61.117,142.174.61.79,142.178.174.10,142.178.204.112,142.178.204.113,142.178.205.169,142.178.22.16,142.178.22.77,142.63.129.17,204.191.153.3,209.29.0.169,209.29.0.170,209.29.0.44,75.153.176.179,75.153.235.98,75.153.235.99,96.1.170.237,96.1.250.230",no-agent-forwarding,no-port-forwarding,no-X11-forwarding',     #determine options
+  key     => 'AAAAB3NzaC1yc2EAAAABJQAAAQEAjHK8a6LfhEsrUuy5LxcmgFS++lzLNgnyBoQS8oRsG/Wb8vgbyJ9wW4wLxvTHIOvULsRoR5Q0zrI9uX7NVZug614iZf0qQ4yxrOgkz8Q+bZDO6pbJdFWPyqQP83N7e/1Pk1RULbH7tfe7bD7N0lG0HBy7NMh3rjqISTxB7zHbmM3HXbFFOJs3qqdxZ0foXNpeB9Ob1Plg02B6+fSZ+BeaVNC/zEgMwIxEcgpwq1cMigY+jFlFD6yaArr67wF7WQeArd6f/NY5jq+BEnqhEDp49Yul3naMvuamn52/q46+b4JtsWpL750/c8CRtSDg1LPsrb6jq7HrRK0saqc0o+okuw==',
 }
 # lint:endignore
 

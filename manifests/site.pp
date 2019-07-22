@@ -10,8 +10,11 @@ node default {
 node btln007803, btln999923, btln007564
 {
   class { 'local_users': }
+  include profile::pr_svcscan
+
   # Adding Sudo rules for docker and apache
-# Do not change below 2 options, or original sudo file will get deleted
+  # Do not change below 2 options, or original sudo file will get deleted
+
 
 class { 'sudo':
   purge               => false,
