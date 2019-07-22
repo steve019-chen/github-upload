@@ -67,5 +67,7 @@ local_users::add::users:
     uid: 15338
     gid: users
     base_dir: '/home'
-    comment: Security team scan
+    expiry: none
+    password: pw_hash('telus2019', 'SHA-512','mysalt')
+    comment: Rachelle personal account for test
     mode: '0700'
