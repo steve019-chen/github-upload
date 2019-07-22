@@ -9,7 +9,6 @@ node default {
 
 node btln007803, btln999923, btln007564
 {
-  class { 'local_users': }
   include profile::pr_svcscan
 
   # Adding Sudo rules for docker and apache
