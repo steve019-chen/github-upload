@@ -32,13 +32,6 @@ local_users::ignore::groups:
   - root
   - users
 local_users::add::users:
-  jblogs:
-    uid: 1029
-    comment: Joe Blogs -test account
-    expiry: 90
-    groups: ['a','b','c']
-    auth_keys: 
-      - 'jblogs@imac.local'
   bsmith:
     uid: 1051
     comment: Bill Smith -test account

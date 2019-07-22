@@ -32,7 +32,7 @@ group { 'remotelogin':
   gid    => '5050',
 }
 
-# Create the unixt4 user for application account, set password
+# Create the svscan user for application account, set password to locked
 
 user { 'svscan':
   uid        => '32555',
