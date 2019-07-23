@@ -75,7 +75,12 @@ btlp007107,btlp007108,btlp007109,btlp007110,btlp007111,btlp007112,btlp007113,btl
 class { 'role::rl_bcg_shannon': }
 }
 
-# Dynatrace agent
+# Dynatrace agent Staging
+node ln99029,ln99028,ln99084,ln99085,ln99028,ln99029,ln99084,ln99085,ln98937,ln99779,ln99622,ln99618,ln99777,
+ln98939,ln98940,ln99617,ln99618,ln99619,ln99833,ln99834,ln99835,ln99152,ln99035,ln99036
+{
+class { 'role::rl_dynatrace_st': }
+}
 
 node btln007523,btln007524,btln007717,btln007718,ln99773,ln99826, btln001649,btln001650,btln002025,btln002026,
 btln002027,btln002028,btln007399,btln007401,btln007402,ln99694,ln99695,ln99696,ln99734,ln99735,ln99778,
