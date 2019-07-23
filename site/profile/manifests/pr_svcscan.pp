@@ -26,23 +26,45 @@ group { 'svcscan':
   gid    => '32555',
 }
 
-# Create the remotelogin group
-group { 'remotelogin':
-  ensure => present,
-  gid    => '5050',
+# A few servers in the Linux enviornment do not have remotelogin group
+# and have winbind enabled. The following condition ensures we do not assign
+# remotelogin group to the user in this case
+
+if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_group_sss'] == '0' ) ) 
+{
+
+  # Create the svcscan user for application account, set password to locked
+  # Do not include in remotelogin group
+
+  user { 'svcscan':
+    uid      => '32555',
+    gid      => 'svcscan',
+    shell    => '/bin/bash',
+    password => '*LK*',
+    require  => Group['svcscan'],
+  }
+}
+else {
+
+  # Create the remotelogin group
+  group { 'remotelogin':
+    ensure => present,
+    gid    => '5050',
+  }
+
+  # Create the svcscan user for application account with remotelogin group
+  # set password to locked
+  user { 'svcscan':
+    uid      => '32555',
+    gid      => 'svcscan',
+    shell    => '/bin/bash',
+    groups   => 'remotelogin',
+    password => '*LK*',
+    require  => Group['svcscan','remotelogin'],
+  }
 }
 
-# Create the svcscan user for application account, set password to locked
-
-user { 'svcscan':
-  uid      => '32555',
-  gid      => 'svcscan',
-  shell    => '/bin/bash',
-  groups   => 'remotelogin',
-  password => '*LK*',
-  require  => Group['svcscan','remotelogin'],
-}
-
+# Create home directory for user and set permissions
 file { '/home/svcscan':
   ensure  => 'directory',
   owner   => 'svcscan',
