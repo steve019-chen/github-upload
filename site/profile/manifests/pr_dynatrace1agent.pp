@@ -15,9 +15,12 @@
 #   - Dynatrace One agent Puppet Module must be available in Bitbucket 
 #   - Installer file should be placed on the regional masters /software/dynatraceoneagent/common directory
 #
+###
 #
-class profile::pr_dynatrace1agent {
-
+class profile::pr_dynatrace1agent (
+  Enum['common','dv-env','st-env','pr-env'] $environment = 'common',
+)
+  {
   if $facts['kernel'] == 'Linux' {
     $path = '/opt/dynatrace/oneagent/log'
     $days_to_keep = 14
@@ -38,10 +41,9 @@ class profile::pr_dynatrace1agent {
       managehome => true,
     }
 
-    # Calling the module and passing a download location and source for the installation file##
-
+    # Calling the module and passing a download location and source for the installation file#
     class { 'dynatraceoneagent':
-        download_link => 'puppet:///software/dynatraceoneagent/common/Dynatrace-OneAgent-Linux-1.167.176.sh',
+        download_link => "puppet:///software/dynatraceoneagent/${environment}/Dynatrace-OneAgent-Linux-1.171.226.sh",
         download_dir  => '/tmp',
         user          => 'dynatrace',
         require       => User['dynatrace'],
@@ -55,6 +57,21 @@ class profile::pr_dynatrace1agent {
       hour    => 10,
       minute  => 0,
       user    => root,
+    }
+    # Changing file mode upon request of SA's to that the .sh file is not editable
+    file { '/opt/dynatrace/oneagent/agent':
+      mode  => 'g-w',
+    }
+
+    class {'sudo':
+    purge               => false,
+    config_file_replace => false,
+    }
+
+  # Configure sudo rules for dynatrace
+  sudo::conf { 'puppet_dynatrace':
+    priority => 10,
+    content  => 'dynatrace ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent, /bin/rm -rf /var/lib/dynatrace/oneagent/agent/config',
     }
     # lint:ignore:140chars
     # lint:endignore
