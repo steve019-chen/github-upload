@@ -110,8 +110,8 @@ mod 'dylanratcliffe-windows_disk_facts',
   :tag => 'v0.2.6d'
 
 mod 'dynatrace-dynatraceoneagent',
-   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
-   :tag => '0.5.1d'
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
+  :tag => '0.5.1d'
 
 #TELUS custom modules
 mod 'puppet_agent_config',
