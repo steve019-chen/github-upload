@@ -13,6 +13,9 @@
 # Prereqs:
 #   - Jump point server has the required keys
 #
+
+# lint:ignore:140chars
+
 class profile::pr_unixadm {
 
 # For reference, as provided by Novo request
@@ -21,30 +24,52 @@ class profile::pr_unixadm {
 # Approved Novo request: 247409
 
 # Create the users group
+
 group { 'unixt4':
   ensure => present,
   gid    => '53535',
 }
 
-# Create the remotelogin group
-group { 'remotelogin':
-  ensure => present,
-  gid    => '5050',
+if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_group_sss'] == '0' ) ) {
+
+  # Create the unixt4 user for application account, set password
+
+  user { 'unixt4':
+    uid        => '53535',
+    gid        => 'unixt4',
+    shell      => '/bin/bash',
+    password   => '*LK*',
+    managehome => true,
+    require    => Group['unixt4'],
+  }
+
 }
 
-# Create the unixt4 user for application account, set password
+else {
 
-user { 'unixt4':
-  uid        => '53535',
-  gid        => 'unixt4',
-  shell      => '/bin/bash',
-  groups     => 'remotelogin',
-  password   => '*LK*',
-  managehome => true,
-  require    => Group['unixt4','remotelogin'],
+  # Create the remotelogin group
+
+  group { 'remotelogin':
+    ensure => present,
+    gid    => '5050',
+  }
+
+  # Create the unixt4 user for application account, set password
+
+  user { 'unixt4':
+    uid        => '53535',
+    gid        => 'unixt4',
+    shell      => '/bin/bash',
+    groups     => 'remotelogin',
+    password   => '*LK*',
+    managehome => true,
+    require    => Group['unixt4','remotelogin'],
+  }
+
 }
-# lint:ignore:140chars
-# Create ssh key with the public key and limit connection from ln99052
+
+# Add the public key to authorized keys and restrict connection to only coming from ln99052
+
 ssh_authorized_key { 'unixt4':
   ensure  => present,
   user    => 'unixt4',
@@ -52,6 +77,7 @@ ssh_authorized_key { 'unixt4':
   options => 'from="142.63.43.98"',
   key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA0Ou2HuF2wwGuLR3kZtco9K6LdIsFpoaLhNlIveLqoqnuYsCIwDIjwNawgep35B/koQyika6zcVY7SNsj5rSOzfpsoA6NvTxcNfdfOakCbBQCLQfza3P1EBuQutVagcYAuukyM14LRTACDKBSnV8b46AvW5DE9c1po6iIAq22dsNGIHcNn17CnXI9WA9fEy1S7+ioGPPjwOz+UkXzxaOr9InwO9/kxLBcBLfGfMIvYW8TPPXTGw8+VNwJg9g5ZodaMR6JKGccOxL+mj4EWTOc56s/diRarbkGky78I1eg7JyQWtDKNvAz7cQ1eANUdDa7LOSHDgfR8n5uDD4wp+tBqw==',
 }
+
 # lint:endignore
 
 }
