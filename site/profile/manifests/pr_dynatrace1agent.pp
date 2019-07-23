@@ -18,7 +18,7 @@
 ###
 #
 class profile::pr_dynatrace1agent (
-  Enum['common','dv-env','st-env','pr-env'] $environment = 'st-env',
+  Enum['common','dv-env','st-env','pr-env'] $environment = 'common',
 )
   {
   if $facts['kernel'] == 'Linux' {
