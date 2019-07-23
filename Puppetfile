@@ -138,5 +138,3 @@ mod 'patrol_upgrade',
 mod 'patrol_rofs',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_rofs.git',
   :tag => '1.0.1'
-
-mod 'qtechnologies-local_users', '1.4.1'
