@@ -7,7 +7,7 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-node btln007803, btln999923, btln007564
+node btln007803, btln999923, btln007564,btln007802
 {
   include profile::pr_svcscan
 }
