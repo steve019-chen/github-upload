@@ -50,11 +50,12 @@ class profile::pr_diversio {
     purge               => false,
     config_file_replace => false,
     }
-
+# lint:ignore:140chars
   sudo::conf { 'puppet_nginx':
     priority => 10,
     content  => 'infra ALL=NOPASSWD : /sbin/service nginx reload, /sbin/service nginx configtest, /sbin/service nginx start, /sbin/service nginx stop, /sbin/service nginx restart, /sbin/service nginx status, /usr/sbin/service nginx reload, /usr/sbin/service nginx configtest, /usr/sbin/service nginx start, /usr/sbin/service nginx stop, /usr/sbin/service nginx restart, /usr/sbin/service nginx status, /usr/sbin/nginx -t, /sbin/iptables -t nat -L -v, /usr/sbin/iptables -t nat -L -v',
   }
+# lint:endignore
 
   # Create NGINX log directories
   $nginx_log_dirs = [ '/work/infra/nginx',
