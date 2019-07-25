@@ -1,13 +1,13 @@
-# Class: Profile pr_unixadm
+# Class: Profile pr_svcscan
 #
-# This Profile is in place for the national Unix team to have an account 
-# that they can use to connect to all linux machines via an ssh key setup
-# and limited to a jump point box
+# This Profile is in place for the Security team to deploy an account 
+# that they can use to connect to all linux machines via an ssh key 
+# for doing vulnerability scans
 # Parameters: 
 #   - None
 #
 # Actions:
-#   - Creates 2 groups : #### and remotelogin
+#   - Creates 2 groups : svcscan and remotelogin
 #   - Create 1 user : svcscan with SSH access only
 # 
 # Prereqs:
@@ -30,7 +30,7 @@ group { 'svcscan':
 # and have winbind enabled. The following condition ensures we do not assign
 # remotelogin group to the user in this case
 
-if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_group_sss'] == '0' ) ) 
+if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_group_sss'] == '0' ) )
 {
 
   # Create the svcscan user for application account, set password to locked
@@ -39,7 +39,6 @@ if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_grou
   user { 'svcscan':
     uid      => '32555',
     gid      => 'svcscan',
-    shell    => '/bin/bash',
     password => '*LK*',
     require  => Group['svcscan'],
   }
@@ -57,7 +56,6 @@ else {
   user { 'svcscan':
     uid      => '32555',
     gid      => 'svcscan',
-    shell    => '/bin/bash',
     groups   => 'remotelogin',
     password => '*LK*',
     require  => Group['svcscan','remotelogin'],
