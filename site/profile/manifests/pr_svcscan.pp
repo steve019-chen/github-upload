@@ -68,7 +68,7 @@ else {
       ensure             => present,
       path               => '/tmp/accesstest',   # '/etc/security/access.conf',
       line               => '+:remotelogin:ALL',
-      match              => '(\+:\(remotelogin\):ALL)',
+      match              => '(remotelogin)',   #'(\+:\(remotelogin\):ALL)',
       append_on_no_match => false,
       replace            => true,
       require            => Group['svcscan','remotelogin'],
