@@ -32,7 +32,7 @@ notify{'Very first notify':}
 
 if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_group_sss'] == '0' ) )
 {
-notify{'inside First...should not be showing':}
+
   # Create the svcscan user for application account, set password to locked
   # Do not include in remotelogin group
 
@@ -69,8 +69,8 @@ else {
     file_line { '/tmp/accesstest':
       ensure             => present,
       path               => '/tmp/accesstest',   # '/etc/security/access.conf',
-      line               => 'CHANGED',           # '+:remotelogin:ALL',
-      match              => '#  e.g. usermod -G remotelogin accountname',     # '(\+:\(remotelogin\):ALL)',
+      line               => '+:remotelogin:ALL',
+      match              => '(\+:\(remotelogin\):ALL)',
       append_on_no_match => true,
       replace            => true,
     }
