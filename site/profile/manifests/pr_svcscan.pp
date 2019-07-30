@@ -66,10 +66,11 @@ else {
   {
     file_line { 'Append a line to /tmp/accesstest':
       path               => '/tmp/accesstest',   # '/etc/security/access.conf',
-      line               => 'remotelogin',
+      line               => '+:remotelogin:ALL',
       match              => '(\+:\(remotelogin\):ALL)',
       append_on_no_match => false,
       replace            => true,
+      require            => Group['svcscan','remotelogin'],
     }
   }
 }
