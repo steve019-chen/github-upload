@@ -65,6 +65,7 @@ else {
   if ($facts['os.release.major'] == '5' and $facts['telus_user_group_sss'] == '1')
   {
     file_line { 'Append a line to /tmp/accesstest':
+      ensure             => present,
       path               => '/tmp/accesstest',   # '/etc/security/access.conf',
       line               => '+:remotelogin:ALL',
       match              => '(\+:\(remotelogin\):ALL)',
