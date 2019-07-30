@@ -65,14 +65,13 @@ else {
   if ( ($facts['os.release.major'] == '5') and ($facts['telus_user_group_sss'] == '1'))
   {
     notify{'inside the if condition':}
-    file_line { 'Append a line to /tmp/accesstest':
+    file_line { '/tmp/accesstest':
       ensure             => present,
       path               => '/tmp/accesstest',   # '/etc/security/access.conf',
-      line               => '+:remotelogin:ALL',
-      match              => '/remotelogin/',   #'(\+:\(remotelogin\):ALL)',
+      line               => 'CHANGED',           # '+:remotelogin:ALL',
+      match              => '#  e.g. usermod -G remotelogin accountname',     # '(\+:\(remotelogin\):ALL)',
       append_on_no_match => true,
       replace            => true,
-      require            => Group['svcscan','remotelogin'],
     }
   }
 }
