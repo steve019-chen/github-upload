@@ -25,14 +25,14 @@ group { 'svcscan':
   ensure => present,
   gid    => '32555',
 }
-
+notify{'Very first notify':}
 # A few servers in the Linux enviornment do not have remotelogin group
 # and have winbind enabled. The following condition ensures we do not assign
 # remotelogin group to the user in this case
 
 if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_group_sss'] == '0' ) )
 {
-
+notify{'inside First...should not be showing':}
   # Create the svcscan user for application account, set password to locked
   # Do not include in remotelogin group
 
@@ -44,6 +44,7 @@ if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_grou
   }
 }
 else {
+  notify{'inside else...should show':}
   # Create the remotelogin group
   group { 'remotelogin':
     ensure => present,

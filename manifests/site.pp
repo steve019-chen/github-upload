@@ -7,7 +7,9 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-node btln007803, btln999923, btln007564,btln007802,btln007801,btln007800,ln99236
+# node btln007803, btln999923, btln007564,btln007802,btln007801,btln007800,ln99236
+# Limiting to Rhel 5 machine
+node btln007803
 {
   include profile::pr_svcscan
 }
