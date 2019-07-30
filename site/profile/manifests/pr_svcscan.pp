@@ -44,7 +44,6 @@ if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_grou
   }
 }
 else {
-
   # Create the remotelogin group
   group { 'remotelogin':
     ensure => present,
@@ -59,6 +58,19 @@ else {
     groups   => 'remotelogin',
     password => '*LK*',
     require  => Group['svcscan','remotelogin'],
+  }
+  # Due to a bug in Rhel5 and OL5 need to remove the brackets that are 
+  # put in access.conf
+  # https://bugzilla.redhat.com/show_bug.cgi?id=1359303
+  if (facts.os.release.major = '5' and facts.telus_user_group_sss = '1')
+  {
+    file_line { 'Append a line to /tmp/accesstest':
+      path               => '/tmp/accesstest',   # '/etc/security/access.conf',
+      line               => 'remotelogin',
+      match              => '(\+:\(remotelogin\):ALL)',
+      append_on_no_match => false,
+      replace            => true,
+    }
   }
 }
 
