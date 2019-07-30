@@ -64,6 +64,7 @@ else {
   # https://bugzilla.redhat.com/show_bug.cgi?id=1359303
   if ($facts['os.release.major'] == '5' and $facts['telus_user_group_sss'] == '1')
   {
+    notify{'inside the if condition':}
     file_line { 'Append a line to /tmp/accesstest':
       ensure             => present,
       path               => '/tmp/accesstest',   # '/etc/security/access.conf',
