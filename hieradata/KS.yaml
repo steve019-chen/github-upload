@@ -3247,6 +3247,16 @@ NETWORK::100-125-165-0:
  router:        100.125.165.1
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1628 - "Zero Touch Deployment" 
+
+NETWORK::100-125-169-160:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1628
+ netmask:       255.255.255.240
+ router:        100.125.169.161
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 3002:3003 - "TS Storage (NAS)"
 
 NETWORK::100-69-196-0:
@@ -6353,7 +6363,7 @@ NETWORK::100-64-45-0:
  router:       100.64.45.1
 
 #-----------------------------------------------------------------------------#
-# QIDC TS - VLAN 1550 - "TS Presentation"
+# QIDC TS - VLAN 1550 - "TS Presentation" 1st of 2 vlans using 1550. Strange?
 
 NETWORK::75-153-180-0:
  context:      NETWORK
@@ -6361,6 +6371,16 @@ NETWORK::75-153-180-0:
  scope:         qidc_ts_pub
  netmask:      255.255.255.0
  router:       75.153.180.1
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1550 - "OSS Presentation" 2nd of 2 vlans using 1550. Strange?
+
+NETWORK::100-125-162-224:
+ context:      NETWORK
+ vlan:          1550
+ scope:         qidc_ts_pub
+ netmask:      255.255.255.240
+ router:       100.125.162.225
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 1570 - "TS Database"
@@ -6464,6 +6484,16 @@ NETWORK::100-125-167-216:
  vlan:          1652
  netmask:       255.255.255.248
  router:        100.125.167.217
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1653 - "Zero Touch Deployment" 
+
+NETWORK::100-125-169-176:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1652
+ netmask:       255.255.255.240
+ router:        100.125.169.177
 
 #-----------------------------------------------------------------------------#
 # this vlan (1600) has muliple community vlans (including 1607)
