@@ -24,10 +24,6 @@ mod 'puppetlabs-inifile',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-inifile.git',
   :tag => '2.5.0'
 
-mod 'puppetlabs-postgresql',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-postgresql.git',
-  :tag => 'v6.1.0'
-
 mod 'puppetlabs-lvm',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-lvm.git',
   :tag => 'v1.3.0'
@@ -119,10 +115,6 @@ mod 'dylanratcliffe-windows_disk_facts',
 mod 'dynatrace-dynatraceoneagent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
   :tag => '0.5.1d'
-
-  mod 'puppetlabs-puppetdb',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/puppetlabs-puppetdb.git',
-  :tag => '7.4.0d'
 
 # TELUS custom modules
 
