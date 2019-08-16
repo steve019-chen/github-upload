@@ -3794,6 +3794,30 @@ NETWORK::142-178-29-224:
  media_server:  lp99705 
  depot_server:  lp99705 
 
+# Toll8 CDE - VLAN 830 Avalon Presentation Service - added Aug 15/2019
+
+NETWORK::100-78-190-64:
+ context:      NETWORK
+ scope:         toll_bt_cde 
+ vlan:          830
+ netmask:       255.255.255.224
+ router:        100.78.190.65
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
+# Toll8 CDE - VLAN 840 Avalon Middleware Service - added Aug 15/2019
+
+NETWORK::100-78-190-96:
+ context:      NETWORK
+ scope:         toll_bt_cde 
+ vlan:          840
+ netmask:       255.255.255.224
+ router:        100.78.190.97
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
 #-------------------------------------------------------------------------PCI-#
 ## PCI network.  This network used to be serviced by boot server sedm3489
 ## Now it is not serviced by any boot server.  ISO booting is the only option.
@@ -3836,6 +3860,32 @@ NETWORK::100-78-191-32:
  depot_server:  none
 
 #-------------------------------------------------------------------------PCI-#
+# Toll8 CDE - VLAN 804 Avalon Presentation oMgmt - added Aug 15/2019
+
+NETWORK::100-78-190-224:
+ context:      NETWORK
+ scope:         toll_bt_cde_oMgmt
+ vlan:          804
+ netmask:       255.255.255.224
+ router:        100.78.190.225
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
+#-------------------------------------------------------------------------PCI-#
+# Toll8 CDE - VLAN 806 Avalon Middleware oMgmt - added Aug 15/2019
+
+NETWORK::100-78-191-0:
+ context:      NETWORK
+ scope:         toll_bt_cde_oMgmt
+ vlan:          806
+ netmask:       255.255.255.224
+ router:        100.78.191.1
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
+#-------------------------------------------------------------------------PCI-#
 # Toll8 CDE - VLAN 850:851 Avalon DB - added July 06/2018
 
 NETWORK::100-78-190-128:
@@ -3864,6 +3914,8 @@ NETWORK::100-78-191-160:
  vlan:          870:871
  netmask:       255.255.255.224
  test_ip:       100.78.191.164 
+
+#TTTTTTT
 
 #-Toll 8 Sun x86 blades-----------------------#
 # IP helper added Jun 1/2011
