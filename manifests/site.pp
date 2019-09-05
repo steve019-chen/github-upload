@@ -14,7 +14,7 @@ node default {
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 #20180831 - Project ASAPNOC
-node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
+node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038, btln008200
 {
 class { 'role::rl_asapnoc': }
 }
