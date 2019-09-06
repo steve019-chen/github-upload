@@ -11,7 +11,6 @@ Table of Contents
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc.go)
 
-
 # Where Did All The Previous Code Go?
 
 Initially, the control-repo project began as a 'starter' template for anyone who wanted to get started with r10k. As time passed, and Code Manager was integrated into Puppet Enterprise, the scope of this project grew to include opinionated Puppet profiles to set up many Puppet Enterprise components. As the code increased, so did the complexity of the control-repo project. To reduce that complexity, as well as continuing to meet the needs of individuals who would like a more minimal template, this repository was stripped of anything other than the bare minimum files necessary to get started with a functioning
