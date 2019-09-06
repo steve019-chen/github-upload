@@ -22,8 +22,5 @@ hierarchy:
   - name: "Kickstart data (YAML version)"
     path: "KS.yaml"
 
-  - name: "Data for each node in 1 file (YAML version)"
-    path: "nodebased.yaml"
-
   - name: "Common data (YAML version)"
     path: "common.yaml"
