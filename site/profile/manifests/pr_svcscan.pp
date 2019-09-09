@@ -23,7 +23,7 @@ class profile::pr_svcscan {
 if ( ($facts['os']['release']['major'] == '5') and ($facts['telus_user_group_sss'] == '1'))
 {
 # Please work with T3 to log into the machines and update /etc/security/access.conf to remove brackets
-# https://bugzilla.redhat.com/show_bug.cgi?id=1359303
+
 }
 else
 {
