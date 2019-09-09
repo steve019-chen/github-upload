@@ -44,7 +44,7 @@ class { 'docker':
   version                     => '18.09.3-3.el7',
   proxy                       => 'http://pac.tsl.telus.com:8080',
   log_opt                     => ['max-size="10m"', 'max-file="5"'],
-  require                     => Gpg_key[$key_name]
+  require                     => Gpg_key[$key_name],
 }
 
 # Install docker compose
