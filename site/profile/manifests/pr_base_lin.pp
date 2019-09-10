@@ -16,8 +16,8 @@ class profile::pr_base_lin {
   # Unixadm profile to all linux machines in 
   # Deployed to: BT KIDC Prod/Non prod, QIDC Prod/Non Prod, Toll, Laird and SDE master
   # Not deployed to: KIDC Tools, QIDC Tools
-  if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads','btln000197.corp.ads','btlp000336.corp.ads','lp99604.corp.ads','lp99605.corp.ads','btlp000966.corp.ads'] )
-  { include profile::pr_unixadm }
+  # if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads','btln000197.corp.ads','btlp000336.corp.ads','lp99604.corp.ads','lp99605.corp.ads','btlp000966.corp.ads'] )
+  # { include profile::pr_unixadm }
 
 
   # CRQ62577 : Tuesday Non Prod deployment
