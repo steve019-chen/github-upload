@@ -867,6 +867,7 @@ PROFILE::kidc_tools:
 
 PROFILE::kidc_ts_oMgmt:
  context:      PROFILE
+ primary_nic_type: mgmt 
  nas_scope:             kidc_ts_nas
  included:               kidc_ts
  puppet_server:         tslp000578.corptools.ads
@@ -894,7 +895,46 @@ PROFILE::kidc_ts_oMgmt:
 
 PROFILE::kidc_ts_iMgmt:
  context:      PROFILE
+ primary_nic_type: mgmt 
  nas_scope:             kidc_ts_nas
+ included:               kidc_ts
+ puppet_server:         tslp000578.corptools.ads
+ site:                  KIDC
+ env:                   TS
+ satellite_server:      tslp000253.corptools.ads
+ satellite_key:         1-ts-kidc
+ spacewalk_server:      tslp000744.corptools.ads
+ spacewalk_key:         1-ts-kidc
+ ldap_server1:          uldap-kidc.corptools.ads 
+ ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
+ tz_local:              Canada/Pacific
+ ntp:                   use_server
+ ntp_servers:           100.64.93.49 100.64.93.57
+ domain:                oss.ads
+ bkp_domain:            oss.ads
+ dns_servers:           100.64.93.50 100.64.93.58 
+ dns_search:            oss.ads
+ bkp_suffix:            -bkp
+ mail_relay:            bcmsg.tsl.telus.com
+ nbu_profile:           kidc_ts 
+
+# This profile was created for tslp001201 which is being used as an NFS server with no service network.
+#VVV
+
+PROFILE::kidc_ts_oMgmt_cde:
+ context:      PROFILE
+ primary_nic_type: mgmt 
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-tl-kidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
+ puppet_server:
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
+ dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
  included:               kidc_ts
  puppet_server:         tslp000578.corptools.ads
  site:                  KIDC
@@ -2204,8 +2244,10 @@ PROFILE::qidc_ts_oMgmt:
  mail_relay:            qcmsg.tsl.telus.com
  nbu_profile:           qidc_ts 
 
+#####[PROFILE] qidc_bt_prod_oMgmt
 # 
 #ZZZ
+
 
 
 PROFILE::qidc_tools_cde:
@@ -2954,6 +2996,21 @@ NETWORK::142-174-4-0:
 #-----------------------------------------------------------------------------#
 # KIDC TS NETWORKS
 #-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1815 - TS oMgmt CDE - This is a shared oMgmt/iMgmt network
+#VVV
+
+NETWORK::100-125-168-128:
+ context:      NETWORK
+ scope:         kidc_ts_oMgmt_cde
+ vlan:          1815
+ netmask:       255.255.255.192
+ router:        100.125.168.129
+ routes:        100.70.31.192/26,100.64.93.48/28
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
 
 #-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 1552 - "gOSS-Tools" 1 of 2
