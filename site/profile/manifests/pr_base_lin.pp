@@ -23,14 +23,14 @@ class profile::pr_base_lin {
   # CRQ62577 : Tuesday Non Prod deployment
   # Limiting deployment to : KIDC NP, SDE master
   # Not deploying to: QIDC Non Prod, QIDC Prod, QIDC Tools, KIDC Prod, KIDC Tools, Toll, Laird
-  if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads'] )
-  { include profile::pr_svcscan }
+  # if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads'] )
+  # { include profile::pr_svcscan }
 
-  # # CRQ62488 : Tuesday night Prod deployment
+  # # CRQ62488 : Monday night Prod deployment (20190916)
   # # Limiting deployment to : KIDC Prod, KIDC NP, Toll, Laird
   # # Not deploying to: QIDC Non Prod, QIDC Prod, QIDC Tools, KIDC Tools
-  # if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads','btlp000336.corp.ads','lp99604.corp.ads','lp99605.corp.ads'] )
-  # { include profile::pr_svcscan }
+  if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads','btlp000336.corp.ads','lp99604.corp.ads','lp99605.corp.ads'] )
+  { include profile::pr_svcscan }
 
 }
 # lint:endignore
