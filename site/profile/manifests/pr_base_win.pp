@@ -1,7 +1,14 @@
+# Class: pr_base_win
+#
+# This class is the base profile for TELUS Windows servers
+#
+# Actions:
+#   - None
+# 
+# Prereqs:
+#   - None
+#
+
 class profile::pr_base_win {
-notify {"Managed by Puppet! Hello World, this is Alex! ":}
-service { 'PatrolAgent':
-name => 'PatrolAgent',
-ensure => 'stopped',
-}
+
 }
