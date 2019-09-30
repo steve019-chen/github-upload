@@ -116,4 +116,9 @@ class { 'role::rl_dynatrace': }
 #   }
 # }
 
+node btwn004488
+{
+  include profile::pr_base_win_temp
+}
+
 # lint:endignore
