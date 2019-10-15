@@ -7,3 +7,4 @@ lvm::volume_groups:
       - /dev/sdc
     logical_volumes:
       app01lv: {fs_type: ext4, size: 500G, mountpath: /totalview}
+      app02lv: {fs_type: ext4, size: 50G, mountpath: /niceapps}
