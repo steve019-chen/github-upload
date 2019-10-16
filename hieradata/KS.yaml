@@ -3324,6 +3324,16 @@ NETWORK::100-125-169-224:
  router:        100.125.169.225
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1650 - "OSS - Dedicated scanner VLAN" # in tools cluster
+
+NETWORK::100-125-167-224:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1650
+ netmask:       255.255.255.240
+ router:        100.125.167.225
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 3002:3003 - "TS Storage (NAS)"
 
 NETWORK::100-69-196-0:
@@ -3373,7 +3383,7 @@ NETWORK::10-42-0-0:
  vlan:          2000:2001
  netmask:       255.255.0.0
  router:        10.42.255.254
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.128/26,75.154.144.0/23
  boot_server:   tslp000058/75.153.186.15
  media_server:  tslp000058/75.153.186.15
  depot_server:  tslp000058/75.153.186.15
@@ -6627,6 +6637,16 @@ NETWORK::100-125-169-176:
  router:        100.125.169.177
 
 #-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1650 - "OSS - Dedicated scanner VLAN" # in tools cluster
+
+NETWORK::100-125-167-240:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1650
+ netmask:       255.255.255.240
+ router:        100.125.167.241
+
+#-----------------------------------------------------------------------------#
 # this vlan (1600) has muliple community vlans (including 1607)
 # this vlan contains the stingray windows + Linux JPs, AD, + radius.
 # QIDC TS - VLAN 1600 - "PCI CDE managment" 
@@ -6755,7 +6775,7 @@ NETWORK::10-43-0-0:
  vlan:          2000:2001
  netmask:      255.255.0.0
  router:       10.43.255.254
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.192/26,75.154.144.0/23
  boot_server:  tslp000011/75.153.182.76
  media_server: tslp000011/75.153.182.76
  depot_server: tslp000011/75.153.182.76
