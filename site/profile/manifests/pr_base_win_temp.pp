@@ -33,8 +33,7 @@ class profile::pr_base_win_temp {
                               'RasMan',
                               'SCardSvr']
 
-  $common_enabled_services = ['PatrolAgent',
-                              'SNMP',
+  $common_enabled_services = ['SNMP',
                               'WinRM']
 
   # modify arrays for OS version specific services
