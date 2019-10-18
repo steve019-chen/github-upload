@@ -54,19 +54,20 @@ class profile::pr_base_win_temp {
 
   }
 
+  # Commenting out until facts are collected for the running services
   # disable services
 
-  service { $disabled_services:
-    ensure => 'stopped',
-    enable => false,
-  }
+  # service { $disabled_services:
+  #   ensure => 'stopped',
+  #   enable => false,
+  # }
 
-  # enable services
+  # # enable services
 
-  service { $enabled_services:
-    ensure => 'running',
-    enable => true,
-  }
+  # service { $enabled_services:
+  #   ensure => 'running',
+  #   enable => true,
+  # }
 
   # add domain local groups to local administrators group (if it exists) in corp.ads and corp.sidclab
 

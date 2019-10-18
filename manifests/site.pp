@@ -116,7 +116,8 @@ class { 'role::rl_dynatrace': }
 #   }
 # }
 
-node btwn004488
+node btwn004210,btwn004305,btwn004405,btwn004409,btwn004410,btwn004411,btwn004543,btwn004544,btwn004545,
+btwn001639,btwn001486,btwn001491,btwn001596,btwn004376,btwn004225,btwn004246,btwn004261,btwn004262,btwn004263
 {
   include profile::pr_base_win_temp
 }
