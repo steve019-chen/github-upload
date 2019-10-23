@@ -111,7 +111,7 @@ mod 'dylanratcliffe-windows_disk_facts',
 
 mod 'dynatrace-dynatraceoneagent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dynatrace-dynatraceoneagent.git',
-  :tag => '0.3.1d'
+  :tag => '0.5.1d'
 
 #TELUS custom modules
 mod 'puppet_agent_config',
@@ -120,7 +120,7 @@ mod 'puppet_agent_config',
 
 mod 'telus_lib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
-  :ref => 'windows_fact_debug'
+  :tag => '3.2.0'
 
 mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
@@ -130,10 +130,10 @@ mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
   :tag => '0.2.7'
   
-# Jun 6, 2019 : CRQ51921
+# Aug 6, 2019: detect sudoers corruption
 mod 'patrol_upgrade',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-  :tag => '1.5.0'
+  :tag => '1.5.1'
 
 mod 'patrol_rofs',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_rofs.git',
