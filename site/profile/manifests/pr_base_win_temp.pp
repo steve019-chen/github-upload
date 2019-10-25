@@ -91,7 +91,8 @@ class profile::pr_base_win_temp {
   #   - largest_free_extent > 1048576 (this means there is more than 1 MB of space on the disk that is not part of a volume)
   #   - model =~ /Virtual disk/ (this excludes CD drives and other removable devices)
   #   - is_offline != true (excludes offline disks)
-  #   - number_of_partitions > 1 (a basic disk with an existing volume will have at least 2 partitions)
+  #   - if the partition_style is "GPT", number_of_partitions > 1 (a basic disk with an existing volume will have at least 2 partitions)
+  #   - if the partition_style is "MBR", number_of_partitions > 0 (a basic disk with an existing volume will have at least 1 partitions)
   #
   # excludes physical machines
   # excludes windows versions below 2012 R2
@@ -112,15 +113,19 @@ class profile::pr_base_win_temp {
         if (($mydisk[1]['largest_free_extent'] > 1048576) and
           ($mydisk[1]['model'] =~ /Virtual disk/) and
           (!$mydisk[1]['is_offline']) and
-          ($mydisk[1]['number_of_partitions'] > 1)) {
+          ($mydisk[1]['number_of_partitions'] > 0)) {
 
-          $disk = $mydisk[0]
-          $partition = $mydisk[1]['number_of_partitions']
+          if ((($mydisk[1]['partition_style'] =~ /GPT/) and ($mydisk[1]['number_of_partitions'] > 1)) or
+            (($mydisk[1]['partition_style'] =~ /MBR/) and ($mydisk[1]['number_of_partitions'] > 0))) {
 
-          exec { "extend-volume ${disk}":
-            command  => "Get-Partition -disknumber ${disk} -partition ${partition} | Resize-Partition -Size (Get-PartitionSupportedSize -disknumber ${disk} -partition ${partition}).SizeMax",
-            onlyif   => "Get-Partition -disknumber ${disk} -partition ${partition} | Resize-Partition -Size (Get-PartitionSupportedSize -disknumber ${disk} -partition ${partition}).SizeMax -WhatIf",
-            provider => powershell,
+            $disk = $mydisk[0]
+            $partition = $mydisk[1]['number_of_partitions']
+
+            exec { "extend-volume ${disk}":
+              command  => "Get-Partition -disknumber ${disk} -partition ${partition} | Resize-Partition -Size (Get-PartitionSupportedSize -disknumber ${disk} -partition ${partition}).SizeMax",
+              onlyif   => "Get-Partition -disknumber ${disk} -partition ${partition} | Resize-Partition -Size (Get-PartitionSupportedSize -disknumber ${disk} -partition ${partition}).SizeMax -WhatIf",
+              provider => powershell,
+            }
           }
         }
       }
