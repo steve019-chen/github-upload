@@ -130,10 +130,10 @@ mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
   :tag => '0.2.7'
   
-# Aug 6, 2019: detect sudoers corruption
+# Oct 28 2019: Use latest x15 version of patrol installer
 mod 'patrol_upgrade',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-  :tag => '1.5.1'
+  :tag => '1.6.0'
 
 mod 'patrol_rofs',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_rofs.git',
