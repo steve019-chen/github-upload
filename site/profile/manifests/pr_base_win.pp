@@ -18,7 +18,17 @@
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 class profile::pr_base_win {
-# Empty class for inclusion in base. Will be replaced by temp
+
+# # Limiting deployment to : SDE, KIDC Non Prod
+# # Not deploying to: KIDC Prod, QIDC Prod, QIDC Tools, KIDC Tools, Toll, Laird
+if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads'] )
+  { include profile::pr_base_win_temp }
+
+# # Limiting deployment to : SDE, KIDC Non Prod, QIDC NP
+# # Not deploying to: KIDC Prod, QIDC Prod, QIDC Tools, KIDC Tools, Toll, Laird
+# if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btln000197.corp.ads'] )
+#   { include profile::pr_base_win_temp }
+
 }
 
 # lint:endignore
