@@ -867,6 +867,7 @@ PROFILE::kidc_tools:
 
 PROFILE::kidc_ts_oMgmt:
  context:      PROFILE
+ primary_nic_type: mgmt 
  nas_scope:             kidc_ts_nas
  included:               kidc_ts
  puppet_server:         tslp000578.corptools.ads
@@ -894,7 +895,46 @@ PROFILE::kidc_ts_oMgmt:
 
 PROFILE::kidc_ts_iMgmt:
  context:      PROFILE
+ primary_nic_type: mgmt 
  nas_scope:             kidc_ts_nas
+ included:               kidc_ts
+ puppet_server:         tslp000578.corptools.ads
+ site:                  KIDC
+ env:                   TS
+ satellite_server:      tslp000253.corptools.ads
+ satellite_key:         1-ts-kidc
+ spacewalk_server:      tslp000744.corptools.ads
+ spacewalk_key:         1-ts-kidc
+ ldap_server1:          uldap-kidc.corptools.ads 
+ ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
+ tz_local:              Canada/Pacific
+ ntp:                   use_server
+ ntp_servers:           100.64.93.49 100.64.93.57
+ domain:                oss.ads
+ bkp_domain:            oss.ads
+ dns_servers:           100.64.93.50 100.64.93.58 
+ dns_search:            oss.ads
+ bkp_suffix:            -bkp
+ mail_relay:            bcmsg.tsl.telus.com
+ nbu_profile:           kidc_ts 
+
+# This profile was created for tslp001201 which is being used as an NFS server with no service network.
+#VVV
+
+PROFILE::kidc_ts_oMgmt_cde:
+ context:      PROFILE
+ primary_nic_type: mgmt 
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-tl-kidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
+ puppet_server:
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
+ dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
  included:               kidc_ts
  puppet_server:         tslp000578.corptools.ads
  site:                  KIDC
@@ -1961,6 +2001,10 @@ PROFILE::consilium_bt:
  mail_relay:        onmsg.tsl.telus.com
 
 
+# this profile for building oMgmt-only servers
+#[PROFILE] consilium_sidc_lab_oMgmt
+#  include:             consilium_sidc_lab
+
 
 PROFILE::consilium_sidc_lab_be-nt:
  context:      PROFILE
@@ -2060,6 +2104,30 @@ PROFILE::consilium_sidc_lab_tools:
  dns_search:        corptools.sidclab corp.sidclab
  mail_relay:
  puppet_server:        lbbtlp810000.corp.sidclab
+
+# this profile for building oMgmt-only servers
+
+PROFILE::consilium_sidc_lab_oMgmt:
+ context:      PROFILE
+ included:              consilium_sidc_lab
+ dns_servers:       10.128.249.11 10.128.249.12
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server
+ ntp_servers:       10.128.249.1
+ ldap_server1:          lbtslp000058.corptools.sidclab
+ ldap_server2:
+ satellite_server:  
+ satellite_key:     
+ spacewalk_server:
+ spacewalk_key: 
+ domain:            corp.sidclab
+ bkp_domain:
+ dns_search:        corp.sidclab corptools.sidclab
+ mail_relay:
+ puppet_server: lbbtlp810000.corp.sidclab
 
 # this profile for building oMgmt-only servers
 #[PROFILE] consilium_sidc_lab_oMgmt
@@ -2176,8 +2244,10 @@ PROFILE::qidc_ts_oMgmt:
  mail_relay:            qcmsg.tsl.telus.com
  nbu_profile:           qidc_ts 
 
+#####[PROFILE] qidc_bt_prod_oMgmt
 # 
 #ZZZ
+
 
 
 PROFILE::qidc_tools_cde:
@@ -2928,6 +2998,21 @@ NETWORK::142-174-4-0:
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1815 - TS oMgmt CDE - This is a shared oMgmt/iMgmt network
+#VVV
+
+NETWORK::100-125-168-128:
+ context:      NETWORK
+ scope:         kidc_ts_oMgmt_cde
+ vlan:          1815
+ netmask:       255.255.255.192
+ router:        100.125.168.129
+ routes:        100.70.31.192/26,100.64.93.48/28
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 1552 - "gOSS-Tools" 1 of 2
 
 NETWORK::75-153-186-0:
@@ -2952,6 +3037,16 @@ NETWORK::75-153-159-0:
  boot_server:   tslp000058/75.153.159.18
  media_server:  tslp000058/75.153.159.18
  depot_server:  tslp000058/75.153.159.18
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1646 - "BMC Monitoring" Treat same as tools
+
+NETWORK::75-156-196-128:
+ context:      NETWORK
+ scope:         kidc_ts_pub 
+ vlan:          1646
+ netmask:       255.255.255.192
+ router:        75.156.196.129
 
 #-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 1555:1558 - TS oMgmt (for OS)
@@ -3159,6 +3254,16 @@ NETWORK::100-70-33-224:
  router:        100.70.33.225
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1589 - "LCD GOnet"
+
+NETWORK::100-70-23-176:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1589
+ netmask:       255.255.255.248
+ router:        100.70.23.177
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 1608 - "Nokia HAL OAM prod net"
 
 NETWORK::100-70-45-64:
@@ -3197,6 +3302,46 @@ NETWORK::100-125-165-0:
  vlan:          1591
  netmask:       255.255.255.0
  router:        100.125.165.1
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1628 - "Zero Touch Deployment" 
+
+NETWORK::100-125-169-160:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1628
+ netmask:       255.255.255.240
+ router:        100.125.169.161
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1648 - "OSS Mediation Zone Collector"
+
+NETWORK::100-125-169-224:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1648
+ netmask:       255.255.255.240
+ router:        100.125.169.225
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1650 - "OSS - Dedicated scanner VLAN" # in tools cluster
+
+NETWORK::100-125-167-224:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1650
+ netmask:       255.255.255.240
+ router:        100.125.167.225
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1610 - "monitoring and polling tools"
+
+NETWORK::100-125-170-32:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1610
+ netmask:       255.255.255.224
+ router:        100.125.170.33
 
 #-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 3002:3003 - "TS Storage (NAS)"
@@ -3248,7 +3393,7 @@ NETWORK::10-42-0-0:
  vlan:          2000:2001
  netmask:       255.255.0.0
  router:        10.42.255.254
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.128/26,75.154.144.0/23
  boot_server:   tslp000058/75.153.186.15
  media_server:  tslp000058/75.153.186.15
  depot_server:  tslp000058/75.153.186.15
@@ -3511,7 +3656,7 @@ NETWORK::216-7-220-0:
 
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 4)"
+# KIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 5)"
 
 NETWORK::216-7-222-128:
  context:      DMZ_NETWORK
@@ -3522,7 +3667,7 @@ NETWORK::216-7-222-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 4)"
+# KIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 5)"
 
 NETWORK::216-7-220-128:
  context:      DMZ_NETWORK
@@ -3533,7 +3678,7 @@ NETWORK::216-7-220-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 3 of 4) - Octopus-DMZ1 (TS network space)"
+# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 3 of 5) - Octopus-DMZ1 (TS network space)"
 
 NETWORK::100-70-41-128:
  context:      DMZ_NETWORK
@@ -3544,7 +3689,7 @@ NETWORK::100-70-41-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 4) - Octopus-DMZ2 (TS network space)"
+# KIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 5) - Octopus-DMZ2 (TS network space)"
 
 NETWORK::100-125-162-160:
  context:      DMZ_NETWORK
@@ -3553,6 +3698,17 @@ NETWORK::100-125-162-160:
  netmask:       255.255.255.240
  router:        100.125.162.161
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2403 - "BT prod BE-NT (back-end non-trusted DMZ 5 of 5) - Zero touch Deployment"
+
+NETWORK::100-125-169-240:
+ context:      DMZ_NETWORK
+ scope:         kidc_bt_prod_be-nt
+ vlan:          2403
+ netmask:       255.255.255.240
+ router:        100.125.169.241
+ routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.70.45.168/29,75.156.196.192/26
 
 #-----------------------------------------------------------------------------#
 # KIDC BT - VLAN 2002:2003 - "BT non-prod FE1 (front-end DMZ 1 of 1)"
@@ -3628,7 +3784,7 @@ NETWORK::100-69-64-0:
  vlan:          1016:1017
  site:          KIDC
  netmask:       255.255.224.0
- test_ip:       100.69.64.10
+ test_ip:       100.69.64.15 
  mtu:           9000
 
 #---------------------------------------------#
@@ -3725,6 +3881,30 @@ NETWORK::142-178-29-224:
  media_server:  lp99705 
  depot_server:  lp99705 
 
+# Toll8 CDE - VLAN 830 Avalon Presentation Service - added Aug 15/2019
+
+NETWORK::100-78-190-64:
+ context:      NETWORK
+ scope:         toll_bt_cde 
+ vlan:          830
+ netmask:       255.255.255.224
+ router:        100.78.190.65
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
+# Toll8 CDE - VLAN 840 Avalon Middleware Service - added Aug 15/2019
+
+NETWORK::100-78-190-96:
+ context:      NETWORK
+ scope:         toll_bt_cde 
+ vlan:          840
+ netmask:       255.255.255.224
+ router:        100.78.190.97
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
 #-------------------------------------------------------------------------PCI-#
 ## PCI network.  This network used to be serviced by boot server sedm3489
 ## Now it is not serviced by any boot server.  ISO booting is the only option.
@@ -3767,6 +3947,32 @@ NETWORK::100-78-191-32:
  depot_server:  none
 
 #-------------------------------------------------------------------------PCI-#
+# Toll8 CDE - VLAN 804 Avalon Presentation oMgmt - added Aug 15/2019
+
+NETWORK::100-78-190-224:
+ context:      NETWORK
+ scope:         toll_bt_cde_oMgmt
+ vlan:          804
+ netmask:       255.255.255.224
+ router:        100.78.190.225
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
+#-------------------------------------------------------------------------PCI-#
+# Toll8 CDE - VLAN 806 Avalon Middleware oMgmt - added Aug 15/2019
+
+NETWORK::100-78-191-0:
+ context:      NETWORK
+ scope:         toll_bt_cde_oMgmt
+ vlan:          806
+ netmask:       255.255.255.224
+ router:        100.78.191.1
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
+#-------------------------------------------------------------------------PCI-#
 # Toll8 CDE - VLAN 850:851 Avalon DB - added July 06/2018
 
 NETWORK::100-78-190-128:
@@ -3795,6 +4001,8 @@ NETWORK::100-78-191-160:
  vlan:          870:871
  netmask:       255.255.255.224
  test_ip:       100.78.191.164 
+
+#TTTTTTT
 
 #-Toll 8 Sun x86 blades-----------------------#
 # IP helper added Jun 1/2011
@@ -6007,7 +6215,7 @@ NETWORK::192-168-96-128:
 NETWORK::192-168-97-0:
  context:      FAKE_NETWORK
  scope:         consilium_bt_lab_pwan
- vlan:          97 
+ vlan:          97:2 
  netmask:       255.255.255.0
  mtu:           9000
  router:        192.168.97.20
@@ -6020,7 +6228,7 @@ NETWORK::192-168-97-0:
 NETWORK::192-168-98-0:
  context:      FAKE_NETWORK
  scope:         consilium_bt_lab_nas
- vlan:          98 
+ vlan:          3:98 
  netmask:       255.255.255.0
  test_ip:       192.168.98.20
  mtu:           9000
@@ -6179,6 +6387,16 @@ NETWORK::75-153-158-0:
  depot_server:  tslp000011/75.153.158.100
 
 #-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1646 - "BMC Monitoring" Treat same as tools
+
+NETWORK::75-156-196-192:
+ context:      NETWORK
+ scope:         qidc_ts_pub 
+ vlan:          1646
+ netmask:       255.255.255.192
+ router:        75.156.196.193
+
+#-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 1555:1558 - "oMgmt"
 
 NETWORK::75-153-160-0:
@@ -6235,6 +6453,16 @@ NETWORK::100-64-45-64:
  router:       100.64.45.65
 
 #-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1593 - "SIEM: Hadoop (Argus)"
+
+NETWORK::100-70-27-0:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1593
+ netmask:      255.255.255.0
+ router:       100.70.27.1
+
+#-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 1574 - "TESTSIEM"
 
 NETWORK::100-64-45-80:
@@ -6285,7 +6513,7 @@ NETWORK::100-64-45-0:
  router:       100.64.45.1
 
 #-----------------------------------------------------------------------------#
-# QIDC TS - VLAN 1550 - "TS Presentation"
+# QIDC TS - VLAN 1550 - "TS Presentation" 1st of 2 vlans using 1550. Strange?
 
 NETWORK::75-153-180-0:
  context:      NETWORK
@@ -6293,6 +6521,17 @@ NETWORK::75-153-180-0:
  scope:         qidc_ts_pub
  netmask:      255.255.255.0
  router:       75.153.180.1
+
+#-----------------------------------------------------------------------------#
+######## QIDC TS - VLAN 1550 - "OSS Presentation" 2nd of 2 vlans using 1550. Strange?
+# QIDC TS - VLAN 1648 - "OSS Mediation Zone Collector"
+
+NETWORK::100-125-162-224:
+ context:      NETWORK
+ vlan:          1648
+ scope:         qidc_ts_pub
+ netmask:      255.255.255.240
+ router:       100.125.162.225
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 1570 - "TS Database"
@@ -6396,6 +6635,26 @@ NETWORK::100-125-167-216:
  vlan:          1652
  netmask:       255.255.255.248
  router:        100.125.167.217
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1653 - "Zero Touch Deployment" 
+
+NETWORK::100-125-169-176:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1652
+ netmask:       255.255.255.240
+ router:        100.125.169.177
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1650 - "OSS - Dedicated scanner VLAN" # in tools cluster
+
+NETWORK::100-125-167-240:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1650
+ netmask:       255.255.255.240
+ router:        100.125.167.241
 
 #-----------------------------------------------------------------------------#
 # this vlan (1600) has muliple community vlans (including 1607)
@@ -6526,7 +6785,7 @@ NETWORK::10-43-0-0:
  vlan:          2000:2001
  netmask:      255.255.0.0
  router:       10.43.255.254
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.192/26,75.154.144.0/23
  boot_server:  tslp000011/75.153.182.76
  media_server: tslp000011/75.153.182.76
  depot_server: tslp000011/75.153.182.76
@@ -7017,7 +7276,7 @@ NETWORK::216-7-221-0:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.70.45.168/29,75.156.196.192/26
 
 #-----------------------------------------------------------------------------#
-# QIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 4)"
+# QIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 5)"
 
 NETWORK::216-7-223-128:
  context:      DMZ_NETWORK
@@ -7028,7 +7287,7 @@ NETWORK::216-7-223-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.70.45.168/29,75.156.196.192/26
 
 #-----------------------------------------------------------------------------#
-# QIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 4)"
+# QIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 5)"
 
 NETWORK::216-7-221-128:
  context:      DMZ_NETWORK
@@ -7038,12 +7297,9 @@ NETWORK::216-7-221-128:
  router:        216.7.221.129
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.70.45.168/29,75.156.196.192/26
 
-#-----------------------------------------------------------------------------#
-# QIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 4) - Octopus-DMZ2 (TS network space)"
-# TBA
 
 #-----------------------------------------------------------------------------#
-# QIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 4) - Octopus-DMZ2 (TS network space)"
+# QIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 5) - Octopus-DMZ2 (TS network space)"
 
 NETWORK::100-125-162-64:
  context:      DMZ_NETWORK
@@ -7051,6 +7307,17 @@ NETWORK::100-125-162-64:
  vlan:          2402
  netmask:       255.255.255.240
  router:        100.125.162.65
+ routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.70.45.168/29,75.156.196.192/26
+
+#-----------------------------------------------------------------------------#
+# QIDC BT - VLAN 2413 - "BT prod BE-NT (back-end non-trusted DMZ 5 of 5) - Zero touch Deployment"
+
+NETWORK::100-125-170-0:
+ context:      DMZ_NETWORK
+ scope:         qidc_bt_prod_be-nt
+ vlan:          2413
+ netmask:       255.255.255.240
+ router:        100.125.170.1
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.70.45.168/29,75.156.196.192/26
 
 #-----------------------------------------------------------------------------#
@@ -7370,3 +7637,4 @@ NETWORK::192-168-92-0:
 
 
 
+###########################################
