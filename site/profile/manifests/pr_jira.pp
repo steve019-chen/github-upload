@@ -43,7 +43,7 @@ class { 'sudo':
 
  sudo::conf { 'puppet_jira':
    priority => 10,
-   content  => 'svc_jira ALL=NOPASSWD : /sbin/service httpd start, /sbin/service httpd stop, /sbin/service httpd restart, /sbin/service httpd status, /usr/sbin/chkconfig httpd on, /usr/sbin/chkconfig httpd off, /opt/puppetlabs/puppet/bin/puppet',
+   content  => 'svc_jira ALL=NOPASSWD : /sbin/service httpd start, /sbin/service httpd stop, /sbin/service httpd restart, /sbin/service httpd status, /usr/sbin/chkconfig httpd on, /usr/sbin/chkconfig httpd off, /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug',
   }
 
   file {'/etc/rc.d/init.d/test1':
