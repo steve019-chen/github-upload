@@ -46,6 +46,11 @@ class { 'sudo':
    content  => 'svc_jira ALL=NOPASSWD : /sbin/service httpd start, /sbin/service httpd stop, /sbin/service httpd restart, /sbin/service httpd status, /usr/sbin/chkconfig httpd on, /usr/sbin/chkconfig httpd off, /opt/puppetlabs/puppet/bin/puppet',
   }
 
+  file {'/etc/rc.d/init.d/test1':
+    ensure => present,
+    content => "Hello Jojos",
+   }
+
 }
 
 # lint:endignore
