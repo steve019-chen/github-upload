@@ -41,11 +41,10 @@ class { 'sudo':
 
 # Include rules in “content”
 
-# sudo::conf { 'puppet_docker':
-#   priority => 10,
-#   content  => 'svc_prov ALL=NOPASSWD : /sbin/service httpd start, /sbin/service httpd stop, /sbin/service httpd restart, /sbin/service httpd status, /usr/sbin/chkconfig httpd on, /usr/sbin/chkconfig httpd off',
-#   require  => User['svc_prov'],
-#   }
+ sudo::conf { 'puppet_jira':
+   priority => 10,
+   content  => 'svc_jira ALL=NOPASSWD : /sbin/service httpd start, /sbin/service httpd stop, /sbin/service httpd restart, /sbin/service httpd status, /usr/sbin/chkconfig httpd on, /usr/sbin/chkconfig httpd off',
+  }
 
 }
 
