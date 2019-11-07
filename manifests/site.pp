@@ -10,6 +10,12 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
+node btln001248, btln001249
+{
+  include role::rl_jira
+}
+
+
 node btln007207
 {
   case $facts['kernel'] {
