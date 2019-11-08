@@ -5913,6 +5913,19 @@ NETWORK::142-63-159-0:
  media_server: lp98989
 
 #-----------------------------------------------------------------------------#
+# Laird4: unknown network with some old Linux servers built in 2011
+# vlan is unknown
+
+NETWORK::142-63-149-160:
+ context:      NETWORK
+ netmask:       255.255.255.224
+ router:        142.63.149.161
+ scope:         laird_bt_ten
+ boot_server:  none
+ media_server: lp98989
+
+
+#-----------------------------------------------------------------------------#
 # Laird4: VLAN 813 - requires IP helper
 
 NETWORK::142-63-188-0:
