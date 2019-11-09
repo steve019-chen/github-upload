@@ -5196,33 +5196,41 @@ NETWORK::11-128-1-0:
 
 NETWORK::11-128-32-0:
  context:      BKP_NETWORK
+ vlan:          911
  scope:         toll_bt_bkp
  site:          Toll8
  netmask:     255.255.255.0
  router:      11.128.32.254
+#routes:      11.128.1.0/24
+ routes:      11.128.1.0/24
+
+#---------------------------------------------#
+# Edmonton Netbackup Network 3 of 4
+# This is for Linux NBU clients.
+
+NETWORK::11-128-33-0:
+ context:      BKP_NETWORK
+ vlan:          912
+ scope:         toll_bt_bkp
+ site:          Toll8
+ netmask:     255.255.255.0
+ router:      11.128.33.254
+#routes:      11.128.1.0/24
  routes:      11.128.1.0/24
 
 #---------------------------------------------#
 # Edmonton Netbackup Network 4 of 4
 # This is for Linux NBU clients.
 
-NETWORK::11-128-33-0:
+NETWORK::11-128-34-0:
  context:      BKP_NETWORK
+ vlan:          913
  scope:         toll_bt_bkp
  site:          Toll8
  netmask:     255.255.255.0
- router:      11.128.33.254
- routes:      11.128.1.0/24
-
-#---------------------------------------------#
-# Edmonton Netbackup Network 4 of 4
-# This maybe for Windows.  Not sure.
-#[BKP_NETWORK] 11.128.33.0
-# scope:                toll_bt_bkp
-# site:         Toll8
-#netmask:     255.255.255.0
-#router:      11.128.33.254
+ router:      11.128.34.254
 #routes:      11.128.1.0/24
+ routes:      11.128.1.0/24
 
 
 
@@ -6749,6 +6757,24 @@ NETWORK::100-125-253-128:
  vlan:          1591
  netmask:       255.255.255.240
  router:        100.125.253.129
+
+#-----------------------------------------------------------------------------#
+# QIDC TS unknown vlan used by tslp000210 & tslp000211
+
+NETWORK::100-64-93-224:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ netmask:       255.255.255.224
+ router:        100.64.93.225
+
+#-----------------------------------------------------------------------------#
+# QIDC TS unknown vlan used by tslp000962
+
+NETWORK::100-70-25-208:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ netmask:       255.255.255.240
+ router:        100.70.25.209
 
 #-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 3002:3003 - "TS oStorage (NAS)"
