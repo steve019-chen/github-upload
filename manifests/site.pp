@@ -16,6 +16,11 @@ node default {
 #  class { 'role::rl_patrol_rofs': }
 #}
 
+node btln999924
+{
+  include role::rl_initd
+}
+
 # 20190222 CRQ37712 - Project Diversio
 node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
 {
