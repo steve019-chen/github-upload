@@ -12,8 +12,10 @@
 #
 class profile::pr_initd {
 
+  # Note: This should be a connection to rc.d. Directory is wrong
   file { '/etc/init.d':
-    ensure => 'directory',
+    link   => true,
+    target => '/etc/rc.d/init.d'
     mode   => '0777'
     }
 
@@ -22,7 +24,7 @@ class profile::pr_initd {
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => 'puppet:///software/nodemanager/TELUS_nodemanager_control',
+    source => 'puppet:///modules/software/nodemanager/TELUS_nodemanager_control',
     notify => Service['TELUS_nodemanager_control']
   }
 
