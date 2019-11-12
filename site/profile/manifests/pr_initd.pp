@@ -15,7 +15,7 @@ class profile::pr_initd {
   # Note: This should be a connection to rc.d. Directory is wrong
   file { '/etc/init.d':
     link   => true,
-    target => '/etc/rc.d/init.d'
+    target => '/etc/rc.d/init.d/'
     mode   => '0777'
     }
 
