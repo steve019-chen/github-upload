@@ -24,7 +24,7 @@ class profile::pr_initd {
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => 'puppet:///modules/software/nodemanager/TELUS_nodemanager_control',
+    source => 'puppet:///software/nodemanager/TELUS_nodemanager_control',
     notify => Service['TELUS_nodemanager_control'],
   }
 
