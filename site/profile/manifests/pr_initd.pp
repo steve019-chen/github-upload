@@ -29,8 +29,9 @@ class profile::pr_initd {
   }
 
   service { 'TELUS_nodemanager_control':
-    ensure => running,
-    enable => true,
+    ensure    => running,
+    enable    => true,
+    hasstatus => false,
   }
 
 }
