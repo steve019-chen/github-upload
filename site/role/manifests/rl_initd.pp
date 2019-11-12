@@ -10,7 +10,7 @@
 # Prereqs:
 #   - <insert text>
 #
-class role::rl_example {
+class role::rl_initd {
 
   #All roles should include the base profile
   include profile::pr_base
