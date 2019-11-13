@@ -26,7 +26,7 @@ class profile::pr_base_win {
 
 # # Limiting deployment to : SDE, KIDC Non Prod, QIDC NP, KIDC Prod, QIDC Prod
 # # Not deploying to: QIDC Tools, KIDC Tools, Toll, Laird
-if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btln000197.corp.ads','btlp000336.corp.ads','btlp000966.corp.ads'] )
+if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btln000197.corp.ads','lp99604.corp.ads'] )
   { include profile::pr_base_win_temp }
 
 }
