@@ -17,7 +17,7 @@
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-class profile::pr_base_win_temp {
+class profile::pr_base_win {
 
   # set array of services to be disabled by kernelmajversion
   # set array of services to be enabled and running by kernelmajversion
