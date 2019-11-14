@@ -12,13 +12,6 @@
 #
 class profile::pr_initd {
 
-  # Note: This should be a connection to rc.d. Directory is wrong
-  file { '/etc/init.d':
-    ensure => link,
-    target => '/etc/rc.d/init.d/',
-    mode   => '0777',
-    }
-
   file { '/etc/init.d/TELUS_nodemanager_control':
     ensure => 'present',
     owner  => 'root',
