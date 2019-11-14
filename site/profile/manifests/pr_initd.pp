@@ -28,7 +28,7 @@ class profile::pr_initd {
   service { 'TELUS_nodemanager_control':
     enable    => true,
     hasstatus => false,
-    provider  => 'bsd',
+    #provider  => 'bsd',
   }
   
 
