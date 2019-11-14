@@ -16,7 +16,7 @@ node default {
 #  class { 'role::rl_patrol_rofs': }
 #}
 
-node btln999924
+node btln999924, btln999923
 {
   include role::rl_initd
 }
