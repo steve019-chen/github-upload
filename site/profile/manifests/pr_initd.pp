@@ -20,16 +20,11 @@ class profile::pr_initd {
     source => 'puppet:///software/nodemanager/TELUS_nodemanager_control',
     notify => Service['TELUS_nodemanager_control'],
   }
-  # exec {'runchkconfig':
-  #   command => "chkconfig TELUS_nodemanager_control on",
-  
-  # }
 
   service { 'TELUS_nodemanager_control':
     enable    => true,
     hasstatus => false,
     provider  => 'redhat',
   }
-  
 
 }
