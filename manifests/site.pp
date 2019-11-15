@@ -48,6 +48,93 @@ node btln007207
   }
 }
 
+# Test Puppet 6 agent upgrade - mix of Linux and Windows
+
+node btwn999991, btwn004551 {
+  case $facts['kernel'] {
+    'Linux'  : {
+      class {'::puppet_agent':
+        collection      => 'puppet6',
+        package_version => '6.10.1',
+        service_names   => ['puppet'],
+        manage_repo     => false,
+        notify          => Exec['set lin no_proxy'],
+      }
+
+      exec { 'set lin no_proxy':
+        command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+        path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+        unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
+      }
+    }
+    'windows': {
+      file { 'win install file':
+        ensure => present,
+        path   => "${env_temp_variable}\\puppet-agent-6.10.1-x64.msi",
+        source => 'puppet:///software/windows/puppet-agent-6.10.1-x64.msi',
+      }
+
+      class {'::puppet_agent':
+        absolute_source       => "${env_temp_variable}\\puppet-agent-6.10.1-x64.msi",
+        collection            => 'puppet6',
+        package_version       => '6.10.1',
+        service_names         => ['puppet'],
+        manage_repo           => false,
+        msi_move_locked_files => true,
+        require               => File['win install file'],
+        notify                => Exec['set win no_proxy'],
+      }
+
+      exec { 'set win no_proxy':
+        command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+        path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+        unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
+      }
+    }
+    default: { }
+  }
+}
+
+node btln007207
+{
+  case $facts['kernel'] {
+    'Linux'  : {
+
+        class {'::puppet_agent':
+        collection      => 'puppet6',
+        package_version => '6.10.1',
+        service_names   => ['puppet'],
+        manage_repo     => false,
+        notify          => Exec['set lin no_proxy'],
+      }
+
+      exec { 'set lin no_proxy':
+        command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+        path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+        unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
+      }
+    }
+    'windows': {
+
+      #   class {'::puppet_agent':
+      #   collection      => 'puppet6',
+      #   package_version => '6.10.1',
+      #   service_names   => ['puppet'],
+      #   manage_repo     => false,
+      #   notify          => Exec['set win no_proxy'],
+      # }
+
+      # exec { 'set win no_proxy':
+      #   command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+      #   path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+      #   unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
+      # }
+    }
+    default: { }
+  }
+
+}
+
 # 20190528  - Patrol ROFS module Non-prod - change4 - CRQ50447
 #node btln007243,btln007331,btln001963,btln000435,btln001839,btln007058,btln003025,btln002968,btln001790,btln002347,btln007003,btln000395,btln002177,btln001296,btln007609,btln000420,btln000428,btln007423,btln002046,btln007299,btln002054,btln001953,btln000433,btln001684,btln002011,btln002818,btln007607,btln002992,btln000429,btln001293,btln002394,btln007315,btln007291,btln002920,btln000438,btln007066,btln002122,btln002713,btln002023,btln002057,btln002390,btln002532,btln001576,btln002622,btln007237,btln002967,btln002092,btln002702,btln002090,btln002614,btln000623,btln001832,btln000590,btln002564,btln000414,btln003067,btln002529,btln001992,btln000544,btln002865,btln002478,btln007475,btln000403,btln002877,btln002724,tsln000108,btln007244,btln001821,btln007421,btln001854,btln001855,btln002797,btln000398,btln000721,btln001370,btln002377,btln002172,btln002385,btln000422,btln003047,btln003061,btln002176,btln002295,btln001283,btln001970,btln002064,btln007606,btln003000,btln007325,btln001611,btln001829,btln007140,btln002387,btln001276,btln002603,btln001246,btln002787,btln002711,btln003042,btln001958,btln001262,btln007329,btln007476,btln001698,btln000426,btln001794,btln007597,btln003011,btln002307,btln002382,btln001795,btln001264,btln001796,btln000695,btln003041,btln001443,tsln000104,btln007347,btln000412,btln000732,btln002858,btln001784,btln002060,btln002714,btln007138,btln002381,btln002015,btln002808,btln002480,btln002388,btln003059,btln002454,btln002786,btln002716,btln001419,btln002095,btln000547,btln002455,btln000589,btln003007,btln002004,btln001774,btln002750,btln002752,btln002862,btln002391,btln007142,btln001272,btln003043,btln001969,btln002484,btln002712,btln001415,btln007477,btln002720,btln002613,btln002473,btln002997,btln002313,btln007148,btln007344,btln002487,btln007245,btln007598,btln002863,btln002048,btln002688,btln001803,btln001836,btln007152,btln002105,btln001247,btln007320,btln000625,btln001610,btln001833,btln007599,btln001853,btln001430,btln001242,btln007502,btln002745,btln001792,btln007241,btln002771,btln002482,btln007211,btln000419,btln007327,btln002998,btln000741,btln000737,btln000722,btln007225,btln007095,btln002091,btln000431,btln007332,btln001844,btln007236,btln000519,btln002810,btln007396,btln007259,btln001584,btln007123,btln001596,btln001051,btln007541,btln000693,btln001742,btln001066,btln002690,btln001090,btln001543,btln001336,btln001180,btln001695,btln000343,btln002179,btln000905,btln007474,btln007043,btln007587,btln001351,btln001456,btln001062,btln002632,btln002439,btln001068,btln007713,btln007583,btln000928,btln007536,btln001980,btln001162,btln001085,btln007394,btln007472,btln000471,btln000963,btln001639,btln002708,btln002636,btln001651,btln001227,btln002985,btln002033,btln002322,btln001723,btln000274,btln000353,btln000462,btln001989,btln000676,btln007127,btln007459,btln001704,btln007443,btln002691,btln007561,btln007544,btln007485,btln000328,btln002417,btln001763,btln000306,btln001565,btln001652,btln001181,btln002551,btln007269,btln001321,btln001955,btln007414,btln001819,btln001289,btln007662,btln007535,btln001658,btln007077,btln000279,btln007391,btln002703,btln002472,btln002118,btln001347,btln000313,btln007124,btln002304,btln002323,btln001178,btln001646,btln000919,btln001988,btln001586,btln001203,btln001529,btln000967,btln001199,btln002339,btln001067,btln001656,btln002080,btln007585,btln001512
 #{
@@ -103,7 +190,8 @@ node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
 
 # 20190425 CRQ45615 - Project ASAPNOC
 
-node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
+# node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
+node btln007808, btln007809, btlp007033, btlp007034
 {
   include role::rl_asapnoc
 }
@@ -122,7 +210,7 @@ ln99619,ln99152,ln99035,ln99036,ln99833,ln99779,ln99835,ln99834,ln99246,ln99247,
 ln99584,ln99839,ln99840,ln99841,btln000075,btln002027,btln002028,btln002039,btln007102,
 btln007103,btln007263,btln007264,btln007265,btln000076,btln001589,btln001590,btln002040,
 btln007403,btln007404,btln001031,btln001032,btln001033,btln000013,btln000014,btln008025,btln008022,btln008023,btln008071,btln008020,
-btln008021,btln008018,btln008019,btln008067,ln99151,btln001242,btln001243
+btln008021,btln008018,btln008019,btln008067,ln99151,btln001242,btln001243,btln007855,btln007856
 
 {
 class { 'role::rl_dynatrace_st': }
@@ -138,12 +226,12 @@ btlp006328,btlp006329,btlp006330,btlp006331,btlp006332,btlp006333,btlp006334,btl
 btln000408,ln98434,ln99217,ln98435,ln99216,ln98438,btln001602,btln001603,btln002029,btln002030,btln002041,
 btln007255,btln007256,btln007530,btln007531,btln007571,btln007572,btln007573,ln98315,ln98317,ln98318,ln98559,
 ln99663,ln99664,ln99772,ln99825,ln99827,ln99641,ln99642,btln007390,btln007388,btln003020,ln99235,ln99236,btln001256,btln001257,ln99712,
-ln98430,ln98431,btln000400,btln000401
+ln98430,ln98431,btln000400,btln000401,ln98142,ln98157
 {
 class { 'role::rl_dynatrace': }
 }
 
-
+#
 #20190213 - CRQ37097 : ROFS many IDCs - Puppet 5 Upgrade 
 # node btlp000812
 # {
