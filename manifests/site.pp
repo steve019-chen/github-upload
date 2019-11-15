@@ -8,46 +8,6 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-
-node btln007207
-{
-  case $facts['kernel'] {
-    'Linux'  : {
-
-        class {'::puppet_agent':
-        collection      => 'puppet6',
-        package_version => '6.10.1',
-        service_names   => ['puppet'],
-        manage_repo     => false,
-        notify          => Exec['set lin no_proxy'],
-      }
-
-      exec { 'set lin no_proxy':
-        command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-        path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
-        unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
-      }
-    }
-    'windows': {
-
-      #   class {'::puppet_agent':
-      #   collection      => 'puppet6',
-      #   package_version => '6.10.1',
-      #   service_names   => ['puppet'],
-      #   manage_repo     => false,
-      #   notify          => Exec['set win no_proxy'],
-      # }
-
-      # exec { 'set win no_proxy':
-      #   command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-      #   path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
-      #   unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
-      # }
-    }
-    default: { }
-  }
-}
-
 # Test Puppet 6 agent upgrade - mix of Linux and Windows
 
 node btwn999991, btwn004551 {
