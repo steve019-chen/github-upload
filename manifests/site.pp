@@ -15,6 +15,26 @@ node default {
 node btwn999991, btwn004551 {
   case $facts['kernel'] {
     'Linux'  : {
+
+      case $facts['os']['release']['major'] {
+        '5':  {
+                $puppet5_channel = 'puppet5-rhel5-x86_64-locked'
+                $puppet6_channel = 'puppet6-rhel5-x86_64-locked'
+              }
+        '6':  {
+                $puppet5_channel = 'puppet5-rhel6-x86_64-locked'
+                $puppet6_channel = 'puppet6-rhel6-x86_64-locked'
+              }
+        '7':  {
+                $puppet5_channel = 'puppet5-rhel7-x86_64-locked'
+                $puppet6_channel = 'puppet6-rhel7-x86_64-locked'
+              }
+        default: { fail('Puppet is only supported on Oracle Linux 5,6, and 7') }
+      }
+
+      # Add Puppet 6 channel
+      telus_lib::spacewalk_channel { $puppet6_channel: }
+
       class {'::puppet_agent':
         collection      => 'puppet6',
         package_version => '6.10.1',
