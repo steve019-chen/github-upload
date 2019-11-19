@@ -44,9 +44,9 @@ mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
   :tag => '0.1.1'
 
-mod 'puppetlabs-translate',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-translate.git',
-  :tag => '1.2.0'
+# mod 'puppetlabs-translate',
+#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-translate.git',
+#   :tag => '1.2.0'
 
 mod 'puppetlabs-docker',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-docker.git',
