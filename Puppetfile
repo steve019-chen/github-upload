@@ -36,9 +36,9 @@ mod 'puppetlabs-puppet_agent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppet_agent.git',
   :tag => '2.2.1'
 
-mod 'puppetlabs-facts',
-  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-facts.git',
-  :tag => '0.6.0'
+# mod 'puppetlabs-facts',
+#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-facts.git',
+#   :tag => '0.6.0'
 
 mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
