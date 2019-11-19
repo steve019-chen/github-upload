@@ -30,7 +30,7 @@ mod 'puppetlabs-lvm',
 
 mod 'puppetlabs-mount_core',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-mount_core.git',
-  :tag => '1.0.3'
+  :tag => '1.0.4'
 
 mod 'puppetlabs-puppet_agent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppet_agent.git',
