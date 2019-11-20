@@ -5,22 +5,19 @@ node default {
 
 }
 
-
-
-
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 # Test Puppet 6 agent upgrade - mix of Linux and Windows
 
-node btwn999991, btwn004551 {
+node btwn999991, btwn004551, btln007207 {
   case $facts['kernel'] {
     'Linux'  : {
       class {'::puppet_agent':
         collection      => 'puppet6',
-        package_version => '6.10.1',
+        package_version => '6.11.0',
         service_names   => ['puppet'],
         manage_repo     => false,
-        notify          => Exec['set lin no_proxy'],
+        notify          => Exec['set lin no_proxy','set lin resubmit_facts'],
       }
 
       exec { 'set lin no_proxy':
@@ -28,23 +25,30 @@ node btwn999991, btwn004551 {
         path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
         unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
       }
+
+      exec { 'set lin resubmit_facts':
+        command => 'puppet config set resubmit_facts true',
+        path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+        unless  => 'puppet config print resubmit_facts | grep -q true > /dev/null',
+      }
+
     }
     'windows': {
       file { 'win install file':
         ensure => present,
-        path   => "${env_temp_variable}\\puppet-agent-6.10.1-x64.msi",
-        source => 'puppet:///software/windows/puppet-agent-6.10.1-x64.msi',
+        path   => "${env_temp_variable}\\puppet-agent-6.11.0-x64.msi",
+        source => 'puppet:///software/windows/puppet-agent-6.11.0-x64.msi',
       }
 
       class {'::puppet_agent':
         absolute_source       => "${env_temp_variable}\\puppet-agent-6.10.1-x64.msi",
         collection            => 'puppet6',
-        package_version       => '6.10.1',
+        package_version       => '6.11.0',
         service_names         => ['puppet'],
         manage_repo           => false,
         msi_move_locked_files => true,
         require               => File['win install file'],
-        notify                => Exec['set win no_proxy'],
+        notify                => Exec['set win no_proxy','set win resubmit_facts'],
       }
 
       exec { 'set win no_proxy':
@@ -52,49 +56,16 @@ node btwn999991, btwn004551 {
         path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
         unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
       }
+
+      exec { 'set win resubmit_facts':
+        command => 'cmd.exe /c  puppet config set resubmit_facts true',
+        path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+        unless  => 'cmd.exe /c puppet config print resubmit_facts | findstr.exe true > nul',
+      }
+
     }
     default: { }
   }
-}
-
-node btln007207
-{
-  case $facts['kernel'] {
-    'Linux'  : {
-
-        class {'::puppet_agent':
-        collection      => 'puppet6',
-        package_version => '6.10.1',
-        service_names   => ['puppet'],
-        manage_repo     => false,
-        notify          => Exec['set lin no_proxy'],
-      }
-
-      exec { 'set lin no_proxy':
-        command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-        path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
-        unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
-      }
-    }
-    'windows': {
-
-      #   class {'::puppet_agent':
-      #   collection      => 'puppet6',
-      #   package_version => '6.10.1',
-      #   service_names   => ['puppet'],
-      #   manage_repo     => false,
-      #   notify          => Exec['set win no_proxy'],
-      # }
-
-      # exec { 'set win no_proxy':
-      #   command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-      #   path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
-      #   unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
-      # }
-    }
-    default: { }
-  }
-
 }
 
 # 20190528  - Patrol ROFS module Non-prod - change4 - CRQ50447
