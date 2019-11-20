@@ -963,6 +963,7 @@ PROFILE::kidc_ts_pub:
  mgmt_scope:            kidc_ts_oMgmt
  nas_scope:             kidc_ts_nas
  bkp_scope:             kidc_ts_bkp
+ ic_scope:              kidc_ts_oInterconnect
  included:               kidc_ts
  puppet_server:         tslp000578.corptools.ads
  site:                  KIDC
@@ -3379,6 +3380,18 @@ NETWORK::100-70-37-144:
  netmask:       255.255.255.240
  router:        100.70.37.145
 #ZZZ
+
+#---------------------------------------------#
+# KIDC - VLAN 3209 - "BT prod oInterconnect"
+
+NETWORK::100-69-250-0:
+ context:      IC_NETWORK
+ scope:         kidc_ts_oInterconnect
+ vlan:          3209
+ site:          KIDC
+ netmask:       255.255.254.0
+ test_ip:       100.69.250.22 
+ mtu:           9000
 
 #-----------------------------------------------------------------------------#
 # KIDC MITS NETWORKS
