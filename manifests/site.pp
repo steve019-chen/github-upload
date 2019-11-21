@@ -6,7 +6,7 @@ node default {
 }
 
 
-# lint:ignore:unquoted_node_name lint:ignore:140chars
+# lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
 
 # Test Puppet 6 agent upgrade - mix of Linux and Windows
 
