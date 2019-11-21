@@ -35,19 +35,19 @@ node btwn999991, btwn004551 {
       # Add Puppet 6 channel
       telus_lib::spacewalk_channel { $puppet6_channel: }
 
-      class {'::puppet_agent':
-        collection      => 'puppet6',
-        package_version => '6.10.1',
-        service_names   => ['puppet'],
-        manage_repo     => false,
-        notify          => Exec['set lin no_proxy'],
-      }
+      # class {'::puppet_agent':
+      #   collection      => 'puppet6',
+      #   package_version => '6.10.1',
+      #   service_names   => ['puppet'],
+      #   manage_repo     => false,
+      #   notify          => Exec['set lin no_proxy'],
+      # }
 
-      exec { 'set lin no_proxy':
-        command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-        path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
-        unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
-      }
+      # exec { 'set lin no_proxy':
+      #   command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+      #   path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+      #   unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
+      # }
     }
     'windows': {
       file { 'win install file':
