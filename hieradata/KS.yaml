@@ -867,6 +867,7 @@ PROFILE::kidc_tools:
 
 PROFILE::kidc_ts_oMgmt:
  context:      PROFILE
+ primary_nic_type: mgmt 
  nas_scope:             kidc_ts_nas
  included:               kidc_ts
  puppet_server:         tslp000578.corptools.ads
@@ -894,7 +895,46 @@ PROFILE::kidc_ts_oMgmt:
 
 PROFILE::kidc_ts_iMgmt:
  context:      PROFILE
+ primary_nic_type: mgmt 
  nas_scope:             kidc_ts_nas
+ included:               kidc_ts
+ puppet_server:         tslp000578.corptools.ads
+ site:                  KIDC
+ env:                   TS
+ satellite_server:      tslp000253.corptools.ads
+ satellite_key:         1-ts-kidc
+ spacewalk_server:      tslp000744.corptools.ads
+ spacewalk_key:         1-ts-kidc
+ ldap_server1:          uldap-kidc.corptools.ads 
+ ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
+ tz_local:              Canada/Pacific
+ ntp:                   use_server
+ ntp_servers:           100.64.93.49 100.64.93.57
+ domain:                oss.ads
+ bkp_domain:            oss.ads
+ dns_servers:           100.64.93.50 100.64.93.58 
+ dns_search:            oss.ads
+ bkp_suffix:            -bkp
+ mail_relay:            bcmsg.tsl.telus.com
+ nbu_profile:           kidc_ts 
+
+# This profile was created for tslp001201 which is being used as an NFS server with no service network.
+#VVV
+
+PROFILE::kidc_ts_oMgmt_cde:
+ context:      PROFILE
+ primary_nic_type: mgmt 
+ cde:                   yes
+ spacewalk_server:      tslp001011.cde.telus.com
+ spacewalk_key:         1-tl-kidc-cde
+ spacewalk_cert:        TELUS-SPACEWALK-CDE-SSL-CERT
+ puppet_server:
+ puppet:                no
+ domain:                cde.telus.com
+ puppet:                no
+ dns_search:            cde.telus.com corp.ads corptools.ads tsl.telus.com
+ dns_servers:           100.70.31.217 100.70.31.213 100.70.31.214 
  included:               kidc_ts
  puppet_server:         tslp000578.corptools.ads
  site:                  KIDC
@@ -923,6 +963,7 @@ PROFILE::kidc_ts_pub:
  mgmt_scope:            kidc_ts_oMgmt
  nas_scope:             kidc_ts_nas
  bkp_scope:             kidc_ts_bkp
+ ic_scope:              kidc_ts_oInterconnect
  included:               kidc_ts
  puppet_server:         tslp000578.corptools.ads
  site:                  KIDC
@@ -2204,8 +2245,10 @@ PROFILE::qidc_ts_oMgmt:
  mail_relay:            qcmsg.tsl.telus.com
  nbu_profile:           qidc_ts 
 
+#####[PROFILE] qidc_bt_prod_oMgmt
 # 
 #ZZZ
+
 
 
 PROFILE::qidc_tools_cde:
@@ -2956,6 +2999,21 @@ NETWORK::142-174-4-0:
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1815 - TS oMgmt CDE - This is a shared oMgmt/iMgmt network
+#VVV
+
+NETWORK::100-125-168-128:
+ context:      NETWORK
+ scope:         kidc_ts_oMgmt_cde
+ vlan:          1815
+ netmask:       255.255.255.192
+ router:        100.125.168.129
+ routes:        100.70.31.192/26,100.64.93.48/28
+ boot_server:   none
+ media_server:  none
+ depot_server:  none
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 1552 - "gOSS-Tools" 1 of 2
 
 NETWORK::75-153-186-0:
@@ -3257,6 +3315,36 @@ NETWORK::100-125-169-160:
  router:        100.125.169.161
 
 #-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1648 - "OSS Mediation Zone Collector"
+
+NETWORK::100-125-169-224:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1648
+ netmask:       255.255.255.240
+ router:        100.125.169.225
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1650 - "OSS - Dedicated scanner VLAN" # in tools cluster
+
+NETWORK::100-125-167-224:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1650
+ netmask:       255.255.255.240
+ router:        100.125.167.225
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1610 - "monitoring and polling tools"
+
+NETWORK::100-125-170-32:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1610
+ netmask:       255.255.255.224
+ router:        100.125.170.33
+
+#-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 3002:3003 - "TS Storage (NAS)"
 
 NETWORK::100-69-196-0:
@@ -3293,6 +3381,18 @@ NETWORK::100-70-37-144:
  router:        100.70.37.145
 #ZZZ
 
+#---------------------------------------------#
+# KIDC - VLAN 3209 - "BT prod oInterconnect"
+
+NETWORK::100-69-250-0:
+ context:      IC_NETWORK
+ scope:         kidc_ts_oInterconnect
+ vlan:          3209
+ site:          KIDC
+ netmask:       255.255.254.0
+ test_ip:       100.69.250.22 
+ mtu:           9000
+
 #-----------------------------------------------------------------------------#
 # KIDC MITS NETWORKS
 #-----------------------------------------------------------------------------#
@@ -3306,7 +3406,7 @@ NETWORK::10-42-0-0:
  vlan:          2000:2001
  netmask:       255.255.0.0
  router:        10.42.255.254
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.128/26,75.154.144.0/23
  boot_server:   tslp000058/75.153.186.15
  media_server:  tslp000058/75.153.186.15
  depot_server:  tslp000058/75.153.186.15
@@ -5109,33 +5209,41 @@ NETWORK::11-128-1-0:
 
 NETWORK::11-128-32-0:
  context:      BKP_NETWORK
+ vlan:          911
  scope:         toll_bt_bkp
  site:          Toll8
  netmask:     255.255.255.0
  router:      11.128.32.254
+#routes:      11.128.1.0/24
+ routes:      11.128.1.0/24
+
+#---------------------------------------------#
+# Edmonton Netbackup Network 3 of 4
+# This is for Linux NBU clients.
+
+NETWORK::11-128-33-0:
+ context:      BKP_NETWORK
+ vlan:          912
+ scope:         toll_bt_bkp
+ site:          Toll8
+ netmask:     255.255.255.0
+ router:      11.128.33.254
+#routes:      11.128.1.0/24
  routes:      11.128.1.0/24
 
 #---------------------------------------------#
 # Edmonton Netbackup Network 4 of 4
 # This is for Linux NBU clients.
 
-NETWORK::11-128-33-0:
+NETWORK::11-128-34-0:
  context:      BKP_NETWORK
+ vlan:          913
  scope:         toll_bt_bkp
  site:          Toll8
  netmask:     255.255.255.0
- router:      11.128.33.254
- routes:      11.128.1.0/24
-
-#---------------------------------------------#
-# Edmonton Netbackup Network 4 of 4
-# This maybe for Windows.  Not sure.
-#[BKP_NETWORK] 11.128.33.0
-# scope:                toll_bt_bkp
-# site:         Toll8
-#netmask:     255.255.255.0
-#router:      11.128.33.254
+ router:      11.128.34.254
 #routes:      11.128.1.0/24
+ routes:      11.128.1.0/24
 
 
 
@@ -5826,6 +5934,19 @@ NETWORK::142-63-159-0:
  media_server: lp98989
 
 #-----------------------------------------------------------------------------#
+# Laird4: unknown network with some old Linux servers built in 2011
+# vlan is unknown
+
+NETWORK::142-63-149-160:
+ context:      NETWORK
+ netmask:       255.255.255.224
+ router:        142.63.149.161
+ scope:         laird_bt_ten
+ boot_server:  none
+ media_server: lp98989
+
+
+#-----------------------------------------------------------------------------#
 # Laird4: VLAN 813 - requires IP helper
 
 NETWORK::142-63-188-0:
@@ -6436,11 +6557,12 @@ NETWORK::75-153-180-0:
  router:       75.153.180.1
 
 #-----------------------------------------------------------------------------#
-# QIDC TS - VLAN 1550 - "OSS Presentation" 2nd of 2 vlans using 1550. Strange?
+######## QIDC TS - VLAN 1550 - "OSS Presentation" 2nd of 2 vlans using 1550. Strange?
+# QIDC TS - VLAN 1648 - "OSS Mediation Zone Collector"
 
 NETWORK::100-125-162-224:
  context:      NETWORK
- vlan:          1550
+ vlan:          1648
  scope:         qidc_ts_pub
  netmask:      255.255.255.240
  router:       100.125.162.225
@@ -6559,6 +6681,16 @@ NETWORK::100-125-169-176:
  router:        100.125.169.177
 
 #-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1650 - "OSS - Dedicated scanner VLAN" # in tools cluster
+
+NETWORK::100-125-167-240:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1650
+ netmask:       255.255.255.240
+ router:        100.125.167.241
+
+#-----------------------------------------------------------------------------#
 # this vlan (1600) has muliple community vlans (including 1607)
 # this vlan contains the stingray windows + Linux JPs, AD, + radius.
 # QIDC TS - VLAN 1600 - "PCI CDE managment" 
@@ -6640,6 +6772,24 @@ NETWORK::100-125-253-128:
  router:        100.125.253.129
 
 #-----------------------------------------------------------------------------#
+# QIDC TS unknown vlan used by tslp000210 & tslp000211
+
+NETWORK::100-64-93-224:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ netmask:       255.255.255.224
+ router:        100.64.93.225
+
+#-----------------------------------------------------------------------------#
+# QIDC TS unknown vlan used by tslp000962
+
+NETWORK::100-70-25-208:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ netmask:       255.255.255.240
+ router:        100.70.25.209
+
+#-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 3002:3003 - "TS oStorage (NAS)"
 
 NETWORK::100-65-196-0:
@@ -6687,7 +6837,7 @@ NETWORK::10-43-0-0:
  vlan:          2000:2001
  netmask:      255.255.0.0
  router:       10.43.255.254
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.156.196.192/26,75.154.144.0/23
  boot_server:  tslp000011/75.153.182.76
  media_server: tslp000011/75.153.182.76
  depot_server: tslp000011/75.153.182.76
