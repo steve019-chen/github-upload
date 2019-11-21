@@ -42,7 +42,7 @@ node btwn999991, btwn004551, btln007207 {
       }
 
       class {'::puppet_agent':
-        absolute_source       => "${env_temp_variable}\\puppet-agent-6.10.1-x64.msi",
+        absolute_source       => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
         collection            => 'puppet6',
         package_version       => '6.11.1',
         service_names         => ['puppet'],
