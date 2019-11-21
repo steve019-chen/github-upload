@@ -6,7 +6,7 @@ node default {
 }
 
 
-# lint:ignore:unquoted_node_name lint:ignore:140chars
+# lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
 
 # Test Puppet 6 agent upgrade - mix of Linux and Windows
 
@@ -15,7 +15,7 @@ node btwn999991, btwn004551, btln007207 {
     'Linux'  : {
       class {'::puppet_agent':
         collection      => 'puppet6',
-        package_version => '6.11.0',
+        package_version => '6.11.1',
         service_names   => ['puppet'],
         manage_repo     => false,
         notify          => Exec['set lin no_proxy','set lin resubmit_facts'],
@@ -37,14 +37,14 @@ node btwn999991, btwn004551, btln007207 {
     'windows': {
       file { 'win install file':
         ensure => present,
-        path   => "${env_temp_variable}\\puppet-agent-6.11.0-x64.msi",
-        source => 'puppet:///software/windows/puppet-agent-6.11.0-x64.msi',
+        path   => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
+        source => 'puppet:///software/windows/puppet-agent-6.11.1-x64.msi',
       }
 
       class {'::puppet_agent':
-        absolute_source       => "${env_temp_variable}\\puppet-agent-6.10.1-x64.msi",
+        absolute_source       => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
         collection            => 'puppet6',
-        package_version       => '6.11.0',
+        package_version       => '6.11.1',
         service_names         => ['puppet'],
         manage_repo           => false,
         msi_move_locked_files => true,
