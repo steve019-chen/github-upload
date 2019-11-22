@@ -2,7 +2,8 @@
 #
 # This Profile is in place for the Security team to deploy an account 
 # that they can use to connect to all linux machines via an ssh key 
-# for doing vulnerability scans
+# Rhel 5 servers with LDAP do not work with remotelogin group due to bug
+# https://bugzilla.redhat.com/show_bug.cgi?id=1358881 
 # Parameters: 
 #   - None
 #
