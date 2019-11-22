@@ -47,14 +47,8 @@ if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_grou
 
 else {
 
-  # Create the remotelogin group
-
-  group { 'remotelogin':
-    ensure => present,
-    gid    => '5050',
-  }
-
   # Create the unixt4 user for application account, set password
+  # Remotelogin is already set in remotelogin profile for all valid scenarios
 
   user { 'unixt4':
     uid        => '53535',

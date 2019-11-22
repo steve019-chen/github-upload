@@ -52,12 +52,6 @@ else
   }
   else {
 
-    # Create the remotelogin group
-    group { 'remotelogin':
-      ensure => present,
-      gid    => '5050',
-    }
-
     # Create the svcscan user for application account with remotelogin group
     # set password to locked
     user { 'svcscan':
