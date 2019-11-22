@@ -35,6 +35,11 @@ node btwn999991, btwn004551, btln-test02 {
       # Add Puppet 6 channel
       telus_lib::spacewalk_channel { $puppet6_channel: }
 
+      # Remove Puppet 5 channel
+      telus_lib::spacewalk_channel { $puppet5_channel:
+        ensure => absent,
+      }
+
       # class {'::puppet_agent':
       #   collection      => 'puppet6',
       #   package_version => '6.10.1',
