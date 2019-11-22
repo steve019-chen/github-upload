@@ -33,10 +33,12 @@ node btwn999991, btwn004551, btln-test02 {
       }
 
       # Add Puppet 6 channel
-      telus_lib::spacewalk_channel { $puppet6_channel: }
+      telus_lib::yum_channel { $puppet6_channel:
+        ensure => present,
+      }
 
       # Remove Puppet 5 channel
-      telus_lib::spacewalk_channel { $puppet5_channel:
+      telus_lib::yum_channel { $puppet5_channel:
         ensure => absent,
       }
 
