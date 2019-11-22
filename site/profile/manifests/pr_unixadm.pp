@@ -24,11 +24,17 @@ class profile::pr_unixadm {
 # Approved Novo request: 247409
 
 # Create the users group
+if ( ($facts['os']['release']['major'] == '5') and ($facts['telus_user_group_sss'] == '1'))
+{
+# Please work with T3 to log into the machines and update /etc/security/access.conf to remove brackets
 
-group { 'unixt4':
-  ensure => present,
-  gid    => '53535',
 }
+else
+{
+  group { 'unixt4':
+    ensure => present,
+    gid    => '53535',
+  }
 
 if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_group_sss'] == '0' ) ) {
 
@@ -74,4 +80,5 @@ ssh_authorized_key { 'unixt4':
 
 # lint:endignore
 
+}
 }
