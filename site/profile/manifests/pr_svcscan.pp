@@ -13,6 +13,9 @@
 # 
 # Prereqs:
 #   - Jump point server has the required keys
+#   - pr_remotelogin_group
+#   - telus_user_group_sss fact
+#   - telus_user_group_winbind fact
 #
 class profile::pr_svcscan {
 
@@ -55,6 +58,7 @@ else
 
     # Create the svcscan user for application account with remotelogin group
     # set password to locked
+    # Remotelogin is already set in remotelogin profile for all valid scenarios
     user { 'svcscan':
       uid      => '32555',
       gid      => 'svcscan',

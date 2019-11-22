@@ -12,9 +12,10 @@
 # 
 # Prereqs:
 #   - Jump point server has the required keys
+#   - pr_remotelogin_group
+#   - telus_user_group_sss fact
+#   - telus_user_group_winbind fact
 #
-
-# lint:ignore:140chars
 
 class profile::pr_unixadm {
 
@@ -67,7 +68,7 @@ else {
   }
 
 }
-
+# lint:ignore:140chars
 # Add the public key to authorized keys and restrict connection to only coming from ln99052
 
 ssh_authorized_key { 'unixt4':
