@@ -24,29 +24,29 @@ mod 'puppetlabs-inifile',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-inifile.git',
   :tag => '2.5.0'
 
-# mod 'puppetlabs-lvm',
-#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-lvm.git',
-#   :tag => 'v1.3.0'
+mod 'puppetlabs-lvm',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-lvm.git',
+  :tag => 'v1.3.0'
 
-# mod 'puppetlabs-mount_core',
-#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-mount_core.git',
-#   :tag => '1.0.4'
+mod 'puppetlabs-mount_core',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-mount_core.git',
+  :tag => '1.0.4'
 
 mod 'puppetlabs-puppet_agent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppet_agent.git',
   :tag => '2.2.1'
 
-# mod 'puppetlabs-facts',
-#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-facts.git',
-#   :tag => '0.6.0'
+mod 'puppetlabs-facts',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-facts.git',
+  :tag => '0.6.0'
 
 mod 'puppetlabs-transition',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-transition.git',
   :tag => '0.1.1'
 
-# mod 'puppetlabs-translate',
-#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-translate.git',
-#   :tag => '1.2.0'
+mod 'puppetlabs-translate',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-translate.git',
+  :tag => '1.2.0'
 
 mod 'puppetlabs-docker',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-docker.git',
@@ -122,9 +122,9 @@ mod 'puppet_agent_config',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
   :tag => '2.3.1'
 
-# mod 'telus_lib',
-#   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
-#   :tag => '3.1.0'
+mod 'telus_lib',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
+  :tag => '3.1.0'
 
 mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
