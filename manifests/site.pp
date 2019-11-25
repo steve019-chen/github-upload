@@ -57,7 +57,7 @@ node btwn999991, btwn004551, btln-test02 {
         package_version => '6.11.1',
         service_names   => ['puppet'],
         manage_repo     => false,
-        notify          => Exec['set lin no_proxy'],
+        notify          => Exec['set lin no_proxy','set lin resubmit_facts'],
         require         => Telus_lib::Yum_channel[$puppet6_channel],
       }
 
