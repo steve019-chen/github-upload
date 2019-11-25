@@ -9,7 +9,7 @@ node default {
 
 # Test Puppet 6 agent upgrade - mix of Linux and Windows
 
-node btwn999991, btwn004551, btln-test02 {
+node btwn999991, btwn004551, btln-test02, btln-test06, btln007803 {
   case $facts['kernel'] {
     'Linux'  : {
 
