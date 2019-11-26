@@ -1,0 +1,8 @@
+---
+lvm::volume_groups:
+  appvg:
+    createonly: true
+    physical_volumes:
+      - /dev/sdb
+    logical_volumes:
+      app01lv: {fs_type: ext4, size: 40G, mountpath: /opt/bmc}

@@ -1,4 +1,4 @@
-#Forge clean modules
+# Forge clean modules
 
 mod 'puppetlabs-stdlib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-stdlib.git',
@@ -30,7 +30,7 @@ mod 'puppetlabs-lvm',
 
 mod 'puppetlabs-mount_core',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-mount_core.git',
-  :tag => '1.0.4'
+  :tag => '1.0.3'
 
 mod 'puppetlabs-puppet_agent',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-puppet_agent.git',
@@ -106,7 +106,7 @@ mod 'puppet-windowsfeature',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-windowsfeature.git',
   :tag => 'v3.2.2'
 
-#Forge dirty modules
+# Forge dirty modules
 
 mod 'dylanratcliffe-windows_disk_facts',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_dirty/dylanratcliffe-windows_disk_facts.git',
@@ -134,10 +134,10 @@ mod 'telus-flexnet_agent_install',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-flexnet_agent_install.git',
   :tag => '0.2.7'
   
-# Aug 6, 2019: detect sudoers corruption
+# Oct 28 2019: Use latest x15 version of patrol installer
 mod 'patrol_upgrade',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_upgrade.git',
-  :tag => '1.5.1'
+  :tag => '1.6.0'
 
 mod 'patrol_rofs',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/patrol_rofs.git',
