@@ -4684,6 +4684,7 @@ NETWORK::142-178-175-128:
  boot_server:  lp99705
  media_server: lp99705
  depot_server: lp99705
+ ai_server:     xp0006/142.63.53.190
 
 #---------------------------------------------#
 # No IP helper for this network... it contains DNS servers, etc.
