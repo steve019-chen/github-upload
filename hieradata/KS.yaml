@@ -6140,6 +6140,16 @@ NETWORK::10-128-249-0:
  router:        10.128.249.1
 
 #---------------------------------------------#
+# Consilium SIDC Lab - VLAN 2204 - PWAN
+
+NETWORK::10-129-0-0:
+ context:      NETWORK
+ scope:         consilium_sidc_lab_pwan
+ vlan:          2204
+ netmask:       255.255.252.0
+ router:        10.129.0.1
+
+#---------------------------------------------#
 # Consilium SIDC Lab - VLAN 1009 - oStorage
 
 NETWORK::10-128-0-0:
