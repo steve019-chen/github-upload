@@ -38,7 +38,7 @@ node btwn999991, btwn004551, btln007207 {
 
       # Run it only on Windows 2012 R2 and newer
 
-      if $facts['kernelversion'] >= 6.3 {
+      if (Float.new($facts['kernelmajversion'])) >= 6.3 {
 
         file { 'win install file':
           ensure => present,
