@@ -1,24 +1,30 @@
-# Class: Profile pr_svcscan
+# Class: pr_base_lin
 #
-# This Profile is in place for the Security team to deploy an account 
-# that they can use to connect to all linux machines via an ssh key
-# for doing vulnerability scans
-# Rhel 5 servers with LDAP do not work with remotelogin group due to bug
-# https://bugzilla.redhat.com/show_bug.cgi?id=1358881 
-# Parameters: 
-#   - None
+# This class is the base profile for TELUS Linux servers
 #
 # Actions:
-#   - Creates 2 groups : svcscan and remotelogin
-#   - Create 1 user : svcscan with SSH access only
+#   - Creates additional VG, LV(s) and filesystems based on host specific Hiera data
 # 
 # Prereqs:
-#   - Jump point server has the required keys
-#   - pr_remotelogin_group
-#   - telus_user_group_sss fact
-#   - telus_user_group_winbind fact
+#   - Module puppetlabs-lvm
 #
-class profile::pr_svcscan {
+# lint:ignore:unquoted_node_name lint:ignore:140chars
+class profile::pr_base_lin_accounts {
+
+# For reference, as provided by Novo request
+# Group: remotelogin gid: 5050
+
+if (( $facts['telus_user_group_winbind'] == '0' and $facts['telus_user_group_sss'] == '1' and $facts['os']['release']['major'] > '5'))
+{
+  # Create the remotelogin group
+  group { 'remotelogin':
+    ensure => present,
+    gid    => '5050',
+  }
+}
+else {
+  # Don't create the remotelogin group
+}
 
 # For reference, as provided by Novo request
 # Account: svcscan uid: 32555
@@ -37,6 +43,10 @@ else
     ensure => present,
     gid    => '32555',
   }
+  group { 'unixt4':
+    ensure => present,
+    gid    => '53535',
+  }
 
   # A few servers in the Linux enviornment do not have remotelogin group
   # and have winbind enabled. The following condition ensures we do not assign
@@ -49,17 +59,28 @@ else
     # Do not include in remotelogin group
 
     user { 'svcscan':
-      uid      => '32555',
-      gid      => 'svcscan',
-      password => '*LK*',
-      require  => Group['svcscan'],
+      uid        => '32555',
+      gid        => 'svcscan',
+      password   => '*LK*',
+      managehome => true,
+      require    => Group['svcscan'],
     }
+  # Create the unixt4 user for application account, set password
+
+  user { 'unixt4':
+    uid        => '53535',
+    gid        => 'unixt4',
+    shell      => '/bin/bash',
+    password   => '*LK*',
+    managehome => true,
+    require    => Group['unixt4'],
+  }
+
   }
   else {
 
     # Create the svcscan user for application account with remotelogin group
     # set password to locked
-    # Remotelogin is already set in remotelogin profile for all valid scenarios
     user { 'svcscan':
       uid        => '32555',
       gid        => 'svcscan',
@@ -68,15 +89,22 @@ else
       managehome => true,
       require    => Group['svcscan','remotelogin'],
     }
+
+  # Create the unixt4 user for application account with remotelogin group
+  # set password to locked
+
+    user { 'unixt4':
+      uid        => '53535',
+      gid        => 'unixt4',
+      shell      => '/bin/bash',
+      groups     => 'remotelogin',
+      password   => '*LK*',
+      managehome => true,
+      require    => Group['unixt4','remotelogin'],
+    }
   }
 
-  # Create home directory for user and set permissions
-  file { '/home/svcscan':
-    ensure  => 'directory',
-    owner   => 'svcscan',
-    require => User['svcscan'],
-  }
-  # lint:ignore:140chars
+
   # # Limiting deployment to : KIDC Prod, KIDC NP, Toll, Laird, QIDC Non Prod, QIDC Prod
   # # Not deploying to: QIDC Tools, KIDC Tools
   if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btlp000336.corp.ads','btln000197.corp.ads','btlp000966.corp.ads','lp99604.corp.ads','lp99605.corp.ads'] )
@@ -89,6 +117,13 @@ else
       options => ['from="142.178.205.169,142.178.204.112,142.178.174.10,142.174.129.135,142.174.129.139,142.174.129.176,142.174.61.117,142.63.129.17,142.174.61.79,75.153.176.179,96.1.160.14,96.1.166.109,100.77.164.23,100.77.165.23,100.125.253.244 ,100.125.162.244,100.70.15.254,100.64.33.30,100.70.23.30,100.70.15.158,100.70.22.62,96.1.250.230,100.70.30.85,100.70.32.85,204.191.153.3,209.29.0.44,209.29.0.161,209.29.0.169,96.1.170.47,96.1.160.113,142.178.22.16 ,100.70.31.235,205.206.214.190,209.91.119.50,100.125.167.228,100.125.167.244"','no-agent-forwarding','no-port-forwarding','no-X11-forwarding'],
       key     => 'AAAAB3NzaC1yc2EAAAABJQAAAQEAjHK8a6LfhEsrUuy5LxcmgFS++lzLNgnyBoQS8oRsG/Wb8vgbyJ9wW4wLxvTHIOvULsRoR5Q0zrI9uX7NVZug614iZf0qQ4yxrOgkz8Q+bZDO6pbJdFWPyqQP83N7e/1Pk1RULbH7tfe7bD7N0lG0HBy7NMh3rjqISTxB7zHbmM3HXbFFOJs3qqdxZ0foXNpeB9Ob1Plg02B6+fSZ+BeaVNC/zEgMwIxEcgpwq1cMigY+jFlFD6yaArr67wF7WQeArd6f/NY5jq+BEnqhEDp49Yul3naMvuamn52/q46+b4JtsWpL750/c8CRtSDg1LPsrb6jq7HrRK0saqc0o+okuw==',
       require => File['/home/svcscan'],
+    }
+    ssh_authorized_key { 'unixt4':
+      ensure  => present,
+      user    => 'unixt4',
+      type    => 'ssh-rsa',
+      options => 'from="142.63.43.98"',
+      key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA0Ou2HuF2wwGuLR3kZtco9K6LdIsFpoaLhNlIveLqoqnuYsCIwDIjwNawgep35B/koQyika6zcVY7SNsj5rSOzfpsoA6NvTxcNfdfOakCbBQCLQfza3P1EBuQutVagcYAuukyM14LRTACDKBSnV8b46AvW5DE9c1po6iIAq22dsNGIHcNn17CnXI9WA9fEy1S7+ioGPPjwOz+UkXzxaOr9InwO9/kxLBcBLfGfMIvYW8TPPXTGw8+VNwJg9g5ZodaMR6JKGccOxL+mj4EWTOc56s/diRarbkGky78I1eg7JyQWtDKNvAz7cQ1eANUdDa7LOSHDgfR8n5uDD4wp+tBqw==',
     }
   }
   # # Limiting deployment to : QIDC Tools, KIDC Tools
@@ -108,7 +143,8 @@ else
   {
     # No service account
   }
-  # lint:endignore
 
   }
+
 }
+# lint:endignore
