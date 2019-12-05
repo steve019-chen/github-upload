@@ -16,6 +16,7 @@ node default {
 #  class { 'role::rl_patrol_rofs': }
 #}
 
+# 20191205 - Node manager for starting services on weblogic machines
 node btlp000757, btlp006265, lp97208, lp99697
 {
   include role::rl_nodemanager
