@@ -16,7 +16,7 @@ node default {
 #  class { 'role::rl_patrol_rofs': }
 #}
 
-node btln999924, btln999923
+node btln999924, btln999923, btlp000757, btlp006265, lp97208, lp99697
 {
   include role::rl_nodemanager
 }
