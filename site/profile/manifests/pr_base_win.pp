@@ -24,9 +24,9 @@ class profile::pr_base_win {
 # if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads'] )
 #   { include profile::pr_base_win_temp }
 
-# # Limiting deployment to : SDE, KIDC Non Prod, QIDC NP
-# # Not deploying to: KIDC Prod, QIDC Prod, QIDC Tools, KIDC Tools, Toll, Laird
-if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btln000197.corp.ads'] )
+# # Limiting deployment to : SDE, KIDC Non Prod, QIDC NP, Laird
+# # Not deploying to: QIDC Tools, KIDC Tools, Toll, KIDC Prod, QIDC Prod
+if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btln000197.corp.ads','lp99604.corp.ads'] )
   { include profile::pr_base_win_temp }
 
 }
