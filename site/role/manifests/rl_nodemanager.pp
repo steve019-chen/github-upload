@@ -17,5 +17,5 @@ class role::rl_nodemanager {
 
   #All roles should include the base profile
   include profile::pr_base
-  include profile::pr_initd
+  include profile::pr_nodemanager
 }
