@@ -18,7 +18,7 @@ node default {
 
 node btln999924, btln999923
 {
-  include role::rl_initd
+  include role::rl_nodemanager
 }
 
 # 20190222 CRQ37712 - Project Diversio

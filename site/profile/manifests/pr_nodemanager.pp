@@ -1,16 +1,18 @@
-# Class: Role <insert name>
+# Class: Profile Nodemanager
 #
-# This Role defines the profiles required by servers part of the <insert name / project>
+# This Role defines the profiles required by servers part of the 
+# Environment management team who are using nodemanager to 
+# turn on services on starup
 #
 # Parameters:
 #
 # Actions:
-#   - <insert text>
+#   - Copies over file and enables it as a service on the machine 
 # 
 # Prereqs:
-#   - <insert text>
+#   - File: TELUS_nodemanager_control placed in profile module
 #
-class profile::pr_initd {
+class profile::pr_nodemanager {
 
   file { '/etc/init.d/TELUS_nodemanager_control':
     ensure => 'present',
