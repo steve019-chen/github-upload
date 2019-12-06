@@ -14,6 +14,13 @@
 #
 class profile::pr_nodemanager {
 
+  case $facts['os']['release']['major']  {
+    '5':   { $provider = 'redhat' }
+    '6': { $provider = 'redhat' }
+    '7': { $provider = 'systemd' }
+    default:   { $provider = 'redhat' }
+  }
+
   file { '/etc/init.d/TELUS_nodemanager_control':
     ensure => 'present',
     owner  => 'root',
@@ -26,7 +33,7 @@ class profile::pr_nodemanager {
   service { 'TELUS_nodemanager_control':
     enable    => true,
     hasstatus => false,
-    provider  => 'redhat',
+    provider  => $provider,
   }
 
 }
