@@ -15,9 +15,9 @@
 class profile::pr_nodemanager {
 
   case $facts['os']['release']['major']  {
-    '5':   { $provider = 'redhat' }
+    '5': { $provider = 'redhat' }
     '6': { $provider = 'redhat' }
-    '7': { $provider = 'systemd' }
+    '7': { $provider = 'redhat' }   #switch to using systemd with a unit file
     default:   { $provider = 'redhat' }
   }
 
