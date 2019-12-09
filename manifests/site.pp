@@ -5,10 +5,121 @@ node default {
 
 }
 
+# lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
+
+# 20191209 - Puppet 6 agent upgrade - Linux KIDC NP - CRQ71596
+
+node btln007444,btln007432,btln007423,btln007422,btln007421,btln007409,btln007398,btln007397,btln007349,btln007337,btln007336,
+btln007335,btln007334,btln007333,btln007332,btln007331,btln007330,btln007329,btln007328,btln007327,btln007326,btln007325,btln007324,
+btln007323,btln007322,btln007321,btln007320,btln007319,btln007318,btln007317,btln007316,btln007315,btln007314,btln007313,btln007312,
+btln007311,btln007301,btln007300,btln007299,btln007298,btln007297,btln007296,btln007295,btln007294,btln007293,btln007292,btln007291,
+btln007246,btln007245,btln007244,btln007243,btln007242,btln007241,btln007240,btln007239,btln007238,btln007237,btln007236,btln007235,
+btln007234,btln007233,btln007232,btln007231,btln007229,btln007228,btln007227,btln007226,btln007225,btln007224,btln007223,btln007177,
+btln007176,btln007175,btln007174,btln007173,btln007172,btln007171,btln007170,btln007169,btln007168,btln007167,btln007166,btln007165,
+btln007164,btln007152,btln007151,btln007149,btln007148,btln007147,btln007146,btln007142,btln007141,btln007140,btln007139,btln007138,
+btln007107,btln007106,btln007105,btln007095,btln007094,btln007093,btln007092,btln007069,btln007068,btln007067,btln007066,btln007065,
+btln007059,btln007058,btln007057,btln007056,btln007055,btln007005,btln007004,btln007003,btln007002,btln007001,btln007000,btln003011,
+btln003003,btln002993,btln002992,btln002991,btln002968,btln002967,btln002966,btln002965,btln002964,btln002920,btln002912,btln002911,
+btln002900,btln002899,btln002898,btln002896,btln002895,btln002890,btln002878,btln002877,btln002876,btln002875,btln002874,btln002873,
+btln002872,btln002871,btln002870,btln002869,btln002868,btln002867,btln002866,btln002865,btln002864,btln002863,btln002862,btln002861,
+btln002860,btln002859,btln002858,btln002857,btln002856,btln002855,btln002854,btln002853,btln002831,btln002830,btln002829,btln002821,
+btln002820,btln002819,btln002818,btln002816,btln002815,btln002802,btln002801,btln002797,btln002796,btln002791,btln002790,btln002786,
+btln002784,btln002776,btln002775,btln002774,btln002773,btln002772,btln002771,btln002752,btln002751,btln002750,btln002749,btln002748,
+btln002747,btln002746,btln002745,btln002744,btln002743,btln002742,btln002741,btln002728,btln002727
+{
+  case $facts['kernel'] {
+    'Linux'  : {
+
+      case $facts['os']['release']['major'] {
+        '5':  {
+                $puppet5_channel = 'puppet5-rhel5-x86_64-locked'
+                $puppet6_channel = 'puppet6-rhel5-x86_64-locked'
+              }
+        '6':  {
+                $puppet5_channel = 'puppet5-rhel6-x86_64-locked'
+                $puppet6_channel = 'puppet6-rhel6-x86_64-locked'
+              }
+        '7':  {
+                $puppet5_channel = 'puppet5-rhel7-x86_64-locked'
+                $puppet6_channel = 'puppet6-rhel7-x86_64-locked'
+              }
+        default: { fail('Puppet is only supported on Oracle Linux 5,6, and 7') }
+      }
+
+      # Add Puppet 6 channel
+      telus_lib::yum_channel { $puppet6_channel:
+        ensure => present,
+      }
+
+      # Remove Puppet 5 channel
+      telus_lib::yum_channel { $puppet5_channel:
+        ensure => absent,
+      }
 
 
+      class {'::puppet_agent':
+        collection      => 'puppet6',
+        package_version => '6.11.1',
+        service_names   => ['puppet'],
+        manage_repo     => false,
+        notify          => Exec['set lin no_proxy','set lin resubmit_facts'],
+        require         => Telus_lib::Yum_channel[$puppet6_channel],
+      }
 
-# lint:ignore:unquoted_node_name lint:ignore:140chars
+      exec { 'set lin no_proxy':
+        command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+        path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+        unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
+      }
+
+      exec { 'set lin resubmit_facts':
+        command => 'puppet config set resubmit_facts true',
+        path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+        unless  => 'puppet config print resubmit_facts | grep -q true > /dev/null',
+      }
+
+    }
+    'windows': {
+
+      # Run it only on Windows 2012 R2 and newer
+
+      # if (Float.new($facts['kernelmajversion'])) >= 6.3 {
+
+      #   file { 'win install file':
+      #     ensure => present,
+      #     path   => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
+      #     source => 'puppet:///software/windows/puppet-agent-6.11.1-x64.msi',
+      #   }
+
+      #   class {'::puppet_agent':
+      #     absolute_source       => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
+      #     collection            => 'puppet6',
+      #     package_version       => '6.11.1',
+      #     service_names         => ['puppet'],
+      #     manage_repo           => false,
+      #     msi_move_locked_files => true,
+      #     require               => File['win install file'],
+      #     notify                => Exec['set win no_proxy','set win resubmit_facts'],
+      #   }
+
+      #   exec { 'set win no_proxy':
+      #     command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+      #     path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+      #     unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
+      #   }
+
+      #   exec { 'set win resubmit_facts':
+      #     command => 'cmd.exe /c  puppet config set resubmit_facts true',
+      #     path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+      #     unless  => 'cmd.exe /c puppet config print resubmit_facts | findstr.exe true > nul',
+      #   }
+
+      # }
+    }
+    default: { }
+  }
+}
+
 
 # 20190528  - Patrol ROFS module Non-prod - change4 - CRQ50447
 #node btln007243,btln007331,btln001963,btln000435,btln001839,btln007058,btln003025,btln002968,btln001790,btln002347,btln007003,btln000395,btln002177,btln001296,btln007609,btln000420,btln000428,btln007423,btln002046,btln007299,btln002054,btln001953,btln000433,btln001684,btln002011,btln002818,btln007607,btln002992,btln000429,btln001293,btln002394,btln007315,btln007291,btln002920,btln000438,btln007066,btln002122,btln002713,btln002023,btln002057,btln002390,btln002532,btln001576,btln002622,btln007237,btln002967,btln002092,btln002702,btln002090,btln002614,btln000623,btln001832,btln000590,btln002564,btln000414,btln003067,btln002529,btln001992,btln000544,btln002865,btln002478,btln007475,btln000403,btln002877,btln002724,tsln000108,btln007244,btln001821,btln007421,btln001854,btln001855,btln002797,btln000398,btln000721,btln001370,btln002377,btln002172,btln002385,btln000422,btln003047,btln003061,btln002176,btln002295,btln001283,btln001970,btln002064,btln007606,btln003000,btln007325,btln001611,btln001829,btln007140,btln002387,btln001276,btln002603,btln001246,btln002787,btln002711,btln003042,btln001958,btln001262,btln007329,btln007476,btln001698,btln000426,btln001794,btln007597,btln003011,btln002307,btln002382,btln001795,btln001264,btln001796,btln000695,btln003041,btln001443,tsln000104,btln007347,btln000412,btln000732,btln002858,btln001784,btln002060,btln002714,btln007138,btln002381,btln002015,btln002808,btln002480,btln002388,btln003059,btln002454,btln002786,btln002716,btln001419,btln002095,btln000547,btln002455,btln000589,btln003007,btln002004,btln001774,btln002750,btln002752,btln002862,btln002391,btln007142,btln001272,btln003043,btln001969,btln002484,btln002712,btln001415,btln007477,btln002720,btln002613,btln002473,btln002997,btln002313,btln007148,btln007344,btln002487,btln007245,btln007598,btln002863,btln002048,btln002688,btln001803,btln001836,btln007152,btln002105,btln001247,btln007320,btln000625,btln001610,btln001833,btln007599,btln001853,btln001430,btln001242,btln007502,btln002745,btln001792,btln007241,btln002771,btln002482,btln007211,btln000419,btln007327,btln002998,btln000741,btln000737,btln000722,btln007225,btln007095,btln002091,btln000431,btln007332,btln001844,btln007236,btln000519,btln002810,btln007396,btln007259,btln001584,btln007123,btln001596,btln001051,btln007541,btln000693,btln001742,btln001066,btln002690,btln001090,btln001543,btln001336,btln001180,btln001695,btln000343,btln002179,btln000905,btln007474,btln007043,btln007587,btln001351,btln001456,btln001062,btln002632,btln002439,btln001068,btln007713,btln007583,btln000928,btln007536,btln001980,btln001162,btln001085,btln007394,btln007472,btln000471,btln000963,btln001639,btln002708,btln002636,btln001651,btln001227,btln002985,btln002033,btln002322,btln001723,btln000274,btln000353,btln000462,btln001989,btln000676,btln007127,btln007459,btln001704,btln007443,btln002691,btln007561,btln007544,btln007485,btln000328,btln002417,btln001763,btln000306,btln001565,btln001652,btln001181,btln002551,btln007269,btln001321,btln001955,btln007414,btln001819,btln001289,btln007662,btln007535,btln001658,btln007077,btln000279,btln007391,btln002703,btln002472,btln002118,btln001347,btln000313,btln007124,btln002304,btln002323,btln001178,btln001646,btln000919,btln001988,btln001586,btln001203,btln001529,btln000967,btln001199,btln002339,btln001067,btln001656,btln002080,btln007585,btln001512
