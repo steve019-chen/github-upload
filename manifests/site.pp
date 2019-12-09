@@ -39,19 +39,6 @@ node btwn999991, btwn004551, btln-test02, btln-test06, btln007803, ln-test11 {
         ensure => absent,
       }
 
-      # Install Puppet GPG Key
-      # file { 'RPM-GPG-KEY-puppet':
-      #   ensure => present,
-      #   path   => '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet',
-      #   source => 'puppet:///modules/telus_lib/RPM-GPG-KEY-puppet',
-      # }
-
-      # gpg_key { 'puppet':
-      #   path => '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet',
-      # }
-
-
-
       class {'::puppet_agent':
         collection      => 'puppet6',
         package_version => '6.11.1',
