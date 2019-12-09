@@ -39,6 +39,7 @@ node btwn999991, btwn004551, btln-test02, btln-test06, btln007803, ln-test11 {
         ensure => absent,
       }
 
+
       class {'::puppet_agent':
         collection      => 'puppet6',
         package_version => '6.11.1',
@@ -65,38 +66,38 @@ node btwn999991, btwn004551, btln-test02, btln-test06, btln007803, ln-test11 {
 
       # Run it only on Windows 2012 R2 and newer
 
-      if (Float.new($facts['kernelmajversion'])) >= 6.3 {
+      # if (Float.new($facts['kernelmajversion'])) >= 6.3 {
 
-        file { 'win install file':
-          ensure => present,
-          path   => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
-          source => 'puppet:///software/windows/puppet-agent-6.11.1-x64.msi',
-        }
+      #   file { 'win install file':
+      #     ensure => present,
+      #     path   => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
+      #     source => 'puppet:///software/windows/puppet-agent-6.11.1-x64.msi',
+      #   }
 
-        class {'::puppet_agent':
-          absolute_source       => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
-          collection            => 'puppet6',
-          package_version       => '6.11.1',
-          service_names         => ['puppet'],
-          manage_repo           => false,
-          msi_move_locked_files => true,
-          require               => File['win install file'],
-          notify                => Exec['set win no_proxy','set win resubmit_facts'],
-        }
+      #   class {'::puppet_agent':
+      #     absolute_source       => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
+      #     collection            => 'puppet6',
+      #     package_version       => '6.11.1',
+      #     service_names         => ['puppet'],
+      #     manage_repo           => false,
+      #     msi_move_locked_files => true,
+      #     require               => File['win install file'],
+      #     notify                => Exec['set win no_proxy','set win resubmit_facts'],
+      #   }
 
-        exec { 'set win no_proxy':
-          command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-          path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
-          unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
-        }
+      #   exec { 'set win no_proxy':
+      #     command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+      #     path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+      #     unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
+      #   }
 
-        exec { 'set win resubmit_facts':
-          command => 'cmd.exe /c  puppet config set resubmit_facts true',
-          path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
-          unless  => 'cmd.exe /c puppet config print resubmit_facts | findstr.exe true > nul',
-        }
+      #   exec { 'set win resubmit_facts':
+      #     command => 'cmd.exe /c  puppet config set resubmit_facts true',
+      #     path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+      #     unless  => 'cmd.exe /c puppet config print resubmit_facts | findstr.exe true > nul',
+      #   }
 
-      }
+      # }
     }
     default: { }
   }
