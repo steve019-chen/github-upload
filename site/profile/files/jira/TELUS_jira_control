@@ -1,0 +1,4 @@
+#!/bin/bash
+# chkconfig: 345 99 99
+
+# <Update with real code and delete this line>
