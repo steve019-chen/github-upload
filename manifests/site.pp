@@ -113,10 +113,11 @@ include profile::pr_base
 #}
 
 # 20190222 CRQ37712 - Project Diversio
-# node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
-# {
-#   include role::rl_diversio
-# }
+
+node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
+{
+  include role::rl_diversio
+}
 
 # 2019/11/17 CRQ71464 - Patrol upgrade group 1007
 # node tslp000150,tslp000251,tslp000274,tslp000275,tslp000288,tslp000289,
