@@ -10,7 +10,7 @@ include profile::pr_base
 
 # Puppet 6 upgrade stanza
 
-node btln001165,btln001166,btln001263,btln001341,btln001342,btln001343,btln001344,btln001345,btln001346,btln001848,btln002554
+node btlp000646.corp.ads,btlp000815.corp.ads,btlp000952.corp.ads,btlp001056.corp.ads,btlp001057.corp.ads,btlp001592.corp.ads,btlp001593.corp.ads
 {
   case $facts['kernel'] {
     'Linux'  : {
