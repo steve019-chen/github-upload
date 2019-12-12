@@ -3,11 +3,12 @@
 # This class is the base profile for TELUS Linux servers
 #
 # Actions:
-#   - Creates additional VG, LV(s) and filesystems based on host specific Hiera data
-# 
+#   - Creates remotelogin group on all ldap enabled servers
+#   - Creates svcscan and unixadm service accounts
+#   - 
 # Prereqs:
-#   - Module puppetlabs-lvm
-#
+#   - telus_user_group_winbind custom fact deployed to machines
+#   - telus_user_group_sss custom fact deployed to machines
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 class profile::pr_base_lin_accounts {
 
@@ -65,7 +66,7 @@ else
       managehome => true,
       require    => Group['svcscan'],
     }
-  # Create the unixt4 user for application account, set password
+  # Create the unixt4 user for application account, set password to locked
 
   user { 'unixt4':
     uid        => '53535',
