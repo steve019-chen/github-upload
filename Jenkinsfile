@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'puppet' }
     environment {
-        PUPPET_ENV = "${currentBuild.fullDisplayName ==~ "SDE" ? "SDE" : /.*Prod.*/ }"
+        PUPPET_ENV = "${currentBuild.fullDisplayName ==~ /.*SDE.*/ ? "[SDE]" : "[Prod]" }"
     }
     stages {
 
