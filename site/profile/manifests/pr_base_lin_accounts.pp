@@ -14,6 +14,9 @@ class profile::pr_base_lin_accounts {
 
 # For reference, as provided by Novo request
 # Group: remotelogin gid: 5050
+# No Ldap : no rl group  >>> ldap yes : yes rl
+# Ldap and rhel 5 : no rl group >>> ldap and rhel 6/7/ : yes rl
+# Winbind : no rl group >>> winbin 0 : yes rl
 
 if (( $facts['telus_user_group_winbind'] == '0' and $facts['telus_user_group_sss'] == '1' and $facts['os']['release']['major'] > '5'))
 {
