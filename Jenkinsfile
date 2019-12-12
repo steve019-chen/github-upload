@@ -1,12 +1,7 @@
 pipeline {
     agent { label 'puppet' }
     environment {
-        PUPPET_ENV = "${currentBuild.fullDisplayName ==~ "SDE" ? "SDE" : "Prod" }"
-        // if(currentBuild.fullDisplayName ==~ "SDE") {
-        //     PUPPET_ENV = "SDE"
-        // } else {
-        //     PUPPET_ENV = "Prod"
-        // }
+        PUPPET_ENV = "${currentBuild.fullDisplayName ==~ "SDE" ? "SDE" : /.*Prod.*/ }"
     }
     stages {
 
@@ -39,12 +34,6 @@ pipeline {
 
     }
     post {
-        // if(currentBuild.fullDisplayName ==~ "SDE") {
-        //     def puppet_env = "SDE"
-        // } else {
-        //     def puppet_env = "Prod"
-        // }
-
         always {
             echo 'Job completed'
         }
