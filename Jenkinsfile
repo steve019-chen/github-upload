@@ -39,11 +39,11 @@ pipeline {
 
     }
     post {
-        if(currentBuild.fullDisplayName ==~ "SDE") {
-            def puppet_env = "SDE"
-        } else {
-            def puppet_env = "Prod"
-        }
+        // if(currentBuild.fullDisplayName ==~ "SDE") {
+        //     def puppet_env = "SDE"
+        // } else {
+        //     def puppet_env = "Prod"
+        // }
 
         always {
             echo 'Job completed'
