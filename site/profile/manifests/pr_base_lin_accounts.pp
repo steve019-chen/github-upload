@@ -53,7 +53,7 @@ else
   # and have winbind enabled. The following condition ensures we do not assign
   # remotelogin group to the user in this case
 
-  if ( ( $facts['telus_user_group_winbind'] == '1' ) and ( $facts['telus_user_group_sss'] == '0' ) )
+  if ( ( $facts['telus_user_group_winbind'] == '1' ) or ( $facts['telus_user_group_sss'] == '0' ) )
   {
 
     # Create the svcscan user for application account, set password to locked
