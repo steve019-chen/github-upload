@@ -1,12 +1,12 @@
 pipeline {
     agent { label 'puppet' }
-    environment {
-        if(currentBuild.fullDisplayName ==~ "SDE") {
-            PUPPET_ENV = "SDE"
-        } else {
-            PUPPET_ENV = "Prod"
-        }
-    }
+    // environment {
+    //     if(currentBuild.fullDisplayName ==~ "SDE") {
+    //         PUPPET_ENV = "SDE"
+    //     } else {
+    //         PUPPET_ENV = "Prod"
+    //     }
+    // }
     stages {
 
         stage('Puppet 5.5 pdk validate') {
@@ -38,6 +38,12 @@ pipeline {
 
     }
     post {
+        if(currentBuild.fullDisplayName ==~ "SDE") {
+            def puppet_env = "SDE"
+        } else {
+            def puppet_env = "Prod"
+        }
+
         always {
             echo 'Job completed'
         }
@@ -46,7 +52,7 @@ pipeline {
             emailext (
                 mimeType: 'text/html',
                 to: 'cc:$DEFAULT_RECIPIENTS',
-                subject: "${PUPPET_ENV} Jenkins Successful Pipeline: ${currentBuild.fullDisplayName}",
+                subject: "${puppet_env} Jenkins Successful Pipeline: ${currentBuild.fullDisplayName}",
                 body: '''${SCRIPT, template="groovy-html.template"}''',
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
@@ -56,7 +62,7 @@ pipeline {
             emailext (
                 mimeType: 'text/html',
                 to: 'cc:$DEFAULT_RECIPIENTS',
-                subject: "${PUPPET_ENV} Jenkins Failed Pipeline: ${currentBuild.fullDisplayName}",
+                subject: "${puppet_env} Jenkins Failed Pipeline: ${currentBuild.fullDisplayName}",
                 body: '''${SCRIPT, template="groovy-html.template"}''',
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
