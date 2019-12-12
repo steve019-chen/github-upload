@@ -106,6 +106,12 @@ node btlp000646.corp.ads,btlp000815.corp.ads,btlp000952.corp.ads,btlp001056.corp
 }
 
 
+# 20191205 - Node manager for starting services on weblogic
+node btlp000757, lp97208
+{
+  include role::rl_nodemanager
+}
+
 # 20190222 CRQ37712 - Project Diversio
 
 node ln98551,lp97396,lp99440,lp99538,lp97817,lp97397,lp97728
