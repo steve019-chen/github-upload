@@ -17,7 +17,7 @@ node default {
 #}
 
 # 20191205 - Node manager for starting services on weblogic
-node btln999923, btln999924, btlp000757, btlp006265, lp97208, lp99697
+node btlp000757, lp97208
 {
   include role::rl_nodemanager
 }
