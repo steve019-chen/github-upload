@@ -10,7 +10,8 @@ node default {
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-node btln001248, btln001249, btln007564
+#node btln001248, btln001249, btln007564
+node btln007564
 {
   include role::rl_jira
 }

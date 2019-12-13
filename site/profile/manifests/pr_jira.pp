@@ -13,6 +13,8 @@
 class profile::pr_jira {
 
 # For reference, as provided by Novo request: svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
+# From Cadmus svc_jira:x:16257:100:Ryan Chan a/r 1307258:/home/svc_jira:/usr/bin/ksh
+
 # Create the users group
 
 group { 'users':
@@ -22,14 +24,14 @@ group { 'users':
 
 # Create the svc_prov user for application account, set password
 
-# user { 'svc_prov':
-#   uid        => '15993',
-#   gid        => 'users',
-#   shell      => '/bin/bash',
-#   password   => pw_hash(lookup('asapnoc::app_account_password'), 'SHA-512','mysalt'),
-#   managehome => true,
-#   require    => Group['users'],
-# }
+ user { 'svc_jira':
+   uid        => '16257',
+   gid        => 'users',
+   shell      => '/bin/bash',
+   password   => pw_hash(lookup('jira::app_account_password'), 'SHA-512','mysalt'),
+   managehome => true,
+   require    => Group['users'],
+ }
 
 # Adding Sudo rules for docker and apache
 
@@ -43,17 +45,24 @@ class { 'sudo':
 
 sudo::conf { 'puppet_jira':
   priority => 10,
-  content  => 'svc_jira ALL=NOPASSWD : /sbin/service httpd start, /sbin/service httpd stop, /sbin/service httpd restart, /sbin/service httpd status, /usr/sbin/chkconfig httpd on, /usr/sbin/chkconfig httpd off, /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug',
+  content  => 'svc_jira ALL=NOPASSWD: /etc/init.d/httpd, /sbin/service httpd start, /sbin/service httpd stop, /sbin/service httpd restart, /sbin/service httpd status, /bin/docker, /bin/systemctl daemon-reload, /sbin/service docker start, /sbin/service docker stop, /sbin/service docker restart, /sbin/service docker status, /sbin/service mysqld start, /sbin/service mysqld stop, /sbin/service mysqld restart, /sbin/service mysqld status, /sbin/service jira start, /sbin/service jira stop, /sbin/service jira restart, /usr/sbin/chkconfig httpd on, /usr/sbin/chkconfig httpd off, /usr/sbin/chkconfig mysqld on, /usr/sbin/chkconfig mysqld off, /usr/sbin/chkconfig docker on, /usr/sbin/chkconfig docker off',
+}
+sudo::conf { 'puppet_jira_mysql':
+  priority => 10,
+  content  => 'svc_jira ALL=(mysql) NOPASSWD: ALL',
 }
 sudo::conf { 'puppet_agent':
   priority => 20,
   content  => 'svc_jira ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug',
 }
 
-file {'/etc/rc.d/init.d/test1':
-  ensure  => present,
-  content => "Hello Jojos",
-  }
+file_line { 'add_crontab_access':
+  ensure => 'present',
+  path  => '/etc/cron.allow',
+  line  => 'svc_jira',
+  match  => 'svc_jira',
+  append_on_no_match => 'true',
+}
 
 case $facts['os']['release']['major']  {
   '5': { $provider = 'redhat' }

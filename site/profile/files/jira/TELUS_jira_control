@@ -1,4 +1,40 @@
-#!/bin/bash
-# chkconfig: 345 99 99
+#!/bin/sh -e
+# JIRA startup script
+#chkconfig: 2345 80 05
+#description: JIRA
 
-# <Update with real code and delete this line>
+# Define some variables
+# Name of app ( JIRA, Confluence, etc )
+APP=jira
+# Name of the user to run as
+USER=svc_jira
+# Location of application's bin directory
+BASE=/apps/jira/jira7
+# Location of Java JDK
+export JAVA_HOME=/apps/java/jdk8
+
+case "$1" in
+  # Start command
+  start)
+    echo "Starting $APP"
+    /bin/su -m $USER -c "cd $BASE/logs && $BASE/bin/start-jira.sh &> /dev/null"
+    ;;
+  # Stop command
+  stop)
+    echo "Stopping $APP"
+    /bin/su -m $USER -c "$BASE/bin/stop-jira.sh &> /dev/null"
+    echo "$APP stopped successfully"
+    ;;
+   # Restart command
+   restart)
+        $0 stop
+        sleep 25
+        $0 start
+        ;;
+  *)
+    echo "Usage: /etc/init.d/$APP {start|restart|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
