@@ -12,14 +12,55 @@
 
 class profile::pr_jira {
 
-# For reference, as provided by Novo request: svc_prov:x:15993:100:svc_prov:/home/svc_prov:/usr/bin/ksh
-# From Cadmus svc_jira:x:16257:100:Ryan Chan a/r 1307258:/home/svc_jira:/usr/bin/ksh
+# Download and Install GPG Key
+$key_file = 'RPM-GPG-KEY-DOCKER-CE'
+$key_name = 'DOCKER-CE'
+
+file { $key_file:
+  ensure => present,
+  path   => "/etc/pki/rpm-gpg/${key_file}",
+  source => "puppet:///modules/telus_lib/${key_file}",
+}
+
+gpg_key { $key_name:
+  path    => "/etc/pki/rpm-gpg/${key_file}",
+}
+
+# Install docker
+# Note: proxy just sets the configuration after installing docker
+# this does not get used when downloading the package, this proxy 
+# is used when connecting to docker hub to download the images
+class { 'docker':
+  use_upstream_package_source => false,
+  version                     => '18.09.3-3.el7',
+  proxy                       => 'http://pac.tsl.telus.com:8080',
+  log_driver                  => 'json-file',
+  log_opt                     => ['max-size=10m', 'max-file=5'],
+  require                     => Gpg_key[$key_name],
+}
+
+# Install docker compose
+class {'docker::compose':
+  ensure  => present,
+  version => '1.9.0',
+  proxy   => 'https://pac.tsl.telus.com:8080',
+}
+
+# Install apache
+class { 'apache':}
+
+# For reference, as provided by Cadmus svc_jira:x:16257:100:Ryan Chan a/r 1307258:/home/svc_jira:/usr/bin/ksh
 
 # Create the users group
 
 group { 'users':
   ensure => present,
   gid    => '100',
+}
+
+group { 'docker':
+  ensure => present,
+  gid    => '991',
 }
 
 # Create the svc_prov user for application account, set password
@@ -30,7 +71,8 @@ group { 'users':
    shell      => '/bin/bash',
    password   => pw_hash(lookup('jira::app_account_password'), 'SHA-512','mysalt'),
    managehome => true,
-   require    => Group['users'],
+   groups     => ['docker'],
+   require    => [ Group['users'], Group['docker'] ],
  }
 
 # Adding Sudo rules for docker and apache
