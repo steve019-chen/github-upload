@@ -65,15 +65,15 @@ group { 'docker':
 
 # Create the svc_prov user for application account, set password
 
- user { 'svc_jira':
-   uid        => '16257',
-   gid        => 'users',
-   shell      => '/bin/bash',
-   password   => pw_hash(lookup('jira::app_account_password'), 'SHA-512','mysalt'),
-   managehome => true,
-   groups     => ['docker'],
-   require    => [ Group['users'], Group['docker'] ],
- }
+user { 'svc_jira':
+  uid        => '16257',
+  gid        => 'users',
+  shell      => '/bin/bash',
+  password   => pw_hash(lookup('jira::app_account_password'), 'SHA-512','mysalt'),
+  managehome => true,
+  groups     => ['docker'],
+  require    => [ Group['users'], Group['docker'] ],
+}
 
 # Adding Sudo rules for docker and apache
 
@@ -99,11 +99,11 @@ sudo::conf { 'puppet_agent':
 }
 
 file_line { 'add_crontab_access':
-  ensure => 'present',
-  path  => '/etc/cron.allow',
-  line  => 'svc_jira',
-  match  => 'svc_jira',
-  append_on_no_match => 'true',
+  ensure              => 'present',
+  path                => '/etc/cron.allow',
+  line                => 'svc_jira',
+  match               => 'svc_jira',
+  append_on_no_match  => 'true',
 }
 
 case $facts['os']['release']['major']  {
