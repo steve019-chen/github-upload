@@ -36,12 +36,12 @@ user { 'svcbmcp':
 if (Float.new($facts['os']['release']['full']) >= 5.5)
 {
   $installtar = 'TSCO-perform-linux-latest.tar'
-  $installdir = 'TSCO-perform-linux-latest/'
+  $installdir = 'TSCO-perform-linux-latest'
 }
 elsif (Float.new($facts['os']['release']['full']) < 5.5 and Float.new($facts['os']['release']['full']) > 5.0)
 {
   $installtar = 'TSCO-perform-linux-legacy.tar'
-  $installdir = 'TSCO-perform-linux-legacy/'
+  $installdir = 'TSCO-perform-linux-legacy'
 }
 else {
   # Do nothing
@@ -75,7 +75,6 @@ else {
   # }
   
   archive { "/var/tmp/${installdir}":
-  ensure => directory,
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
   extract_path  => "/var/tmp/",
@@ -94,7 +93,7 @@ else {
   exec {'performupgrade':
     command     => 'install_wrapper.sh',
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-    cwd         => "/var/tmp/${installdir}",
+    cwd         => "/var/tmp/${installdir}/",
     environment => ['HOME=/home/svcbmcp'],
     creates     => '/var/tmp/perform_upgrade.status',
     timeout     => 3600,
