@@ -83,5 +83,6 @@ else {
     rmdirs  => true,
   }
 }
+}
 
 # lint:endignore
