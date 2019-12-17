@@ -33,11 +33,11 @@ user { 'svcbmcp':
 }
 
 
-if (os_full >= 5.5)
+if (Float.new($facts['os']['release']['full']) >= 5.5)
 {
   $installtar = 'TSCO-perform-linux-latest.tar'
 }
-elsif (os_full < 5.5 and os_full > 5.0)
+elsif (Float.new($facts['os']['release']['full']) < 5.5 and Float.new($facts['os']['release']['full']) > 5.0)
 {
   $installtar = 'TSCO-perform-linux-legacy.tar'
 }
