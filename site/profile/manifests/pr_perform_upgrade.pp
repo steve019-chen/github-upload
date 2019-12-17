@@ -11,7 +11,7 @@
 
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
-Float $os_full = $facts['os']['release']['full'].scanf('%f')[0]
+Float $os_full = $facts['os']['release']['full'].scanf('%f')[0],
 )
 {
 
