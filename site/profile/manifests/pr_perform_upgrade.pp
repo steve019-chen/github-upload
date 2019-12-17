@@ -42,7 +42,6 @@ elsif (Float.new($facts['os']['release']['full']) < 5.5 and Float.new($facts['os
 {
   $installtar = 'TSCO-perform-linux-legacy.tar'
   $installdir = 'TSCO-perform-linux-legacy/'
-  
 }
 else {
   # Do nothing
@@ -62,6 +61,8 @@ if $space_needed > $patrol['var_tmp_bytes'] {
 }
 else {
 
+
+
 # Download tar file
 # lint:ignore:puppet_url_without_modules
   # file { $installtar:
@@ -78,16 +79,25 @@ else {
   extract       => true,
   extract_path  => "/var/tmp/",
   cleanup => true,
-  before => Exec['performupgrade'],
+  }
+
+  file { "/var/tmp/${installdir}/install_wrapper.sh":
+    ensure => 'present',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/profile/perform_upgrade/install_wrapper.sh',
+    require => Archive["/var/tmp/${installdir}"],
   }
 
   exec {'performupgrade':
-    command     => 'su -c /var/tmp/patrol_rofs/install.sh svcbmcp',
+    command     => 'install_wrapper.sh',
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
     cwd         => "/var/tmp/${installdir}",
     environment => ['HOME=/home/svcbmcp'],
     creates     => '/opt/bmc/perform_upgrade.status',
     timeout     => 3600,
+    require => File["/var/tmp/${installdir}/install_wrapper.sh"],
   }
 
   # We have already completed, make sure we cleaned up.
