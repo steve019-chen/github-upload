@@ -31,11 +31,12 @@ user { 'svcbmcp':
   require => Group['bmc'],
 }
 
-if ($facts['os']['release']['full'] >= 5.5)
+$os_full = $facts['os']['release']['full'].scanf('%f')[0]
+if (os_full >= 5.5)
 {
   $installtar = 'TSCO-perform-linux-latest.tar'
 }
-elsif ($facts['os']['release']['full'] < 5.5 and $facts['os']['release']['full'] > 5.0)
+elsif (os_full < 5.5 and os_full > 5.0)
 {
   $installtar = 'TSCO-perform-linux-legacy.tar'
 }
