@@ -11,7 +11,7 @@
 
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
-Float $os_full = $facts['os']['release']['full'].scanf('%f')[0],
+Float $os_full = Float.new($facts['os']['release']['full']),
 )
 {
 
@@ -33,17 +33,17 @@ user { 'svcbmcp':
 }
 
 
-# if (os_full >= 5.5)
-# {
-   $installtar = 'TSCO-perform-linux-latest.tar'
-# }
-# elsif (os_full < 5.5 and os_full > 5.0)
-# {
-#   $installtar = 'TSCO-perform-linux-legacy.tar'
-# }
-# else {
-#   # Do nothing
-# }
+if (os_full >= 5.5)
+{
+  $installtar = 'TSCO-perform-linux-latest.tar'
+}
+elsif (os_full < 5.5 and os_full > 5.0)
+{
+  $installtar = 'TSCO-perform-linux-legacy.tar'
+}
+else {
+  # Do nothing
+}
 
 $patrol=$facts['patrol_info']
 
@@ -74,6 +74,7 @@ else {
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
   extract_path  => "/var/tmp/",
+  cleanup => true,
   before => Exec['performupgrade'],
   }
 
