@@ -74,10 +74,8 @@ else {
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
   extract_path  => "/var/tmp/",
-}
-
-
   }
+
   exec {'performupgrade':
     command     => 'su -c /var/tmp/patrol_rofs/install.sh svcbmcp',
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
@@ -95,6 +93,6 @@ else {
     rmdirs  => true,
   }
 }
-#}
+}
 
 # lint:endignore
