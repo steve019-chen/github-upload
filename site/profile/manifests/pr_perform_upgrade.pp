@@ -36,10 +36,12 @@ user { 'svcbmcp':
 if (Float.new($facts['os']['release']['full']) >= 5.5)
 {
   $installtar = 'TSCO-perform-linux-latest.tar'
+  $installdir = 'TSCO-perform-linux-latest'
 }
 elsif (Float.new($facts['os']['release']['full']) < 5.5 and Float.new($facts['os']['release']['full']) > 5.0)
 {
   $installtar = 'TSCO-perform-linux-legacy.tar'
+  $installdir = 'TSCO-perform-linux-legacy'
 }
 else {
   # Do nothing
@@ -70,7 +72,7 @@ else {
   #   source => "puppet:///software/perform_upgrade/${installtar}",
   # }
   
-  archive { "/var/tmp/${installtar}":
+  archive { "/var/tmp/${installdir}":
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
   extract_path  => "/var/tmp/",
@@ -81,14 +83,14 @@ else {
   exec {'performupgrade':
     command     => 'su -c /var/tmp/patrol_rofs/install.sh svcbmcp',
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-    cwd         => "/var/tmp/${installtar}",
+    cwd         => "/var/tmp/${installdir}",
     environment => ['HOME=/home/svcbmcp'],
     creates     => '/opt/bmc/perform_upgrade.status',
     timeout     => 3600,
   }
 
   # We have already completed, make sure we cleaned up.
-  tidy {'/var/tmp/patrol_rofs':
+  tidy {"/var/tmp/${installdir}":
     backup  => false,
     recurse => true,
     rmdirs  => true,
