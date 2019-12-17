@@ -61,19 +61,27 @@ else {
 
 # Download tar file
 # lint:ignore:puppet_url_without_modules
-  file { $installtar:
-    ensure => present,
-    path   => "/var/tmp/${installtar}",
-    mode   => '0755',
-    owner  => 'svcbmcp',
-    group  => 'bmc',
-    source => "puppet:///software/perform_upgrade/${installtar}",
-  }
+  # file { $installtar:
+  #   ensure => present,
+  #   path   => "/var/tmp/${installtar}",
+  #   mode   => '0755',
+  #   owner  => 'svcbmcp',
+  #   group  => 'bmc',
+  #   source => "puppet:///software/perform_upgrade/${installtar}",
+  # }
+  
+  archive { "/var/tmp/${installtar}":
+  source        => "puppet:///software/perform_upgrade/${installtar}",
+  extract       => true,
+  extract_path  => "/var/tmp/",
+}
 
+
+  }
   exec {'performupgrade':
     command     => 'su -c /var/tmp/patrol_rofs/install.sh svcbmcp',
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-    cwd         => '/var/tmp/patrol_rofs',
+    cwd         => "/var/tmp/${installtar}",
     environment => ['HOME=/home/svcbmcp'],
     creates     => '/opt/bmc/perform_upgrade.status',
     timeout     => 3600,
