@@ -7,7 +7,10 @@ include profile::pr_base
 }
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
-
+node btln007802
+{
+  include role::rl_perform_upgrade
+}
 # Puppet 6 upgrade stanza
 
 node btlp000646.corp.ads,btlp000815.corp.ads,btlp000952.corp.ads,btlp001056.corp.ads,btlp001057.corp.ads,btlp001592.corp.ads,btlp001593.corp.ads
