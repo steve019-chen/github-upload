@@ -74,9 +74,10 @@ else {
   #   source => "puppet:///software/perform_upgrade/${installtar}",
   # }
   
-  archive { "/var/tmp/${installdir}":
+  archive { "/var/tmp/${installtar}":
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
+  creates => "/var/tmp/${installdir}"
   extract_path  => "/var/tmp/",
   cleanup => true,
   }
@@ -87,7 +88,7 @@ else {
     group  => 'root',
     mode   => '0755',
     source => 'puppet:///modules/profile/perform_upgrade/install_wrapper.sh',
-    require => Archive["/var/tmp/${installdir}"],
+    require => Archive["/var/tmp/${installtar}"],
   }
 
   exec {'performupgrade':
