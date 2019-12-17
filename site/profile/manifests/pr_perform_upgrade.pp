@@ -11,6 +11,7 @@
 
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
+Float $os_full = $facts['os']['release']['full'].scanf('%f')[0]
 )
 {
 
@@ -31,7 +32,7 @@ user { 'svcbmcp':
   require => Group['bmc'],
 }
 
-$os_full = $facts['os']['release']['full'].scanf('%f')[0]
+
 if (os_full >= 5.5)
 {
   $installtar = 'TSCO-perform-linux-latest.tar'
