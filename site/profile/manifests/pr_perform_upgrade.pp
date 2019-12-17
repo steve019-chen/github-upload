@@ -95,7 +95,7 @@ else {
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
     cwd         => "/var/tmp/${installdir}",
     environment => ['HOME=/home/svcbmcp'],
-    creates     => '/opt/bmc/perform_upgrade.status',
+    creates     => '/var/tmp/perform_upgrade.status',
     timeout     => 3600,
     require => File["/var/tmp/${installdir}/install_wrapper.sh"],
   }
