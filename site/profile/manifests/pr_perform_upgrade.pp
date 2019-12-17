@@ -74,6 +74,7 @@ else {
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
   extract_path  => "/var/tmp/",
+  before => Exec['performupgrade'],
   }
 
   exec {'performupgrade':
@@ -83,7 +84,6 @@ else {
     environment => ['HOME=/home/svcbmcp'],
     creates     => '/opt/bmc/perform_upgrade.status',
     timeout     => 3600,
-    require     => File[$installtar]
   }
 
   # We have already completed, make sure we cleaned up.
