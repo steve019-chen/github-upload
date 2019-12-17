@@ -9,7 +9,10 @@
 #   - 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
-class profile::pr_perform_upgrade {
+class profile::pr_perform_upgrade (
+Integer $space_needed = 310200000,
+)
+{
 
 # For reference, as provided by Novo request: svc
 # Create the users group
@@ -40,7 +43,6 @@ else {
   # Do nothing
 }
 
-Integer $space_needed = 310200000
 $patrol=$facts['patrol_info']
 
 if $space_needed > $patrol['var_tmp_bytes'] {
