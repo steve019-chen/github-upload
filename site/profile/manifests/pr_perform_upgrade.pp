@@ -75,6 +75,7 @@ else {
   # }
   
   archive { "/var/tmp/${installdir}":
+  ensure => directory,
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
   extract_path  => "/var/tmp/",
