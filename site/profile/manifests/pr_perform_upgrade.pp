@@ -9,7 +9,7 @@
 
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
-String $hostname = $facts['hostname']
+String $hostname = $facts['hostname'],
 )
 {
 
@@ -50,7 +50,14 @@ elsif (Float.new($facts['os']['release']['full']) < 5.2 and Float.new($facts['os
   $installdir = 'TSCO-perform-linux-old'
 }
 else {
-  # Do nothing
+  # lint:ignore:140chars
+  notify{
+    "Unknown version of linux OS":
+  }
+  #Force an error at runtime
+  exec{'perform_upgrade_not_supported_os':
+    command => '/bin/false',
+  }  
 }
 
 $patrol=$facts['patrol_info']
@@ -61,12 +68,11 @@ if $space_needed > $patrol['var_tmp_bytes'] {
     "Filesystem ${patrol['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${patrol['var_tmp_bytes']} available":
   }
   #Force an error at runtime
-  exec{'patrol_upgrade_no_space':
+  exec{'perfom_upgrade_no_space':
     command => '/bin/false',
   }
 }
 else {
-
   archive { "/var/tmp/${installtar}":
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
@@ -75,15 +81,6 @@ else {
   cleanup => true,
   }
 
-  # file { "/var/tmp/${installdir}/install_wrapper.sh":
-  #   ensure => 'present',
-  #   owner  => 'root',
-  #   group  => 'root',
-  #   mode   => '0755',
-  #   source => 'puppet:///modules/profile/perform_upgrade/install_wrapper.sh',
-  #   require => Archive["/var/tmp/${installtar}"],
-  # }
-  
   exec {'performupgrade':
     command     => "/var/tmp/${installdir}/telusinstall.sh",
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
@@ -91,7 +88,6 @@ else {
     environment => ['HOME=/home/svcbmcp'],
     creates     => "/tmp/TSCO_${hostname}_Install.txt",
     timeout     => 3600,
-    #require => File["/var/tmp/${installdir}/install_wrapper.sh"],
     require => Archive["/var/tmp/${installtar}"],
   }
 
@@ -104,5 +100,4 @@ else {
   }
 }
 }
-
 # lint:endignore
