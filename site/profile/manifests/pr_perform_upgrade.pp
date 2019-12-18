@@ -84,7 +84,6 @@ else {
   }
   # We have already completed, make sure we cleaned up.
   tidy {"/var/tmp/${installdir}":
-    path => "/var/tmp/${installdir}",
     backup  => false,
     recurse => true,
     rmdirs  => true,
