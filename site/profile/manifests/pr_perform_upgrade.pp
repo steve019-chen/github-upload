@@ -76,9 +76,9 @@ else {
   archive { "/var/tmp/${installtar}":
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
-  creates => "/var/tmp/${installdir}",
+  #creates       => "/var/tmp/${installdir}",
   extract_path  => "/var/tmp/",
-  cleanup => true,
+  cleanup       => true,
   }
 
   exec {'performupgrade':
@@ -88,7 +88,7 @@ else {
     environment => ['HOME=/home/svcbmcp'],
     creates     => "/tmp/TSCO_${hostname}_Install.txt",
     timeout     => 3600,
-    require => Archive["/var/tmp/${installtar}"],
+    require     => Archive["/var/tmp/${installtar}"],
   }
 
   # We have already completed, make sure we cleaned up.
