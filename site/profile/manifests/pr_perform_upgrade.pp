@@ -75,7 +75,7 @@ else {
   }
 
   file { "/var/tmp/${installdir}/install_wrapper.sh":
-    ensure => 'present',
+    #ensure => 'present',
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
@@ -92,7 +92,6 @@ else {
     timeout     => 3600,
     require => File["/var/tmp/${installdir}/install_wrapper.sh"],
   }
-
 
   # We have already completed, make sure we cleaned up.
   tidy {"/var/tmp/${installdir}":
