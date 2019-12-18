@@ -92,9 +92,9 @@ else {
   }
 
   exec {'performupgrade':
-    command     => './install_wrapper.sh',
+    command     => "./install_wrapper.sh",
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-    cwd         => "/var/tmp/${installdir}/",
+    cwd         => "/var/tmp/${installdir}",
     environment => ['HOME=/home/svcbmcp'],
     creates     => '/var/tmp/perform_upgrade.status',
     timeout     => 3600,
