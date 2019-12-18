@@ -76,7 +76,7 @@ else {
   archive { "/var/tmp/${installtar}":
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
-  #creates       => "/var/tmp/${installdir}",
+  creates       => "/var/tmp/${installdir}",
   extract_path  => "/var/tmp/",
   cleanup       => true,
   }
@@ -92,12 +92,12 @@ else {
   }
 
   # We have already completed, make sure we cleaned up.
-  tidy {"/var/tmp/${installdir}":
-    path => "/var/tmp/${installdir}",
-    backup  => false,
-    recurse => true,
-    rmdirs  => true,
-  }
+  # tidy {"/var/tmp/${installdir}":
+  #   path => "/var/tmp/${installdir}",
+  #   backup  => false,
+  #   recurse => true,
+  #   rmdirs  => true,
+  # }
 }
 }
 # lint:endignore
