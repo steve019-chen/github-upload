@@ -9,6 +9,7 @@
 
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
+String $hostname = $facts['hostname']
 )
 {
 
@@ -42,7 +43,7 @@ elsif (Float.new($facts['os']['release']['full']) < 6.7 and Float.new($facts['os
   $installtar = 'TSCO-perform-linux-legacy.tar'
   $installdir = 'TSCO-perform-linux-legacy'
 }
-elsif (Float.new($facts['os']['release']['full']) < 6.7 and Float.new($facts['os']['release']['full']) > 5.2)
+elsif (Float.new($facts['os']['release']['full']) < 5.2 and Float.new($facts['os']['release']['full']) > 5.0)
 {
 # Agent 9.05.0  
   $installtar = 'TSCO-perform-linux-old.tar'
@@ -88,7 +89,7 @@ else {
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
     cwd         => "/var/tmp/${installdir}",
     environment => ['HOME=/home/svcbmcp'],
-    creates     => '/var/tmp/perform_upgrade.status',
+    creates     => "/tmp/TSCO_${hostname}_Install.txt",
     timeout     => 3600,
     #require => File["/var/tmp/${installdir}/install_wrapper.sh"],
     require => Archive["/var/tmp/${installtar}"],
