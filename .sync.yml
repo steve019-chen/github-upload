@@ -27,4 +27,3 @@ spec/spec_helper.rb:
     RSpec.configure do |c|
       c.module_path = File.join(fixture_path, 'modules/site')
     end
-
