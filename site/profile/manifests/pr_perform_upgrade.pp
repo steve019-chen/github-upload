@@ -5,13 +5,10 @@
 # Actions:
 #   - 
 # 
-# Prereqs for docker:
-#   - 
 # lint:ignore:unquoted_node_name lint:ignore:140chars
 
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
-Float $os_full = Float.new($facts['os']['release']['full']),
 )
 {
 
@@ -23,7 +20,7 @@ group { 'bmc':
   gid    => '3181',
 }
 
-# Create the  user for application account, 
+# Create the user for application account, 
 
 user { 'svcbmcp':
   uid     => '3181',
@@ -61,19 +58,6 @@ if $space_needed > $patrol['var_tmp_bytes'] {
 }
 else {
 
-
-
-# Download tar file
-# lint:ignore:puppet_url_without_modules
-  # file { $installtar:
-  #   ensure => present,
-  #   path   => "/var/tmp/${installtar}",
-  #   mode   => '0755',
-  #   owner  => 'svcbmcp',
-  #   group  => 'bmc',
-  #   source => "puppet:///software/perform_upgrade/${installtar}",
-  # }
-  
   archive { "/var/tmp/${installtar}":
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
@@ -81,7 +65,6 @@ else {
   extract_path  => "/var/tmp/",
   cleanup => true,
   }
-
   file { "/var/tmp/${installdir}/install_wrapper.sh":
     ensure => 'present',
     owner  => 'root',
@@ -90,7 +73,6 @@ else {
     source => 'puppet:///modules/profile/perform_upgrade/install_wrapper.sh',
     require => Archive["/var/tmp/${installtar}"],
   }
-
   exec {'performupgrade':
     command     => "/var/tmp/${installdir}/install_wrapper.sh",
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
@@ -100,9 +82,9 @@ else {
     timeout     => 3600,
     require => File["/var/tmp/${installdir}/install_wrapper.sh"],
   }
-
   # We have already completed, make sure we cleaned up.
   tidy {"/var/tmp/${installdir}":
+    path => "/var/tmp/${installdir}",
     backup  => false,
     recurse => true,
     rmdirs  => true,
