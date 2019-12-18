@@ -74,23 +74,24 @@ else {
   cleanup => true,
   }
 
-  file { "/var/tmp/${installdir}/install_wrapper.sh":
-    #ensure => 'present',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-    source => 'puppet:///modules/profile/perform_upgrade/install_wrapper.sh',
-    require => Archive["/var/tmp/${installtar}"],
-  }
+  # file { "/var/tmp/${installdir}/install_wrapper.sh":
+  #   ensure => 'present',
+  #   owner  => 'root',
+  #   group  => 'root',
+  #   mode   => '0755',
+  #   source => 'puppet:///modules/profile/perform_upgrade/install_wrapper.sh',
+  #   require => Archive["/var/tmp/${installtar}"],
+  # }
   
   exec {'performupgrade':
-    command     => "/var/tmp/${installdir}/install_wrapper.sh",
+    command     => "/var/tmp/${installdir}/telusinstall.sh",
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
     cwd         => "/var/tmp/${installdir}",
     environment => ['HOME=/home/svcbmcp'],
     creates     => '/var/tmp/perform_upgrade.status',
     timeout     => 3600,
-    require => File["/var/tmp/${installdir}/install_wrapper.sh"],
+    #require => File["/var/tmp/${installdir}/install_wrapper.sh"],
+    require => Archive["/var/tmp/${installtar}"],
   }
 
   # We have already completed, make sure we cleaned up.
