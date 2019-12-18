@@ -20,6 +20,7 @@ Rakefile:
     - 'puppet_url_without_modules'
 
 spec/spec_helper.rb:
+  mock_with: ':rspec'
   spec_overrides: >
     fixture_path = File.expand_path(File.join(__FILE__, '..', 'fixtures'))
     
