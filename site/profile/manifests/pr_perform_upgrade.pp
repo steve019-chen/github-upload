@@ -31,19 +31,19 @@ user { 'svcbmcp':
 }
 
 
-if (Float.new($facts['os']['release']['full']) >= 7.8)
+if (Float.new($facts['os']['release']['full']) >= 6.7)
 {
 # Agent 11.5.01
   $installtar = 'TSCO-perform-linux-latest.tar'
   $installdir = 'TSCO-perform-linux-latest'
 }
-elsif (Float.new($facts['os']['release']['full']) < 7.7 and Float.new($facts['os']['release']['full']) > 5.2)
+elsif (Float.new($facts['os']['release']['full']) > 5.2 and Float.new($facts['os']['release']['full']) < 6.7)
 {
 # Agent 10.5.00  
   $installtar = 'TSCO-perform-linux-legacy.tar'
   $installdir = 'TSCO-perform-linux-legacy'
 }
-elsif (Float.new($facts['os']['release']['full']) < 5.2 and Float.new($facts['os']['release']['full']) > 5.0)
+elsif (Float.new($facts['os']['release']['full']) > 5.0 and Float.new($facts['os']['release']['full']) < 5.2)
 {
 # Agent 9.05.0  
   $installtar = 'TSCO-perform-linux-old.tar'
