@@ -13,7 +13,7 @@ String $hostname = $facts['hostname'],
 )
 {
 
-# For reference, as provided by Novo request: svc
+# Required user uid=3181(svcbmcp) gid=3181(bmc) groups=3181(bmc) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
 # Create the users group
 
 group { 'bmc':
@@ -25,7 +25,7 @@ group { 'bmc':
 
 user { 'svcbmcp':
   uid     => '3181',
-  gid     => 'users',
+  gid     => 'bmc',
   shell   => '/bin/bash',
   require => Group['bmc'],
 }
