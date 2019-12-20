@@ -166,16 +166,6 @@ $best1home    = $facts['perform_info']['best1home'],
       $installtar = 'TSCO-perform-linux-latest.tar'
       $installdir = 'TSCO-perform-linux-latest'
 
-      if '11.5.0' in $best1home
-      {
-      tidy {"/var/tmp/${installdir}/":
-          path    => "/var/tmp/${installdir}/",
-          backup  => false,
-          recurse => true,
-        }
-      }
-
-      else {
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           # lint: ignore: 160chars
           notify{
@@ -210,23 +200,12 @@ $best1home    = $facts['perform_info']['best1home'],
           }
         }
       }
-    }
     elsif $osversion >= 5.2 and $osversion < 6.7
     {
     # Agent 10.5.00
       $installtar = 'TSCO-perform-linux-legacy.tar'
       $installdir = 'TSCO-perform-linux-legacy'
 
-      if '10.5.0' in $best1home
-      {
-      tidy {"/var/tmp/${installdir}/":
-          path    => "/var/tmp/${installdir}/",
-          backup  => false,
-          recurse => true,
-        }
-      }
-
-      else {
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           # lint: ignore: 160chars
           notify{
@@ -261,7 +240,6 @@ $best1home    = $facts['perform_info']['best1home'],
           }
         }
       }
-    }
     else
     {
     # Unsupported version
