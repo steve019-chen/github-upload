@@ -5,6 +5,8 @@
 # 750 servers in telus between 5.2 and 6.6
 # Actions: 
 #   - This will check that svcbmcp is present on the server
+#   - Check if perform is already installed based on Puppet facts
+#   - Choose the correct version of the agent based on the OS release
 #   - Download and untar the agent installer
 #   - Install the agent via the telusinstall.sh script provided in the tar file
 #     - The script will install or upgrade the agent using svcbmcp
@@ -18,7 +20,7 @@
 # Last updated by: Corey Sprung ----- Corey.Sprung@TELUS.com
 # Updated on : Dec 20th 2019
 #
-# Comment for update: Added better comments
+# Comment for update: Updated the logic to make it smarter
 # lint: ignore: unquoted_node_name lint: ignore: 140chars
 
 class profile::pr_perform_upgrade (
