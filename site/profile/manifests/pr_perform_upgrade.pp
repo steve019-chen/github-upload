@@ -55,8 +55,8 @@ $best1home    = $facts['perform_info']['best1home'],
 
       if '11.5.0' in $best1home
       {
-      tidy {"/var/tmp/${installdir}/":
-          path    => "/var/tmp/${installdir}/",
+      tidy {'/var/tmp/TSCO-perform-linux-*':
+          path    => '/var/tmp/TSCO-perform-linux-*',
           backup  => false,
           recurse => true,
         }
@@ -106,8 +106,8 @@ $best1home    = $facts['perform_info']['best1home'],
 
       if '10.5.0' in $best1home
       {
-      tidy {"/var/tmp/${installdir}/":
-          path    => "/var/tmp/${installdir}/",
+      tidy {'/var/tmp/TSCO-perform-linux-*':
+          path    => '/var/tmp/TSCO-perform-linux-*',
           backup  => false,
           recurse => true,
         }
