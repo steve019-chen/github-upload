@@ -79,18 +79,10 @@ else {
   ensure        => absent,
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
-  #creates      => "/var/tmp/${installdir}",
+  creates      => "/var/tmp/${installdir}",
   extract_path  => "/var/tmp/",
   extract_flags => 'xvf',
   cleanup       => true,
-  }
-
-  # Untar the file
-  exec { "tar -xfv /var/tmp/${installtar}":
-  cwd         => '/var/tmp',
-  environment => ['HOME=/home/svcbmcp'],
-  creates     => "/var/tmp/${installdir}",
-  path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
   }
 
   # Perfom the installation using the provide telusinstall.sh.
