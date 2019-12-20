@@ -44,14 +44,15 @@ user { 'svcbmcp':
   require => Group['bmc'],
 }
 
-#(Float.new($facts['os']['release']['full'])
+if $status{
+
   if $osversion >= 6.7
   {
   # Agent 11.5.01 - 3700 servers in telus greater or equal to 6.7 
     $installtar = 'TSCO-perform-linux-latest.tar'
     $installdir = 'TSCO-perform-linux-latest'
   }
-  elsif (Float.new($facts['os']['release']['full']) >= 5.2 and Float.new($facts['os']['release']['full']) < 6.7)
+  elsif $osversion >= 5.2 and $osversion < 6.7
   {
   # Agent 10.5.00  - 750 servers in telus between 5.2 and 6.6
     $installtar = 'TSCO-perform-linux-legacy.tar'
@@ -108,7 +109,10 @@ user { 'svcbmcp':
         recurse => true,
       }
     }
-
+}
+else {
+  #do nothing
+}
 }
 
 # lint: endignore
