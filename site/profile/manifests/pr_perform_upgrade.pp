@@ -27,7 +27,7 @@ String  $hostname     = $facts['hostname'],
 Boolean $status       = $facts['perform_info']['installed'],
 #Float   $osversion    = Float.new($facts['os']['release']['full']),
 Float   $osversion    = 5.6,
-String  $best1home    = $facts['perform_info']['best1home'],
+$best1home    = $facts['perform_info']['best1home'],
 )
 {
 
