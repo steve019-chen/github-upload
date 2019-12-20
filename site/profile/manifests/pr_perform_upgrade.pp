@@ -1,10 +1,23 @@
-# This profile contains the configuration for the 
+# This profile contains the configuration for the perform agent install / upgrade
 #
 # Parameters: 
 #
 # Actions: 
-#   - 
+#   - This will check that svcbmcp is present on the server
+#   - Download and untar the agent installer
+#   - Install the agent via the telusinstall.sh script provided in the tar file
+#     - The script will install or upgrade the agent using svcbmcp
+#     - The script will also run the post install script as root
+#     - a log file will be created in the /var/tmp directory TSCO_<hostname>_install.txt
+#   - We will remove all the files within the directory created.
 # 
+# Create by: Corey Sprung ---- Corey.Sprung@TELUS.com
+# Created on : Dec 18th 2019
+#
+# Last updated by: Corey Sprung ----- Corey.Sprung@TELUS.com
+# Updated on : Dec 20th 2019
+#
+# Comment for update: Added better comments
 # lint: ignore: unquoted_node_name lint: ignore: 140chars
 
 class profile::pr_perform_upgrade (
@@ -14,15 +27,13 @@ String  $hostname     = $facts['hostname'],
 {
 
 # Required user uid = 3181(svcbmcp) gid = 3181(bmc) groups = 3181(bmc) context = unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
-# Create the users group
-
+# Create the users group if it doesnt already exsist
 group { 'bmc':
   ensure => present,
   gid    => '3181',
 }
 
-# Create the user for application account, 
-
+# Create the user for application account if it doesnt already exsist
 user { 'svcbmcp':
   uid     => '3181',
   gid     => 'bmc',
@@ -31,33 +42,27 @@ user { 'svcbmcp':
 }
 
 
-if (Float.new($facts['os']['release']['full']) >= 5.7)
+if (Float.new($facts['os']['release']['full']) >= 6.7)
 {
-# Agent 11.5.01
+# Agent 11.5.01 - 3700 servers in telus greater or equal to 6.7 
   $installtar = 'TSCO-perform-linux-latest.tar'
   $installdir = 'TSCO-perform-linux-latest'
 }
-elsif (Float.new($facts['os']['release']['full']) >= 5.2 and Float.new($facts['os']['release']['full']) < 5.7)
+elsif (Float.new($facts['os']['release']['full']) >= 5.2 and Float.new($facts['os']['release']['full']) < 6.7)
 {
-# Agent 10.5.00  
+# Agent 10.5.00  - 750 servers in telus between 5.2 and 6.6
   $installtar = 'TSCO-perform-linux-legacy.tar'
   $installdir = 'TSCO-perform-linux-legacy'
-}
-elsif (Float.new($facts['os']['release']['full']) >= 5.0 and Float.new($facts['os']['release']['full']) < 5.2)
-{
-# Agent 9.05.0  
-  $installtar = 'TSCO-perform-linux-old.tar'
-  $installdir = 'TSCO-perform-linux-old'
 }
 else {
   # lint: ignore: 140chars
   notify{
-    "Unsupported version of linux OS": 
+    'Unsupported version of linux OS':,
   }
   #Force an error at runtime
   exec{'perform_upgrade_not_supported_os':
     command => '/bin/false',
-  }  
+  }
 }
 
 $patrol = $facts['patrol_info']
@@ -65,7 +70,7 @@ $patrol = $facts['patrol_info']
 if $space_needed > $patrol['var_tmp_bytes'] {
   # lint: ignore: 140chars
   notify{
-    "Filesystem ${patrol['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${patrol['var_tmp_bytes']} available": 
+    "Filesystem ${patrol['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${patrol['var_tmp_bytes']} available":,
   }
   #Force an error at runtime
   exec{'perfom_upgrade_no_space':
@@ -80,7 +85,7 @@ else {
     source        => "puppet:///software/perform_upgrade/${installtar}",
     extract       => true,
     creates       => "/var/tmp/${installdir}",
-    extract_path  => "/var/tmp/",
+    extract_path  => '/var/tmp/',
     extract_flags => 'xvf',
     cleanup       => true,
   }
@@ -101,7 +106,6 @@ else {
     path    => "/var/tmp/${installdir}/",
     backup  => false,
     recurse => true,
-#    rmdirs  => true,
   }
 }
 }
