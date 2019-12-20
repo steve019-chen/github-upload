@@ -55,11 +55,15 @@ $best1home    = $facts['perform_info']['best1home'],
 
       if '11.5.0' in $best1home
       {
-      tidy {'/var/tmp/TSCO':
-          path    => '/var/tmp/TSCO-perform-linux-latest, /var/tmp/TSCO-perform-linux-legacy, /var/tmp/TSCO-perform-linux-old',
+      tidy {'/var/tmp/TSCO-perform-linux-latest':
           backup  => false,
           recurse => true,
           rmdirs  => true,
+        }
+      tidy {'/var/tmp/TSCO-perform-linux-legacy':
+        backup  => false,
+        recurse => true,
+        rmdirs  => true,
         }
       }
 
@@ -107,10 +111,10 @@ $best1home    = $facts['perform_info']['best1home'],
 
       if '10.5.0' in $best1home
       {
-      tidy {'/var/tmp/TSCO-perform-linux-*':
-          path    => '/var/tmp/TSCO-perform-linux-*',
-          backup  => false,
-          recurse => true,
+      tidy {'/var/tmp/TSCO-perform-linux-legacy':
+        backup  => false,
+        recurse => true,
+        rmdirs  => true,
         }
       }
 
