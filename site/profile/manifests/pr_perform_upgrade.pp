@@ -31,13 +31,13 @@ user { 'svcbmcp':
 }
 
 
-if (Float.new($facts['os']['release']['full']) >= 7.9)
+if (Float.new($facts['os']['release']['full']) >= 5.7)
 {
 # Agent 11.5.01
   $installtar = 'TSCO-perform-linux-latest.tar'
   $installdir = 'TSCO-perform-linux-latest'
 }
-elsif (Float.new($facts['os']['release']['full']) >= 5.2 and Float.new($facts['os']['release']['full']) < 7.8)
+elsif (Float.new($facts['os']['release']['full']) >= 5.2 and Float.new($facts['os']['release']['full']) < 5.7)
 {
 # Agent 10.5.00  
   $installtar = 'TSCO-perform-linux-legacy.tar'
@@ -52,7 +52,7 @@ elsif (Float.new($facts['os']['release']['full']) >= 5.0 and Float.new($facts['o
 else {
   # lint:ignore:140chars
   notify{
-    "Unknown version of linux OS":
+    "Unsupported version of linux OS":
   }
   #Force an error at runtime
   exec{'perform_upgrade_not_supported_os':
@@ -73,6 +73,8 @@ if $space_needed > $patrol['var_tmp_bytes'] {
   }
 }
 else {
+
+  # download the TAR file and extract into the installdir.
   archive { "/var/tmp/${installtar}":
   source        => "puppet:///software/perform_upgrade/${installtar}",
   extract       => true,
@@ -81,6 +83,7 @@ else {
   cleanup       => true,
   }
 
+  # Perfom the installation using the provide telusinstall.sh.
   exec {'performupgrade':
     command     => "/var/tmp/${installdir}/telusinstall.sh",
     path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
@@ -91,13 +94,13 @@ else {
     require     => Archive["/var/tmp/${installtar}"],
   }
 
-  # We have already completed, make sure we cleaned up.
-  # tidy {"/var/tmp/${installdir}":
-  #   path => "/var/tmp/${installdir}",
-  #   backup  => false,
-  #   recurse => true,
-  #   rmdirs  => true,
-  # }
+  # We have already completed, make sure we clean up the directory.
+  tidy {"/var/tmp/${installdir}/":
+    path    => "/var/tmp/${installdir}",
+    backup  => false,
+    recurse => true,
+    rmdirs  => true,
+  }
 }
 }
 # lint:endignore
