@@ -23,27 +23,29 @@
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
 String  $hostname     = $facts['hostname'],
+Boolean $status       = $facts['perform_info']['installed'],
+Float   $osversion      = $facts['os']['release']['full'],
+String  $best1home    = $facts['perform_info']['best1home'],
 )
 {
 
-# Required user uid = 3181(svcbmcp) gid = 3181(bmc) groups = 3181(bmc) context = unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
-# Create the users group if it doesnt already exsist
-# group { 'bmc':
-#   ensure => present,
-#   gid    => '3181',
-# }
+#Required user uid = 3181(svcbmcp) gid = 3181(bmc) groups = 3181(bmc) context = unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+#Create the users group if it doesnt already exsist
+group { 'bmc':
+  ensure => present,
+  gid    => '3181',
+}
 
-# Create the user for application account if it doesnt already exsist
-# user { 'svcbmcp':
-#   uid     => '3181',
-#   gid     => 'bmc',
-#   shell   => '/bin/bash',
-#   require => Group['bmc'],
-# }
+#Create the user for application account if it doesnt already exsist
+user { 'svcbmcp':
+  uid     => '3181',
+  gid     => 'bmc',
+  shell   => '/bin/bash',
+  require => Group['bmc'],
+}
 
-if ($facts['perform_info']['installed'] = true)
-{
-  if (Float.new($facts['os']['release']['full']) >= 6.7)
+#(Float.new($facts['os']['release']['full'])
+  if $osversion >= 6.7
   {
   # Agent 11.5.01 - 3700 servers in telus greater or equal to 6.7 
     $installtar = 'TSCO-perform-linux-latest.tar'
@@ -66,12 +68,10 @@ if ($facts['perform_info']['installed'] = true)
     }
   }
 
-  $patrol = $facts['patrol_info']
-
-  if $space_needed > $patrol['var_tmp_bytes'] {
-    # lint: ignore: 140chars
+  if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
+    # lint: ignore: 160chars
     notify{
-      "Filesystem ${patrol['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${patrol['var_tmp_bytes']} available":,
+      "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
     }
     #Force an error at runtime
     exec{'perfom_upgrade_no_space':
@@ -108,10 +108,7 @@ if ($facts['perform_info']['installed'] = true)
         recurse => true,
       }
     }
-  }
-  else {
-    #do nothing
-  }
+
 }
 
 # lint: endignore
