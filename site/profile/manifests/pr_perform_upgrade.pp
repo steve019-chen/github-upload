@@ -76,13 +76,13 @@ else {
 
   # download the TAR file and extract into the installdir.
   archive { "/var/tmp/${installtar}":
-  ensure        => absent,
-  source        => "puppet:///software/perform_upgrade/${installtar}",
-  extract       => true,
-  creates      => "/var/tmp/${installdir}",
-  extract_path  => "/var/tmp/",
-  extract_flags => 'xvf',
-  cleanup       => true,
+    ensure        => present,
+    source        => "puppet:///software/perform_upgrade/${installtar}",
+    extract       => true,
+    creates       => "/var/tmp/${installdir}",
+    extract_path  => "/var/tmp/",
+    extract_flags => 'xvf',
+    cleanup       => true,
   }
 
   # Perfom the installation using the provide telusinstall.sh.
@@ -101,7 +101,7 @@ else {
     path    => "/var/tmp/${installdir}/",
     backup  => false,
     recurse => true,
-    rmdirs  => true,
+#    rmdirs  => true,
   }
 }
 }
