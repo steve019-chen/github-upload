@@ -4,6 +4,9 @@
 fixtures:
   symlinks:
     site: "#{source_dir}/site"
-    # modules: "#{source_dir}/modules"
-  forge_modules:
+#  forge_modules:
 #     stdlib: "puppetlabs/stdlib"
+  repositories:
+    archive: 
+      repo: "ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-archive.git"
+      target: "spec/fixtures/modules/site"
