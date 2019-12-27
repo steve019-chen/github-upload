@@ -18,7 +18,7 @@
 # Created on : Dec 18th 2019
 #
 # Last updated by: Corey Sprung ----- Corey.Sprung@TELUS.com
-# Updated on : Dec 20th 2019
+# Updated on : Dec 27th 2019
 #
 # Comment for update: Updated the logic to make it smarter
 # lint: ignore: unquoted_node_name lint: ignore: 140chars
