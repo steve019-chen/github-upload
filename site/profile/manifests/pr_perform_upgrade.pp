@@ -90,7 +90,7 @@ $best1home    = $facts['perform_info']['best1home'],
             # download the TAR file and extract into the installdir.
             archive { "/var/tmp/${installtar}":
               ensure        => present,
-              source        => "http://lp99850.corp.ads/downloads/linux/${installtar}",
+              source        => "puppet:///software/perform_upgrade/${installtar}",
               extract       => true,
               creates       => "/var/tmp/${installdir}",
               extract_path  => '/var/tmp/',
@@ -209,7 +209,7 @@ $best1home    = $facts['perform_info']['best1home'],
           # download the TAR file and extract into the installdir.
           archive { "/var/tmp/${installtar}":
             ensure        => present,
-            source        => 'http://lp99850.corp.ads/downloads/linux/TSCO-perform-linux-latest.tar',
+            source        => "puppet:///software/perform_upgrade/${installtar}",
             extract       => true,
             creates       => "/var/tmp/${installdir}",
             extract_path  => '/var/tmp/',
