@@ -193,7 +193,7 @@ $repourl              = 'http://lp99850.corp.ads/downloads',
     if $osversion >= 6.7
     {
     # Agent 11.5.01
-      $installtar = '/linux/TSCO-perform-linux-latest.tar'
+      $installtar = 'TSCO-perform-linux-latest.tar'
       $installdir = 'TSCO-perform-linux-latest'
 
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
@@ -213,7 +213,7 @@ $repourl              = 'http://lp99850.corp.ads/downloads',
             extract       => true,
             extract_path  => '/var/tmp/',
             extract_flags => 'xvf',
-            source        => "${repourl}/${installtar}",
+            source        => "${repourl}/linux/${installtar}",
             creates       => "/var/tmp/${installdir}",
             cleanup       => true,
           }
