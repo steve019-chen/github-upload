@@ -209,11 +209,11 @@ $best1home    = $facts['perform_info']['best1home'],
           # download the TAR file and extract into the installdir.
           archive { "/var/tmp/${installtar}":
             ensure        => present,
-            source        => "http://lp99850.corp.ads/downloads/linux/${installtar}",
             extract       => true,
-            creates       => "/var/tmp/${installdir}",
             extract_path  => '/var/tmp/',
             extract_flags => 'xvf',
+            source        => "http://lp99850.corp.ads/downloads/linux/${installtar}",
+            creates       => "/var/tmp/${installdir}",
             cleanup       => true,
           }
 
