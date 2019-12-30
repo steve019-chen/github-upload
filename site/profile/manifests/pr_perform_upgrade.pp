@@ -28,10 +28,10 @@ Integer $space_needed = 310200000,
 String  $hostname     = $facts['hostname'],
 Boolean $status       = $facts['perform_info']['installed'],
 Float   $osversion    = Float.new($facts['os']['release']['full']),
+$architecture = $facts['architecture'],
 $best1home    = $facts['perform_info']['best1home'],
 )
 {
-
   #Required user uid = 3181(svcbmcp) gid = 3181(bmc) groups = 3181(bmc) context = unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
   #Create the users group if it doesnt already exsist
   group { 'bmc':
@@ -46,15 +46,18 @@ $best1home    = $facts['perform_info']['best1home'],
     shell   => '/bin/bash',
     require => Group['bmc'],
   }
-
+  #Check Perform status
   if $status{
   # If Perform install status is true
+
+    #Check if the OS version is Greater or Equal to 6.7
     if $osversion >= 6.7
     {
     # Agent 11.5.01
       $installtar = 'TSCO-perform-linux-latest.tar'
       $installdir = 'TSCO-perform-linux-latest'
 
+      #Check What version of perform is currently on the server and if its equal to the latest release clean up
       if '11.5.0' in $best1home
       {
       tidy {'/var/tmp/TSCO-perform-linux-latest':
@@ -70,6 +73,8 @@ $best1home    = $facts['perform_info']['best1home'],
       }
 
       else {
+        #If the Version of perform isnt the latest install the latest
+
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           # lint: ignore: 160chars
           notify{
@@ -81,26 +86,35 @@ $best1home    = $facts['perform_info']['best1home'],
           }
         }
         else {
-          # download the TAR file and extract into the installdir.
-          archive { "/var/tmp/${installtar}":
-            ensure        => present,
-            source        => "puppet:///software/perform_upgrade/${installtar}",
-            extract       => true,
-            creates       => "/var/tmp/${installdir}",
-            extract_path  => '/var/tmp/',
-            extract_flags => 'xvf',
-            cleanup       => true,
-          }
+          if 'x86_64' in $architecture {
+            # download the TAR file and extract into the installdir.
+            archive { "/var/tmp/${installtar}":
+              ensure        => present,
+              source        => "http://lp99850.corp.ads/downloads/linux/${installtar}",
+              extract       => true,
+              creates       => "/var/tmp/${installdir}",
+              extract_path  => '/var/tmp/',
+              extract_flags => 'xvf',
+              cleanup       => true,
+            }
 
-          # Perfom the installation using the provide telusinstall.sh.
-          exec {'performupgrade':
-            command     => "/var/tmp/${installdir}/telusinstall.sh",
-            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-            cwd         => "/var/tmp/${installdir}",
-            environment => ['HOME=/home/svcbmcp'],
-            creates     => "/tmp/TSCO_${hostname}_Install.txt",
-            timeout     => 3600,
-            require     => Archive["/var/tmp/${installtar}"],
+            # Perfom the installation using the provide telusinstall.sh.
+            exec {'performupgrade':
+              command     => "/var/tmp/${installdir}/telusinstall.sh",
+              path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+              cwd         => "/var/tmp/${installdir}",
+              environment => ['HOME=/home/svcbmcp'],
+              creates     => "/tmp/TSCO_${hostname}_Install.txt",
+              timeout     => 3600,
+              require     => Archive["/var/tmp/${installtar}"],
+            }
+          }
+          else{
+              # Will be updated with 32 bit version
+                # Unsupported OS architecture version
+                notify{
+                'Unsupported architecture version':,
+                }
           }
         }
       }
@@ -132,26 +146,35 @@ $best1home    = $facts['perform_info']['best1home'],
           }
         }
         else {
-          # download the TAR file and extract into the installdir.
-          archive { "/var/tmp/${installtar}":
-            ensure        => present,
-            source        => "puppet:///software/perform_upgrade/${installtar}",
-            extract       => true,
-            creates       => "/var/tmp/${installdir}",
-            extract_path  => '/var/tmp/',
-            extract_flags => 'xvf',
-            cleanup       => true,
-          }
+          if 'x86_64' in $architecture {
+            # download the TAR file and extract into the installdir.
+            archive { "/var/tmp/${installtar}":
+              ensure        => present,
+              source        => "puppet:///software/perform_upgrade/${installtar}",
+              extract       => true,
+              creates       => "/var/tmp/${installdir}",
+              extract_path  => '/var/tmp/',
+              extract_flags => 'xvf',
+              cleanup       => true,
+            }
 
-          # Perfom the installation using the provide telusinstall.sh.
-          exec {'performupgrade':
-            command     => "/var/tmp/${installdir}/telusinstall.sh",
-            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-            cwd         => "/var/tmp/${installdir}",
-            environment => ['HOME=/home/svcbmcp'],
-            creates     => "/tmp/TSCO_${hostname}_Install.txt",
-            timeout     => 3600,
-            require     => Archive["/var/tmp/${installtar}"],
+            # Perfom the installation using the provide telusinstall.sh.
+            exec {'performupgrade':
+              command     => "/var/tmp/${installdir}/telusinstall.sh",
+              path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+              cwd         => "/var/tmp/${installdir}",
+              environment => ['HOME=/home/svcbmcp'],
+              creates     => "/tmp/TSCO_${hostname}_Install.txt",
+              timeout     => 3600,
+              require     => Archive["/var/tmp/${installtar}"],
+            }
+          }
+          else{
+              # Will be updated with 32 bit version
+                # Unsupported OS architecture version
+                notify{
+                'Unsupported architecture version':,
+                }
           }
         }
       }
@@ -165,7 +188,7 @@ $best1home    = $facts['perform_info']['best1home'],
     }
   }
   else{
-  # In Perform hasnt been installed
+  # If Perform hasnt been installed
     if $osversion >= 6.7
     {
     # Agent 11.5.01
