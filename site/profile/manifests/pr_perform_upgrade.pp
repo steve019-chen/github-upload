@@ -213,13 +213,13 @@ $repourl              = 'http://lp99850.corp.ads/downloads',
             ensure        => present,
             extract       => true,
             extract_path  => '/var/tmp/',
-            extract_flags => 'xvf',
+            extract_flags => 'xv',
             source        => "${repourl}/linux/${installtar}",
             creates       => "/var/tmp/${installdir}",
             cleanup       => true,
           }
 
-          # Perfom the installation using the provide telusinstall.sh.
+          # Perfom the installation using the provided telusinstall.sh.
           exec {'performupgrade':
             command     => "/var/tmp/${installdir}/telusinstall.sh",
             path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
