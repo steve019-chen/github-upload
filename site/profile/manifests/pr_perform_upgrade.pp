@@ -217,6 +217,7 @@ $repourl              = 'http://lp99850.corp.ads/downloads',
             source        => "${repourl}/linux/${installtar}",
             creates       => "/var/tmp/${installdir}",
             cleanup       => true,
+            before        => Exec['performupgrade'],
           }
 
           # Perfom the installation using the provided telusinstall.sh.
