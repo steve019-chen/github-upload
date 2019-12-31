@@ -90,17 +90,18 @@ $repourl              = 'http://lp99850.corp.ads/downloads',
         else {
           if '64' in $architecture{
             # download the TAR file and extract into the installdir.
-            archive { "/var/tmp/${installtar}":
+            archive {"/var/tmp/${installtar}":
               ensure        => present,
-              source        => "puppet:///software/perform_upgrade/${installtar}",
               extract       => true,
-              creates       => "/var/tmp/${installdir}",
               extract_path  => '/var/tmp/',
-              extract_flags => 'xvf',
+              extract_flags => 'xv',
+              source        => "${repourl}/linux/${installtar}",
+              creates       => "/var/tmp/${installdir}",
               cleanup       => true,
+              before        => Exec['performupgrade'],
             }
 
-            # Perfom the installation using the provide telusinstall.sh.
+            # Perfom the installation using the provided telusinstall.sh.
             exec {'performupgrade':
               command     => "/var/tmp/${installdir}/telusinstall.sh",
               path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
@@ -150,17 +151,18 @@ $repourl              = 'http://lp99850.corp.ads/downloads',
         else {
           if '64' in $architecture {
             # download the TAR file and extract into the installdir.
-            archive { "/var/tmp/${installtar}":
+            archive {"/var/tmp/${installtar}":
               ensure        => present,
-              source        => "puppet:///software/perform_upgrade/${installtar}",
               extract       => true,
-              creates       => "/var/tmp/${installdir}",
               extract_path  => '/var/tmp/',
-              extract_flags => 'xvf',
+              extract_flags => 'xv',
+              source        => "${repourl}/linux/${installtar}",
+              creates       => "/var/tmp/${installdir}",
               cleanup       => true,
+              before        => Exec['performupgrade'],
             }
 
-            # Perfom the installation using the provide telusinstall.sh.
+            # Perfom the installation using the provided telusinstall.sh.
             exec {'performupgrade':
               command     => "/var/tmp/${installdir}/telusinstall.sh",
               path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
@@ -209,7 +211,7 @@ $repourl              = 'http://lp99850.corp.ads/downloads',
         }
         else {
           # download the TAR file and extract into the installdir.
-          archive { "/var/tmp/${installtar}":
+          archive {"/var/tmp/${installtar}":
             ensure        => present,
             extract       => true,
             extract_path  => '/var/tmp/',
@@ -250,17 +252,18 @@ $repourl              = 'http://lp99850.corp.ads/downloads',
         }
         else {
           # download the TAR file and extract into the installdir.
-          archive { "/var/tmp/${installtar}":
+          archive {"/var/tmp/${installtar}":
             ensure        => present,
-            source        => "puppet:///software/perform_upgrade/${installtar}",
             extract       => true,
-            creates       => "/var/tmp/${installdir}",
             extract_path  => '/var/tmp/',
-            extract_flags => 'xvf',
+            extract_flags => 'xv',
+            source        => "${repourl}/linux/${installtar}",
+            creates       => "/var/tmp/${installdir}",
             cleanup       => true,
+            before        => Exec['performupgrade'],
           }
 
-          # Perfom the installation using the provide telusinstall.sh.
+          # Perfom the installation using the provided telusinstall.sh.
           exec {'performupgrade':
             command     => "/var/tmp/${installdir}/telusinstall.sh",
             path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
