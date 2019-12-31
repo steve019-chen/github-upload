@@ -88,7 +88,8 @@ $best1home            = $facts['perform_info']['best1home'],
             # Agent 11.5.01 X86_64
             $installtar = 'TSCO-perform-linux-latest.tar'
             $installdir = 'TSCO-perform-linux-latest'
-            $repourl    = 'http://lp99850.corp.ads/downloads/linux/',
+            $repourl    = 'http://lp99850.corp.ads/downloads/linux/'
+
             # download the TAR file and extract into the installdir.
             archive {"/var/tmp/${installtar}":
               ensure        => present,
@@ -149,7 +150,8 @@ $best1home            = $facts['perform_info']['best1home'],
             # Agent 10.5.00 X84_64
             $installtar = 'TSCO-perform-linux-legacy.tar'
             $installdir = 'TSCO-perform-linux-legacy'
-            $repourl    = 'http://lp99850.corp.ads/downloads/linux/',
+            $repourl    = 'http://lp99850.corp.ads/downloads/linux/'
+
             # download the TAR file and extract into the installdir.
             archive {"/var/tmp/${installtar}":
               ensure        => present,
@@ -209,7 +211,8 @@ $best1home            = $facts['perform_info']['best1home'],
           # Agent 11.5.01 X86_64
           $installtar = 'TSCO-perform-linux-latest.tar'
           $installdir = 'TSCO-perform-linux-latest'
-          $repourl    = 'http://lp99850.corp.ads/downloads/linux/',
+          $repourl    = 'http://lp99850.corp.ads/downloads/linux/'
+
           # download the TAR file and extract into the installdir.
           archive {"/var/tmp/${installtar}":
             ensure        => present,
@@ -252,7 +255,8 @@ $best1home            = $facts['perform_info']['best1home'],
             # Agent 10.5.00 x86_64
             $installtar = 'TSCO-perform-linux-legacy.tar'
             $installdir = 'TSCO-perform-linux-legacy'
-            $repourl    = 'http://lp99850.corp.ads/downloads/linux/',
+            $repourl    = 'http://lp99850.corp.ads/downloads/linux/'
+            
           # download the TAR file and extract into the installdir.
           archive {"/var/tmp/${installtar}":
             ensure        => present,
