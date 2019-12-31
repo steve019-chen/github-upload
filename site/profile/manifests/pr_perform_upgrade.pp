@@ -54,7 +54,7 @@ $best1home            = $facts['perform_info']['best1home'],
 
     #Check if the OS version is Greater or Equal to 6.7
     if $osversion >= 6.7
-    {    
+    {
       #Check What version of perform is currently on the server and if its equal to the latest release clean up
       if '11.5.0' in $best1home
       {
@@ -256,7 +256,7 @@ $best1home            = $facts['perform_info']['best1home'],
             $installtar = 'TSCO-perform-linux-legacy.tar'
             $installdir = 'TSCO-perform-linux-legacy'
             $repourl    = 'http://lp99850.corp.ads/downloads/linux/'
-            
+
           # download the TAR file and extract into the installdir.
           archive {"/var/tmp/${installtar}":
             ensure        => present,
