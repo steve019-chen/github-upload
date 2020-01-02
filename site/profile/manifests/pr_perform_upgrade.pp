@@ -84,7 +84,6 @@ $best1home            = $facts['perform_info']['best1home'],
           }
         }
         else {
-          if '64' in $architecture{
             # Agent 11.5.01 X86_64
             $installtar = 'TSCO-perform-linux-latest.tar'
             $installdir = 'TSCO-perform-linux-latest'
@@ -112,14 +111,6 @@ $best1home            = $facts['perform_info']['best1home'],
               timeout     => 3600,
               require     => Archive["/var/tmp/${installtar}"],
             }
-          }
-          else{
-            # Will be updated with 32 bit version
-              # Unsupported OS architecture version
-              notify{
-              'Unsupported architecture version':,
-              }
-          }
         }
       }
     }
@@ -146,7 +137,6 @@ $best1home            = $facts['perform_info']['best1home'],
           }
         }
         else {
-          if '64' in $architecture {
             # Agent 10.5.00 X84_64
             $installtar = 'TSCO-perform-linux-legacy.tar'
             $installdir = 'TSCO-perform-linux-legacy'
@@ -174,14 +164,6 @@ $best1home            = $facts['perform_info']['best1home'],
               timeout     => 3600,
               require     => Archive["/var/tmp/${installtar}"],
             }
-          }
-          else{
-            # Will be updated with 32 bit version
-            # Unsupported OS architecture version
-            notify{
-            'Unsupported architecture version':,
-            }
-          }
         }
       }
     }
@@ -239,8 +221,6 @@ $best1home            = $facts['perform_info']['best1home'],
       }
     elsif $osversion >= 5.2 and $osversion < 6.7
     {
-
-
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           # lint: ignore: 160chars
           notify{
