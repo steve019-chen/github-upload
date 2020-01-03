@@ -25,10 +25,10 @@
 
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
-String  $hostname     = $facts['hostname'],
-String $status       = $facts['perform_info']['installed'],
-Float   $osversion    = Float.new($facts['os']['release']['full']),
-$best1home    = $facts['perform_info']['best1home'],
+String $hostname      = $facts['hostname'],
+String $status        = $facts['perform_info']['installed'],
+Float $osversion      = Float.new($facts['os']['release']['full']),
+$best1home            = $facts['perform_info']['best1home'],
 )
 {
 
@@ -47,7 +47,8 @@ $best1home    = $facts['perform_info']['best1home'],
     require => Group['bmc'],
   }
 
-  if 'true' in $status{
+  if 'true' in $status
+  {
   # If Perform install status is true
     if $osversion >= 6.7
     {
@@ -162,7 +163,8 @@ $best1home    = $facts['perform_info']['best1home'],
       }
     }
   }
-  elsif 'false' in $status{
+  elsif 'false' in $status
+  {
   # In Perform hasnt been installed
     if $osversion >= 6.7
     {
@@ -250,7 +252,8 @@ $best1home    = $facts['perform_info']['best1home'],
       }
     }
   }
-  else {
+  else
+  {
       # Unknown status
       notify{
       'unknown status of TSCO':,
