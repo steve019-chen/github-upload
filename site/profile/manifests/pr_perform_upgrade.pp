@@ -186,20 +186,21 @@ $best1home            = $facts['perform_info']['best1home'],
           file { "/var/tmp/${installtar}":
           ensure => present,
           source => "puppet:///software/perform_upgrade/${installtar}",
-          # before => Archive["/var/tmp/${installtar}"],
+          before => Archive["/var/tmp/${installtar}"],
           }
 
           # download the TAR file and extract into the installdir.
-          # archive { "/var/tmp/${installtar}":
-          #   ensure        => present,
-          #   source        => "puppet:///software/perform_upgrade/${installtar}",
-          #   extract       => true,
-          #   creates       => "/var/tmp/${installdir}",
-          #   extract_path  => '/var/tmp/',
-          #   extract_flags => 'xvf',
-          #   cleanup       => true,
-          #   before        => Exec['performupgrade'],
-          # }
+          archive { "${installtar}":
+            ensure        => present,
+            path          => "var/tmp/${installtar}",
+            # source        => "puppet:///software/perform_upgrade/${installtar}",
+            extract       => true,
+            creates       => "/var/tmp/${installdir}",
+            extract_path  => '/var/tmp/',
+            extract_flags => 'xvf',
+            cleanup       => true,
+            before        => Exec['performupgrade'],
+          }
 
           # Perfom the installation using the provide telusinstall.sh.
           exec {'performupgrade':
