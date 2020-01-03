@@ -21,12 +21,12 @@
 # Updated on : Dec 27th 2019
 #
 # Comment for update: Updated the logic to make it smarter
-# lint: ignore: unquoted_node_name lint: ignore: 140chars
+# lint: ignore: unquoted_node_name lint: ignore: 140chars lint: ignore: puppet_url_without_modules
 
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
 String  $hostname     = $facts['hostname'],
-Boolean $status       = Boolean.new($facts['perform_info']['installed']),
+String $status       = $facts['perform_info']['installed'],
 Float   $osversion    = Float.new($facts['os']['release']['full']),
 $best1home    = $facts['perform_info']['best1home'],
 )
@@ -71,7 +71,6 @@ $best1home    = $facts['perform_info']['best1home'],
 
       else {
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-          # lint: ignore: 160chars
           notify{
             "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
           }
@@ -122,7 +121,6 @@ $best1home    = $facts['perform_info']['best1home'],
 
       else {
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-          # lint: ignore: 160chars
           notify{
             "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
           }
@@ -173,7 +171,6 @@ $best1home    = $facts['perform_info']['best1home'],
       $installdir = 'TSCO-perform-linux-latest'
 
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-          # lint: ignore: 160chars
           notify{
             "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
           }
@@ -213,7 +210,6 @@ $best1home    = $facts['perform_info']['best1home'],
       $installdir = 'TSCO-perform-linux-legacy'
 
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-          # lint: ignore: 160chars
           notify{
             "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
           }
@@ -257,7 +253,7 @@ $best1home    = $facts['perform_info']['best1home'],
   else {
       # Unknown status
       notify{
-      'unknown status of TSCO':, 
+      'unknown status of TSCO':,
       }
   }
 }
