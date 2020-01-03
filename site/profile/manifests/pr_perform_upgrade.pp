@@ -26,11 +26,7 @@
 class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
 String  $hostname     = $facts['hostname'],
-<<<<<<< HEAD
-Boolean $status       = Boolean.new($facts['perform_info']['installed']),
-=======
-Boolean $status       =  Boolean.new($facts['perform_info']['installed']),
->>>>>>> 77e6b8f86e2a95d281a70cb5fe41673605a6b4cb
+$status       = $facts['perform_info']['installed'],
 Float   $osversion    = Float.new($facts['os']['release']['full']),
 $best1home    = $facts['perform_info']['best1home'],
 )
