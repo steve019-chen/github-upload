@@ -171,7 +171,7 @@ $best1home            = $facts['perform_info']['best1home'],
     # Agent 11.5.01
       $installtar = 'TSCO-perform-linux-latest.tar'
       $installdir = 'TSCO-perform-linux-latest'
-      notify{"Inside status False and OS >=6.7 ${osversion} and status ${status}  Current ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,}
+
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           notify{
             "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
@@ -199,19 +199,19 @@ $best1home            = $facts['perform_info']['best1home'],
             extract_path  => '/var/tmp/',
             extract_flags => 'xvf',
             cleanup       => true,
-            before        => Exec['performupgrade'],
+            # before        => Exec['performupgrade'],
           }
 
           # Perfom the installation using the provide telusinstall.sh.
-          exec {'performupgrade':
-            command     => "/var/tmp/${installdir}/telusinstall.sh",
-            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-            cwd         => "/var/tmp/${installdir}",
-            environment => ['HOME=/home/svcbmcp'],
-            creates     => "/tmp/TSCO_${hostname}_Install.txt",
-            timeout     => 3600,
-            # require     => Archive["/var/tmp/${installtar}"],
-          }
+          # exec {'performupgrade':
+          #   command     => "/var/tmp/${installdir}/telusinstall.sh",
+          #   path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+          #   cwd         => "/var/tmp/${installdir}",
+          #   environment => ['HOME=/home/svcbmcp'],
+          #   creates     => "/tmp/TSCO_${hostname}_Install.txt",
+          #   timeout     => 3600,
+          #   # require     => Archive["/var/tmp/${installtar}"],
+          # }
         }
       }
     elsif $osversion >= 5.2 and $osversion < 6.7
