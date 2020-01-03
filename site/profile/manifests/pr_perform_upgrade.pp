@@ -195,15 +195,15 @@ $best1home    = $facts['perform_info']['best1home'],
           }
 
           # Perfom the installation using the provide telusinstall.sh.
-          exec {'performupgrade':
-            command     => "/var/tmp/${installdir}/telusinstall.sh",
-            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-            cwd         => "/var/tmp/${installdir}",
-            environment => ['HOME=/home/svcbmcp'],
-            creates     => "/tmp/TSCO_${hostname}_Install.txt",
-            timeout     => 3600,
-            require     => Archive["/var/tmp/${installtar}"],
-          }
+          # exec {'performupgrade':
+          #   command     => "/var/tmp/${installdir}/telusinstall.sh",
+          #   path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+          #   cwd         => "/var/tmp/${installdir}",
+          #   environment => ['HOME=/home/svcbmcp'],
+          #   creates     => "/tmp/TSCO_${hostname}_Install.txt",
+          #   timeout     => 3600,
+          #   require     => Archive["/var/tmp/${installtar}"],
+          # }
         }
       }
     elsif $osversion >= 5.2 and $osversion < 6.7
