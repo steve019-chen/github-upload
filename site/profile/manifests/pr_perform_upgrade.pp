@@ -47,7 +47,7 @@ $best1home    = $facts['perform_info']['best1home'],
     require => Group['bmc'],
   }
 
-  if $status{
+  if 'true' in $status{
   # If Perform install status is true
     if $osversion >= 6.7
     {
@@ -164,7 +164,7 @@ $best1home    = $facts['perform_info']['best1home'],
       }
     }
   }
-  else{
+  elsif 'false' in $status{
   # In Perform hasnt been installed
     if $osversion >= 6.7
     {
@@ -253,6 +253,12 @@ $best1home    = $facts['perform_info']['best1home'],
       'Unsupported version of linux OS':,
       }
     }
+  }
+  else {
+      # Unknown status
+      notify{
+      'unknown status of TSCO':, 
+      }
   }
 }
 # lint: endignore
