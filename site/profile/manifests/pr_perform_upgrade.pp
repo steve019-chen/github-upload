@@ -186,7 +186,7 @@ $best1home            = $facts['perform_info']['best1home'],
           file { "/var/tmp/${installtar}":
           ensure => present,
           source => "puppet:///software/perform_upgrade/${installtar}",
-          before => Archive["/var/tmp/${installtar}"],
+          before => Archive["${installtar}"],
           }
 
           # download the TAR file and extract into the installdir.
