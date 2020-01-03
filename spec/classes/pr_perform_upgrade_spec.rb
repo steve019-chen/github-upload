@@ -18,7 +18,7 @@ describe 'profile::pr_perform_upgrade' do
         'var_tmp_fs' => '/var/tmp',
         },
         'perform_info' => {
-          'installed' => 'False',
+          'installed' => 'false',
           'var_tmp_fs' => '/var/tmp',
           },
     }
