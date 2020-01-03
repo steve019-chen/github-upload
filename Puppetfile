@@ -1,8 +1,7 @@
 # Forge clean modules
 
 mod 'puppet-archive', '4.4.0'
-:git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-archive.git',
-:tag => '4.4.0'
+
 
 mod 'puppetlabs-stdlib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppetlabs-stdlib.git',
