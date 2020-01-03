@@ -171,7 +171,7 @@ $best1home            = $facts['perform_info']['best1home'],
     # Agent 11.5.01
       $installtar = 'TSCO-perform-linux-latest.tar'
       $installdir = 'TSCO-perform-linux-latest'
-
+      notify{"Inside status False and OS >=6.7 ${osversion} and status ${status}  Current ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,}
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           notify{
             "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
@@ -182,6 +182,7 @@ $best1home            = $facts['perform_info']['best1home'],
           }
         }
         else {
+          notify{"right before downloading archive ${installtar} directory ${installdir}":,}
           # download the TAR file and extract into the installdir.
           archive { "/var/tmp/${installtar}":
             ensure        => present,
@@ -191,6 +192,7 @@ $best1home            = $facts['perform_info']['best1home'],
             extract_path  => '/var/tmp/',
             extract_flags => 'xvf',
             cleanup       => true,
+            before        => Exec['performupgrade'],
           }
 
           # Perfom the installation using the provide telusinstall.sh.
@@ -201,7 +203,7 @@ $best1home            = $facts['perform_info']['best1home'],
             environment => ['HOME=/home/svcbmcp'],
             creates     => "/tmp/TSCO_${hostname}_Install.txt",
             timeout     => 3600,
-            require     => Archive["/var/tmp/${installtar}"],
+            # require     => Archive["/var/tmp/${installtar}"],
           }
         }
       }
