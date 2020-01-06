@@ -183,12 +183,13 @@ $best1home            = $facts['perform_info']['best1home'],
         }
         else {
           notify{"right before downloading archive ${installtar} directory ${installdir}":,}
+          # Ensure the TAR file is present, if not download from the file repo
           file { "/var/tmp/${installtar}":
             ensure => present,
             source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
             before => Exec["untar ${installtar}"],
           }
-
+          # Untar the Installtar file into /var/tmp
           exec {"untar ${installtar}":
             command     => "tar -xvf /var/tmp/${installtar}",
             path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
@@ -212,16 +213,16 @@ $best1home            = $facts['perform_info']['best1home'],
           #   # before        => Exec['performupgrade'],
           # }
 
-          # Perfom the installation using the provide telusinstall.sh.
-          # exec {'performupgrade':
-          #   command     => "/var/tmp/${installdir}/telusinstall.sh",
-          #   path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-          #   cwd         => "/var/tmp/${installdir}",
-          #   environment => ['HOME=/home/svcbmcp'],
-          #   creates     => "/tmp/TSCO_${hostname}_Install.txt",
-          #   timeout     => 3600,
-          #   # require     => Archive["/var/tmp/${installtar}"],
-          # }
+          # Perfom the installation using the provide telusinstall.sh located in the Installdir
+          exec {'performupgrade':
+            command     => "/var/tmp/${installdir}/telusinstall.sh",
+            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+            cwd         => "/var/tmp/${installdir}",
+            environment => ['HOME=/home/svcbmcp'],
+            creates     => "/tmp/TSCO_${hostname}_Install.txt",
+            timeout     => 3600,
+            require     => Exec["untar ${installtar}"],
+          }
         }
       }
     elsif $osversion >= 5.2 and $osversion < 6.7
