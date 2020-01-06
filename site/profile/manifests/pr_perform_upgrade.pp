@@ -73,7 +73,7 @@ $best1home            = $facts['perform_info']['best1home'],
       else {
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           notify{
-            "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
+            "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
           }
           #Force an error at runtime
           exec{'perfom_upgrade_no_space':
@@ -127,7 +127,7 @@ $best1home            = $facts['perform_info']['best1home'],
       else {
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           notify{
-            "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
+            "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
           }
           #Force an error at runtime
           exec{'perfom_upgrade_no_space':
@@ -181,7 +181,7 @@ $best1home            = $facts['perform_info']['best1home'],
 
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           notify{
-            "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
+            "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
           }
           #Force an error at runtime
           exec{'perfom_upgrade_no_space':
@@ -198,21 +198,21 @@ $best1home            = $facts['perform_info']['best1home'],
           }
           # Untar the Installtar file into /var/tmp
           exec {"untar ${installtar}":
-            command     => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
-            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-            cwd         => '/var/tmp/',
-            creates     => "/var/tmp/${installdir}",
-            timeout     => 3600,
-            require     => File["/var/tmp/${installtar}"],
+            command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
+            path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+            cwd     => '/var/tmp/',
+            creates => "/var/tmp/${installdir}",
+            timeout => 3600,
+            require => File["/var/tmp/${installtar}"],
           }
           # Perfom the installation using the provide telusinstall.sh located in the Installdir
           exec {'performupgrade':
-            command     => "/var/tmp/${installdir}/telusinstall.sh",
-            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-            cwd         => "/var/tmp/${installdir}",
-            creates     => "/tmp/TSCO_${hostname}_Install.txt",
-            timeout     => 3600,
-            require     => Exec["untar ${installtar}"],
+            command => "/var/tmp/${installdir}/telusinstall.sh",
+            path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+            cwd     => "/var/tmp/${installdir}",
+            creates => "/tmp/TSCO_${hostname}_Install.txt",
+            timeout => 3600,
+            require => Exec["untar ${installtar}"],
           }
         }
       }
@@ -224,7 +224,7 @@ $best1home            = $facts['perform_info']['best1home'],
 
         if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
           notify{
-            "Filesystem ${facts['patrol_info']['var_tmp_fs']} too full. Need ${space_needed} bytes in /var/tmp but only ${facts['patrol_info']['var_tmp_bytes']} available":,
+            "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
           }
           #Force an error at runtime
           exec{'perfom_upgrade_no_space':
