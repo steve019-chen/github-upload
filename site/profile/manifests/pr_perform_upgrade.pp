@@ -191,7 +191,7 @@ $best1home            = $facts['perform_info']['best1home'],
           }
           # Untar the Installtar file into /var/tmp
           exec {"untar ${installtar}":
-            command     => "tar -xvf /var/tmp/${installtar}",
+            command     => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
             path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
             cwd         => '/var/tmp/',
             environment => ['HOME=/home/svcbmcp'],
@@ -218,7 +218,7 @@ $best1home            = $facts['perform_info']['best1home'],
             command     => "/var/tmp/${installdir}/telusinstall.sh",
             path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
             cwd         => "/var/tmp/${installdir}",
-            environment => ['HOME=/home/svcbmcp'],
+            #environment => ['HOME=/home/svcbmcp'],
             creates     => "/tmp/TSCO_${hostname}_Install.txt",
             timeout     => 3600,
             require     => Exec["untar ${installtar}"],
