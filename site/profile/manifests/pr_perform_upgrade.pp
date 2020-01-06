@@ -27,31 +27,17 @@ String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 Float $osversion      = Float.new($facts['os']['release']['full']),
 $best1home            = $facts['perform_info']['best1home'],
+
 )
 {
-  #Required user uid = 3181(svcbmcp) gid = 3181(bmc) groups = 3181(bmc) context = unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
-  #Create the users group if it doesnt already exsist
-  group { 'bmc':
-    ensure => present,
-    gid    => '3181',
-  }
+  # User id and Group dependency removed
 
-  #Create the user for application account if it doesnt already exsist
-  user { 'svcbmcp':
-    uid     => '3181',
-    gid     => 'bmc',
-    shell   => '/bin/bash',
-    require => Group['bmc'],
-  }
+
   if 'true' in $status {
   # If Perform install status is true upgrade the agents to the following version
 
     if $osversion >= 6.7 {
     # If the OS is version 6.7 or higher
-
-        # Agent 11.5.01 x64
-        $installtar = 'TSCO-perform-linux-latest.tar'
-        $installdir = 'TSCO-perform-linux-latest'
 
         if '11.5.0' in $best1home
         {
@@ -66,51 +52,14 @@ $best1home            = $facts['perform_info']['best1home'],
           rmdirs  => true,
           }
         }
-
         else {
-          if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-            notify{
-              "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
-            }
-            #Force an error at runtime
-            exec{'perfom_upgrade_no_space':
-              command => '/bin/false',
-            }
-          }
-          else {
-            # download the TAR file and extract into the installdir.
-            # Ensure the TAR file is present, if not download from the file repo
-            file { "/var/tmp/${installtar}":
-              ensure => present,
-              source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
-              before => Exec["untar ${installtar}"],
-            }
-            # Untar the Installtar file into /var/tmp
-            exec {"untar ${installtar}":
-              command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
-              path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-              cwd     => '/var/tmp/',
-              creates => "/var/tmp/${installdir}",
-              timeout => 3600,
-              require => File["/var/tmp/${installtar}"],
-            }
-            # Perfom the installation using the provide telusinstall.sh located in the Installdir
-            exec {'performupgrade':
-              command => "/var/tmp/${installdir}/telusinstall.sh",
-              path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-              cwd     => "/var/tmp/${installdir}",
-              creates => "/tmp/TSCO_${hostname}_Install.txt",
-              timeout => 3600,
-              require => Exec["untar ${installtar}"],
-            }
-          }
+          # Agent 11.5.01 x64
+          $installdir = 'TSCO-perform-linux-latest'
+          $install_perform = true
         }
       }
     elsif $osversion >= 5.2 and $osversion < 6.7 {
     # If the OS is between version 5.2 and 6.7
-        # Agent 10.5.00
-        $installtar = 'TSCO-perform-linux-legacy.tar'
-        $installdir = 'TSCO-perform-linux-legacy'
 
         if '10.5.0' in $best1home
         {
@@ -122,41 +71,9 @@ $best1home            = $facts['perform_info']['best1home'],
         }
 
         else {
-          if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-            notify{
-              "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
-            }
-            #Force an error at runtime
-            exec{'perfom_upgrade_no_space':
-              command => '/bin/false',
-            }
-          }
-          else {
-            # Ensure the TAR file is present, if not download from the file repo
-            file { "/var/tmp/${installtar}":
-              ensure => present,
-              source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
-              before => Exec["untar ${installtar}"],
-            }
-            # Untar the Installtar file into /var/tmp
-            exec {"untar ${installtar}":
-              command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
-              path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-              cwd     => '/var/tmp/',
-              creates => "/var/tmp/${installdir}",
-              timeout => 3600,
-              require => File["/var/tmp/${installtar}"],
-            }
-            # Perfom the installation using the provide telusinstall.sh located in the Installdir
-            exec {'performupgrade':
-              command => "/var/tmp/${installdir}/telusinstall.sh",
-              path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-              cwd     => "/var/tmp/${installdir}",
-              creates => "/tmp/TSCO_${hostname}_Install.txt",
-              timeout => 3600,
-              require => Exec["untar ${installtar}"],
-            }
-          }
+          # Agent 10.5.00
+          $installdir = 'TSCO-perform-linux-legacy'
+          $install_perform = true
         }
       }
     else {
@@ -173,100 +90,62 @@ $best1home            = $facts['perform_info']['best1home'],
     # If the OS is version 6.7 or higher
 
           # Agent 11.5.01
-          $installtar = 'TSCO-perform-linux-latest.tar'
           $installdir = 'TSCO-perform-linux-latest'
-
-            if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-              notify{
-                "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
-              }
-              #Force an error at runtime
-              exec{'perfom_upgrade_no_space':
-                command => '/bin/false',
-              }
-            }
-            else {
-              notify{"right before downloading archive ${installtar} directory ${installdir}":,}
-              # Ensure the TAR file is present, if not download from the file repo
-              file { "/var/tmp/${installtar}":
-                ensure => present,
-                source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
-                before => Exec["untar ${installtar}"],
-              }
-              # Untar the Installtar file into /var/tmp
-              exec {"untar ${installtar}":
-                command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
-                path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-                cwd     => '/var/tmp/',
-                creates => "/var/tmp/${installdir}",
-                timeout => 3600,
-                require => File["/var/tmp/${installtar}"],
-              }
-              # Perfom the installation using the provide telusinstall.sh located in the Installdir
-              exec {'performupgrade':
-                command => "/var/tmp/${installdir}/telusinstall.sh",
-                path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-                cwd     => "/var/tmp/${installdir}",
-                creates => "/tmp/TSCO_${hostname}_Install.txt",
-                timeout => 3600,
-                require => Exec["untar ${installtar}"],
-              }
-            }
+          $install_perform = true
     }
     elsif $osversion >= 5.2 and $osversion < 6.7 {
     # If the OS is between version 5.2 and 6.7
-          # Agent 10.5.00
-          $installtar = 'TSCO-perform-linux-legacy.tar'
-          $installdir = 'TSCO-perform-linux-legacy'
+    # Agent 10.5.00
 
-            if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-              notify{
-                "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
-              }
-              #Force an error at runtime
-              exec{'perfom_upgrade_no_space':
-                command => '/bin/false',
-              }
-            }
-            else {
-              # Ensure the TAR file is present, if not download from the file repo
-              file { "/var/tmp/${installtar}":
-                ensure => present,
-                source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
-                before => Exec["untar ${installtar}"],
-              }
-              # Untar the Installtar file into /var/tmp
-              exec {"untar ${installtar}":
-                command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
-                path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-                cwd     => '/var/tmp/',
-                creates => "/var/tmp/${installdir}",
-                timeout => 3600,
-                require => File["/var/tmp/${installtar}"],
-              }
-              # Perfom the installation using the provide telusinstall.sh located in the Installdir
-              exec {'performupgrade':
-                command => "/var/tmp/${installdir}/telusinstall.sh",
-                path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-                cwd     => "/var/tmp/${installdir}",
-                creates => "/tmp/TSCO_${hostname}_Install.txt",
-                timeout => 3600,
-                require => Exec["untar ${installtar}"],
-              }
-            }
+      $installdir = 'TSCO-perform-linux-legacy'
+      $install_perform = true
     }
     else {
     # Unsupported version
-      notify{
-      'Unsupported version of linux OS':,
-      }
+      notify{'Unsupported version of linux OS':,}
     }
   }
   else{
   # Unknown status
-    notify{
-    'unknown status of TSCO':,
+    notify{'unknown status of TSCO':,}
     }
+  if $install_perform {
+    $installtar = "${installdir}.tar"
+    if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
+      notify{
+        "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
+      }
+      #Force an error at runtime
+      exec{'perfom_upgrade_no_space':
+        command => '/bin/false',
+      }
     }
+    else {
+      # Ensure the TAR file is present, if not download from the file repo
+      file { "/var/tmp/${installtar}":
+        ensure => present,
+        source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
+        before => Exec["untar ${installtar}"],
+      }
+      # Untar the Installtar file into /var/tmp
+      exec {"untar ${installtar}":
+        command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
+        path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+        cwd     => '/var/tmp/',
+        creates => "/var/tmp/${installdir}",
+        timeout => 3600,
+        require => File["/var/tmp/${installtar}"],
+      }
+      # Perfom the installation using the provide telusinstall.sh located in the Installdir
+      exec {'performupgrade':
+        command => "/var/tmp/${installdir}/telusinstall.sh",
+        path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+        cwd     => "/var/tmp/${installdir}",
+        creates => "/tmp/TSCO_${hostname}_Install.txt",
+        timeout => 3600,
+        require => Exec["untar ${installtar}"],
+      }
+    }
+  }
 }
 # lint: endignore
