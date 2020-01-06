@@ -185,7 +185,7 @@ $best1home            = $facts['perform_info']['best1home'],
           notify{"right before downloading archive ${installtar} directory ${installdir}":,}
           file { "/var/tmp/${installtar}":
             ensure => present,
-            source => "puppet:///software/perform_upgrade/${installtar}",
+            source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
             before => Exec["untar ${installtar}"],
           }
 
