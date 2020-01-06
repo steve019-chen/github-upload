@@ -27,7 +27,6 @@ String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 Float $osversion      = Float.new($facts['os']['release']['full']),
 $best1home            = $facts['perform_info']['best1home'],
-$architecture         = $facts['architecture'],
 )
 {
   #Required user uid = 3181(svcbmcp) gid = 3181(bmc) groups = 3181(bmc) context = unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
@@ -44,15 +43,11 @@ $architecture         = $facts['architecture'],
     shell   => '/bin/bash',
     require => Group['bmc'],
   }
-
   if 'true' in $status {
   # If Perform install status is true upgrade the agents to the following version
 
     if $osversion >= 6.7 {
     # If the OS is version 6.7 or higher
-
-      if '64' in $architecture {
-      # If the OS is 64 BIT
 
         # Agent 11.5.01 x64
         $installtar = 'TSCO-perform-linux-latest.tar'
@@ -110,16 +105,9 @@ $architecture         = $facts['architecture'],
             }
           }
         }
-        }
-
-      else {
-      # Unsupported OS architecture
-        }
-    }
+      }
     elsif $osversion >= 5.2 and $osversion < 6.7 {
-
-      if '64' in $architecture {
-      # If the OS is 64 BIT
+    # If the OS is between version 5.2 and 6.7
         # Agent 10.5.00
         $installtar = 'TSCO-perform-linux-legacy.tar'
         $installdir = 'TSCO-perform-linux-legacy'
@@ -170,12 +158,7 @@ $architecture         = $facts['architecture'],
             }
           }
         }
-        }
-
-      else {
-      # Unsupported OS architecture
-        }
-    }
+      }
     else {
     # Unsupported version
       notify{
@@ -186,11 +169,8 @@ $architecture         = $facts['architecture'],
   elsif 'false' in $status {
   # If Perform hasnt been installed install the agents
 
-    if $osversion >= 8.7 {
+    if $osversion >= 6.7 {
     # If the OS is version 6.7 or higher
-
-      if '64' in $architecture {
-      # If the OS is 64 BIT
 
           # Agent 11.5.01
           $installtar = 'TSCO-perform-linux-latest.tar'
@@ -232,18 +212,10 @@ $architecture         = $facts['architecture'],
                 require => Exec["untar ${installtar}"],
               }
             }
-          }
-
-      else {
-      # Unsupported OS architecture
-        }
     }
-    elsif $osversion >= 5.2 and $osversion < 8.7 {
-
-      if '64' in $architecture {
-      # If the OS is 64 BIT
-
-        # Agent 10.5.00
+    elsif $osversion >= 5.2 and $osversion < 6.7 {
+    # If the OS is between version 5.2 and 6.7
+          # Agent 10.5.00
           $installtar = 'TSCO-perform-linux-legacy.tar'
           $installdir = 'TSCO-perform-linux-legacy'
 
@@ -282,18 +254,13 @@ $architecture         = $facts['architecture'],
                 require => Exec["untar ${installtar}"],
               }
             }
-          }
-
-      else {
-      # Unsupported OS architecture
-        }
     }
     else {
     # Unsupported version
       notify{
       'Unsupported version of linux OS':,
       }
-      }
+    }
   }
   else{
   # Unknown status
