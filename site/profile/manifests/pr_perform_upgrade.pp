@@ -186,7 +186,7 @@ $architecture         = $facts['architecture'],
   elsif 'false' in $status {
   # If Perform hasnt been installed install the agents
 
-    if $osversion >= 6.7 {
+    if $osversion >= 8.7 {
     # If the OS is version 6.7 or higher
 
       if '64' in $architecture {
@@ -238,7 +238,7 @@ $architecture         = $facts['architecture'],
       # Unsupported OS architecture
         }
     }
-    elsif $osversion >= 5.2 and $osversion < 6.7 {
+    elsif $osversion >= 5.2 and $osversion < 8.7 {
 
       if '64' in $architecture {
       # If the OS is 64 BIT
