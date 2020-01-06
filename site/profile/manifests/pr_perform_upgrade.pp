@@ -18,7 +18,7 @@
 # Created on : Dec 18th 2019
 #
 # Last updated by: Corey Sprung ----- Corey.Sprung@TELUS.com
-# Updated on : Dec 27th 2019
+# Updated on : Jan 6th 2020
 #
 # Comment for update: Updated the logic to make it smarter
 # lint: ignore: unquoted_node_name lint: ignore: 140chars lint: ignore: puppet_url_without_modules
@@ -82,25 +82,29 @@ $best1home            = $facts['perform_info']['best1home'],
         }
         else {
           # download the TAR file and extract into the installdir.
-          archive { "/var/tmp/${installtar}":
-            ensure        => present,
-            source        => "puppet:///software/perform_upgrade/${installtar}",
-            extract       => true,
-            creates       => "/var/tmp/${installdir}",
-            extract_path  => '/var/tmp/',
-            extract_flags => 'xvf',
-            cleanup       => true,
+          # Ensure the TAR file is present, if not download from the file repo
+          file { "/var/tmp/${installtar}":
+            ensure => present,
+            source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
+            before => Exec["untar ${installtar}"],
           }
-
-          # Perfom the installation using the provide telusinstall.sh.
+          # Untar the Installtar file into /var/tmp
+          exec {"untar ${installtar}":
+            command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
+            path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+            cwd     => '/var/tmp/',
+            creates => "/var/tmp/${installdir}",
+            timeout => 3600,
+            require => File["/var/tmp/${installtar}"],
+          }
+          # Perfom the installation using the provide telusinstall.sh located in the Installdir
           exec {'performupgrade':
-            command     => "/var/tmp/${installdir}/telusinstall.sh",
-            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-            cwd         => "/var/tmp/${installdir}",
-            environment => ['HOME=/home/svcbmcp'],
-            creates     => "/tmp/TSCO_${hostname}_Install.txt",
-            timeout     => 3600,
-            require     => Archive["/var/tmp/${installtar}"],
+            command => "/var/tmp/${installdir}/telusinstall.sh",
+            path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+            cwd     => "/var/tmp/${installdir}",
+            creates => "/tmp/TSCO_${hostname}_Install.txt",
+            timeout => 3600,
+            require => Exec["untar ${installtar}"],
           }
         }
       }
@@ -131,26 +135,29 @@ $best1home            = $facts['perform_info']['best1home'],
           }
         }
         else {
-          # download the TAR file and extract into the installdir.
-          archive { "/var/tmp/${installtar}":
-            ensure        => present,
-            source        => "puppet:///software/perform_upgrade/${installtar}",
-            extract       => true,
-            creates       => "/var/tmp/${installdir}",
-            extract_path  => '/var/tmp/',
-            extract_flags => 'xvf',
-            cleanup       => true,
+          # Ensure the TAR file is present, if not download from the file repo
+          file { "/var/tmp/${installtar}":
+            ensure => present,
+            source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
+            before => Exec["untar ${installtar}"],
           }
-
-          # Perfom the installation using the provide telusinstall.sh.
+          # Untar the Installtar file into /var/tmp
+          exec {"untar ${installtar}":
+            command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
+            path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+            cwd     => '/var/tmp/',
+            creates => "/var/tmp/${installdir}",
+            timeout => 3600,
+            require => File["/var/tmp/${installtar}"],
+          }
+          # Perfom the installation using the provide telusinstall.sh located in the Installdir
           exec {'performupgrade':
-            command     => "/var/tmp/${installdir}/telusinstall.sh",
-            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-            cwd         => "/var/tmp/${installdir}",
-            environment => ['HOME=/home/svcbmcp'],
-            creates     => "/tmp/TSCO_${hostname}_Install.txt",
-            timeout     => 3600,
-            require     => Archive["/var/tmp/${installtar}"],
+            command => "/var/tmp/${installdir}/telusinstall.sh",
+            path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+            cwd     => "/var/tmp/${installdir}",
+            creates => "/tmp/TSCO_${hostname}_Install.txt",
+            timeout => 3600,
+            require => Exec["untar ${installtar}"],
           }
         }
       }
@@ -194,31 +201,15 @@ $best1home            = $facts['perform_info']['best1home'],
             command     => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
             path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
             cwd         => '/var/tmp/',
-            environment => ['HOME=/home/svcbmcp'],
             creates     => "/var/tmp/${installdir}",
             timeout     => 3600,
             require     => File["/var/tmp/${installtar}"],
           }
-
-          # # download the TAR file and extract into the installdir.
-          # archive { "${installtar}":
-          #   ensure        => present,
-          #   path          => "var/tmp/${installtar}",
-          #   # source        => "puppet:///software/perform_upgrade/${installtar}",
-          #   extract       => true,
-          #   creates       => "/var/tmp/${installdir}",
-          #   extract_path  => '/var/tmp/',
-          #   extract_flags => 'xvf',
-          #   cleanup       => true,
-          #   # before        => Exec['performupgrade'],
-          # }
-
           # Perfom the installation using the provide telusinstall.sh located in the Installdir
           exec {'performupgrade':
             command     => "/var/tmp/${installdir}/telusinstall.sh",
             path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
             cwd         => "/var/tmp/${installdir}",
-            #environment => ['HOME=/home/svcbmcp'],
             creates     => "/tmp/TSCO_${hostname}_Install.txt",
             timeout     => 3600,
             require     => Exec["untar ${installtar}"],
@@ -241,26 +232,29 @@ $best1home            = $facts['perform_info']['best1home'],
           }
         }
         else {
-          # download the TAR file and extract into the installdir.
-          archive { "/var/tmp/${installtar}":
-            ensure        => present,
-            source        => "puppet:///software/perform_upgrade/${installtar}",
-            extract       => true,
-            creates       => "/var/tmp/${installdir}",
-            extract_path  => '/var/tmp/',
-            extract_flags => 'xvf',
-            cleanup       => true,
+          # Ensure the TAR file is present, if not download from the file repo
+          file { "/var/tmp/${installtar}":
+            ensure => present,
+            source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
+            before => Exec["untar ${installtar}"],
           }
-
-          # Perfom the installation using the provide telusinstall.sh.
+          # Untar the Installtar file into /var/tmp
+          exec {"untar ${installtar}":
+            command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
+            path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+            cwd     => '/var/tmp/',
+            creates => "/var/tmp/${installdir}",
+            timeout => 3600,
+            require => File["/var/tmp/${installtar}"],
+          }
+          # Perfom the installation using the provide telusinstall.sh located in the Installdir
           exec {'performupgrade':
-            command     => "/var/tmp/${installdir}/telusinstall.sh",
-            path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-            cwd         => "/var/tmp/${installdir}",
-            environment => ['HOME=/home/svcbmcp'],
-            creates     => "/tmp/TSCO_${hostname}_Install.txt",
-            timeout     => 3600,
-            require     => Archive["/var/tmp/${installtar}"],
+            command => "/var/tmp/${installdir}/telusinstall.sh",
+            path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+            cwd     => "/var/tmp/${installdir}",
+            creates => "/tmp/TSCO_${hostname}_Install.txt",
+            timeout => 3600,
+            require => Exec["untar ${installtar}"],
           }
         }
       }
