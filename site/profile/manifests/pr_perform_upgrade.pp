@@ -184,12 +184,12 @@ $best1home            = $facts['perform_info']['best1home'],
         else {
           notify{"right before downloading archive ${installtar} directory ${installdir}":,}
           file { "/var/tmp/${installtar}":
-          ensure => present,
-          source => "puppet:///software/perform_upgrade/${installtar}",
-          before => Archive["${installtar}"],
+            ensure => present,
+            source => "puppet:///software/perform_upgrade/${installtar}",
+            before => Exec["untar ${installtar}"],
           }
 
-          exec {'performupgrade':
+          exec {"untar ${installtar}":
             command     => "tar -xvf /var/tmp/${installtar}",
             path        => ['/sbin','/bin','/usr/sbin','/usr/bin'],
             cwd         => '/var/tmp/',
