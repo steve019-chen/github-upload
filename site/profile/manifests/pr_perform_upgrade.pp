@@ -5,16 +5,16 @@
 # 750 servers in telus between 5.2 and 6.6
 # All servers are x64
 # Actions: 
-#   - Check if perform is already installed based on Puppet facts
-#   - Choose the correct version of the agent based on the OS release
-#   - Download and untar the agent installer
-#   - Install the agent via the telusinstall.sh script provided in the tar file
-#     - The script will install or upgrade the agent using svcbmcp
-#     - The script will also run the post install script as root
-#     - a log file will be created in the /var/tmp directory TSCO_<hostname>_install.txt
-#   - We will remove all the files within the directory created once the agent has been installed per the puppet fact.
+# - Check if perform is already installed based on Puppet facts
+# - Choose the correct version of the agent based on the OS release
+# - Download and untar the agent installer
+# - Install the agent via the telusinstall.sh script provided in the tar file
+# -- The script will install or upgrade the agent using svcbmcp
+# -- The script will also run the post install script as root
+# -- a log file will be created in the /var/tmp directory TSCO_<hostname>_install.txt
+# - We will remove all the files within the directory created once the agent has been installed per the puppet fact
 # 
-# Create by: Corey Sprung ----Corey.Sprung@TELUS.com
+# Create by: Corey Sprung ---- Corey.Sprung@TELUS.com
 # Created on : Dec 18th 2019
 #
 # Last updated by: Corey Sprung ---- Corey.Sprung@TELUS.com
@@ -27,11 +27,8 @@ String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 Float $osversion      = Float.new($facts['os']['release']['full']),
 $best1home            = $facts['perform_info']['best1home'],
-
 )
 {
-  # User id and Group dependency removed
-
   if 'true' in $status {
   # If Perform install status is true upgrade the agents to the following version
 
@@ -77,7 +74,8 @@ $best1home            = $facts['perform_info']['best1home'],
 
     else {
     # Unsupported version
-      notify{'Unsupported version of linux OS':,}
+      notify{'Unsupported version of linux OS':,
+      }
     }
   }
   elsif 'false' in $status {
@@ -99,7 +97,8 @@ $best1home            = $facts['perform_info']['best1home'],
     }
     else {
     # Unsupported version
-      notify{'Unsupported version of linux OS':,}
+      notify{'Unsupported version of linux OS':,
+      }
     }
   }
   else{
@@ -109,7 +108,8 @@ $best1home            = $facts['perform_info']['best1home'],
   if $install_perform {
     $installtar = "${installdir}.tar"
     if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-      notify{"Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,}
+      notify{"Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
+      }
 
       #Force an error at runtime
       exec{'perfom_upgrade_no_space':
