@@ -103,8 +103,9 @@ $best1home            = $facts['perform_info']['best1home'],
   }
   else{
   # Unknown status
-    notify{'unknown status of TSCO':,}
+    notify{'unknown status of TSCO':,
     }
+  }
   if $install_perform {
     $installtar = "${installdir}.tar"
     if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
