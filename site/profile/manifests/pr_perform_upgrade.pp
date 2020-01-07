@@ -3,8 +3,8 @@
 # Parameters: 
 # 3700 servers in telus greater or equal to 6.7
 # 750 servers in telus between 5.2 and 6.6
+# All servers are x64
 # Actions: 
-#   - This will check that svcbmcp is present on the server
 #   - Check if perform is already installed based on Puppet facts
 #   - Choose the correct version of the agent based on the OS release
 #   - Download and untar the agent installer
@@ -12,13 +12,13 @@
 #     - The script will install or upgrade the agent using svcbmcp
 #     - The script will also run the post install script as root
 #     - a log file will be created in the /var/tmp directory TSCO_<hostname>_install.txt
-#   - We will remove all the files within the directory created.
+#   - We will remove all the files within the directory created once the agent has been installed per the puppet fact.
 # 
 # Create by: Corey Sprung ----Corey.Sprung@TELUS.com
 # Created on : Dec 18th 2019
 #
 # Last updated by: Corey Sprung ---- Corey.Sprung@TELUS.com
-# Updated on : Jan 6th 2020
+# Updated on : Jan 7th 2020
 #
 # Comment for update: Updated the logic to make it smarter
 class profile::pr_perform_upgrade (
@@ -31,7 +31,6 @@ $best1home            = $facts['perform_info']['best1home'],
 )
 {
   # User id and Group dependency removed
-
 
   if 'true' in $status {
   # If Perform install status is true upgrade the agents to the following version
@@ -61,8 +60,7 @@ $best1home            = $facts['perform_info']['best1home'],
     elsif $osversion >= 5.2 and $osversion < 6.7 {
     # If the OS is between version 5.2 and 6.7
 
-        if '10.5.0' in $best1home
-        {
+      if '10.5.0' in $best1home{
         tidy {'/var/tmp/TSCO-perform-linux-legacy':
           backup  => false,
           recurse => true,
@@ -70,17 +68,16 @@ $best1home            = $facts['perform_info']['best1home'],
           }
         }
 
-        else {
-          # Agent 10.5.00
-          $installdir = 'TSCO-perform-linux-legacy'
-          $install_perform = true
+      else {
+        # Agent 10.5.00 x64
+        $installdir = 'TSCO-perform-linux-legacy'
+        $install_perform = true
         }
       }
+
     else {
     # Unsupported version
-      notify{
-      'Unsupported version of linux OS':,
-      }
+      notify{'Unsupported version of linux OS':,}
     }
   }
   elsif 'false' in $status {
@@ -89,14 +86,14 @@ $best1home            = $facts['perform_info']['best1home'],
     if $osversion >= 6.7 {
     # If the OS is version 6.7 or higher
 
-          # Agent 11.5.01
-          $installdir = 'TSCO-perform-linux-latest'
-          $install_perform = true
+      # Agent 11.5.01 x64
+      $installdir = 'TSCO-perform-linux-latest'
+      $install_perform = true
     }
     elsif $osversion >= 5.2 and $osversion < 6.7 {
     # If the OS is between version 5.2 and 6.7
-    # Agent 10.5.00
 
+      # Agent 10.5.00 x64
       $installdir = 'TSCO-perform-linux-legacy'
       $install_perform = true
     }
@@ -112,9 +109,8 @@ $best1home            = $facts['perform_info']['best1home'],
   if $install_perform {
     $installtar = "${installdir}.tar"
     if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-      notify{
-        "Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
-      }
+      notify{"Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,}
+
       #Force an error at runtime
       exec{'perfom_upgrade_no_space':
         command => '/bin/false',
