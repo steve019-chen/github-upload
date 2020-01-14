@@ -4,6 +4,7 @@
 # 3700 servers in telus greater or equal to 6.7
 # 750 servers in telus between 5.2 and 6.6
 # All servers are x64
+# Servers will have version 11 or higher of patrol
 # Actions: 
 # - Check if perform is already installed based on Puppet facts
 # - Choose the correct version of the agent based on the OS release
@@ -25,10 +26,13 @@ class profile::pr_perform_upgrade (
 Integer $space_needed = 310200000,
 String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
+String $patrolversion = String.new($facts['patrol_info']['version']),
 Float $osversion      = Float.new($facts['os']['release']['full']),
 $best1home            = $facts['perform_info']['best1home'],
 )
 {
+if 'V11' in $patrolversion {
+
   if 'true' in $status {
   # If Perform install status is true upgrade the agents to the following version
 
@@ -144,5 +148,10 @@ $best1home            = $facts['perform_info']['best1home'],
       }
     }
   }
+}
+else{
+  # Unknown status
+    notify{'Patrol V11 not installed':,
+    }
 }
 # lint: endignore
