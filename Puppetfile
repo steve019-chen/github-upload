@@ -120,11 +120,13 @@ mod 'dynatrace-dynatraceoneagent',
 
 mod 'puppet_agent_config',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/puppet_agent_config.git',
-  :tag => '2.3.1'
+#  :tag => '2.3.1'
+  :ref => 'puppet6'
 
 mod 'telus_lib',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus_lib.git',
-  :tag => '3.3.0'
+#  :tag => '3.3.0'
+  :ref => 'ks_facts'
 
 mod 'telus-spacewalk_migrate',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/pprod/telus-spacewalk_migrate.git',
