@@ -27,7 +27,7 @@ Integer $space_needed = 310200000,
 String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 String $patrolversion = String.new($facts['patrol_info']['version']),
-Float $osversion      = Float.new($facts['os']['release']['full']),
+Float[0.0,10.100] $osversion      = Float.new($facts['os']['release']['full']),
 $best1home            = $facts['perform_info']['best1home'],
 )
 {
@@ -58,7 +58,7 @@ $best1home            = $facts['perform_info']['best1home'],
             $install_perform = true
           }
         }
-      elsif $osversion >= 5.2 and $osversion < 5.11 {
+      elsif $osversion >= 5.2 and $osversion < 6.7 {
       # If the OS is between version 5.2 and 6.7
 
         if '10.5.0' in $best1home{
@@ -90,7 +90,7 @@ $best1home            = $facts['perform_info']['best1home'],
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
-      elsif $osversion >= 5.1 and $osversion < 6.7 {
+      elsif $osversion >= 5.2 and $osversion < 6.7 {
 
         # Agent 10.5.00
         $installdir = 'TSCO-perform-linux-legacy'
@@ -136,7 +136,7 @@ $best1home            = $facts['perform_info']['best1home'],
           path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
           cwd     => '/var/tmp/',
           creates => "/var/tmp/${installdir}",
-          timeout => 3600,
+          timeout => 300,
           require => File["/var/tmp/${installtar}"],
         }
 
@@ -146,7 +146,7 @@ $best1home            = $facts['perform_info']['best1home'],
           path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
           cwd     => "/var/tmp/${installdir}",
           creates => "/tmp/TSCO_${hostname}_Install.txt",
-          timeout => 3600,
+          timeout => 300,
           require => Exec["untar ${installtar}"],
         }
       }
