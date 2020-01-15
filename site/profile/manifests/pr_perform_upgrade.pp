@@ -58,7 +58,7 @@ $best1home            = $facts['perform_info']['best1home'],
             $install_perform = true
           }
         }
-      elsif $osversion >= 5.2 and $osversion < 6.7 {
+      elsif $osversion >= 5.2 and $osversion < 5.11 {
       # If the OS is between version 5.2 and 6.7
 
         if '10.5.0' in $best1home{
