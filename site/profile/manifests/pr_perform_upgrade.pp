@@ -53,7 +53,7 @@ $best1home            = $facts['perform_info']['best1home'],
             }
           }
           else {
-            # Agent 11.5.01 x64
+            # Agent 11.5.01
             $installdir = 'TSCO-perform-linux-latest'
             $install_perform = true
           }
@@ -70,7 +70,7 @@ $best1home            = $facts['perform_info']['best1home'],
           }
 
         else {
-          # Agent 10.5.00 x64
+          # Agent 10.5.00
           $installdir = 'TSCO-perform-linux-legacy'
           $install_perform = true
           }
@@ -86,15 +86,11 @@ $best1home            = $facts['perform_info']['best1home'],
     # If Perform hasnt been installed install the agents
 
       if $osversion >= 6.7 {
-      # If the OS is version 6.7 or higher
-
-        # Agent 11.5.01 x64
+        # Agent 11.5.01
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
       elsif $osversion >= 5.2 and $osversion < 6.7 {
-      # If the OS is between version 5.2 and 6.7
-
         # Agent 10.5.00 x64
         $installdir = 'TSCO-perform-linux-legacy'
         $install_perform = true
@@ -107,11 +103,15 @@ $best1home            = $facts['perform_info']['best1home'],
     }
     else{
     # Unknown status
-      notify{'unknown status of TSCO':,
+      notify{'Unknown status of TSCO':,
       }
     }
+
     if $install_perform {
+
       $installtar = "${installdir}.tar"
+
+      #Ensure we have enough space for the .tar and extracted directoy
       if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
         notify{"Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
         }
@@ -128,6 +128,7 @@ $best1home            = $facts['perform_info']['best1home'],
           source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
           before => Exec["untar ${installtar}"],
         }
+
         # Untar the Installtar file into /var/tmp
         exec {"untar ${installtar}":
           command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
@@ -137,6 +138,7 @@ $best1home            = $facts['perform_info']['best1home'],
           timeout => 3600,
           require => File["/var/tmp/${installtar}"],
         }
+
         # Perfom the installation using the provide telusinstall.sh located in the Installdir
         exec {'performupgrade':
           command => "/var/tmp/${installdir}/telusinstall.sh",

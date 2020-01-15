@@ -7,7 +7,8 @@ include profile::pr_base
 }
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
-node btln007802
+# btln007801 = OL7.5 btln007802 = btln007802 = RHEL5
+node btln007801,btln007802,btln007803
 {
   include role::rl_perform_upgrade
 }
