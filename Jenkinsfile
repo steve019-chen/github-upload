@@ -1,89 +1,61 @@
 pipeline {
     agent { label 'puppet' }
+    environment {
+        PUPPET_ENV = "${currentBuild.fullDisplayName ==~ /.*SDE.*/ ? "[SDE]" : "[Prod]" }"
+    }
     stages {
 
-        stage('prepare gems') {
+        stage('Puppet 5.5 pdk validate') {
             steps {
                 sh ''' 
                 #!/bin/bash
-                source ~/.profile
-                source $(rvm 2.4.6 do rvm env --path)
-                proxyon
-                bundle install --path=.bundle/gems/
-                proxyoff
+                pdk validate --puppet-version 5.5
                 '''
             }
         }
-
-        stage('syntax testing') {
+        
+        stage('Puppet 6 pdk validate') {
             steps {
                 sh ''' 
                 #!/bin/bash
-                source ~/.profile
-                source $(rvm 2.4.6 do rvm env --path)
-                bundle exec puppet parser validate manifests/
+                pdk validate --puppet-version 6
                 '''
             }
         }
 
-        stage('lint testing') {
+        stage('RSpec Unit Tests') {
             steps {
-                sh '''
+                sh ''' 
                 #!/bin/bash
-                source ~/.profile
-                source $(rvm 2.4.6 do rvm env --path)
-                bundle exec puppet-lint --no-autoloader_layout-check manifests/*.pp
+                pdk test unit
                 '''
             }
-        }
-
-        stage('rspec testing') {
-            // steps {
-            //     sh '''
-            //     #!/bin/bash
-            //     source ~/.profile
-            //     source $(rvm 2.4.4 do rvm env --path)
-            //     proxyon
-            //     bundle exec rake spec
-            //     proxyoff
-            //     '''
-            // }
-            steps {
-                script {
-                    rspec_status = sh (
-                        returnStatus: true,
-                        script: '''\
-                            #!/bin/bash \
-                            source ~/.profile \
-                            source $(rvm 2.4.6 do rvm env --path) \
-                            proxyon \
-                            bundle exec rake spec \
-                            proxyoff \
-                            '''
-                    ) == 0
-                    echo "RSPEC test: ${rspec_status}"
-                }
-            }
-
         }
 
     }
     post {
         always {
             echo 'Job completed'
-           
         }
         success {
             echo 'I succeeded!'
-            mail to: 'shaun.mcevoy@telus.com, daruvin.sood@telus.com',
-                subject: "[SDE] Jenkins Successful Pipeline: ${currentBuild.fullDisplayName}",
-                body: "${env.BUILD_URL} ran successfully.  RSPEC Testing: ${rspec_status}"
+            emailext (
+                mimeType: 'text/html',
+                to: 'cc:$DEFAULT_RECIPIENTS',
+                subject: "${PUPPET_ENV} Jenkins Successful Pipeline: ${currentBuild.fullDisplayName}",
+                body: '''${SCRIPT, template="groovy-html.template"}''',
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )
         }
         failure {
             echo 'I failed :('
-            mail to: 'shaun.mcevoy@telus.com, daruvin.sood@telus.com',
-                subject: "[SDE] Jenkins Failed Pipeline: ${currentBuild.fullDisplayName}",
-                body: "Something is wrong with ${env.BUILD_URL}.  RSPEC Testing: ${rspec_status}"
+            emailext (
+                mimeType: 'text/html',
+                to: 'cc:$DEFAULT_RECIPIENTS',
+                subject: "${PUPPET_ENV} Jenkins Failed Pipeline: ${currentBuild.fullDisplayName}",
+                body: '''${SCRIPT, template="groovy-html.template"}''',
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )
         }
     }
 }

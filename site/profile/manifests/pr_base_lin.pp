@@ -12,25 +12,7 @@
 class profile::pr_base_lin {
 
   include lvm
-
-  # Unixadm profile to all linux machines in 
-  # Deployed to: BT KIDC Prod/Non prod, QIDC Prod/Non Prod, Toll, Laird and SDE master
-  # Not deployed to: KIDC Tools, QIDC Tools
-  # if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads','btln000197.corp.ads','btlp000336.corp.ads','lp99604.corp.ads','lp99605.corp.ads','btlp000966.corp.ads'] )
-  # { include profile::pr_unixadm }
-
-
-  # CRQ62577 : Tuesday Non Prod deployment
-  # Limiting deployment to : KIDC NP, SDE master
-  # Not deploying to: QIDC Non Prod, QIDC Prod, QIDC Tools, KIDC Prod, KIDC Tools, Toll, Laird
-  if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads'] )
-  { include profile::pr_svcscan }
-
-  # # CRQ62488 : Tuesday night Prod deployment
-  # # Limiting deployment to : KIDC Prod, KIDC NP, Toll, Laird
-  # # Not deploying to: QIDC Non Prod, QIDC Prod, QIDC Tools, KIDC Tools
-  # if ($facts['puppet_server'] in ['btln002494.corp.ads','btln007206.corp.ads','btlp000336.corp.ads','lp99604.corp.ads','lp99605.corp.ads'] )
-  # { include profile::pr_svcscan }
+  include profile::pr_base_lin_accounts
 
 }
 # lint:endignore

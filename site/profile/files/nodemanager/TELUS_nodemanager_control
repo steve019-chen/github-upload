@@ -1,0 +1,80 @@
+#!/bin/bash
+# chkconfig: 345 99 99
+
+### BEGIN INIT INFO
+# Provides:          nodemanager
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Custom script to start and stop the various domains of Nodemanager for Telus.
+# Description:       A custom script designed to start and stop Nodemanager for Telus.
+#                Designed 2019.
+### END INIT INFO
+
+IFS='%'
+i=0
+nodemanager="/apps/infra/lifecycle/nodemanager.sh"
+otherapp="/apps/infra/lifecycle/domain.sh"
+domain_path="/work/users/infra/wls/domains"
+domain_list="$domain_path/domains.list"
+priv_run="sudo -u infra"
+
+if [ ! -f $domain_list ]; then
+        echo "--> $domain_list not found, exiting."
+        exit 1
+fi
+
+if [ ! -f $nodemanager ]; then
+        echo "--> $nodemanager not found, exiting."
+        exit 1
+fi
+
+if [ ! -f $otherapp ]; then
+        echo "--> $otherapp not found, exiting."
+        exit 1
+fi
+
+
+while read line; do
+  if [[ $line == *['!'@#\$%^\&*()+]* ]]; then
+        echo "-->  Special characters ('!'@#\$%^\&*()+]*) found in $domain_list, exiting."
+        logger "-->  Special characters ('!'@#\$%^\&*()+]*) found in $domain_list, exiting."
+        exit 1
+  fi
+  sanity_check="${domain_path}/${line}"
+  if [ -d $sanity_check ]; then
+        domains[i]=$sanity_check
+        ((i++))
+  else
+        echo "--> $sanity_check not found"
+        logger "--> $sanity_check not found"
+  fi
+done < $domain_list
+
+case "$1" in
+  start)
+    for row in ${domains[@]}; do
+        logger "Starting domain in $row"
+        eval "cd $row && $priv_run $nodemanager start && $priv_run $otherapp start"
+    done
+  ;;
+  stop)
+    for row in ${domains[@]}; do
+        logger "Stopping domain in $row"
+        eval "cd $row && $priv_run $otherapp stop -force"
+    done
+
+    for row in ${domains[@]}; do
+        eval "cd $row && $priv_run $nodemanager stop"
+    done
+
+  ;;
+  *)
+    echo "Usage: service TELUS_nodemanager_control [start|stop]"
+  ;;
+
+esac
+exit 0
+
+        
