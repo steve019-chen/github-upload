@@ -31,127 +31,128 @@ Float $osversion      = Float.new($facts['os']['release']['full']),
 $best1home            = $facts['perform_info']['best1home'],
 )
 {
-if 'V11' in $patrolversion {
+  if 'V11' in $patrolversion {
 
-  if 'true' in $status {
-  # If Perform install status is true upgrade the agents to the following version
+    if 'true' in $status {
+    # If Perform install status is true upgrade the agents to the following version
 
-    if $osversion >= 6.7 {
-    # If the OS is version 6.7 or higher
+      if $osversion >= 6.7 {
+      # If the OS is version 6.7 or higher
 
-        if '11.5.0' in $best1home
-        {
-        tidy {'/var/tmp/TSCO-perform-linux-latest':
+          if '11.5.0' in $best1home
+          {
+          tidy {'/var/tmp/TSCO-perform-linux-latest':
+              backup  => false,
+              recurse => true,
+              rmdirs  => true,
+            }
+          tidy {'/var/tmp/TSCO-perform-linux-legacy':
             backup  => false,
             recurse => true,
             rmdirs  => true,
+            }
           }
-        tidy {'/var/tmp/TSCO-perform-linux-legacy':
-          backup  => false,
-          recurse => true,
-          rmdirs  => true,
+          else {
+            # Agent 11.5.01 x64
+            $installdir = 'TSCO-perform-linux-latest'
+            $install_perform = true
           }
         }
-        else {
-          # Agent 11.5.01 x64
-          $installdir = 'TSCO-perform-linux-latest'
-          $install_perform = true
-        }
-      }
-    elsif $osversion >= 5.2 and $osversion < 6.7 {
-    # If the OS is between version 5.2 and 6.7
+      elsif $osversion >= 5.2 and $osversion < 6.7 {
+      # If the OS is between version 5.2 and 6.7
 
-      if '10.5.0' in $best1home{
-        tidy {'/var/tmp/TSCO-perform-linux-legacy':
-          backup  => false,
-          recurse => true,
-          rmdirs  => true,
+        if '10.5.0' in $best1home{
+          tidy {'/var/tmp/TSCO-perform-linux-legacy':
+            backup  => false,
+            recurse => true,
+            rmdirs  => true,
+            }
+          }
+
+        else {
+          # Agent 10.5.00 x64
+          $installdir = 'TSCO-perform-linux-legacy'
+          $install_perform = true
           }
         }
 
       else {
+      # Unsupported version
+        notify{'Unsupported version of linux OS':,
+        }
+      }
+    }
+    elsif 'false' in $status {
+    # If Perform hasnt been installed install the agents
+
+      if $osversion >= 6.7 {
+      # If the OS is version 6.7 or higher
+
+        # Agent 11.5.01 x64
+        $installdir = 'TSCO-perform-linux-latest'
+        $install_perform = true
+      }
+      elsif $osversion >= 5.2 and $osversion < 6.7 {
+      # If the OS is between version 5.2 and 6.7
+
         # Agent 10.5.00 x64
         $installdir = 'TSCO-perform-linux-legacy'
         $install_perform = true
+      }
+      else {
+      # Unsupported version
+        notify{'Unsupported version of linux OS':,
         }
       }
-
-    else {
-    # Unsupported version
-      notify{'Unsupported version of linux OS':,
+    }
+    else{
+    # Unknown status
+      notify{'unknown status of TSCO':,
       }
     }
-  }
-  elsif 'false' in $status {
-  # If Perform hasnt been installed install the agents
+    if $install_perform {
+      $installtar = "${installdir}.tar"
+      if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
+        notify{"Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
+        }
 
-    if $osversion >= 6.7 {
-    # If the OS is version 6.7 or higher
-
-      # Agent 11.5.01 x64
-      $installdir = 'TSCO-perform-linux-latest'
-      $install_perform = true
-    }
-    elsif $osversion >= 5.2 and $osversion < 6.7 {
-    # If the OS is between version 5.2 and 6.7
-
-      # Agent 10.5.00 x64
-      $installdir = 'TSCO-perform-linux-legacy'
-      $install_perform = true
-    }
-    else {
-    # Unsupported version
-      notify{'Unsupported version of linux OS':,
+        #Force an error at runtime
+        exec{'perfom_upgrade_no_space':
+          command => '/bin/false',
+        }
+      }
+      else {
+        # Ensure the TAR file is present, if not download from the file repo
+        file { "/var/tmp/${installtar}":
+          ensure => present,
+          source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
+          before => Exec["untar ${installtar}"],
+        }
+        # Untar the Installtar file into /var/tmp
+        exec {"untar ${installtar}":
+          command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
+          path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+          cwd     => '/var/tmp/',
+          creates => "/var/tmp/${installdir}",
+          timeout => 3600,
+          require => File["/var/tmp/${installtar}"],
+        }
+        # Perfom the installation using the provide telusinstall.sh located in the Installdir
+        exec {'performupgrade':
+          command => "/var/tmp/${installdir}/telusinstall.sh",
+          path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
+          cwd     => "/var/tmp/${installdir}",
+          creates => "/tmp/TSCO_${hostname}_Install.txt",
+          timeout => 3600,
+          require => Exec["untar ${installtar}"],
+        }
       }
     }
   }
   else{
-  # Unknown status
-    notify{'unknown status of TSCO':,
-    }
+    # Unknown status
+      notify{'Patrol V11 not installed':,
+      }
   }
-  if $install_perform {
-    $installtar = "${installdir}.tar"
-    if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
-      notify{"Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
-      }
-
-      #Force an error at runtime
-      exec{'perfom_upgrade_no_space':
-        command => '/bin/false',
-      }
-    }
-    else {
-      # Ensure the TAR file is present, if not download from the file repo
-      file { "/var/tmp/${installtar}":
-        ensure => present,
-        source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
-        before => Exec["untar ${installtar}"],
-      }
-      # Untar the Installtar file into /var/tmp
-      exec {"untar ${installtar}":
-        command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
-        path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-        cwd     => '/var/tmp/',
-        creates => "/var/tmp/${installdir}",
-        timeout => 3600,
-        require => File["/var/tmp/${installtar}"],
-      }
-      # Perfom the installation using the provide telusinstall.sh located in the Installdir
-      exec {'performupgrade':
-        command => "/var/tmp/${installdir}/telusinstall.sh",
-        path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
-        cwd     => "/var/tmp/${installdir}",
-        creates => "/tmp/TSCO_${hostname}_Install.txt",
-        timeout => 3600,
-        require => Exec["untar ${installtar}"],
-      }
-    }
-  }
-}
-else{
-  # Unknown status
-    notify{'Patrol V11 not installed':,
-    }
 }
 # lint: endignore
