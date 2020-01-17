@@ -92,7 +92,7 @@ $best1home            = $facts['perform_info']['best1home'],
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
-      elsif $osmajor == 5 and $osminor >= 2 and $osmajor == 6 and $osminor <= 6 {
+      elsif ($osmajor == 5 and $osminor >= 2) and ($osmajor == 6 and $osminor <= 6) {
 
         # Agent 10.5.00
         $installdir = 'TSCO-perform-linux-legacy'
