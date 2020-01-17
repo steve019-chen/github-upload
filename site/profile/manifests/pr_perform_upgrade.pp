@@ -102,7 +102,7 @@ Float $osversion = Float.new((($osmajor * 1000) + $osminor) / 1000)
       }
       else {
       # Unsupported version
-        notify{'Unsupported version of linux OS':,
+        notify{"Unsupported version of linux OS ${osversion} Major ${osmajor} Minor ${osminor}":,
         }
       }
     }
