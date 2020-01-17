@@ -27,8 +27,12 @@ Integer $space_needed = 310200000,
 String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 String $patrolversion = String.new($facts['patrol_info']['version']),
-Float $osversion      = Float.new($facts['operatingsystemrelease']),
+#$osversion      = $facts['operatingsystemrelease'],
+Integer $osmajor      = Integer.new($facts['os']['release']['major']),
+Integer $osminor      = Integer.new($facts['os']['release']['minor']),
 $best1home            = $facts['perform_info']['best1home'],
+Float $osversion = ((($osmajor * 1000) + $osminor) / 1000)
+
 )
 {
   if 'V11' in $patrolversion {
@@ -36,7 +40,7 @@ $best1home            = $facts['perform_info']['best1home'],
     if 'true' in $status {
     # If Perform install status is true upgrade the agents to the following version
 
-      if $osversion >= 6.7 {
+      if $osversion >= 6.007 {
       # If the OS is version 6.7 or higher
 
           if '11.5.0' in $best1home
@@ -58,7 +62,7 @@ $best1home            = $facts['perform_info']['best1home'],
             $install_perform = true
           }
         }
-      elsif $osversion >= 5.1 and $osversion < 6.7 {
+      elsif $osversion >= 5.002 and $osversion < 6.007 {
 
         if '10.5.0' in $best1home{
           tidy {'/var/tmp/TSCO-perform-linux-legacy':
@@ -84,13 +88,13 @@ $best1home            = $facts['perform_info']['best1home'],
     elsif 'false' in $status {
     # If Perform hasnt been installed install the agents
 
-      if $osversion >= 6.7 {
+      if $osversion >= 6.007 {
         # Agent 11.5.01
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
 
-      elsif $osversion >= 5.1 and $osversion < 6.7 {
+      elsif $osversion >= 5.002 and $osversion < 6.007 {
 
         # Agent 10.5.00
         $installdir = 'TSCO-perform-linux-legacy'
@@ -126,6 +130,7 @@ $best1home            = $facts['perform_info']['best1home'],
         # Ensure the TAR file is present, if not download from the file repo
         file { "/var/tmp/${installtar}":
           ensure => present,
+          # update the location to be from puppet repo
           source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
           before => Exec["untar ${installtar}"],
         }
@@ -145,7 +150,7 @@ $best1home            = $facts['perform_info']['best1home'],
           command => "/var/tmp/${installdir}/telusinstall.sh",
           path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
           cwd     => "/var/tmp/${installdir}",
-          creates => "/tmp/TSCO_${hostname}_Install.txt",
+          creates => "/var/tmp/TSCO_${hostname}_Install.txt",
           timeout => 300,
           require => Exec["untar ${installtar}"],
         }
