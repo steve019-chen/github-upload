@@ -38,7 +38,7 @@ $best1home            = $facts['perform_info']['best1home'],
     if 'true' in $status {
     # If Perform install status is true upgrade the agents to the following version
 
-      if ($osmajor = 6 and $osminor >= 7) {
+      if $osmajor == 6 and $osminor >= 7 {
       # If the OS is version 6.7 or higher
 
           if '11.5.0' in $best1home
@@ -60,7 +60,7 @@ $best1home            = $facts['perform_info']['best1home'],
             $install_perform = true
           }
         }
-      elsif ($osmajor = 5 and $osminor >= 2) and ($osmajor = 6 and $osminor < 7) {
+      elsif $osmajor == 5 and $osminor >= 2 and $osmajor == 6 and $osminor < 7 {
       # If the OS is between version 5.2 and 6.7
 
         if '10.5.0' in $best1home{
@@ -87,12 +87,12 @@ $best1home            = $facts['perform_info']['best1home'],
     elsif 'false' in $status {
     # If Perform hasnt been installed install the agents
 
-      if ($osmajor = 6 and $osminor >= 7) {
+      if $osmajor == 6 and $osminor >= 7 {
         # Agent 11.5.01
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
-      elsif ($osmajor = 5 and $osminor >= 2) and ($osmajor = 6 and $osminor < 7) {
+      elsif $osmajor == 5 and $osminor >= 2 and $osmajor == 6 and $osminor < 7 {
 
         # Agent 10.5.00
         $installdir = 'TSCO-perform-linux-legacy'
