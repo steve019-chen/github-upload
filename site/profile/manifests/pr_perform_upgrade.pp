@@ -99,7 +99,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
       }
       else {
       # Unsupported version
-        notify{"Unsupported version of linux OS ${osversion} Major ${osmajor} Minor ${osminor}":,
+        notify{'Unsupported version of linux OS':,
         }
       }
     }
