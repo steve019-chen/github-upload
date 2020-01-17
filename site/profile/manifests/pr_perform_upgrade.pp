@@ -28,7 +28,7 @@ String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 String $patrolversion = String.new($facts['patrol_info']['version']),
 Float $osversion      = Float.new($facts['operatingsystemrelease']),
-Float $osversionmajor = Float.new($facts['os']['release']['major']),
+Integer $osversionmajor = Integer.new($facts['os']['release']['major']),
 Float $osversionminor = Float.new($facts['os']['release']['minor']),
 $best1home            = $facts['perform_info']['best1home'],
 )
@@ -38,7 +38,7 @@ $best1home            = $facts['perform_info']['best1home'],
     if 'true' in $status {
     # If Perform install status is true upgrade the agents to the following version
 
-      if ($osversionmajor = 6) and ($osversionminor >= 7) {
+      if ($osversionmajor = 6 and $osversionminor >= 7) {
       # If the OS is version 6.7 or higher
 
           if '11.5.0' in $best1home
@@ -60,7 +60,7 @@ $best1home            = $facts['perform_info']['best1home'],
             $install_perform = true
           }
         }
-      elsif (($osversionmajor = 5) and ($osversionminor >= 2)) and (($osversionmajor = 6) and ($osversionminor < 7)) {
+      elsif ($osversionmajor = 5 and $osversionminor >= 2) and ($osversionmajor = 6 and $osversionminor < 7) {
       # If the OS is between version 5.2 and 6.7
 
         if '10.5.0' in $best1home{
