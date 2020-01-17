@@ -29,7 +29,7 @@ String $status        = String.new($facts['perform_info']['installed']),
 String $patrolversion = String.new($facts['patrol_info']['version']),
 Float $osversion      = Float.new($facts['operatingsystemrelease']),
 Integer $osversionmajor = Integer.new($facts['os']['release']['major']),
-Float $osversionminor = Float.new($facts['os']['release']['minor']),
+Integer $osversionminor = Integer.new($facts['os']['release']['minor']),
 $best1home            = $facts['perform_info']['best1home'],
 )
 {
