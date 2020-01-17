@@ -27,11 +27,8 @@ Integer $space_needed = 310200000,
 String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 String $patrolversion = String.new($facts['patrol_info']['version']),
-#$osversion      = $facts['operatingsystemrelease'],
-Integer $osmajor      = Integer.new($facts['os']['release']['major']),
-Integer $osminor      = Integer.new($facts['os']['release']['minor']),
 $best1home            = $facts['perform_info']['best1home'],
-Integer $osversion = Integer.new($osmajor * 100 + $osminor)
+Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($facts['os']['release']['minor'])),
 
 )
 {
