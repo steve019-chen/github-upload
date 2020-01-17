@@ -29,7 +29,7 @@ String $status        = String.new($facts['perform_info']['installed']),
 String $patrolversion = String.new($facts['patrol_info']['version']),
 Float $osversion      = Float.new($facts['operatingsystemrelease']),
 Integer $osmajor      = Integer.new($facts['os']['release']['major']),
-Integer $osminor      = Integer.new($facts['os']['release']['minor']),
+Integer $osminor      = $facts['os']['release']['minor'],
 $best1home            = $facts['perform_info']['best1home'],
 )
 {
@@ -60,7 +60,7 @@ $best1home            = $facts['perform_info']['best1home'],
             $install_perform = true
           }
         }
-      elsif $osmajor == 5 and $osminor >= 2 and $osmajor == 6 and $osminor < 7 {
+      elsif $osmajor == 5 and $osminor >= 2 and $osmajor == 6 and $osminor <= 6 {
       # If the OS is between version 5.2 and 6.7
 
         if '10.5.0' in $best1home{
@@ -92,7 +92,7 @@ $best1home            = $facts['perform_info']['best1home'],
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
-      elsif $osmajor == 5 and $osminor >= 2 and $osmajor == 6 and $osminor < 7 {
+      elsif $osmajor == 5 and $osminor >= 2 and $osmajor == 6 and $osminor <= 6 {
 
         # Agent 10.5.00
         $installdir = 'TSCO-perform-linux-legacy'
