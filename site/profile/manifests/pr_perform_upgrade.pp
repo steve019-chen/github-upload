@@ -31,7 +31,7 @@ String $patrolversion = String.new($facts['patrol_info']['version']),
 Integer $osmajor      = Integer.new($facts['os']['release']['major']),
 Integer $osminor      = Integer.new($facts['os']['release']['minor']),
 $best1home            = $facts['perform_info']['best1home'],
-Integer $osversion = Integer.new($osmajor + $osminor)
+Integer $osversion = Integer.new($osmajor * 100 + $osminor)
 
 )
 {
@@ -40,7 +40,7 @@ Integer $osversion = Integer.new($osmajor + $osminor)
     if 'true' in $status {
     # If Perform install status is true upgrade the agents to the following version
 
-      if $osversion >= 6.007 {
+      if $osversion >= 607 {
       # If the OS is version 6.7 or higher
 
           if '11.5.0' in $best1home
@@ -62,7 +62,7 @@ Integer $osversion = Integer.new($osmajor + $osminor)
             $install_perform = true
           }
         }
-      elsif $osversion >= 5.002 and $osversion < 6.007 {
+      elsif $osversion >= 502 and $osversion < 607 {
 
         if '10.5.0' in $best1home{
           tidy {'/var/tmp/TSCO-perform-linux-legacy':
@@ -88,13 +88,13 @@ Integer $osversion = Integer.new($osmajor + $osminor)
     elsif 'false' in $status {
     # If Perform hasnt been installed install the agents
 
-      if $osversion >= 6.007 {
+      if $osversion >= 607 {
         # Agent 11.5.01
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
 
-      elsif $osversion >= 5.002 and $osversion < 6.007 {
+      elsif $osversion >= 502 and $osversion < 607 {
 
         # Agent 10.5.00
         $installdir = 'TSCO-perform-linux-legacy'
