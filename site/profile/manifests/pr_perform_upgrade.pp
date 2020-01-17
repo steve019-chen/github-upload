@@ -60,8 +60,7 @@ $best1home            = $facts['perform_info']['best1home'],
             $install_perform = true
           }
         }
-      elsif $osmajor == 5 and $osminor >= 2 and $osmajor == 6 and $osminor <= 6 {
-      # If the OS is between version 5.2 and 6.7
+      elsif ($osmajor == 5 and $osminor >= 1) and ($osmajor == 6 and $osminor <= 6) {
 
         if '10.5.0' in $best1home{
           tidy {'/var/tmp/TSCO-perform-linux-legacy':
@@ -92,7 +91,7 @@ $best1home            = $facts['perform_info']['best1home'],
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
-      elsif ($osmajor == 5 and $osminor >= 2) and ($osmajor == 6 and $osminor <= 6) {
+      elsif ($osmajor == 5 and $osminor >= 1) and ($osmajor == 6 and $osminor <= 6) {
 
         # Agent 10.5.00
         $installdir = 'TSCO-perform-linux-legacy'
