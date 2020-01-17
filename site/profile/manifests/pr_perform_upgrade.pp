@@ -28,8 +28,8 @@ String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 String $patrolversion = String.new($facts['patrol_info']['version']),
 Float $osversion      = Float.new($facts['operatingsystemrelease']),
-Integer $osmajor      = Integer.new($facts['os']['release']['major']),
-Integer $osminor      = $facts['os']['release']['minor'],
+Integer $osmajor      = Integer.new($facts['os']['release']['major'],20),
+Integer $osminor      = Integer.new($facts['os']['release']['minor'],20),
 $best1home            = $facts['perform_info']['best1home'],
 )
 {
