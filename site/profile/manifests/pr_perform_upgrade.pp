@@ -31,7 +31,7 @@ String $patrolversion = String.new($facts['patrol_info']['version']),
 Integer $osmajor      = Integer.new($facts['os']['release']['major']),
 Integer $osminor      = Integer.new($facts['os']['release']['minor']),
 $best1home            = $facts['perform_info']['best1home'],
-Integer $osversion = Integer.new((($osmajor * 1000) + $osminor) / 1000)
+Integer $osversion = Integer.new($osmajor + $osminor)
 
 )
 {
