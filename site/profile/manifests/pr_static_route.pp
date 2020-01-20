@@ -18,18 +18,24 @@ package {'yum-plugin-versionlock':
   ensure => present,
 }
 
-exec { 'yum versionlock docker-ce':
-  path    => '/bin:/usr/bin:/usr/sbin:/bin',
-  unless  => 'cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce > /dev/null',
-  require => Package['yum-plugin-versionlock'],
-}
+case $facts['os']['release']['major']  {
+    '5': { $provider = 'redhat' }
+    '6': { $provider = 'redhat' }
+    '7': { $provider = 'redhat' }   #switch to using systemd with a unit file
+    default:   { $provider = 'redhat' }
+  }
+
+service { 'network_service_restart':
+    provider  => $provider,
+    restart   => true,
+  }
 
 file_line { 'add_route_static':
   ensure             => present,
   path               => '/etc/sysconfig/network-scripts/route-mgmt0_backup_20jan2020',
   line               => '100.70.45.169/32 via 100.66.96.1 dev mgmt0',
   append_on_no_match => true,
- 
+  notify             => Service['network_service_restart'],
 }
 
 }
