@@ -23,7 +23,7 @@
 #
 # Comment for update: Updated the logic to make it smarter
 class profile::pr_perform_upgrade (
-Integer $space_needed = 310200000,
+Integer $space_needed = 632000000,
 String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 String $patrolversion = String.new($facts['patrol_info']['version']),
