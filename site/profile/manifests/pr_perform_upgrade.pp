@@ -90,7 +90,6 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
-
       elsif $osversion >= 502 and $osversion < 607 {
 
         # Agent 10.5.00
@@ -134,7 +133,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
 
         # Untar the Installtar file into /var/tmp
         exec {"untar ${installtar}":
-          command => "tar -xvf /var/tmp/${installtar} && rm /var/tmp/${installtar}",
+          command => "tar -xvf /var/tmp/${installtar} && rm -rf /var/tmp/${installtar}",
           path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
           cwd     => '/var/tmp/',
           creates => "/var/tmp/${installdir}",
