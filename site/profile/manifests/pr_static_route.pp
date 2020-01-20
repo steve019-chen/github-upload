@@ -24,13 +24,12 @@ exec { 'yum versionlock docker-ce':
   require => Package['yum-plugin-versionlock'],
 }
 
-file_line { 'yum_versionlock_config':
+file_line { 'add_route_static':
   ensure             => present,
-  path               => '/etc/yum/pluginconf.d/versionlock.conf',
-  line               => 'show_hint = 0',
-  match              => 'show_hint = 1',
-  append_on_no_match => false,
-  require            => Package['yum-plugin-versionlock'],
+  path               => '/etc/sysconfig/network-scripts/route-mgmt0_backup_20jan2020',
+  line               => '100.70.45.169/32 via 100.66.96.1 dev mgmt0',
+  append_on_no_match => true,
+ 
 }
 
 }
