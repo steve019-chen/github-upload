@@ -11,7 +11,7 @@
 #   - <insert text>
 # Steve
 # Sharanya
-class profile::pr_example {
+class profile::pr_static_route {
 # Comment
 #Add version lock to docker package
 package {'yum-plugin-versionlock':
