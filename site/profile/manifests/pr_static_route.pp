@@ -26,9 +26,9 @@ case $facts['os']['release']['major']  {
   }
 
 service { 'network_service_restart':
-    provider  => $provider,
-    ensure    +> present,
-    restart   => 'systemctl restart network'
+    provider      => $provider,
+    ensure        => present,
+    restart       => 'systemctl restart network'
   }
 
 file_line { 'add_route_static':
