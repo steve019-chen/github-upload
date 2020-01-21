@@ -27,7 +27,6 @@ case $facts['os']['release']['major']  {
   }
 
 service { 'network_restart':
-    ensure   => present,
     provider => $provider,
     restart  => 'systemctl restart network',
     }
