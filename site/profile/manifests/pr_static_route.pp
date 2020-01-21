@@ -18,6 +18,7 @@ package {'yum-plugin-versionlock':
   ensure => present,
 }
 
+
 case $facts['os']['release']['major']  {
     '5': { $provider = 'redhat' }
     '6': { $provider = 'redhat' }
@@ -25,19 +26,18 @@ case $facts['os']['release']['major']  {
     default:   { $provider = 'redhat' }
   }
 
-service { 'network_service_restart':
-    provider      => $provider,
-    enable        => true,
-    ensure        => present,
-    restart       => 'systemctl restart network',
-  }
+service { 'network_restart':
+    ensure   => present,
+    provider => $provider,
+    restart  => 'systemctl restart network',
+    }
 
 file_line { 'add_route_static':
   ensure             => present,
   path               => '/etc/sysconfig/network-scripts/route-mgmt0_backup_20jan2020',
   line               => '100.70.45.169/32 via 100.66.96.1 dev mgmt0',
   append_on_no_match => true,
-  notify             => Service['network_service_restart'],
+  notify             => Service['network_restart'],
 }
 
 }
