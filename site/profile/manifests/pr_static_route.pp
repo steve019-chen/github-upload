@@ -14,9 +14,9 @@
 class profile::pr_static_route {
 # Comment
 #Add version lock to docker package
-package {'yum-plugin-versionlock':
-  ensure => present,
-}
+#package {'yum-plugin-versionlock':
+# ensure => present,
+#}
 
 
 case $facts['os']['release']['major']  {
