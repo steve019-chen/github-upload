@@ -8,9 +8,9 @@ include profile::pr_base
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
 
-# Puppet 6 upgrade stanza
+# 20200123 CRQ78695 Puppet 6 upgrade
 
-node btlp000646.corp.ads,btlp000815.corp.ads,btlp000952.corp.ads,btlp001056.corp.ads,btlp001057.corp.ads,btlp001592.corp.ads,btlp001593.corp.ads
+node btln000741,btln002449,btln007135,btlp002431,btlp007534,ln98127,ln98129,ln99018,ln99019,ln99020,lp97008,lp97041,qadev115,tslp000114
 {
   case $facts['kernel'] {
     'Linux'  : {
