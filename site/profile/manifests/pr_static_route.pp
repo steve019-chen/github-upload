@@ -30,7 +30,7 @@ Service { 'network':
     ensure   => 'running',
     provider => $provider,
     enable   => true,
-    require  => file_line('add_route_static'),
+    restart  => 'systemctl restart network',
     }
 
 file_line { 'add_route_static':
