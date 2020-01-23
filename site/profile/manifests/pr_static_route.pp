@@ -26,9 +26,11 @@ case $facts['os']['release']['major']  {
     default:   { $provider = 'redhat' }
   }
 
-service { 'network_restart':
+Service { 'network':
+    ensure   => 'running',
     provider => $provider,
-    restart  => 'systemctl restart network',
+    enable   => true,
+    require  => file_line('add_route_static'),
     }
 
 file_line { 'add_route_static':
@@ -36,7 +38,7 @@ file_line { 'add_route_static':
   path               => '/etc/sysconfig/network-scripts/route-mgmt0_backup_20jan2020',
   line               => '100.70.45.169/32 via 100.66.96.1 dev mgmt0',
   append_on_no_match => true,
-  notify             => Service['network_restart'],
+  notify             => Service['network'],
 }
 
 }
