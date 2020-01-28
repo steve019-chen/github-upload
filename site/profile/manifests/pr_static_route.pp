@@ -18,6 +18,18 @@ class profile::pr_static_route {
 # ensure => present,
 #}
 
+# BT QIDC Linux servers get a static route to 100.125.167.240/28 via oMGmt
+# BT KIDC Linux servers get a static route to 100.125.167.224/28 via oMGmt
+
+$qidc_static = '100.125.167.240/28 via 100.66.96.1 dev mgmt0'
+$kidc_static = '100.125.167.224/28 via 100.66.96.1 dev mgmt0'
+
+
+case $facts['telus_site']  {
+    'QIDC': { $static_route = $qidc_static }
+    'KIDC': { $static_route = $kidc_static }
+    default:   { $static_route = 'none' }
+  }
 
 case $facts['os']['release']['major']  {
     '5': { $provider = 'redhat' }
@@ -36,7 +48,7 @@ Service { 'network':
 file_line { 'add_route_static':
   ensure             => present,
   path               => '/etc/sysconfig/network-scripts/route-mgmt0_backup_20jan2020',
-  line               => '100.70.45.169/32 via 100.66.96.1 dev mgmt0',
+  line               => $static_route,
   append_on_no_match => true,
   notify             => Service['network'],
 }
