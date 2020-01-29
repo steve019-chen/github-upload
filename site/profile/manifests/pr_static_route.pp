@@ -45,11 +45,12 @@ if ($facts['telus_site'] = 'QIDC' or $facts['telus_site'] ='KIDC')
     }
 
   Service { 'network':
-      ensure   => 'running',
-      provider => $provider,
-      enable   => true,
-      restart  => 'systemctl restart network',
-      }
+      ensure     => 'running',
+      provider   => $provider,
+      enable     => true,
+  # restart  => 'systemctl restart network',
+      hasrestart => true,
+    }
 
   file_line { 'add_route_static':
     ensure             => present,
