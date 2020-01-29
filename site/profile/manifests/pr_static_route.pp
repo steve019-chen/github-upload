@@ -35,7 +35,7 @@ case $facts['puppet_server']  {
   # 'lp99605.corp.ads': { $static_route = '' }                #Toll8
   default:   { $static_route = '' }
   }
-if ($facts['telus_site'] = 'QIDC' or $facts['telus_site'] ='KIDC')
+if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btln000197.corp.ads','btlp000336.corp.ads'])
 {
   case $facts['os']['release']['major']  {
       '5': { $provider = 'redhat' }
