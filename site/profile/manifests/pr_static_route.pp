@@ -45,11 +45,12 @@ if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btl
     }
 
   Service { 'network':
-      ensure   => 'running',
-      provider => $provider,
-      enable   => true,
-      restart  => 'systemctl restart network',
-      }
+      ensure     => 'running',
+      provider   => $provider,
+      enable     => true,
+  # restart  => 'systemctl restart network',
+      hasrestart => true,
+    }
 
   file_line { 'add_route_static':
     ensure             => present,
