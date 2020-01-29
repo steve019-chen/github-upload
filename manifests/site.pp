@@ -162,4 +162,12 @@ ln98430,ln98431,btln000400,btln000401,ln98142,ln98157,btln007235,btln007236,btln
 class { 'role::rl_dynatrace': }
 }
 
+# Dynatrace agent Production
+
+node btlp000756,lp97529,btlp002443
+{
+class { 'role::rl_dynatrace_pr': }
+}
+
+
 # lint:endignore
