@@ -5598,7 +5598,21 @@ NETWORK::172-23-112-0:
  ai_server:     xp0006/142.63.53.190
 
 #-----------------------------------------------------------------------------#
+# Marmac ?? network - VLAN 129 ### not sure what this is for.
+# IP helper requested Dec 09/2016 (ICR 803763) but maybe not required
+
+NETWORK::142-63-76-0:
+ context:      NETWORK
+ netmask:       255.255.255.0
+ router:        142.63.76.1
+ vlan:          129
+ scope:         marmac_bt_ten
+ boot_server:   aphid
+ media_server:  aphid
+
+#-----------------------------------------------------------------------------#
 # Marmac KB network - VLAN 300 - aka "ESX_UCS_PROD"
+# IP helper requested Dec 09/2016 (ICR 803763) 
 
 NETWORK::142-63-54-0:
  context:      NETWORK
