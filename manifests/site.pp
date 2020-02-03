@@ -106,11 +106,11 @@ node btlp003166, btlp003167, btlp003168, btlp003169, btlp003170, btlp006240, btl
 }
 
 
-# 20191205 - Node manager for starting services on weblogic
-node btlp000757, lp97208
-{
-  include role::rl_nodemanager
-}
+# # 20191205 - Node manager for starting services on weblogic
+# node btlp000757, lp97208
+# {
+#   include role::rl_nodemanager
+# }
 
 # 20190222 CRQ37712 - Project Diversio
 
