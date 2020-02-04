@@ -106,11 +106,11 @@ include profile::pr_base
 # }
 
 
-# 20191205 - Node manager for starting services on weblogic
-node lp97208
-{
-  include role::rl_nodemanager
-}
+# # 20191205 - Node manager for starting services on weblogic
+# node btlp000757, lp97208
+# {
+#   include role::rl_nodemanager
+# }
 
 # 20190222 CRQ37712 - Project Diversio
 
