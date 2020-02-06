@@ -37,27 +37,27 @@ case $facts['puppet_server']  {
   }
 if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btln000197.corp.ads','btlp000336.corp.ads'])
 {
-  case $facts['os']['release']['major']  {
-      '5': { $provider = 'redhat' }
-      '6': { $provider = 'redhat' }
-      '7': { $provider = 'redhat' }   #switch to using systemd with a unit file
-      default:   { $provider = 'redhat' }
-    }
-
-  Service { 'network':
-      ensure     => 'running',
-      provider   => $provider,
-      enable     => true,
-  # restart  => 'systemctl restart network',
-      hasrestart => true,
-    }
 
   file_line { 'add_route_static':
     ensure             => present,
     path               => '/etc/sysconfig/network-scripts/route-mgmt0_backup_20jan2020',
     line               => $static_route,
     append_on_no_match => true,
-    notify             => Service['network'],
+  }
+
+  # Copy the file down to the client
+  file { '/root/bin/setup_static_route_for_scanners':
+    ensure => 'present',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/profile/securityscanner/setup_static_route_for_scanners',
+  }
+
+  exec { '/root/bin/setup_static_route_for_scanners':
+    cwd     => '/root/bin',
+    creates => '/root/.puppet_flag_scanner_routes',
+    require => File['/var/tmp/setup_static_route_for_scanners'],
   }
 }
 }
