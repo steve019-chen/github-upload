@@ -7360,6 +7360,18 @@ NETWORK::100-66-148-0:
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
+# QIDC BT - VLAN 2225 - "BT VDI" (treat like PWAN)
+
+NETWORK::100-67-204-0:
+ context:      PWAN_NETWORK
+ scope:         qidc_bt_prod_pwan
+ vlan:          2225
+ netmask:       255.255.252.0
+ router:        100.67.204.1
+ mtu:           9000
+
+
+#-----------------------------------------------------------------------------#
 # QIDC BT - VLAN 2223 - "BT non-prod ICO"
 
 NETWORK::100-66-156-0:
