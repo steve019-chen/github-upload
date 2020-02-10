@@ -3659,6 +3659,17 @@ NETWORK::142-174-205-0:
  router:        142.174.205.1
  mtu:           9000
 
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2220 - "VDI" (Treat like PWAN)
+
+NETWORK::100-67-140-0:
+ context:      PWAN_NETWORK
+ scope:         kidc_bt_prod_pwan
+ vlan:          2220
+ netmask:       255.255.252.0
+ router:        100.67.140.1
+ mtu:           9000
+
 
 #-----------------------------------------------------------------------------#
 # KIDC BT - VLAN 2000:2001 - "BT prod PWAN1"
@@ -7360,6 +7371,7 @@ NETWORK::100-66-148-0:
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
+# This VLAN is for VDI desktops. 
 # QIDC BT - VLAN 2225 - "BT VDI" (treat like PWAN)
 
 NETWORK::100-67-204-0:
