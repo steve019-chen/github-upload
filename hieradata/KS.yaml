@@ -3590,6 +3590,7 @@ NETWORK::100-66-96-0:
 
 #-----------------------------------------------------------------------------#
 # KIDC BT - VLAN 1022:1023 - BT prod oMgmt for VDI
+# # DHCP IP helper is not working in this VLAN... tested feb 10/2020
 
 NETWORK::100-66-208-0:
  context:      MGMT_NETWORK
