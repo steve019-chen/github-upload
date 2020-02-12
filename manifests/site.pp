@@ -10,7 +10,7 @@ include profile::pr_base
 #btln008192 - old test node 
 #node btln001672,btln008192
  #node btln001672
-node btln008192
+node btln008192,btln001185,btln001672
 {
   include role::rl_static_route
 }
