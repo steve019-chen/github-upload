@@ -46,18 +46,19 @@ if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btl
   }
 
   # Copy the file down to the client
-  file { '/var/tmp/setup_static_route_for_scanners':
+  file { 'setup_static_route_for_scanners':
     ensure => 'present',
+    path   => '/var/tmp/setup_static_route_for_scanners',
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
     source => 'puppet:///modules/profile/securityscanner/setup_static_route_for_scanners',
   }
 
-  exec { '/var/tmp/setup_static_route_for_scanners':
+  exec { 'setup_static_route_for_scanners':
     cwd     => '/var/tmp',
     creates => '/root/.puppet_flag_scanner_routes',
-    require => File['/var/tmp/setup_static_route_for_scanners'],
-  }
+    require => File['setup_static_route_for_scanners'],
+   }
 }
 }
