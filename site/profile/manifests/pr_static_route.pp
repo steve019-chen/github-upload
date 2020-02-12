@@ -53,6 +53,7 @@ if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btl
     group  => 'root',
     mode   => '0755',
     source => 'puppet:///modules/profile/securityscanner/setup_static_route_for_scanners',
+    before => Exec['setup_static_route_for_scanners'],
   }
 
   exec { 'setup_static_route_for_scanners':
@@ -60,7 +61,6 @@ if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btl
     cwd     => '/var/tmp',
     path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
     creates => '/root/.puppet_flag_scanner_routes',
-    require => File['setup_static_route_for_scanners'],
     timeout => 3600,
   }
 }
