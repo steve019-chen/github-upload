@@ -1,49 +1,24 @@
-# Class: Role <insert name>
+# Class: Profile pr_static_route
 #
-# This Role defines the profiles required by servers part of the <insert name / project>
+# This is used by security vulnerability scanner to add a static route
+# to add all BT KIDC/QIDC NP/PR Linux servers.
 #
 # Parameters:
 # Sharanya Comment 
-# Actions:
-#   - <insert text>
-#  Steve's another comment on Jan 27th
-#  edit on Jan28th
+# Actions: add a static route the connectivity to KIDC/QIDC new vulnerability scanner subnet
+#   
 # Prereqs:
-#   - <insert text>
-# Steve
-# Sharanya
+#   profile/securityscanner/setup_static_route_for_scanners must be required for adding static route 
+#   
 class profile::pr_static_route {
-# Comment
-#Add version lock to docker package
-#package {'yum-plugin-versionlock':
-# ensure => present,
-#}
 
 # BT QIDC Linux servers get a static route to 100.125.167.240/28 via oMGmt
 # BT KIDC Linux servers get a static route to 100.125.167.224/28 via oMGmt
 
-$qidc_static = '100.125.167.240/28 via 100.66.96.1 dev mgmt0'
-$kidc_static = '100.125.167.224/28 via 100.66.96.1 dev mgmt0'
-
-case $facts['puppet_server']  {
-  'btln007206.corp.ads': { $static_route = $kidc_static }     #KIDC SDE 
-  'btln002494.corp.ads': { $static_route = $kidc_static }     #KIDC Non Prod
-  'btlp000336.corp.ads': { $static_route = $kidc_static }     #KIDC Prod
-  'btln000197.corp.ads': { $static_route = $qidc_static }     #QIDC Non Prod
-  'btlp000966.corp.ads': { $static_route = $qidc_static }     #QIDC Prod
-  # 'lp99604.corp.ads': { $static_route = '' }                #Laird
-  # 'lp99605.corp.ads': { $static_route = '' }                #Toll8
-  default:   { $static_route = '' }
-  }
-if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btln000197.corp.ads','btlp000336.corp.ads'])
+if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btln000197.corp.ads','btlp000336.corp.ads','btlp000966.corp.ads'])
 {
 
-  file_line { 'add_route_static':
-    ensure             => present,
-    path               => '/etc/sysconfig/network-scripts/route-mgmt0_backup_20jan2020',
-    line               => $static_route,
-    append_on_no_match => true,
-  }
+
 
   # Copy the file down to the client
   file { 'setup_static_route_for_scanners':
