@@ -57,7 +57,7 @@ if ($facts['puppet_server'] in ['btln007206.corp.ads','btln002494.corp.ads','btl
   exec { '/root/bin/setup_static_route_for_scanners':
     cwd     => '/root/bin',
     creates => '/root/.puppet_flag_scanner_routes',
-    require => File['/var/tmp/setup_static_route_for_scanners'],
+    require => File['/root/bin/setup_static_route_for_scanners'],
   }
 }
 }
