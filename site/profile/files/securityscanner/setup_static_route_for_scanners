@@ -127,7 +127,7 @@ logger "SCANNER_NET:$NET->{SCANNER}{network}\n";
 
 
 {
-	#open PUPPET_FLAG, ">/root/.puppet_flag_flexera_routes";
+	#open PUPPET_FLAG, ">/root/.puppet_flag_scanner_routes";
 	#close PUPPET_FLAG;
 	logger "\n#". "-"x78 . "\n";
 	logger "# ROUTING\n";
