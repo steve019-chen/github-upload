@@ -9,7 +9,7 @@ include profile::pr_base
 # lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
 #btln008192 - old test node 
 #node btln001672,btln008192
- #node btln001672
+#node btln001672
 node btln008192,btln001185,btln000506
 {
   include role::rl_static_route
