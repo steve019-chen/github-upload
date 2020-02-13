@@ -16,7 +16,6 @@ btwn004410, btwn004359, btwn000123, btwn004628, btwn001670, btwn004375, btwn0004
 btwn000452, btwn001089, btwn001621, btwn004370, btwn004548, btwn004568, btwn004514, btwn004377,
 btwn004379, btwn004262, btwn001092, btwn004493, btwn001091, btwn004271, btwn004615, btwn004210,
 btwn004264
-
 {
   case $facts['kernel'] {
     'Linux'  : {
