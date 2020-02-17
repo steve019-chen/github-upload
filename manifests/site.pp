@@ -10,105 +10,105 @@ include profile::pr_base
 
 # 20200213 CRQ81608 Puppet 6 windows agent upgrade
 
-node btwn004622, btwn000156, btwn000090, btwn001027, btwn004649, btwn004632, btwn001487,
-btwn000207, btwn004155, btwn004324, btwn004322, btwn000160, btwn004653, btwn004560,btwn000189,
-btwn004410, btwn004359, btwn000123, btwn004628, btwn001670, btwn004375, btwn000419, btwn004197,
-btwn000452, btwn001089, btwn001621, btwn004370, btwn004548, btwn004568, btwn004514, btwn004377,
-btwn004379, btwn004262, btwn001092, btwn004493, btwn001091, btwn004271, btwn004615, btwn004210,
-btwn004264
-{
-  case $facts['kernel'] {
-    'Linux'  : {
+# node btwn004622, btwn000156, btwn000090, btwn001027, btwn004649, btwn004632, btwn001487,
+# btwn000207, btwn004155, btwn004324, btwn004322, btwn000160, btwn004653, btwn004560,btwn000189,
+# btwn004410, btwn004359, btwn000123, btwn004628, btwn001670, btwn004375, btwn000419, btwn004197,
+# btwn000452, btwn001089, btwn001621, btwn004370, btwn004548, btwn004568, btwn004514, btwn004377,
+# btwn004379, btwn004262, btwn001092, btwn004493, btwn001091, btwn004271, btwn004615, btwn004210,
+# btwn004264
+# {
+#   case $facts['kernel'] {
+#     'Linux'  : {
 
-      # case $facts['os']['release']['major'] {
-      #   '5':  {
-      #           $puppet5_channel = 'puppet5-rhel5-x86_64-locked'
-      #           $puppet6_channel = 'puppet6-rhel5-x86_64-locked'
-      #         }
-      #   '6':  {
-      #           $puppet5_channel = 'puppet5-rhel6-x86_64-locked'
-      #           $puppet6_channel = 'puppet6-rhel6-x86_64-locked'
-      #         }
-      #   '7':  {
-      #           $puppet5_channel = 'puppet5-rhel7-x86_64-locked'
-      #           $puppet6_channel = 'puppet6-rhel7-x86_64-locked'
-      #         }
-      #   default: { fail('Puppet is only supported on Oracle Linux 5,6, and 7') }
-      # }
+#       # case $facts['os']['release']['major'] {
+#       #   '5':  {
+#       #           $puppet5_channel = 'puppet5-rhel5-x86_64-locked'
+#       #           $puppet6_channel = 'puppet6-rhel5-x86_64-locked'
+#       #         }
+#       #   '6':  {
+#       #           $puppet5_channel = 'puppet5-rhel6-x86_64-locked'
+#       #           $puppet6_channel = 'puppet6-rhel6-x86_64-locked'
+#       #         }
+#       #   '7':  {
+#       #           $puppet5_channel = 'puppet5-rhel7-x86_64-locked'
+#       #           $puppet6_channel = 'puppet6-rhel7-x86_64-locked'
+#       #         }
+#       #   default: { fail('Puppet is only supported on Oracle Linux 5,6, and 7') }
+#       # }
 
-      # # Add Puppet 6 channel
-      # telus_lib::yum_channel { $puppet6_channel:
-      #   ensure => present,
-      # }
+#       # # Add Puppet 6 channel
+#       # telus_lib::yum_channel { $puppet6_channel:
+#       #   ensure => present,
+#       # }
 
-      # # Remove Puppet 5 channel
-      # telus_lib::yum_channel { $puppet5_channel:
-      #   ensure => absent,
-      # }
+#       # # Remove Puppet 5 channel
+#       # telus_lib::yum_channel { $puppet5_channel:
+#       #   ensure => absent,
+#       # }
 
 
-      # class {'::puppet_agent':
-      #   collection      => 'puppet6',
-      #   package_version => '6.11.1',
-      #   service_names   => ['puppet'],
-      #   manage_repo     => false,
-      #   notify          => Exec['set lin no_proxy','set lin resubmit_facts'],
-      #   require         => Telus_lib::Yum_channel[$puppet6_channel],
-      # }
+#       # class {'::puppet_agent':
+#       #   collection      => 'puppet6',
+#       #   package_version => '6.11.1',
+#       #   service_names   => ['puppet'],
+#       #   manage_repo     => false,
+#       #   notify          => Exec['set lin no_proxy','set lin resubmit_facts'],
+#       #   require         => Telus_lib::Yum_channel[$puppet6_channel],
+#       # }
 
-      # exec { 'set lin no_proxy':
-      #   command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-      #   path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
-      #   unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
-      # }
+#       # exec { 'set lin no_proxy':
+#       #   command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+#       #   path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+#       #   unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
+#       # }
 
-      # exec { 'set lin resubmit_facts':
-      #   command => 'puppet config set resubmit_facts true',
-      #   path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
-      #   unless  => 'puppet config print resubmit_facts | grep -q true > /dev/null',
-      # }
+#       # exec { 'set lin resubmit_facts':
+#       #   command => 'puppet config set resubmit_facts true',
+#       #   path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+#       #   unless  => 'puppet config print resubmit_facts | grep -q true > /dev/null',
+#       # }
 
-    }
-    'windows': {
+#     }
+#     'windows': {
 
-      # Run it only on Windows 2012 R2 and newer
+#       # Run it only on Windows 2012 R2 and newer
 
-      if (Float.new($facts['kernelmajversion'])) >= 6.3 {
+#       if (Float.new($facts['kernelmajversion'])) >= 6.3 {
 
-        file { 'win install file':
-          ensure => present,
-          path   => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
-          source => 'puppet:///software/windows/puppet-agent-6.11.1-x64.msi',
-        }
+#         file { 'win install file':
+#           ensure => present,
+#           path   => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
+#           source => 'puppet:///software/windows/puppet-agent-6.11.1-x64.msi',
+#         }
 
-        class {'::puppet_agent':
-          absolute_source       => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
-          collection            => 'puppet6',
-          package_version       => '6.11.1',
-          service_names         => ['puppet'],
-          manage_repo           => false,
-          msi_move_locked_files => true,
-          require               => File['win install file'],
-          notify                => Exec['set win no_proxy','set win resubmit_facts'],
-        }
+#         class {'::puppet_agent':
+#           absolute_source       => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
+#           collection            => 'puppet6',
+#           package_version       => '6.11.1',
+#           service_names         => ['puppet'],
+#           manage_repo           => false,
+#           msi_move_locked_files => true,
+#           require               => File['win install file'],
+#           notify                => Exec['set win no_proxy','set win resubmit_facts'],
+#         }
 
-        exec { 'set win no_proxy':
-          command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-          path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
-          unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
-        }
+#         exec { 'set win no_proxy':
+#           command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+#           path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+#           unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
+#         }
 
-        exec { 'set win resubmit_facts':
-          command => 'cmd.exe /c  puppet config set resubmit_facts true',
-          path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
-          unless  => 'cmd.exe /c puppet config print resubmit_facts | findstr.exe true > nul',
-        }
+#         exec { 'set win resubmit_facts':
+#           command => 'cmd.exe /c  puppet config set resubmit_facts true',
+#           path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+#           unless  => 'cmd.exe /c puppet config print resubmit_facts | findstr.exe true > nul',
+#         }
 
-      }
-    }
-    default: { }
-  }
-}
+#       }
+#     }
+#     default: { }
+#   }
+# }
 
 
 # # 20191205 - Node manager for starting services on weblogic
