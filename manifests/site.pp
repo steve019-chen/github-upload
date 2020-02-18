@@ -16,100 +16,100 @@ include profile::pr_base
 # node btwn001573, btwn001594, btwn004400, btwn004623, btwp013957, btwn000148, btwp001382, btwp013625, btwp013999, btwp013397, btwp013721, btwp013805, btwp001389, btwp001536, btwp001712, btwp013916, btwp013772, btwn001548, btwp013763, btwp013857, btwp001501, btwp001653, btwp013782, btwn001099, btwp001387, btwp001546, btwp013610, btwp014000, btwp013744, btwp001426, btwp004188, btwp001427, btwn001570, btwn004191, btwp014012, btwp001714, btwn001679, btwn001685, btwp013864, btwp013849, btwn004234, btwn001397, btwp013738, btwn004520, btwp013583, btwn000096, btwn001649, btwp001350, btwn001395, btwn004196, btwp001648, btwp013755, btwn000099, btwp001432, btwn001651, btwp013689, btwn004297, btwp013713, btwn001412, btwn004304, btwp014035, btwp013715, btwp013826, btwp013714, btwp000281, btwn001446, btwn004172, btwp001379, btwp013930, btwn001629, btwp001687, btwn001095, btwp001633, btwp001375, btwn004368, btwn001592, btwn000750, btwn004214, btwn001393, btwn004160, btwp013658, btwn004194, btwp001510, btwp013505, btwn004578, btwp001471, btwp013372, btwp013829, btwn001442, btwp013784, btwp013351, btwp013781, btwp013402, btwp013885, btwp013582, btwp014013, btwp001668, btwp013934, btwn004369, btwp013567, btwn004616, btwn004261, btwp004278, btwn004380, btwn001609, btwp001464, btwp001582, btwn004614, btwn004581, btwp000279, btwp001261, btwn001689, btwn004233, btwn000353, btwn999992, btwn001399, btwp013856, btwp013906, btwn001630, btwp014024, btwn000432, btwn004198, btwn004256, btwp013901, btwp013907, btwn000453, btwn001628, btwp013839, btwp000314, btwn001688, btwp013621, btwp014020, btwp014033, btwp013344, btwp013961, btwn004181, btwp013863, btwn004384, btwp013750, btwp013807, btwp013699, btwn001633, btwp014072, btwn001654, btwp001641, btwp013361, btwn001619, btwp013809, btwp002102, btwp001340, btwn001591, btwp013401, btwn004215, btwp001690, btwp013847, btwp013395, btwp013593, btwp013650, btwp013740, btwn001444, btwp001433, btwn004558, btwp001567, btwp013581, btwp013578, btwn004498, btwp013585, btwn001666, btwp001639, btwn001090, btwp014002, btwn004490, btwp013354, btwp014021, btwp001579, btwp001541, btwn001413, btwp001352, btwp013628, btwp001543, btwn001478, btwp013644, btwn004171, btwn004499, btwp013656, btwn004567, btwn001394, btwn004515, btwp001337, btwp001529, btwn004538, btwp013819, btwp013834, btwn000748, btwp001672, btwp013525, btwp001634, btwp013813, btwp001341, btwp001405, btwp000250, btwp001542, btwn004580, btwp001493, btwn000445, btwn004277, btwn001590, btwp013340, btwp013579, btwp013984, btwp001559, btwn001653, btwp013389, btwp013602, btwn001663, btwp004292, btwn004176, btwp013866, btwp001473, btwn004170, btwp014005, btwn004594, btwn004195, btwn001686, btwp013989, btwn001656, btwp014093, btwn004500, btwn004549, btwn004577, btwp013831, btwp001654, btwp013947, btwp013987, btwp001495, btwn001496, btwn004221, btwn004192, btwn004496, btwn004474, btwp001457, btwp013697, btwp013751, btwn001605, btwn001507, btwp000252, btwp014038, btwn004501, btwn004218, btwn001396, btwp013773, btwp001594, btwp001555, btwp013700, btwp004288, btwp014089, btwp004225, btwp013605, btwn001606, btwn004263, btwp004233, btwn004199, btwn001613, btwn001077, btwp013654, btwn004494, btwp013923, btwp001499, btwn001620, btwn001636, btwp001609, btwn001443, btwn001093, btwp013803, btwn001445, btwn004539, btwp013764, btwp013902, btwp001498, btwn004477, btwp013703, btwp001465, btwn004371, btwp013348, btwp001678, btwp000375, btwp013897, btwn004540, btwp001390, btwn004278, btwn001634, btwp001508, btwp000084, btwp013898, btwn004579, btwn004553, btwn004382, btwn004381, btwp001586, btwp013994, btwp000086, btwp013341, btwp001391, btwp004181, btwp013601, btwp000372, btwp013756, btwp004236, btwp004224, btwp001707, btwp001531, btwp001459, btwp013852, btwp001640, btwp013769, btwp001557, btwp001371, btwp014099, btwp004187, btwp002105, btwn001414, btwp014026, btwp001474, btwp013634, btwp013992, btwp013381, btwp000820, btwp001527, btwp999940, btwp004286, btwp013890, btwp000818, btwp013806, btwp004295, btwp013837, btwp013587, btwp013853, btwp013603, btwp001578, btwp013767, btwp013828, btwp001466, btwp001455, btwp001506, btwp014014, btwp013646, btwp013370, btwp001694, btwp001713, btwp013725, btwp013382, btwp001175, btwp004213, btwp001617, btwp004277, btwp013503, btwp013840, btwp001599, btwp013848, btwp013586, btwp013927, btwp001384, btwp001677, btwn000231, btwn004480, btwp013824, btwp001548, btwp001477, btwp001554, btwn004348, btwp013569, btwp001635, btwn004412, btwp013366, btwp013865, btwp014022, btwp001551, btwn004352, btwn004482, btwn000094, btwp001549, btwn000140, btwp002103, btwp000970, btwp013719, btwn000144, btwp013850, btwp002106, btwn004414, btwn004353, btwp001597, btwp014016, btwp013921, btwp013377, btwp013748, btwp001496, btwp001556, btwp014027, btwp001516, btwn004387, btwp004282, btwn004362, btwn000126, btwn004654, btwp014007, btwp014045, btwn000206, btwp013711, btwn000209, btwp014017, btwp013673, btwn001409, btwp013362, btwp014018, btwp013360, btwp004214, btwp013979, btwp001456, btwn000137, btwn004309, btwp013816, btwp013814, btwp013869, btwp013766, btwn001553, btwp013643, btwn000358, btwp001369, btwp001540, btwn001596, btwn000191, btwn000222, btwn001568, btwp001702, btwp001519, btwn001565, btwp013830, btwp001650, btwp001647, btwn004346, btwn001593, btwn004644, btwp001343, btwp002104, btwn004544, btwp001657, btwn004647, btwp013760, btwn004401, btwp013983, btwp013390, btwp013736, btwp001472, btwp001492, btwp001240, btwp013403, btwn000113, btwn000153, btwn001552, btwp013990, btwp013595, btwp013732, btwp014075, btwn000326, btwn004519, btwp001717, btwn004471, btwn004620, btwp013652, btwp001676, btwp013959, btwp000367, btwn000213, btwp001497, btwn004298, btwp001334, btwp013726, btwp013779, btwp013801, btwp001537, btwp013589, btwp001446, btwn004593, btwn001085, btwp004220, btwn000127, btwn004576, btwn004405, btwp004285, btwp000246, btwn004573, btwn000357, btwp001515, btwp014032, btwn001561, btwn004330, btwp013696, btwp013808, btwp013954, btwn001492, btwp001349, btwn000184, btwn000116, btwp013568, btwn004636, btwp001607, btwn004566, btwp014042, btwn000143, btwp013931, btwn004404, btwp004289, btwp013373, btwn004565, btwp004217, btwn001026, btwp013817, btwp013891, btwn004363, btwn004483, btwp001686, btwp013815, btwn000107, btwn000225, btwn001599, btwp001655, btwn000132, btwn001551, btwn004279, btwn000108, btwp013867, btwp002107, btwp001192, btwp001517, btwn000200, btwn004332, btwn001186, btwp013845, btwp013396, btwn000296, btwn004657, btwp001711, btwp013778, btwp013749, btwn000187, btwp013572, btwp000282, btwp001614, btwp014066, btwn001572, btwp014023, btwp001701, btwn001506, btwn000112, btwp013762, btwp013997, btwn004323, btwp013653, btwn001672, btwn000122, btwp013665, btwn004349, btwp001608, btwp013571, btwn000208, btwp013733, btwp001651, btwp014037, btwp001265, btwp000772, btwp013735, btwn004587, btwp000315, btwn004635, btwp014039, btwp013895, btwn000093, btwp001553, btwn004303, btwn000181, btwn000220, btwp013799, btwp013353, btwp013679, btwp000817, btwn001677, btwn004403, btwp014048, btwp004234, btwn000172, btwn004650, btwp001370, btwn000215, btwn004525, btwp013671, btwp013882, btwp013352, btwn000165, btwp013936, btwn004409, btwp000251, btwn000192, btwn000147, btwn004288, btwp013728, btwp001649, btwp013349, btwn004489, btwn004472, btwn001644, btwp001403, btwp001372, btwn004585, btwn004658, btwn001524, btwp013986, btwn001437, btwn000219, btwp001171, btwn004213, btwp001565, btwp001258, btwn001559, btwn004225, btwn001543, btwn004319, btwn004643, btwp013759, btwn004280, btwn004642, btwn000210, btwp001528, btwn004416, btwn000354, btwp000360, btwp001535, btwn000100, btwp014009, btwp013757, btwp013400, btwn000235, btwp013962, btwn004406, btwp013783, btwp013641, btwn004311, btwn000097, btwp000373, btwn001566, btwn001523, btwn004308, btwn004299, btwn004475, btwn001556, btwn004205, btwn004296, btwn000363, btwn004312, btwn001626, btwn004397, btwn004300, btwn000095, btwn000185, btwn000084, btwn004547, btwn001584, btwn001408, btwn001575, btwn001557, btwn001185, btwn004240, btwn004637, btwn000118, btwn001669, btwn000152, btwn004383, btwn001546, btwn001140, btwn004223, btwn004631, btwn004411, btwn000224, btwn004289, btwn001579, btwn004564, btwn000196, btwn000119, btwn001601, btwn000178, btwn000355, btwn004320, btwn004313, btwn004344, btwn001564, btwn004249, btwn004207, btwn004625, btwn000218, btwn000120, btwn004237, btwn004336, btwn000361, btwn004545, btwn001676, btwn004333, btwn004413, btwn000109, btwn004314, wp41929, wp80970, wp80939, wp81100, wp81063, wp41927, wp80946, wp81016, wp81049, wp41931, wp81015, wp81061, wp80977, wp41928, wp80899, wp80941, wp81018, wp81065, wp81000, wp41932, wp80995, wp80943, wp80968, wp80996, wp80982, wp81064, wp81001, wp81012, wp41930
 
 # Phase 2:20200217 CRQ83129: Upgrade 311 servers
-node btwp013960, btwp013676, btwp013982, btwp013371, btwp013386, btwp013710, btwp001618, btwp013862, btwp013995, btwp004287, wn50631, btwp000391, btwp013933, btwp013383, btwp013741, btwp001595, btwp013875, btwp001494, btwp001381, btwp013918, btwp013843, btwp013838, btwp013892, btwp013896, btwp013802, btwp013932, btwp004237, btwp013820, btwp013945, btwp001518, btwp013922, btwp013620, btwp001351, btwp013980, btwp001709, btwp013905, btwp013594, btwp014036, btwp013720, wn54174, btwp014056, btwp001593, btwp013709, btwp001346, btwp001577, btwp013380, btwp001547, btwp001587, btwp013378, btwp001378, btwp013669, btwn001610, btwn000451, btwp013666, btwp013917, btwp001575, btwp013978, btwn004177, btwp013712, btwp013384, btwp013951, btwn004476, btwp001521, wn50627, btwp014073, btwp001568, btwn004276, btwp013770, btwn004492, btwp000819, wn54173, btwn004495, btwn004521, wn54202, btwn004376, btwn001503, btwn001657, btwn001611, btwp001645, btwp000085, btwp013956, btwp013681, btwp001359, btwp001600, btwn001687, btwp013724, btwp013624, btwn001586, wn54130, btwn004572, btwp001710, btwp013729, btwp001263, wn54206, btwn001655, btwp013924, btwp013391, btwn001637, btwp014043, btwp001511, btwp013894, btwn001635, btwp013899, btwn004373, btwp013394, btwp000130, btwn001537, btwn004555, btwn004366, btwp004293, wn54199, btwn004571, btwn001094, btwp004218, btwn004491, btwp000249, btwn004193, btwp013988, btwn001508, btwp000253, btwn004367, btwp001483, btwp000787, btwn001614, btwp001613, btwp004215, btwn004556, btwp001489, btwn004497, btwn000444, btwn001612, btwn004190, btwn004486, wn50624, btwn004216, btwn004180, btwn004575, btwn001400, btwp001552, btwp014070, btwp013818, btwn000454, btwp014046, btwn004559, btwn001589, btwn004378, wn50630, btwn001615, btwp013393, btwp001490, btwn004592, btwn001650, btwn004526, btwn001096, btwn004557, btwn004478, btwp001388, btwp013657, btwp013822, btwp014076, wn54201, wn50626, wn54207, wn50628, wn54172, wn54175, wn54193, wn54166, wn54167, wn54191, wn54155, wn54184, wn54192, wn54190, wn54198, wn54157, wn54180, wn54200, wn54194, wn54185, wn54171, wn54205, wn54183, wn50623, btwn000136, wn54146, btwn004624, btwn004589, btwn000217, btwn004660, btwn004655, btwn000101, btwn004661, btwn000212, btwn004639, btwn000176, btwn004331, btwn004399, btwn004408, btwn004638, btwn001494, btwn004356, btwn000364, btwn004626, btwn000226, btwn001580, btwn001581, btwn004484, btwn004574, wn54156, btwn000114, btwn000327, btwn000130, btwn004203, btwn004361, btwn004425, btwn004351, wp80948, btwn000088, btwn001097, btwn000345, btwn001491, wp81052, btwn001542, btwn004428, btwn004630, btwn004633, btwn001549, wp81057, btwn004527, btwn001055, wp80978, btwn000167, wp81032, btwn000175, wp41238, btwn000117, btwn001526, btwn001567, wp81055, btwn000993, btwn004591, btwn004392, wp81039, wp81056, wp81058, wp50352, wp81174, wp81034, wp81054, wp81118, wp81019, wp50353, wp80994, wp80863, wp81014, wp81031, wp40312, wp80898, wp81112, wp81013, wp80955, wp80998, wp81021, wp81171, wp80979, wp41983, wp81062, wp81101, wp81105, wp80984, wp81033, wp80928, abapp148, wp80947, wp80961, wp80976, wp80983, wp41925, wp80964, wp80962, wp41973, wp81042, wp81017, wp41926, wp80999, wp80981, wp41445, wp81027, wp81040, wp80929, wp81002, wp80989, wp80969, wp80965, wp81041, wp80942, wp80992, wp80990, wp41984, wp80927, wp81053, wp41933, wp41934, wp81104, wp81175, wp41446, wp81020, wp80997, wp81036, wp80980
-{
-  case $facts['kernel'] {
-    'Linux'  : {
+# node btwp013960, btwp013676, btwp013982, btwp013371, btwp013386, btwp013710, btwp001618, btwp013862, btwp013995, btwp004287, wn50631, btwp000391, btwp013933, btwp013383, btwp013741, btwp001595, btwp013875, btwp001494, btwp001381, btwp013918, btwp013843, btwp013838, btwp013892, btwp013896, btwp013802, btwp013932, btwp004237, btwp013820, btwp013945, btwp001518, btwp013922, btwp013620, btwp001351, btwp013980, btwp001709, btwp013905, btwp013594, btwp014036, btwp013720, wn54174, btwp014056, btwp001593, btwp013709, btwp001346, btwp001577, btwp013380, btwp001547, btwp001587, btwp013378, btwp001378, btwp013669, btwn001610, btwn000451, btwp013666, btwp013917, btwp001575, btwp013978, btwn004177, btwp013712, btwp013384, btwp013951, btwn004476, btwp001521, wn50627, btwp014073, btwp001568, btwn004276, btwp013770, btwn004492, btwp000819, wn54173, btwn004495, btwn004521, wn54202, btwn004376, btwn001503, btwn001657, btwn001611, btwp001645, btwp000085, btwp013956, btwp013681, btwp001359, btwp001600, btwn001687, btwp013724, btwp013624, btwn001586, wn54130, btwn004572, btwp001710, btwp013729, btwp001263, wn54206, btwn001655, btwp013924, btwp013391, btwn001637, btwp014043, btwp001511, btwp013894, btwn001635, btwp013899, btwn004373, btwp013394, btwp000130, btwn001537, btwn004555, btwn004366, btwp004293, wn54199, btwn004571, btwn001094, btwp004218, btwn004491, btwp000249, btwn004193, btwp013988, btwn001508, btwp000253, btwn004367, btwp001483, btwp000787, btwn001614, btwp001613, btwp004215, btwn004556, btwp001489, btwn004497, btwn000444, btwn001612, btwn004190, btwn004486, wn50624, btwn004216, btwn004180, btwn004575, btwn001400, btwp001552, btwp014070, btwp013818, btwn000454, btwp014046, btwn004559, btwn001589, btwn004378, wn50630, btwn001615, btwp013393, btwp001490, btwn004592, btwn001650, btwn004526, btwn001096, btwn004557, btwn004478, btwp001388, btwp013657, btwp013822, btwp014076, wn54201, wn50626, wn54207, wn50628, wn54172, wn54175, wn54193, wn54166, wn54167, wn54191, wn54155, wn54184, wn54192, wn54190, wn54198, wn54157, wn54180, wn54200, wn54194, wn54185, wn54171, wn54205, wn54183, wn50623, btwn000136, wn54146, btwn004624, btwn004589, btwn000217, btwn004660, btwn004655, btwn000101, btwn004661, btwn000212, btwn004639, btwn000176, btwn004331, btwn004399, btwn004408, btwn004638, btwn001494, btwn004356, btwn000364, btwn004626, btwn000226, btwn001580, btwn001581, btwn004484, btwn004574, wn54156, btwn000114, btwn000327, btwn000130, btwn004203, btwn004361, btwn004425, btwn004351, wp80948, btwn000088, btwn001097, btwn000345, btwn001491, wp81052, btwn001542, btwn004428, btwn004630, btwn004633, btwn001549, wp81057, btwn004527, btwn001055, wp80978, btwn000167, wp81032, btwn000175, wp41238, btwn000117, btwn001526, btwn001567, wp81055, btwn000993, btwn004591, btwn004392, wp81039, wp81056, wp81058, wp50352, wp81174, wp81034, wp81054, wp81118, wp81019, wp50353, wp80994, wp80863, wp81014, wp81031, wp40312, wp80898, wp81112, wp81013, wp80955, wp80998, wp81021, wp81171, wp80979, wp41983, wp81062, wp81101, wp81105, wp80984, wp81033, wp80928, abapp148, wp80947, wp80961, wp80976, wp80983, wp41925, wp80964, wp80962, wp41973, wp81042, wp81017, wp41926, wp80999, wp80981, wp41445, wp81027, wp81040, wp80929, wp81002, wp80989, wp80969, wp80965, wp81041, wp80942, wp80992, wp80990, wp41984, wp80927, wp81053, wp41933, wp41934, wp81104, wp81175, wp41446, wp81020, wp80997, wp81036, wp80980
+# {
+#   case $facts['kernel'] {
+#     'Linux'  : {
 
-      # case $facts['os']['release']['major'] {
-      #   '5':  {
-      #           $puppet5_channel = 'puppet5-rhel5-x86_64-locked'
-      #           $puppet6_channel = 'puppet6-rhel5-x86_64-locked'
-      #         }
-      #   '6':  {
-      #           $puppet5_channel = 'puppet5-rhel6-x86_64-locked'
-      #           $puppet6_channel = 'puppet6-rhel6-x86_64-locked'
-      #         }
-      #   '7':  {
-      #           $puppet5_channel = 'puppet5-rhel7-x86_64-locked'
-      #           $puppet6_channel = 'puppet6-rhel7-x86_64-locked'
-      #         }
-      #   default: { fail('Puppet is only supported on Oracle Linux 5,6, and 7') }
-      # }
+#       # case $facts['os']['release']['major'] {
+#       #   '5':  {
+#       #           $puppet5_channel = 'puppet5-rhel5-x86_64-locked'
+#       #           $puppet6_channel = 'puppet6-rhel5-x86_64-locked'
+#       #         }
+#       #   '6':  {
+#       #           $puppet5_channel = 'puppet5-rhel6-x86_64-locked'
+#       #           $puppet6_channel = 'puppet6-rhel6-x86_64-locked'
+#       #         }
+#       #   '7':  {
+#       #           $puppet5_channel = 'puppet5-rhel7-x86_64-locked'
+#       #           $puppet6_channel = 'puppet6-rhel7-x86_64-locked'
+#       #         }
+#       #   default: { fail('Puppet is only supported on Oracle Linux 5,6, and 7') }
+#       # }
 
-      # # Add Puppet 6 channel
-      # telus_lib::yum_channel { $puppet6_channel:
-      #   ensure => present,
-      # }
+#       # # Add Puppet 6 channel
+#       # telus_lib::yum_channel { $puppet6_channel:
+#       #   ensure => present,
+#       # }
 
-      # # Remove Puppet 5 channel
-      # telus_lib::yum_channel { $puppet5_channel:
-      #   ensure => absent,
-      # }
+#       # # Remove Puppet 5 channel
+#       # telus_lib::yum_channel { $puppet5_channel:
+#       #   ensure => absent,
+#       # }
 
 
-      # class {'::puppet_agent':
-      #   collection      => 'puppet6',
-      #   package_version => '6.11.1',
-      #   service_names   => ['puppet'],
-      #   manage_repo     => false,
-      #   notify          => Exec['set lin no_proxy','set lin resubmit_facts'],
-      #   require         => Telus_lib::Yum_channel[$puppet6_channel],
-      # }
+#       # class {'::puppet_agent':
+#       #   collection      => 'puppet6',
+#       #   package_version => '6.11.1',
+#       #   service_names   => ['puppet'],
+#       #   manage_repo     => false,
+#       #   notify          => Exec['set lin no_proxy','set lin resubmit_facts'],
+#       #   require         => Telus_lib::Yum_channel[$puppet6_channel],
+#       # }
 
-      # exec { 'set lin no_proxy':
-      #   command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-      #   path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
-      #   unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
-      # }
+#       # exec { 'set lin no_proxy':
+#       #   command => "puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+#       #   path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+#       #   unless  => "puppet config print no_proxy | grep -q ${servername} > /dev/null",
+#       # }
 
-      # exec { 'set lin resubmit_facts':
-      #   command => 'puppet config set resubmit_facts true',
-      #   path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
-      #   unless  => 'puppet config print resubmit_facts | grep -q true > /dev/null',
-      # }
+#       # exec { 'set lin resubmit_facts':
+#       #   command => 'puppet config set resubmit_facts true',
+#       #   path    => '/opt/puppetlabs/puppet/bin:/bin:/usr/bin:/usr/sbin:/bin',
+#       #   unless  => 'puppet config print resubmit_facts | grep -q true > /dev/null',
+#       # }
 
-    }
-    'windows': {
+#     }
+#     'windows': {
 
-      # Run it only on Windows 2012 R2 and newer
+#       # Run it only on Windows 2012 R2 and newer
 
-      if (Float.new($facts['kernelmajversion'])) >= 6.3 {
+#       if (Float.new($facts['kernelmajversion'])) >= 6.3 {
 
-        file { 'win install file':
-          ensure => present,
-          path   => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
-          source => 'puppet:///software/windows/puppet-agent-6.11.1-x64.msi',
-        }
+#         file { 'win install file':
+#           ensure => present,
+#           path   => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
+#           source => 'puppet:///software/windows/puppet-agent-6.11.1-x64.msi',
+#         }
 
-        class {'::puppet_agent':
-          absolute_source       => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
-          collection            => 'puppet6',
-          package_version       => '6.11.1',
-          service_names         => ['puppet'],
-          manage_repo           => false,
-          msi_move_locked_files => true,
-          require               => File['win install file'],
-          notify                => Exec['set win no_proxy','set win resubmit_facts'],
-        }
+#         class {'::puppet_agent':
+#           absolute_source       => "${env_temp_variable}\\puppet-agent-6.11.1-x64.msi",
+#           collection            => 'puppet6',
+#           package_version       => '6.11.1',
+#           service_names         => ['puppet'],
+#           manage_repo           => false,
+#           msi_move_locked_files => true,
+#           require               => File['win install file'],
+#           notify                => Exec['set win no_proxy','set win resubmit_facts'],
+#         }
 
-        exec { 'set win no_proxy':
-          command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
-          path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
-          unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
-        }
+#         exec { 'set win no_proxy':
+#           command => "cmd.exe /c  puppet config set no_proxy 'localhost, 127.0.0.1, ${servername}'",
+#           path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+#           unless  => "cmd.exe /c puppet config print no_proxy | findstr.exe ${servername} > nul",
+#         }
 
-        exec { 'set win resubmit_facts':
-          command => 'cmd.exe /c  puppet config set resubmit_facts true',
-          path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
-          unless  => 'cmd.exe /c puppet config print resubmit_facts | findstr.exe true > nul',
-        }
+#         exec { 'set win resubmit_facts':
+#           command => 'cmd.exe /c  puppet config set resubmit_facts true',
+#           path    => 'C:\Program Files\Puppet Labs\Puppet\bin;C:\Windows\system32',
+#           unless  => 'cmd.exe /c puppet config print resubmit_facts | findstr.exe true > nul',
+#         }
 
-      }
-    }
-    default: { }
-  }
-}
+#       }
+#     }
+#     default: { }
+#   }
+# }
 
 
 # # 20191205 - Node manager for starting services on weblogic
