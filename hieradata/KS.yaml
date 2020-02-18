@@ -2017,6 +2017,7 @@ PROFILE::consilium_bt_lab_pwan:
  dns_servers:       172.23.5.244 172.23.116.244
  dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
  mail_relay:        onmsg.tsl.telus.com
+ ntp_servers:   172.23.59.20     
  bkp_suffix:   -bkp
  mgmt_scope:   consilium_bt_lab_mgmt
  nas_scope:    consilium_bt_lab_nas
