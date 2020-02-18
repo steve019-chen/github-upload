@@ -1,14 +1,14 @@
-# Class: Role <insert name>
+# Class: Role rl_static_route
 #
-# This Role defines the profiles required by servers part of the <insert name / project>
+# This Role defines the profiles required by servers part of the Security Vulnerability scan
 #
 # Parameters:
-#
+#   - N/A
 # Actions:
-#   - <insert text>
+#   - Creates static routes
 # 
 # Prereqs:
-#   - <insert text>
+#   - Files added to files/securityscanner
 #
 class role::rl_static_route {
 
