@@ -39,13 +39,18 @@ unless ( open LOG, ">>/var/tmp/add_static_route.log" ){
 	exit 2;
 }
 
-my $date=gmtime();
 {
+	my $date=gmtime();
 	my $args=join " ", @ARGV;
 	logger "\n\n" . ("#"x79) . "\n# $date --- Executing Static Route Add Script\n# Args: $args\n";
 	logger (("#"x79) . "\n");
 }
 
+my $file_timestamp;
+{
+	my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = gmtime();
+	$file_timestamp= sprintf "%04d-%02d-%02d.%02d:%02d:%02d", ($year+1900) , ($mon+1) , $mday , $hour , $min , $sec;
+}
 
 my $os_major;
 my $os_minor;
@@ -240,6 +245,7 @@ sub create_static_route {
 	my $NET=shift;
 	my $SCANNER=$NET->{SCANNER};
         my $route_file="/etc/sysconfig/network-scripts/route-$nic";
+        my $route_file_saved="/var/tmp/route-$nic.$file_timestamp";
 
         my $new_route_entry=qq{$SCANNER->{network}/$SCANNER->{mask_bits} via $NET->{gateway} dev $nic};
 
@@ -256,8 +262,25 @@ sub create_static_route {
                 exit 10;
         }
 
-        logger "Checking existing static route...\n";
-        #open IP_ROUTE, "ip -o route get $NET->{server_ip}|";
+	{
+                logger qq{#### Current kernel routing table ##############\n};
+        	open IP_ROUTE, "ip route|";
+		while (<IP_ROUTE>){
+			logger " $_";
+		}
+		close IP_ROUTE;
+                logger qq{################################################\n};
+
+                logger qq{#### Current contents of $route_file\n};
+        	open ROUTE_FILE, "$route_file";
+		while (<ROUTE_FILE>){
+			logger " $_";
+		}
+		close ROUTE_FILE;
+                logger qq{################################################\n};
+	}
+
+        logger "\nChecking existing static route...\n";
         open IP_ROUTE, "ip -o route get $SCANNER->{ip}|";
         my $line = <IP_ROUTE>;
 	close IP_ROUTE;
@@ -265,27 +288,39 @@ sub create_static_route {
         logger "$line\n";
         if ( ((split " ", $line)[2]) ne $NET->{gateway} ){
                 logger "\nStatic route to $SCANNER->{network} is missing.\n";
-                logger "\nAdding static route\n";
+                logger "\nAdding static route to kernel routing table...\n";
                 runsyscmd("ip route add $new_route_entry");
         } else {
-                logger "route is ok\n";
+		logger "Required route already exists in kernel routing table. OK.\n";
         }
-        open ROUTE, "$route_file";
-        my $match=0;
-        for my $line (<ROUTE>){
-                if ( $line =~ /^$SCANNER->{network}/ ){
-                        logger "\nRouting file $route_file already contains static route for $SCANNER->{network}. OK.\n";
-                        $match=1;
-                        last;
-                }
-        }
-        close ROUTE;
-        unless ( $match ){
-                logger qq{\nAppending "$new_route_entry" to $route_file\n};
-                open ROUTE, ">>$route_file";
-                print ROUTE "$new_route_entry\n";
-                close ROUTE;
-        }
+
+
+	open ROUTE_FILE, "$route_file";
+	my $match=0;
+	for my $line (<ROUTE_FILE>){
+		if ( $line =~ /^$SCANNER->{network}/ ){
+			logger "\nRouting file $route_file already contains static route for $SCANNER->{network}. OK.\n";
+			$match=1;
+			last;
+		}
+	}
+	close ROUTE_FILE;
+
+	unless ( $match ){
+		logger qq{\nSaving contents of $route_file to $route_file_saved.\n};
+		open ROUTE_FILE, "$route_file";
+		open ROUTE_FILE_SAVED, ">$route_file_saved";
+		for my $line (<ROUTE_FILE>){
+			print ROUTE_FILE_SAVED $line;
+		}
+		close ROUTE_FILE;
+		close ROUTE_FILE_SAVED;
+
+		logger qq{Appending "$new_route_entry" to $route_file\n};
+		open ROUTE_FILE, ">>$route_file";
+		print ROUTE_FILE "$new_route_entry\n";
+		close ROUTE_FILE;
+	}
 
 }
 
