@@ -1938,6 +1938,33 @@ PROFILE::laird_mits:
 # Consilium BT PROFILES
 #-----------------------------------------------------------------------------#
 
+# profile for building mgmt only servers (such as epoxy)
+
+PROFILE::consilium_bt_lab_mgmt:
+ context:      PROFILE
+ included:       consilium_bt
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server 
+ ntp_servers:       172.23.5.38 
+ ldap_server1:       uldap-east.tsl.telus.com
+ ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
+ satellite_server:  lp98085.corp.ads
+ satellite_key:     1-bt-cons
+ spacewalk_server:  lp98187.corp.ads
+ spacewalk_key:     1-bt-cons
+ domain:            tmi.telus.com
+ bkp_domain:
+ dns_servers:       172.23.5.244 172.23.116.244
+ dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
+ mail_relay:        onmsg.tsl.telus.com
+ ntp_servers:   172.23.59.20     
+ puppet_server: 
+ primary_nic_type: mgmt 
+
 # everything except KVM VMs on acrylic (and maybe one VMs on acrylic)
 
 PROFILE::consilium_bt_lab_ten:
