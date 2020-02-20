@@ -193,7 +193,7 @@ node btln002750, btln002998, btln002045, btln000604, btln008131, btln002013, btl
 # ln98430,ln98431,btln000400,btln000401,ln98142,ln98157,btln007235,btln007236,btln007232,btln007233,btln007237,btln007984,btln007985,ln98775,ln99015,ln98844,ln98776,btln000103,ln99790
 # {
 # class { 'role::rl_dynatrace': }
-}
+# }
 
 # Dynatrace agent Production
 
