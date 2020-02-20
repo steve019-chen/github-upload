@@ -159,7 +159,7 @@ node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btl
   include role::rl_asapnoc
 }
 
-# # BCG Shannon project 
+# BCG Shannon project 
 
 node btlp007087, btlp007088,btlp007089,btlp007090,btlp007091,btlp007092,btlp007093,btlp007094,btlp007095,btlp007096,
 btlp007097,btlp007098,btlp007099,btlp007100,btlp007101,btlp007102,btlp007103,btlp007104,btlp007105,btlp007106,
@@ -167,7 +167,7 @@ btlp007107,btlp007108,btlp007109,btlp007110,btlp007111,btlp007112,btlp007113,btl
 class { 'role::rl_bcg_shannon': }
 }
 
-# # Dynatrace agent Staging
+# Dynatrace agent Staging
 
 node ln99029,ln99028,ln99084,ln99085,ln98937,ln99622,ln99618,ln99777,ln98939,ln98940,ln99617,
 ln99619,ln99152,ln99035,ln99036,ln99833,ln99779,ln99835,ln99834,ln99246,ln99247,ln99582,ln99583,
