@@ -1938,6 +1938,33 @@ PROFILE::laird_mits:
 # Consilium BT PROFILES
 #-----------------------------------------------------------------------------#
 
+# profile for building mgmt only servers (such as epoxy)
+
+PROFILE::consilium_bt_lab_mgmt:
+ context:      PROFILE
+ included:       consilium_bt
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server 
+ ntp_servers:       172.23.5.38 
+ ldap_server1:       uldap-east.tsl.telus.com
+ ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
+ satellite_server:  lp98085.corp.ads
+ satellite_key:     1-bt-cons
+ spacewalk_server:  lp98187.corp.ads
+ spacewalk_key:     1-bt-cons
+ domain:            tmi.telus.com
+ bkp_domain:
+ dns_servers:       172.23.5.244 172.23.116.244
+ dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
+ mail_relay:        onmsg.tsl.telus.com
+ ntp_servers:   172.23.59.20     
+ puppet_server: 
+ primary_nic_type: mgmt 
+
 # everything except KVM VMs on acrylic (and maybe one VMs on acrylic)
 
 PROFILE::consilium_bt_lab_ten:
@@ -2524,7 +2551,7 @@ PROFILE::qidc_bt_prod_extranet:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2557,7 +2584,7 @@ PROFILE::qidc_bt_prod_pwan:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2589,7 +2616,7 @@ PROFILE::qidc_bt_nonprod_pwan:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2621,7 +2648,7 @@ PROFILE::qidc_bt_prod_be-tr:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2653,7 +2680,7 @@ PROFILE::qidc_bt_nonprod_be-tr:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2700,7 +2727,7 @@ PROFILE::qidc_bt_prod_be-nt:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2733,7 +2760,7 @@ PROFILE::qidc_bt_nonprod_be-nt:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2773,7 +2800,7 @@ PROFILE::qidc_bt_prod_cde:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2813,7 +2840,7 @@ PROFILE::qidc_bt_nonprod_cde:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2850,7 +2877,7 @@ PROFILE::qidc_bt_nonprod:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:       qidc_bt
  nbu_profile:           qidc_bt 
@@ -2878,7 +2905,7 @@ PROFILE::qidc_bt_prod:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:       qidc_bt
  nbu_profile:           qidc_bt 
@@ -7634,7 +7661,7 @@ NETWORK::100-78-187-160:
 
 NETWORK::100-65-64-0:
  context:      BKP_NETWORK
- scope:         qdic_bt_sNBU
+ scope:         qidc_bt_sNBU
  vlan:          1016:1017
  site:          QIDC
  netmask:       255.255.224.0
