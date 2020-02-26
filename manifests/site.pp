@@ -154,10 +154,10 @@ node btlp007390, btlp000367, btlp002082, btlp000313, btlp002096, btlp007273, btl
 }
 # 20190425 CRQ45615 - Project ASAPNOC
 
-node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
-{
-  include role::rl_asapnoc
-}
+# node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
+# {
+#   include role::rl_asapnoc
+# }
 
 # BCG Shannon project 
 
