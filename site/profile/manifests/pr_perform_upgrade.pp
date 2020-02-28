@@ -40,7 +40,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
       if $osversion >= 607 {
       # If the OS is version 6.7 or higher
 
-          if '11.5.0' in $best1home
+          if '20.02.00' in $best1home
           {
           tidy {'/var/tmp/TSCO-perform-linux-latest':
               backup  => false,
@@ -54,7 +54,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
             }
           }
           else {
-            # Agent 11.5.01
+            # Agent 20.02.00
             $installdir = 'TSCO-perform-linux-latest'
             $install_perform = true
           }
@@ -86,7 +86,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
     # If Perform hasnt been installed install the agents
 
       if $osversion >= 607 {
-        # Agent 11.5.01
+        # Agent 20.02.00
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
