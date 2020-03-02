@@ -171,7 +171,7 @@ sudo::conf { 'puppet_docker':
 }
 
 # Add svc_prov to /etc/cron.allow
-file_line { 'add svc_prov to crontab users':
+file_line { 'svc_prov_crontab':
   ensure  => present,
   path    => '/etc/cron.allow',
   line    => 'svc_prov',
