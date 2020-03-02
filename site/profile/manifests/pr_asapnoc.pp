@@ -9,8 +9,11 @@
 #   - Lock docker version, so it does not get updated automatically during patching cycles
 #   - Configure application account
 #   - Create application account home directory
+#   - Create Unix group for SFTP application accounts
+#   - Configure SFTP application accounts
 #   - Install apache
 #   - Add sudo rules
+#   - Add application account to crontab user list
 # 
 # Prereqs for docker:
 #   - docker-ce-rhel7-x86_64 channel must exist in Spacewalk
@@ -98,6 +101,57 @@ user { 'svc_prov':
   require    => Group['users'],
 }
 
+
+# Creating SFTP user group and users (approval obtained through Novo request 324566) 
+# Create the group
+group { 'asapnocsftpbatchusers':
+  ensure => present,
+  gid    => '16667',
+}
+
+#Create the users
+user { 'tq_ttv_sftp':
+  uid        => '33218',
+  gid        => 'asapnocsftpbatchusers',
+  shell      => '/bin/bash',
+  password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
+  managehome => true,
+  require    => Group['asapnocsftpbatchusers'],
+}
+user { 'lsr_sftp':
+  uid        => '33219',
+  gid        => 'asapnocsftpbatchusers',
+  shell      => '/bin/bash',
+  password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
+  managehome => true,
+  require    => Group['asapnocsftpbatchusers'],
+}
+user { 'cris_sftp':
+  uid        => '33220',
+  gid        => 'asapnocsftpbatchusers',
+  shell      => '/bin/bash',
+  password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
+  managehome => true,
+  require    => Group['asapnocsftpbatchusers'],
+}
+user { 'nc_compass_sftp':
+  uid        => '33221',
+  gid        => 'asapnocsftpbatchusers',
+  shell      => '/bin/bash',
+  password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
+  managehome => true,
+  require    => Group['asapnocsftpbatchusers'],
+}
+user { 'nc_fifa_sftp':
+  uid        => '33222',
+  gid        => 'asapnocsftpbatchusers',
+  shell      => '/bin/bash',
+  password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
+  managehome => true,
+  require    => Group['asapnocsftpbatchusers'],
+}
+
+
 # Adding Sudo rules for docker and apache
 # Do not change below 2 options, or original sudo file will get deleted
 
@@ -114,6 +168,13 @@ sudo::conf { 'puppet_docker':
   require  => User['svc_prov'],
   }
 
+}
+
+# Add svc_prov to /etc/cron.allow
+file_line { 'add svc_prov to crontab users':
+  ensure  => present,
+  path    => '/etc/cron.allow',
+  line    => 'svc_prov',
 }
 
 # lint:endignore
