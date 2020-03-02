@@ -1,0 +1,20 @@
+--- 
+appveyor.yml:
+  delete: true
+
+.travis.yml:
+  delete: true
+
+.gitlab-ci.yml:
+  delete: true
+
+.gitignore:
+  required:
+    - '/data/'
+    - '.vscode/settings.json'
+    - '/CHANGELOG.md'
+
+Rakefile:
+  default_disabled_lint_checks:
+    - '140chars'
+    - 'puppet_url_without_modules'
