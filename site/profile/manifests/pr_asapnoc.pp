@@ -168,13 +168,13 @@ sudo::conf { 'puppet_docker':
   require  => User['svc_prov'],
   }
 
-}
-
 # Add svc_prov to /etc/cron.allow
 file_line { 'svc_prov_crontab':
   ensure  => present,
   path    => '/etc/cron.allow',
   line    => 'svc_prov',
+  }
+
 }
 
 # lint:endignore
