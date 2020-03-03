@@ -113,6 +113,7 @@ group { 'asapnocsftpbatchusers':
 user { 'tq_ttv_sftp':
   uid        => '33218',
   gid        => 'asapnocsftpbatchusers',
+  groups     => 'sftponly',
   shell      => '/bin/bash',
   password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
   managehome => true,
@@ -121,6 +122,7 @@ user { 'tq_ttv_sftp':
 user { 'lsr_sftp':
   uid        => '33219',
   gid        => 'asapnocsftpbatchusers',
+  groups     => 'sftponly',
   shell      => '/bin/bash',
   password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
   managehome => true,
@@ -129,6 +131,7 @@ user { 'lsr_sftp':
 user { 'cris_sftp':
   uid        => '33220',
   gid        => 'asapnocsftpbatchusers',
+  groups     => 'sftponly',
   shell      => '/bin/bash',
   password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
   managehome => true,
@@ -137,6 +140,7 @@ user { 'cris_sftp':
 user { 'nc_compass_sftp':
   uid        => '33221',
   gid        => 'asapnocsftpbatchusers',
+  groups     => 'sftponly',
   shell      => '/bin/bash',
   password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
   managehome => true,
@@ -145,6 +149,7 @@ user { 'nc_compass_sftp':
 user { 'nc_fifa_sftp':
   uid        => '33222',
   gid        => 'asapnocsftpbatchusers',
+  groups     => 'sftponly',
   shell      => '/bin/bash',
   password   => pw_hash(lookup('asapnoc::sftp_password'), 'SHA-512','mysalt'),
   managehome => true,
