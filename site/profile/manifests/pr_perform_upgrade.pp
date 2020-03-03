@@ -127,6 +127,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
         file { "/var/tmp/${installtar}":
           ensure => present,
           # update the location to be from puppet repo
+          #source => "puppet:///modules/",
           source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
           before => Exec["untar ${installtar}"],
         }
