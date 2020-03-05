@@ -1,7 +1,3 @@
-RSpec.configure do |c|
-  c.mock_with :rspec
-end
-
 require 'puppetlabs_spec_helper/module_spec_helper'
 require 'rspec-puppet-facts'
 
@@ -56,7 +52,3 @@ def ensure_module_defined(module_name)
 end
 
 # 'spec_overrides' from sync.yml will appear below this line
-fixture_path = File.expand_path(File.join(__FILE__, '..', 'fixtures'))
-RSpec.configure do |c|
-  c.module_path = File.join(fixture_path, 'modules/site')
-end
