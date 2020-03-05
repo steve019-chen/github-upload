@@ -23,7 +23,7 @@
 #
 # Comment for update: Updated the logic to make it smarter
 class profile::pr_perform_upgrade (
-Integer $space_needed = 632000000,
+Integer $space_needed = 640000000,
 String $hostname      = $facts['hostname'],
 String $status        = String.new($facts['perform_info']['installed']),
 String $patrolversion = String.new($facts['patrol_info']['version']),
@@ -60,6 +60,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
           }
         }
       elsif $osversion >= 502 and $osversion < 607 {
+      # If the OS is version bettwen 5.2 and  6.7
 
         if '10.5.0' in $best1home{
           tidy {'/var/tmp/TSCO-perform-linux-legacy':
