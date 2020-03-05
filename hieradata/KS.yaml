@@ -1300,6 +1300,40 @@ PROFILE::kidc_bt_nonprod_be-tr:
  bkp_suffix:    -bkp
  mail_relay:    bcmsg.tsl.telus.com
 
+# this is for TS DMZ servers built in BT clusters
+
+PROFILE::kidc_bt_prod_oss_dmz:
+ context:      PROFILE
+ dns_servers:           75.153.186.4 75.153.186.5 75.153.186.6
+ primary_nic_type:      be
+ puppet_server:
+ dns_search:            oss.ads corp.ads corptools.ads tsl.telus.com
+ included:               kidc_bt_prod
+ mgmt_scope:    kidc_bt_prod_oMgmt
+ nas_scope:     kidc_bt_prod_oStorage
+ ic_scope:      kidc_bt_prod_oInterconnect
+ voip_scope:    kidc_bt_prod_voip
+ bkp_scope:     kidc_bt_sNBU
+ included:      kidc_bt
+ nbu_profile:           kidc_bt 
+ site:          KIDC
+ env:           BT
+ satellite_server:      tslp000252.corptools.ads
+ satellite_key:         1-bt-kidc
+ spacewalk_server:      tslp000743.corptools.ads
+ spacewalk_key:         1-bt-kidc
+ ldap_server1:          uldap-kidc.corptools.ads 
+ ldap_server2:          uldap-qidc.corptools.ads 
+ flexera_server:        tswp000376.oss.ads
+ tz_local:      Canada/Pacific
+ ntp:           use_server
+ ntp_servers:   100.64.93.49 100.64.93.57
+ domain:        corp.ads
+ bkp_domain:    corp.ads
+ dns_search:    corp.ads tmi.telus.com ent.agt.ab.ca corptools.ads tsl.telus.com
+ bkp_suffix:    -bkp
+ mail_relay:    bcmsg.tsl.telus.com
+
 
 PROFILE::kidc_bt_prod_be-nt:
  context:      PROFILE
@@ -1904,6 +1938,33 @@ PROFILE::laird_mits:
 # Consilium BT PROFILES
 #-----------------------------------------------------------------------------#
 
+# profile for building mgmt only servers (such as epoxy)
+
+PROFILE::consilium_bt_lab_mgmt:
+ context:      PROFILE
+ included:       consilium_bt
+ nbu_profile:       consilium_bt 
+ site:              Consilium
+ env:               BT
+ tz_local:          Canada/Eastern
+ ntp:               use_server 
+ ntp_servers:       172.23.5.38 
+ ldap_server1:       uldap-east.tsl.telus.com
+ ldap_server2:       uldap-west.tsl.telus.com
+ flexera_server:        btwp013746.corp.ads
+ satellite_server:  lp98085.corp.ads
+ satellite_key:     1-bt-cons
+ spacewalk_server:  lp98187.corp.ads
+ spacewalk_key:     1-bt-cons
+ domain:            tmi.telus.com
+ bkp_domain:
+ dns_servers:       172.23.5.244 172.23.116.244
+ dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
+ mail_relay:        onmsg.tsl.telus.com
+ ntp_servers:   172.23.59.20     
+ puppet_server: 
+ primary_nic_type: mgmt 
+
 # everything except KVM VMs on acrylic (and maybe one VMs on acrylic)
 
 PROFILE::consilium_bt_lab_ten:
@@ -1983,6 +2044,7 @@ PROFILE::consilium_bt_lab_pwan:
  dns_servers:       172.23.5.244 172.23.116.244
  dns_search:        tmi.telus.com corp.ads ent.agt.ab.ca tsl.telus.com
  mail_relay:        onmsg.tsl.telus.com
+ ntp_servers:   172.23.59.20     
  bkp_suffix:   -bkp
  mgmt_scope:   consilium_bt_lab_mgmt
  nas_scope:    consilium_bt_lab_nas
@@ -2281,7 +2343,6 @@ PROFILE::qidc_ts_oMgmt:
 
 #####[PROFILE] qidc_bt_prod_oMgmt
 # 
-#ZZZ
 
 
 
@@ -2490,7 +2551,7 @@ PROFILE::qidc_bt_prod_extranet:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2523,7 +2584,7 @@ PROFILE::qidc_bt_prod_pwan:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2555,7 +2616,7 @@ PROFILE::qidc_bt_nonprod_pwan:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2587,7 +2648,7 @@ PROFILE::qidc_bt_prod_be-tr:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2619,7 +2680,7 @@ PROFILE::qidc_bt_nonprod_be-tr:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2666,7 +2727,7 @@ PROFILE::qidc_bt_prod_be-nt:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2699,7 +2760,7 @@ PROFILE::qidc_bt_nonprod_be-nt:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2739,7 +2800,7 @@ PROFILE::qidc_bt_prod_cde:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2779,7 +2840,7 @@ PROFILE::qidc_bt_nonprod_cde:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:      qidc_bt
  nbu_profile:           qidc_bt 
@@ -2816,7 +2877,7 @@ PROFILE::qidc_bt_nonprod:
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
  ic_scope:      qidc_bt_nonprod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_nonprod_voip
  included:       qidc_bt
  nbu_profile:           qidc_bt 
@@ -2844,7 +2905,7 @@ PROFILE::qidc_bt_prod:
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
  ic_scope:      qidc_bt_prod_oInterconnect
- bkp_scope:     qdic_bt_sNBU
+ bkp_scope:     qidc_bt_sNBU
  voip_scope:    qidc_bt_prod_voip
  included:       qidc_bt
  nbu_profile:           qidc_bt 
@@ -3375,12 +3436,12 @@ NETWORK::100-125-169-224:
  router:        100.125.169.225
 
 #-----------------------------------------------------------------------------#
-# KIDC TS - VLAN 1650 - "OSS - Dedicated scanner VLAN" # in tools cluster
+# KIDC TS - VLAN 1650:1651- "OSS - Dedicated scanner VLAN" # in tools cluster
 
 NETWORK::100-125-167-224:
  context:      NETWORK
  scope:         kidc_ts_pub
- vlan:          1650
+ vlan:          1650:1651
  netmask:       255.255.255.240
  router:        100.125.167.225
 
@@ -3393,6 +3454,16 @@ NETWORK::100-125-170-32:
  vlan:          1610
  netmask:       255.255.255.224
  router:        100.125.170.33
+
+#-----------------------------------------------------------------------------#
+# KIDC TS - VLAN 1611 - "SAWS/ERE"
+
+NETWORK::100-125-174-128:
+ context:      NETWORK
+ scope:         kidc_ts_pub
+ vlan:          1611
+ netmask:       255.255.255.240
+ router:        100.125.174.129
 
 #-----------------------------------------------------------------------------#
 # KIDC TS - VLAN 3002:3003 - "TS Storage (NAS)"
@@ -3418,18 +3489,6 @@ NETWORK::100-69-228-0:
  test_ip:       100.69.228.55 
  mtu:           9000
 
-#-----------------------------------------------------------------------------#
-# This is a TS subnet that has been made visible to a BT VMware cluster
-# (cluster: BT_KIDC_PR_DMZ_01).  The subnet is reserved for HDM.
-# KIDC BT - VLAN 2400 - "DMZ for HDM" 
-
-NETWORK::100-70-37-144:
- context:      NETWORK
- scope:         kidc_bt_prod_dmz
- vlan:          2400
- netmask:       255.255.255.240
- router:        100.70.37.145
-#ZZZ
 
 #---------------------------------------------#
 # KIDC - VLAN 3209 - "BT prod oInterconnect"
@@ -3475,7 +3534,7 @@ NETWORK::216-7-200-0:
  site:          KIDC
  netmask:       255.255.254.0
  router:        216.7.200.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26,100.125.167.224/28
  boot_server:   tslp000058/75.153.186.40
  media_server:  tslp000058/75.153.186.40
  depot_server:  tslp000058/75.153.186.40
@@ -3491,7 +3550,7 @@ NETWORK::216-7-192-0:
  site:          KIDC
  netmask:       255.255.254.0
  router:        216.7.192.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26,100.125.167.224/28
  boot_server:   tslp000058/75.153.186.40
  media_server:  tslp000058/75.153.186.40
  depot_server:  tslp000058/75.153.186.40
@@ -3506,7 +3565,7 @@ NETWORK::216-7-202-0:
  site:          KIDC
  netmask:       255.255.254.0
  router:        216.7.202.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26,100.125.167.224/28
  boot_server:   tslp000058/75.153.186.40
  media_server:  tslp000058/75.153.186.40
  depot_server:  tslp000058/75.153.186.40
@@ -3521,7 +3580,7 @@ NETWORK::216-7-194-0:
  site:          KIDC
  netmask:       255.255.254.0
  router:        216.7.194.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26,100.125.167.224/28
  boot_server:   tslp000058/75.153.186.40
  media_server:  tslp000058/75.153.186.40
  depot_server:  tslp000058/75.153.186.40
@@ -3535,7 +3594,7 @@ NETWORK::100-66-64-0:
  vlan:          1004:1005
  netmask:       255.255.224.0
  router:        100.66.64.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26,100.125.167.224/28
  boot_server:   tslp000058/75.153.186.40
  media_server:  tslp000058/75.153.186.40
  depot_server:  tslp000058/75.153.186.40
@@ -3550,7 +3609,7 @@ NETWORK::100-66-96-0:
  vlan:          1006:1007
  netmask:       255.255.224.0
  router:        100.66.96.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26,100.125.167.224/28
  boot_server:   tslp000058/75.153.186.40
  media_server:  tslp000058/75.153.186.40
  depot_server:  tslp000058/75.153.186.40
@@ -3559,6 +3618,7 @@ NETWORK::100-66-96-0:
 
 #-----------------------------------------------------------------------------#
 # KIDC BT - VLAN 1022:1023 - BT prod oMgmt for VDI
+# # DHCP IP helper is not working in this VLAN... tested feb 10/2020
 
 NETWORK::100-66-208-0:
  context:      MGMT_NETWORK
@@ -3566,7 +3626,7 @@ NETWORK::100-66-208-0:
  vlan:          1022:1023
  netmask:       255.255.255.0
  router:        100.66.208.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.125.252.192/29,75.156.196.128/26,100.125.167.224/28
  boot_server:   tslp000058/75.153.186.40
  media_server:  tslp000058/75.153.186.40
  depot_server:  tslp000058/75.153.186.40
@@ -3626,6 +3686,17 @@ NETWORK::142-174-205-0:
  vlan:          2012:2013
  netmask:       255.255.255.128
  router:        142.174.205.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2220 - "VDI" (Treat like PWAN)
+
+NETWORK::100-67-140-0:
+ context:      PWAN_NETWORK
+ scope:         kidc_bt_prod_pwan
+ vlan:          2220
+ netmask:       255.255.252.0
+ router:        100.67.140.1
  mtu:           9000
 
 
@@ -3771,7 +3842,33 @@ NETWORK::100-125-169-240:
  vlan:          2403
  netmask:       255.255.255.240
  router:        100.125.169.241
- routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.70.45.168/29,75.156.196.192/26
+ routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
+
+#-----------------------------------------------------------------------------#
+#DDD
+# This is a TS VLAN in BT space.
+# (cluster: BT_KIDC_PR_DMZ_02).
+# KIDC BT - VLAN 2404 - "OSS DMZ"
+
+NETWORK::100-125-171-192:
+ context:      DMZ_NETWORK
+ scope:         kidc_bt_prod_oss_dmz
+ vlan:          2404
+ netmask:       255.255.255.224
+ router:        100.125.171.193
+
+#-----------------------------------------------------------------------------#
+# This is a TS VLAN in BT space.
+# (cluster: BT_KIDC_PR_DMZ_01).  The subnet is reserved for HDM.
+# KIDC BT - VLAN 2400 - "DMZ for HDM" 
+
+NETWORK::100-70-37-144:
+ context:      NETWORK
+ scope:         kidc_bt_prod_oss_dmz
+ vlan:          2400
+ netmask:       255.255.255.240
+ router:        100.70.37.145
+#ZZZ
 
 #-----------------------------------------------------------------------------#
 # KIDC BT - VLAN 2002:2003 - "BT non-prod FE1 (front-end DMZ 1 of 1)"
@@ -5541,7 +5638,21 @@ NETWORK::172-23-112-0:
  ai_server:     xp0006/142.63.53.190
 
 #-----------------------------------------------------------------------------#
+# Marmac ?? network - VLAN 129 ### not sure what this is for.
+# IP helper requested Dec 09/2016 (ICR 803763) but maybe not required
+
+NETWORK::142-63-76-0:
+ context:      NETWORK
+ netmask:       255.255.255.0
+ router:        142.63.76.1
+ vlan:          129
+ scope:         marmac_bt_ten
+ boot_server:   aphid
+ media_server:  aphid
+
+#-----------------------------------------------------------------------------#
 # Marmac KB network - VLAN 300 - aka "ESX_UCS_PROD"
+# IP helper requested Dec 09/2016 (ICR 803763) 
 
 NETWORK::142-63-54-0:
  context:      NETWORK
@@ -6742,12 +6853,12 @@ NETWORK::100-125-169-176:
  router:        100.125.169.177
 
 #-----------------------------------------------------------------------------#
-# QIDC TS - VLAN 1650 - "OSS - Dedicated scanner VLAN" # in tools cluster
+# QIDC TS - VLAN 1650:1651 - "OSS - Dedicated scanner VLAN" # in tools cluster
 
 NETWORK::100-125-167-240:
  context:      NETWORK
  scope:         qidc_ts_pub
- vlan:          1650
+ vlan:          1650:1651
  netmask:       255.255.255.240
  router:        100.125.167.241
 
@@ -6831,6 +6942,16 @@ NETWORK::100-125-253-128:
  vlan:          1591
  netmask:       255.255.255.240
  router:        100.125.253.129
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1716 - "SAWS/ERE"
+
+NETWORK::100-125-174-224:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1716
+ netmask:       255.255.255.240
+ router:        100.125.174.225
 
 #-----------------------------------------------------------------------------#
 # QIDC TS unknown vlan used by tslp000210 & tslp000211
@@ -6944,7 +7065,7 @@ NETWORK::216-7-208-0:
  site:          QIDC
  netmask:       255.255.254.0
  router:        216.7.208.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26,100.125.167.240/28
  boot_server:  tslp000011/75.153.182.78
  media_server: tslp000011/75.153.182.78
  depot_server: tslp000011/75.153.182.78
@@ -6960,7 +7081,7 @@ NETWORK::216-7-196-0:
  site:          QIDC
  netmask:       255.255.254.0
  router:        216.7.196.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26,100.125.167.240/28
  boot_server:  tslp000011/75.153.182.78
  media_server: tslp000011/75.153.182.78
  depot_server: tslp000011/75.153.182.78
@@ -6975,7 +7096,7 @@ NETWORK::216-7-210-0:
  site:          QIDC
  netmask:       255.255.254.0
  router:        216.7.210.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26,100.125.167.240/28
  boot_server:   tslp000011/75.153.182.78
  media_server:  tslp000011/75.153.182.78
  depot_server:  tslp000011/75.153.182.78
@@ -6991,7 +7112,7 @@ NETWORK::216-7-198-0:
  site:          QIDC
  netmask:       255.255.254.0
  router:        216.7.198.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26,100.125.167.240/28
  boot_server:   tslp000011/75.153.182.78
  media_server:  tslp000011/75.153.182.78
  depot_server:  tslp000011/75.153.182.78
@@ -7005,7 +7126,7 @@ NETWORK::100-66-0-0:
  vlan:          1004:1005
  netmask:       255.255.224.0
  router:        100.66.0.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26,100.125.167.240/28
  boot_server:   tslp000011/75.153.182.78
  media_server:  tslp000011/75.153.182.78
  depot_server:  tslp000011/75.153.182.78
@@ -7020,7 +7141,7 @@ NETWORK::100-66-32-0:
  vlan:          1006:1007
  netmask:       255.255.224.0
  router:        100.66.32.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26,100.125.167.240/28
  boot_server:   tslp000011/75.153.182.78
  media_server:  tslp000011/75.153.182.78
  depot_server:  tslp000011/75.153.182.78
@@ -7035,7 +7156,7 @@ NETWORK::100-66-240-0:
  vlan:          1022:1023
  netmask:       255.255.255.0
  router:        100.66.240.1
- routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26
+ routes:        75.153.182.0/23,75.153.186.0/23,75.153.158.0/23,75.153.190.0/23,100.64.93.48/28,100.70.45.168/29,75.156.196.192/26,100.125.167.240/28
  boot_server:   tslp000011/75.153.182.78
  media_server:  tslp000011/75.153.182.78
  depot_server:  tslp000011/75.153.182.78
@@ -7277,6 +7398,19 @@ NETWORK::100-66-148-0:
  netmask:       255.255.252.0
  router:        100.66.148.1
  mtu:           9000
+
+#-----------------------------------------------------------------------------#
+# This VLAN is for VDI desktops. 
+# QIDC BT - VLAN 2225 - "BT VDI" (treat like PWAN)
+
+NETWORK::100-67-204-0:
+ context:      PWAN_NETWORK
+ scope:         qidc_bt_prod_pwan
+ vlan:          2225
+ netmask:       255.255.252.0
+ router:        100.67.204.1
+ mtu:           9000
+
 
 #-----------------------------------------------------------------------------#
 # QIDC BT - VLAN 2223 - "BT non-prod ICO"
@@ -7527,7 +7661,7 @@ NETWORK::100-78-187-160:
 
 NETWORK::100-65-64-0:
  context:      BKP_NETWORK
- scope:         qdic_bt_sNBU
+ scope:         qidc_bt_sNBU
  vlan:          1016:1017
  site:          QIDC
  netmask:       255.255.224.0
