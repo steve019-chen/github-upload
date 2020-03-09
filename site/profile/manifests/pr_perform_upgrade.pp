@@ -125,11 +125,12 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
       }
       else {
         # Ensure the TAR file is present, if not download from the file repo
+        #  lint:ignore:puppet_url_without_modules
         file { "/var/tmp/${installtar}":
           ensure => present,
           # update the location to be from puppet repo
-          #source => "puppet:///modules/",
-          source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
+          source => "puppet:///software/perform_upgrade/${installtar}",
+          # source => "http://lp99850.corp.ads/downloads/linux/${installtar}",
           before => Exec["untar ${installtar}"],
         }
 
