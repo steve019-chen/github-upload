@@ -19,7 +19,7 @@
 # Created on : Dec 18th 2019
 #
 # Last updated by: Corey Sprung ---- Corey.Sprung@TELUS.com
-# Updated on : Jan 7th 2020
+# Updated on : March 12th 2020
 #
 # Comment for update: Updated the logic to make it smarter
 class profile::pr_perform_upgrade (
@@ -37,8 +37,8 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
     if 'true' in $status {
     # If Perform install status is true upgrade the agents to the following version
 
-      if $osversion >= 607 {
-      # If the OS is version 6.7 or higher
+      if $osversion >= 600 {
+      # If the OS is version 6.0 or higher
 
           if '20.02.00' in $best1home
           {
@@ -59,8 +59,8 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
             $install_perform = true
           }
         }
-      elsif $osversion >= 502 and $osversion < 607 {
-      # If the OS is version bettwen 5.2 and  6.7
+      elsif $osversion >= 502 and $osversion < 600 {
+      # If the OS is version bettwen 5.2 and  6.0
 
         if '10.5.0' in $best1home{
           tidy {'/var/tmp/TSCO-perform-linux-legacy':
@@ -86,13 +86,12 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
     elsif 'false' in $status {
     # If Perform hasnt been installed install the agents
 
-      if $osversion >= 607 {
+      if $osversion >= 600 {
         # Agent 20.02.00
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
-      elsif $osversion >= 502 and $osversion < 607 {
-
+      elsif $osversion >= 502 and $osversion < 600 {
         # Agent 10.5.00
         $installdir = 'TSCO-perform-linux-legacy'
         $install_perform = true
@@ -103,6 +102,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
         }
       }
     }
+
     else{
     # Unknown status
       notify{'Unknown status of TSCO':,
@@ -113,19 +113,20 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
 
       $installtar = "${installdir}.tar"
 
-      #Ensure we have enough space for the .tar and extracted directoy
+      # Ensure we have enough space for the .tar and extracted directoy
       if $space_needed > $facts['patrol_info']['var_tmp_bytes'] {
         notify{"Filesystem /var/tmp too full. Need ${space_needed} bytes but only ${facts['patrol_info']['var_tmp_bytes']} available":,
         }
 
-        #Force an error at runtime
+        # Force an error at runtime
         exec{'perfom_upgrade_no_space':
           command => '/bin/false',
         }
       }
+
       else {
         # Ensure the TAR file is present, if not download from the file repo
-        #  lint:ignore:puppet_url_without_modules
+        # lint:ignore:puppet_url_without_modules
         file { "/var/tmp/${installtar}":
           ensure => present,
           # update the location to be from puppet repo
@@ -140,7 +141,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
           path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
           cwd     => '/var/tmp/',
           creates => "/var/tmp/${installdir}",
-          timeout => 1000,
+          timeout => 1200,
           require => File["/var/tmp/${installtar}"],
         }
 
@@ -150,7 +151,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
           path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
           cwd     => "/var/tmp/${installdir}",
           creates => "/var/tmp/TSCO_${hostname}_Install.txt",
-          timeout => 1000,
+          timeout => 1200,
           require => Exec["untar ${installtar}"],
         }
       }
