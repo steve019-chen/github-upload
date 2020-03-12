@@ -37,7 +37,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
     if 'true' in $status {
     # If Perform install status is true upgrade the agents to the following version
 
-      if $osversion >= 607 {
+      if $osversion >= 600 {
       # If the OS is version 6.7 or higher
 
           if '20.02.00' in $best1home
@@ -59,7 +59,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
             $install_perform = true
           }
         }
-      elsif $osversion >= 502 and $osversion < 607 {
+      elsif $osversion >= 502 and $osversion < 600 {
       # If the OS is version bettwen 5.2 and  6.7
 
         if '10.5.0' in $best1home{
@@ -86,12 +86,12 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
     elsif 'false' in $status {
     # If Perform hasnt been installed install the agents
 
-      if $osversion >= 607 {
+      if $osversion >= 600 {
         # Agent 20.02.00
         $installdir = 'TSCO-perform-linux-latest'
         $install_perform = true
       }
-      elsif $osversion >= 502 and $osversion < 607 {
+      elsif $osversion >= 502 and $osversion < 600 {
 
         # Agent 10.5.00
         $installdir = 'TSCO-perform-linux-legacy'
