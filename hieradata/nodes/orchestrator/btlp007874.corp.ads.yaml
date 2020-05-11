@@ -1,0 +1,13 @@
+---
+lvm::volume_groups:
+  appvg:
+    createonly: true
+    physical_volumes:
+      - /dev/sdb
+      - /dev/sdc
+      - /dev/sdd
+    logical_volumes:
+      app01lv: {fs_type: ext4, size: 100G, mountpath: /opt/infra}
+      app03lv: {fs_type: ext4, size: 500G, mountpath: /work/infra/cassandra}
+      app04lv: {fs_type: ext4, size: 500G, mountpath: /work/infra/dynatrace_managed}
+      app02lv: {fs_type: ext4, size: 100G, mountpath: /work/infra/elasticsearch}
