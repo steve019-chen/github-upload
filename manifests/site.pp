@@ -238,7 +238,7 @@ node ln98519,ln98520,ln99635,ln99636,ln98517,ln98518,ln99632,
 {
 class { 'role::rl_dynatrace': }
 }
- 
+
 # Dynatrace agent Production
 
 # node btlp000756,btlp000757,btlp000758,btlp000759,btlp000763,btlp001439,btlp001440,btlp001441,btlp001444,btlp001445,btlp006092,btlp006093,
