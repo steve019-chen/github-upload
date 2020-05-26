@@ -235,9 +235,9 @@ class { 'role::rl_dynatrace_st': }
 
 node ln98519,ln98520,ln99635,ln99636,ln98517,ln98518,ln99632
 
- {
+{
 class { 'role::rl_dynatrace': }
- }
+}
  
 # Dynatrace agent Production
 
