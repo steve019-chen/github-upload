@@ -6802,7 +6802,7 @@ NETWORK::100-70-22-0:
  router:        100.70.22.1 
 
 #-----------------------------------------------------------------------------#
-# KIDC TS - VLAN 1595 - "UNIX Terminal Services"
+# QIDC TS - VLAN 1595 - "UNIX Terminal Services"
 
 NETWORK::100-70-29-128:
  context:      NETWORK
@@ -6952,6 +6952,16 @@ NETWORK::100-125-174-224:
  vlan:          1716
  netmask:       255.255.255.240
  router:        100.125.174.225
+
+#-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1657 - "Report Modernization"
+
+NETWORK::100-125-176-144:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1657
+ netmask:       255.255.255.240
+ router:        100.125.176.145
 
 #-----------------------------------------------------------------------------#
 # QIDC TS unknown vlan used by tslp000210 & tslp000211
