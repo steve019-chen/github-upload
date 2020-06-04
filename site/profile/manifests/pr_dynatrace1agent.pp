@@ -42,26 +42,26 @@ class profile::pr_dynatrace1agent (
     }
 
     # Calling the module and passing a download location and source for the installation file#
-    class { 'dynatraceoneagent':
-        download_link => "puppet:///software/dynatraceoneagent/${environment}/Dynatrace-OneAgent-Linux-1.171.226.sh",
-        download_dir  => '/tmp',
-        user          => 'dynatrace',
-        require       => User['dynatrace'],
-        }
+    # class { 'dynatraceoneagent':
+    #     download_link => "puppet:///software/dynatraceoneagent/${environment}/Dynatrace-OneAgent-Linux-1.171.226.sh",
+    #     download_dir  => '/tmp',
+    #     user          => 'dynatrace',
+    #     require       => User['dynatrace'],
+    #     }
 
     # Setup cron job that runs everyday to clean up logs older than <days_to_keep> 
     # Actions by the cron job will be sent to default system logs
 
-    cron { 'Dynatrace1agent old log cleanup':
-      command => "/usr/bin/find ${path} -type f -mtime +${days_to_keep} -exec rm {} \\;",
-      hour    => 10,
-      minute  => 0,
-      user    => root,
-    }
-    # Changing file mode upon request of SA's to that the .sh file is not editable
-    file { '/opt/dynatrace/oneagent/agent':
-      mode  => 'g-w',
-    }
+    # cron { 'Dynatrace1agent old log cleanup':
+    #   command => "/usr/bin/find ${path} -type f -mtime +${days_to_keep} -exec rm {} \\;",
+    #   hour    => 10,
+    #   minute  => 0,
+    #   user    => root,
+    # }
+    # # Changing file mode upon request of SA's to that the .sh file is not editable
+    # file { '/opt/dynatrace/oneagent/agent':
+    #   mode  => 'g-w',
+    # }
 
     class {'sudo':
     purge               => false,
