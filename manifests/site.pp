@@ -8,7 +8,7 @@ include profile::pr_base
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
 # ,btln007803,ln-test11
-node btln-test02
+node btln-test02, ln-test11
 {
   class { 'role::rl_dynatrace_pr': }
 }
