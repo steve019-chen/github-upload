@@ -72,10 +72,18 @@ class profile::pr_dynatrace1agent (
     sudo::conf { 'puppet_dynatrace':
       priority => 10,
       content  => @("EOT"/L)
-        dynatrace ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug, \
-        /opt/dynatrace/oneagent/agent/uninstall.sh, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, \
-        /bin/systemctl status oneagent, /usr/sbin/service oneagent stop, /usr/sbin/service oneagent start, \
-        /usr/sbin/service oneagent status, /bin/rm -rf /opt/dynatrace/oneagent, /bin/rm -rf /var/lib/dynatrace/oneagent/agent/config
+        dynatrace ALL=NOPASSWD : \
+        /opt/puppetlabs/bin/puppet agent -t, \
+        /opt/puppetlabs/bin/puppet agent -t --debug, \
+        /opt/dynatrace/oneagent/agent/uninstall.sh, \
+        /bin/systemctl stop oneagent, \
+        /bin/systemctl start oneagent, \
+        /bin/systemctl status oneagent, \
+        /usr/sbin/service oneagent stop, \
+        /usr/sbin/service oneagent start, \
+        /usr/sbin/service oneagent status, \
+        /bin/rm -rf /opt/dynatrace/oneagent, \
+        /bin/rm -rf /var/lib/dynatrace/oneagent/agent/config 
         |  EOT
     }
   }
