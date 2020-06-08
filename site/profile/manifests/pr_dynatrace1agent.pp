@@ -16,7 +16,6 @@
 #   - Installer file should be placed on the regional masters /software/dynatraceoneagent/common directory
 #
 #
-# lint:ignore:140chars
 class profile::pr_dynatrace1agent (
   Enum['common','dv-env','st-env','pr-env'] $environment = 'common',
 )
@@ -90,4 +89,3 @@ class profile::pr_dynatrace1agent (
     }
   }
 }
-# lint:endignore
