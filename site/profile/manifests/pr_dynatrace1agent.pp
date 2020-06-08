@@ -69,6 +69,8 @@ class profile::pr_dynatrace1agent (
     }
 
     # Configure sudo rules for dynatrace
+    # The content attribute uses a heredoc to improve readability of sudo rules.  
+    # Read about heredocs: https://puppet.com/docs/puppet/latest/lang_data_string.html
     sudo::conf { 'puppet_dynatrace':
       priority => 10,
       content  => @("EOT"/L)
@@ -84,7 +86,7 @@ class profile::pr_dynatrace1agent (
         /usr/sbin/service oneagent status, \
         /bin/rm -rf /opt/dynatrace/oneagent, \
         /bin/rm -rf /var/lib/dynatrace/oneagent/agent/config 
-        |  EOT
+        | -EOT
     }
   }
 }
