@@ -264,10 +264,10 @@ include profile::pr_base
 
 # Dynatrace deployments for Michael Aguire - June 2020
 # CRQ103918 - Batch 1 
-node btlp000752,btlp000753,btlp000754,btlp000755,lp97396,lp97397,lp97398,lp97399,btlp000041,btlp000042,btlp000043,btlp000064
-{
-class { 'role::rl_dynatrace_pr': }
-}
+# node btlp000752,btlp000753,btlp000754,btlp000755,lp97396,lp97397,lp97398,lp97399,btlp000041,btlp000042,btlp000043,btlp000064
+# {
+# class { 'role::rl_dynatrace_pr': }
+# }
 
 # CRQ104147 - Batch 2 
 # node btlp000760,btlp000761,btlp000762,btlp001436,btlp001437,btlp001438,btlp001442,btlp001443,btlp002447,btlp002448,btlp002449,btlp006089,
@@ -298,10 +298,10 @@ class { 'role::rl_dynatrace_pr': }
 # }
 
 # Batch 4
-# node lp99746,lp99747,lp99748,lp99749,lp99750,lp99751,btlp006234,btlp006235,btlp006236,btlp006237,btlp006238,btlp006473,btlp006474,btlp006475,
-# btlp006476,btlp006477,btlp006478,btlp006483,btlp006484,btlp006485,btlp006486,btlp006487,btlp006488
-# {
-# class { 'role::rl_dynatrace_pr': }
-# }
+node lp99746,lp99747,lp99748,lp99749,lp99750,lp99751,btlp006234,btlp006235,btlp006236,btlp006237,btlp006238,btlp006473,btlp006474,btlp006475,
+btlp006476,btlp006477,btlp006478,btlp006483,btlp006484,btlp006485,btlp006486,btlp006487,btlp006488
+{
+class { 'role::rl_dynatrace_pr': }
+}
 
 # lint:endignore
