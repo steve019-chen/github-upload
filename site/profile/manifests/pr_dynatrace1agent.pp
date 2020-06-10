@@ -15,7 +15,6 @@
 #   - Dynatrace One agent Puppet Module must be available in Bitbucket 
 #   - Installer file should be placed on the regional masters /software/dynatraceoneagent/common directory
 #
-###
 #
 class profile::pr_dynatrace1agent (
   Enum['common','dv-env','st-env','pr-env'] $environment = 'common',
@@ -43,7 +42,7 @@ class profile::pr_dynatrace1agent (
 
     # Calling the module and passing a download location and source for the installation file#
     class { 'dynatraceoneagent':
-        download_link => "puppet:///software/dynatraceoneagent/${environment}/Dynatrace-OneAgent-Linux-1.171.226.sh",
+        download_link => "puppet:///software/dynatraceoneagent/${environment}/Dynatrace-OneAgent-Linux-1.191.239.sh",
         download_dir  => '/tmp',
         user          => 'dynatrace',
         require       => User['dynatrace'],
@@ -51,29 +50,42 @@ class profile::pr_dynatrace1agent (
 
     # Setup cron job that runs everyday to clean up logs older than <days_to_keep> 
     # Actions by the cron job will be sent to default system logs
-
     cron { 'Dynatrace1agent old log cleanup':
       command => "/usr/bin/find ${path} -type f -mtime +${days_to_keep} -exec rm {} \\;",
       hour    => 10,
       minute  => 0,
       user    => root,
     }
+
     # Changing file mode upon request of SA's to that the .sh file is not editable
     file { '/opt/dynatrace/oneagent/agent':
       mode  => 'g-w',
     }
 
     class {'sudo':
-    purge               => false,
-    config_file_replace => false,
+      purge               => false,
+      config_file_replace => false,
     }
 
-  # Configure sudo rules for dynatrace
-  sudo::conf { 'puppet_dynatrace':
-    priority => 10,
-    content  => 'dynatrace ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug, /bin/systemctl stop oneagent, /bin/systemctl start oneagent, /opt/dynatrace/oneagent/agent/uninstall.sh,/bin/rm -rf /opt/dynatrace/oneagent, /bin/rm -rf /var/lib/dynatrace/oneagent/agent/config',
+    # Configure sudo rules for dynatrace
+    # The content attribute uses a heredoc to improve readability of sudo rules.  
+    # Read about heredocs: https://puppet.com/docs/puppet/latest/lang_data_string.html
+    sudo::conf { 'puppet_dynatrace':
+      priority => 10,
+      content  => @("EOT"/L)
+        dynatrace ALL=NOPASSWD : \
+        /opt/puppetlabs/bin/puppet agent -t, \
+        /opt/puppetlabs/bin/puppet agent -t --debug, \
+        /opt/dynatrace/oneagent/agent/uninstall.sh, \
+        /bin/systemctl stop oneagent, \
+        /bin/systemctl start oneagent, \
+        /bin/systemctl status oneagent, \
+        /sbin/service oneagent stop, \
+        /sbin/service oneagent start, \
+        /sbin/service oneagent status, \
+        /bin/rm -rf /opt/dynatrace/oneagent, \
+        /bin/rm -rf /var/lib/dynatrace/oneagent/agent/config 
+        | -EOT
     }
-    # lint:ignore:140chars
-    # lint:endignore
   }
 }
