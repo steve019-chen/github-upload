@@ -108,14 +108,14 @@ node btwn004488
 
         file { 'win install file':
           ensure => present,
-          path   => "${env_temp_variable}\\puppet-agent-6.16.0-x64.msi",
-          source => 'puppet:///software/windows/puppet-agent-6.16.0-x64.msi',
+          path   => "${env_temp_variable}\\puppet-agent-6.15.0-x64.msi",
+          source => 'puppet:///software/windows/puppet-agent-6.15.0-x64.msi',
         }
 
         class {'::puppet_agent':
-          absolute_source       => "${env_temp_variable}\\puppet-agent-6.16.0-x64.msi",
+          absolute_source       => "${env_temp_variable}\\puppet-agent-6.15.0-x64.msi",
           collection            => 'puppet6',
-          package_version       => '6.16.0',
+          package_version       => '6.15.0',
           service_names         => ['puppet'],
           manage_repo           => false,
           msi_move_locked_files => true,
