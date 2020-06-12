@@ -6382,7 +6382,7 @@ NETWORK::172-23-39-0:
  router:      172.23.39.1
  scope:      consilium_bt_ten
  boot_server:  none
- media_server: aphid
+ media_server: none
 
 #---------------------------------------------#
 # Consilium 14 floor fake IC network for KVM
@@ -7914,3 +7914,4 @@ NETWORK::192-168-92-0:
 
 
 ###########################################
+
