@@ -5728,6 +5728,30 @@ NETWORK::192-168-156-128:
  depot_server: none
 
 
+#-DMZ V---------------------------------------------------------------------#
+# This should not really be part of marmac_bt_ten profile
+
+NETWORK::142-63-51-64:
+ context:      NETWORK
+ netmask:      255.255.255.240
+ router:       142.63.51.65
+ scope:      marmac_bt_ten
+ boot_server:  none
+ media_server: none
+ depot_server: none
+
+#-DMZ ?---------------------------------------------------------------------#
+# This DMZ is only for a bell sftp server (lp99836)
+# This should not really be part of marmac_bt_ten profile
+
+NETWORK::142-63-51-0:
+ context:      NETWORK
+ netmask:      255.255.255.240
+ router:       142.63.51.1
+ scope:      marmac_bt_ten
+ boot_server:  none
+ media_server: none
+ depot_server: none
 
 #-----------------------------------------------------------------------------#
 # Laird1 Networks
