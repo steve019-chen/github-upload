@@ -3853,6 +3853,17 @@ NETWORK::100-125-169-240:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
 
 #-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2405 - "BT prod BE-NT(back-end non-trusted DMZ 6 of 6) - Octopus-DMZ2 (TS network space)"
+
+NETWORK::100-125-175-160:
+ context:      DMZ_NETWORK
+ scope:         kidc_bt_prod_be-nt
+ vlan:          2405
+ netmask:       255.255.255.240
+ router:        100.125.175.161
+ routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
+
+#-----------------------------------------------------------------------------#
 #DDD
 # This is a TS VLAN in BT space.
 # (cluster: BT_KIDC_PR_DMZ_02).
@@ -5728,7 +5739,7 @@ NETWORK::192-168-156-128:
  depot_server: none
 
 
-#-DMZ V---------------------------------------------------------------------#
+#-DMZ Z---------------------------------------------------------------------#
 # This should not really be part of marmac_bt_ten profile
 
 NETWORK::142-63-51-64:
@@ -5743,15 +5754,13 @@ NETWORK::142-63-51-64:
 #-DMZ ?---------------------------------------------------------------------#
 # This DMZ is only for a bell sftp server (lp99836)
 # This should not really be part of marmac_bt_ten profile
-
-NETWORK::142-63-51-0:
- context:      NETWORK
- netmask:      255.255.255.240
- router:       142.63.51.1
- scope:      marmac_bt_ten
- boot_server:  none
- media_server: none
- depot_server: none
+#[NETWORK]      142.63.51.0
+# netmask:      255.255.255.240
+# router:       142.63.51.1
+# scope:      marmac_bt_ten
+# boot_server:  none
+# media_server: none
+# depot_server: none
 
 #-----------------------------------------------------------------------------#
 # Laird1 Networks
