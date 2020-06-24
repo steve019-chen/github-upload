@@ -6,4 +6,4 @@ lvm::volume_groups:
       - /dev/sdb
       - /dev/sdc
     logical_volumes:
-      app01lv: {fs_type: ext4, size: 500G, mountpath: /dev}
+      app01lv: {fs_type: ext4, size: 500G, mountpath: /telemetry}
