@@ -1241,7 +1241,7 @@ PROFILE::kidc_bt_nonprod_pwan:
 PROFILE::kidc_bt_prod_be-tr:
  context:      PROFILE
  dns_servers:           216.7.222.150 
- puppet_server: 
+ puppet_server:         tslp000578.corptools.ads
  included:               kidc_bt_prod
  mgmt_scope:    kidc_bt_prod_oMgmt
  nas_scope:     kidc_bt_prod_oStorage
@@ -1274,7 +1274,8 @@ PROFILE::kidc_bt_prod_be-tr:
 PROFILE::kidc_bt_nonprod_be-tr:
  context:      PROFILE
  dns_servers:           216.7.222.14  
- puppet_server: 
+ puppet_server:         tslp000578.corptools.ads
+ dmz:   1 
  included:               kidc_bt_nonprod
  mgmt_scope:    kidc_bt_nonprod_oMgmt
  nas_scope:     kidc_bt_nonprod_oStorage
@@ -1300,7 +1301,6 @@ PROFILE::kidc_bt_nonprod_be-tr:
  dns_search:    corp.ads tmi.telus.com ent.agt.ab.ca corptools.ads tsl.telus.com
  bkp_suffix:    -bkp
  mail_relay:    bcmsg.tsl.telus.com
- dmz:   1 
 
 # this is for TS DMZ servers built in BT clusters
 
@@ -1308,7 +1308,7 @@ PROFILE::kidc_bt_prod_oss_dmz:
  context:      PROFILE
  dns_servers:           75.153.186.4 75.153.186.5 75.153.186.6
  primary_nic_type:      be
- puppet_server:
+ puppet_server:         tslp000578.corptools.ads
  dns_search:            oss.ads corp.ads corptools.ads tsl.telus.com
  included:               kidc_bt_prod
  mgmt_scope:    kidc_bt_prod_oMgmt
@@ -1335,6 +1335,7 @@ PROFILE::kidc_bt_prod_oss_dmz:
  dns_search:    corp.ads tmi.telus.com ent.agt.ab.ca corptools.ads tsl.telus.com
  bkp_suffix:    -bkp
  mail_relay:    bcmsg.tsl.telus.com
+ dmz:   1 
 
 
 PROFILE::kidc_bt_prod_be-nt:
@@ -1342,7 +1343,7 @@ PROFILE::kidc_bt_prod_be-nt:
  dns_servers:           216.7.222.150 
  primary_nic_type:      be
  fe_scope:              kidc_bt_prod_fe
- puppet_server:
+ puppet_server:         tslp000578.corptools.ads
  dmz:   1 
  included:               kidc_bt_prod
  mgmt_scope:    kidc_bt_prod_oMgmt
@@ -1376,7 +1377,7 @@ PROFILE::kidc_bt_nonprod_be-nt:
  dns_servers:           216.7.222.14  
  primary_nic_type:      be
  fe_scope:              kidc_bt_nonprod_fe
- puppet_server:
+ puppet_server:         tslp000578.corptools.ads
  dmz:   1 
  included:               kidc_bt_nonprod
  mgmt_scope:    kidc_bt_nonprod_oMgmt
@@ -2728,7 +2729,7 @@ PROFILE::qidc_bt_prod_be-nt:
  dns_servers:           216.7.223.138 
  primary_nic_type:      be
  fe_scope:              qidc_bt_prod_fe
- puppet_server:
+ puppet_server:         tslp000443.corptools.ads
  dmz:   1 
  included:               qidc_bt_prod
  mgmt_scope:    qidc_bt_prod_oMgmt
@@ -2762,7 +2763,7 @@ PROFILE::qidc_bt_nonprod_be-nt:
  dns_servers:           216.7.223.10  
  primary_nic_type:      be
  fe_scope:              qidc_bt_nonprod_fe
- puppet_server:
+ puppet_server:         tslp000443.corptools.ads
  dmz:   1 
  included:               qidc_bt_nonprod
  mgmt_scope:    qidc_bt_nonprod_oMgmt
