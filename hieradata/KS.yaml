@@ -1241,7 +1241,7 @@ PROFILE::kidc_bt_nonprod_pwan:
 PROFILE::kidc_bt_prod_be-tr:
  context:      PROFILE
  dns_servers:           216.7.222.150 
- puppet_server: 
+ puppet_server:         tslp000578.corptools.ads
  included:               kidc_bt_prod
  mgmt_scope:    kidc_bt_prod_oMgmt
  nas_scope:     kidc_bt_prod_oStorage
@@ -1274,7 +1274,8 @@ PROFILE::kidc_bt_prod_be-tr:
 PROFILE::kidc_bt_nonprod_be-tr:
  context:      PROFILE
  dns_servers:           216.7.222.14  
- puppet_server: 
+ puppet_server:         tslp000578.corptools.ads
+ dmz:   1 
  included:               kidc_bt_nonprod
  mgmt_scope:    kidc_bt_nonprod_oMgmt
  nas_scope:     kidc_bt_nonprod_oStorage
@@ -1300,7 +1301,6 @@ PROFILE::kidc_bt_nonprod_be-tr:
  dns_search:    corp.ads tmi.telus.com ent.agt.ab.ca corptools.ads tsl.telus.com
  bkp_suffix:    -bkp
  mail_relay:    bcmsg.tsl.telus.com
- dmz:   1 
 
 # this is for TS DMZ servers built in BT clusters
 
@@ -1308,7 +1308,7 @@ PROFILE::kidc_bt_prod_oss_dmz:
  context:      PROFILE
  dns_servers:           75.153.186.4 75.153.186.5 75.153.186.6
  primary_nic_type:      be
- puppet_server:
+ puppet_server:         tslp000578.corptools.ads
  dns_search:            oss.ads corp.ads corptools.ads tsl.telus.com
  included:               kidc_bt_prod
  mgmt_scope:    kidc_bt_prod_oMgmt
@@ -1335,6 +1335,7 @@ PROFILE::kidc_bt_prod_oss_dmz:
  dns_search:    corp.ads tmi.telus.com ent.agt.ab.ca corptools.ads tsl.telus.com
  bkp_suffix:    -bkp
  mail_relay:    bcmsg.tsl.telus.com
+ dmz:   1 
 
 
 PROFILE::kidc_bt_prod_be-nt:
@@ -1342,7 +1343,7 @@ PROFILE::kidc_bt_prod_be-nt:
  dns_servers:           216.7.222.150 
  primary_nic_type:      be
  fe_scope:              kidc_bt_prod_fe
- puppet_server:
+ puppet_server:         tslp000578.corptools.ads
  dmz:   1 
  included:               kidc_bt_prod
  mgmt_scope:    kidc_bt_prod_oMgmt
@@ -1376,7 +1377,7 @@ PROFILE::kidc_bt_nonprod_be-nt:
  dns_servers:           216.7.222.14  
  primary_nic_type:      be
  fe_scope:              kidc_bt_nonprod_fe
- puppet_server:
+ puppet_server:         tslp000578.corptools.ads
  dmz:   1 
  included:               kidc_bt_nonprod
  mgmt_scope:    kidc_bt_nonprod_oMgmt
@@ -2728,7 +2729,7 @@ PROFILE::qidc_bt_prod_be-nt:
  dns_servers:           216.7.223.138 
  primary_nic_type:      be
  fe_scope:              qidc_bt_prod_fe
- puppet_server:
+ puppet_server:         tslp000443.corptools.ads
  dmz:   1 
  included:               qidc_bt_prod
  mgmt_scope:    qidc_bt_prod_oMgmt
@@ -2762,7 +2763,7 @@ PROFILE::qidc_bt_nonprod_be-nt:
  dns_servers:           216.7.223.10  
  primary_nic_type:      be
  fe_scope:              qidc_bt_nonprod_fe
- puppet_server:
+ puppet_server:         tslp000443.corptools.ads
  dmz:   1 
  included:               qidc_bt_nonprod
  mgmt_scope:    qidc_bt_nonprod_oMgmt
@@ -3482,7 +3483,7 @@ NETWORK::100-69-196-0:
  vlan:          3002:3003
  site:          KIDC
  netmask:       255.255.252.0
- test_ip:       100.69.196.80
+ test_ip:       100.69.196.138 
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
@@ -3798,7 +3799,7 @@ NETWORK::216-7-220-0:
 
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 5)"
+# KIDC BT - VLAN 2202 - "BT prod BE-NT1 (back-end non-trusted DMZ 1 of 7)"
 
 NETWORK::216-7-222-128:
  context:      DMZ_NETWORK
@@ -3809,7 +3810,7 @@ NETWORK::216-7-222-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 5)"
+# KIDC BT - VLAN 2222 - "BT prod BE-NT2 (back-end non-trusted DMZ 2 of 7)"
 
 NETWORK::216-7-220-128:
  context:      DMZ_NETWORK
@@ -3820,7 +3821,18 @@ NETWORK::216-7-220-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 3 of 5) - Octopus-DMZ1 (TS network space)"
+# KIDC BT - VLAN 2242 - "BT prod BE-NT3 (back-end non-trusted DMZ 3 of 7)"
+
+NETWORK::100-66-199-0:
+ context:      DMZ_NETWORK
+ scope:         kidc_bt_prod_be-nt
+ vlan:          2242
+ netmask:       255.255.255.0
+ router:        100.66.199.1
+ routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2401 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 7) - Octopus-DMZ1 (TS network space)"
 
 NETWORK::100-70-41-128:
  context:      DMZ_NETWORK
@@ -3831,7 +3843,7 @@ NETWORK::100-70-41-128:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 4 of 5) - Octopus-DMZ2 (TS network space)"
+# KIDC BT - VLAN 2402 - "BT prod BE-NT?(back-end non-trusted DMZ 5 of 7) - Octopus-DMZ2 (TS network space)"
 
 NETWORK::100-125-162-160:
  context:      DMZ_NETWORK
@@ -3842,7 +3854,7 @@ NETWORK::100-125-162-160:
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2403 - "BT prod BE-NT (back-end non-trusted DMZ 5 of 5) - Zero touch Deployment"
+# KIDC BT - VLAN 2403 - "BT prod BE-NT (back-end non-trusted DMZ 6 of 7) - Zero touch Deployment"
 
 NETWORK::100-125-169-240:
  context:      DMZ_NETWORK
@@ -3850,6 +3862,17 @@ NETWORK::100-125-169-240:
  vlan:          2403
  netmask:       255.255.255.240
  router:        100.125.169.241
+ routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2405 - "BT prod BE-NT(back-end non-trusted DMZ 7 of 7) - Octopus-DMZ2 (TS network space)"
+
+NETWORK::100-125-175-160:
+ context:      DMZ_NETWORK
+ scope:         kidc_bt_prod_be-nt
+ vlan:          2405
+ netmask:       255.255.255.240
+ router:        100.125.175.161
  routes:        100.64.0.0/10,142.63.0.0/16,142.168.0.0/16,142.174.0.0/16,142.178.0.0/16,216.7.220.0/22,100.125.252.192/29,75.156.196.128/26
 
 #-----------------------------------------------------------------------------#
@@ -3889,7 +3912,7 @@ NETWORK::64-114-0-0:
  router:        64.114.0.1
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2004:2005 - "BT prod FE1 (front-end DMZ 1 of 3)"
+# KIDC BT - VLAN 2004:2005 - "BT prod FE1 (front-end DMZ 1 of 4)"
 
 NETWORK::64-114-1-0:
  context:      DMZ_NETWORK
@@ -3899,7 +3922,7 @@ NETWORK::64-114-1-0:
  router:        64.114.1.1
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 2024:2025 - "BT prod FE2 (front-end DMZ 2 of 3)"
+# KIDC BT - VLAN 2024:2025 - "BT prod FE2 (front-end DMZ 2 of 4)"
 
 NETWORK::208-181-254-0:
  context:      DMZ_NETWORK
@@ -3909,7 +3932,17 @@ NETWORK::208-181-254-0:
  router:        208.181.254.1   
 
 #-----------------------------------------------------------------------------#
-# KIDC BT - VLAN 36:37 - "BT prod FE2 (front-end DMZ 3 of 3) for reverse proxy"
+# KIDC BT - VLAN 2044:2045 - "BT prod FE3 (front-end DMZ 3 of 4)"
+
+NETWORK::208-181-255-0:
+ context:      DMZ_NETWORK
+ scope:         kidc_bt_prod_fe
+ vlan:          2044:2045
+ netmask:       255.255.255.0
+ router:        208.181.255.1   
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 36:37 - "BT prod FE (front-end DMZ 4 of 3) for reverse proxy"
 # this vlan might not get used directly by Linux servers
 
 NETWORK::207-194-85-0:
@@ -5728,6 +5761,28 @@ NETWORK::192-168-156-128:
  depot_server: none
 
 
+#-DMZ Z---------------------------------------------------------------------#
+# This should not really be part of marmac_bt_ten profile
+
+NETWORK::142-63-51-64:
+ context:      NETWORK
+ netmask:      255.255.255.240
+ router:       142.63.51.65
+ scope:      marmac_bt_ten
+ boot_server:  none
+ media_server: none
+ depot_server: none
+
+#-DMZ ?---------------------------------------------------------------------#
+# This DMZ is only for a bell sftp server (lp99836)
+# This should not really be part of marmac_bt_ten profile
+#[NETWORK]      142.63.51.0
+# netmask:      255.255.255.240
+# router:       142.63.51.1
+# scope:      marmac_bt_ten
+# boot_server:  none
+# media_server: none
+# depot_server: none
 
 #-----------------------------------------------------------------------------#
 # Laird1 Networks
@@ -6382,7 +6437,7 @@ NETWORK::172-23-39-0:
  router:      172.23.39.1
  scope:      consilium_bt_ten
  boot_server:  none
- media_server: aphid
+ media_server: none
 
 #---------------------------------------------#
 # Consilium 14 floor fake IC network for KVM
@@ -6998,7 +7053,7 @@ NETWORK::100-65-196-0:
  vlan:          3002:3003
  site:          QIDC
  netmask:       255.255.252.0
- test_ip:       100.65.196.3
+ test_ip:       100.65.196.159 
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
@@ -7914,3 +7969,4 @@ NETWORK::192-168-92-0:
 
 
 ###########################################
+

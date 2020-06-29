@@ -42,7 +42,7 @@ class profile::pr_dynatrace1agent (
 
     # Calling the module and passing a download location and source for the installation file#
     class { 'dynatraceoneagent':
-        download_link => "puppet:///software/dynatraceoneagent/${environment}/Dynatrace-OneAgent-Linux-1.191.239.sh",
+        download_link => "puppet:///software/dynatraceoneagent/${environment}/Dynatrace-OneAgent-Linux-1.171.226.sh",
         download_dir  => '/tmp',
         user          => 'dynatrace',
         require       => User['dynatrace'],
