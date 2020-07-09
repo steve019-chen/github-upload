@@ -3380,7 +3380,7 @@ NETWORK::100-70-33-224:
 NETWORK::100-70-23-176:
  context:      NETWORK
  scope:         kidc_ts_pub
- vlan:          1589
+ vlan:          1589:1590
  netmask:       255.255.255.248
  router:        100.70.23.177
 
