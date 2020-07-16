@@ -3687,6 +3687,17 @@ NETWORK::100-66-180-0:
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2229 - "BT non-prod PWAN-OpenShift"
+
+NETWORK::100-66-198-0:
+ context:      PWAN_NETWORK
+ scope:         kidc_bt_nonprod_pwan
+ vlan:          2229
+ netmask:       255.255.255.0
+ router:        100.66.198.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
 # KIDC BT - VLAN 2012:2013 - "VDI" (Treat like PWAN)
 
 NETWORK::142-174-205-0:
@@ -3751,6 +3762,17 @@ NETWORK::100-66-164-0:
  vlan:          2018:2019
  netmask:       255.255.252.0
  router:        100.66.164.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2026:2027 - "BT prod PWAN-OpenShift"
+
+NETWORK::100-66-197-0:
+ context:      PWAN_NETWORK
+ scope:         kidc_bt_prod_pwan
+ vlan:          2026:2027
+ netmask:       255.255.255.0
+ router:        100.66.197.1
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
@@ -7475,6 +7497,17 @@ NETWORK::100-66-148-0:
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
+# QIDC BT - VLAN 2229 - "BT non-prod PWAN-OpenShift"
+
+NETWORK::100-66-226-0:
+ context:      PWAN_NETWORK
+ scope:         qidc_bt_nonprod_pwan
+ vlan:          2229
+ netmask:       255.255.255.0
+ router:        100.66.226.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
 # This VLAN is for VDI desktops. 
 # QIDC BT - VLAN 2225 - "BT VDI" (treat like PWAN)
 
@@ -7541,6 +7574,16 @@ NETWORK::100-66-132-0:
  vlan:          2028:2029
  netmask:       255.255.252.0
  router:        100.66.132.1
+ mtu:           9000
+#-----------------------------------------------------------------------------#
+# QIDC BT - VLAN 2026:2027 - "BT prod PWAN-OpenShift"
+
+NETWORK::100-66-225-0:
+ context:      PWAN_NETWORK
+ scope:         qidc_bt_prod_pwan
+ vlan:          2026:2027
+ netmask:       255.255.255.0
+ router:        100.66.225.1
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
