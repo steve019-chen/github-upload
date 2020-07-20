@@ -141,10 +141,13 @@ class profile::pr_jira {
   # }
 
   # Create application directories
-  $jira_app_dirs = [ '/apps/jira',
+  $jira_app_dirs = [ 
+    '/apps',
+    '/apps/jira',
     '/apps/java',
     '/apps/scripts',
     '/apps/ssl',
+    '/data',
     '/data/jira',
     '/data/backups',
     '/data/installers',
@@ -154,6 +157,7 @@ class profile::pr_jira {
     ensure  => 'directory',
     owner   => 'svc_jira',
     group   => 'users',
+    mode   => '0755',
   }
 
   # file { '/etc/init.d/TELUS_jira_control':
