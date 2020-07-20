@@ -57,7 +57,7 @@ class profile::pr_jira {
   }
 
   # Install apache
-  class { 'apache':}
+  # class { 'apache':}
 
   # For reference, as provided by Cadmus svc_jira:x:16257:100:Ryan Chan a/r 1307258:/home/svc_jira:/usr/bin/ksh
   # Create the users group
@@ -139,6 +139,22 @@ class profile::pr_jira {
   #   '7': { $provider = 'redhat' }   #switch to using systemd with a unit file
   #   default:   { $provider = 'redhat' }
   # }
+
+  # Create application directories
+  $jira_app_dirs = [ '/apps/jira',
+    '/apps/java',
+    '/apps/scripts',
+    '/apps/ssl',
+    '/data/jira',
+    '/data/backups',
+    '/data/installers',
+    '/data/wwwroot',]
+
+  file { $jira_app_dirs:
+    ensure  => 'directory',
+    owner   => 'svc_jira',
+    group   => 'users',
+  }
 
   # file { '/etc/init.d/TELUS_jira_control':
   #   ensure => 'present',
