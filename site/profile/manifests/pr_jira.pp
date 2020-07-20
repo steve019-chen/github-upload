@@ -141,8 +141,7 @@ class profile::pr_jira {
   # }
 
   # Create application directories
-  $jira_app_dirs = [ 
-    '/apps',
+  $jira_app_dirs = ['/apps',
     '/apps/jira',
     '/apps/java',
     '/apps/scripts',
