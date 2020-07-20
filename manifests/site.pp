@@ -8,7 +8,7 @@ include profile::pr_base
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
 
-node ln-test11
+node ln-test11, ln-test16, btln-test02
 {
   include role::rl_gcnet
 }
