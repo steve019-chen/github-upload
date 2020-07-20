@@ -7,14 +7,13 @@
 #   - Create application account home directory
 #   - Add sudo rules
 
-
-# lint:ignore:unquoted_node_name lint:ignore:140chars
-
 class profile::pr_jira {
 
   # Download and Install GPG Key
   $key_file = 'RPM-GPG-KEY-DOCKER-CE'
   $key_name = 'DOCKER-CE'
+  $docker_channel = 'docker-ce-rhel7-x86_64'
+  $addons_channel = 'oraclelinux7-x86_64-addons'
 
   file { $key_file:
     ensure => present,
@@ -26,6 +25,16 @@ class profile::pr_jira {
     path    => "/etc/pki/rpm-gpg/${key_file}",
   }
 
+  # Subscribe to Docker channel
+  telus_lib::yum_channel { $docker_channel:
+    ensure => present,
+  }
+
+  # Subscribe to Add-ons channel
+  telus_lib::yum_channel { $addons_channel:
+    ensure => present,
+  }
+
   # Install docker
   # Note: proxy just sets the configuration after installing docker
   # this does not get used when downloading the package, this proxy 
@@ -34,15 +43,16 @@ class profile::pr_jira {
     use_upstream_package_source => false,
     version                     => '18.09.3-3.el7',
     proxy                       => 'http://pac.tsl.telus.com:8080',
+    no_proxy                    => '.corp.ads,.tsl.telus.com,localhost,127.0.0.1',
     log_driver                  => 'json-file',
     log_opt                     => ['max-size=10m', 'max-file=5'],
-    require                     => Gpg_key[$key_name],
+    require                     => [ Telus_lib::Yum_channel[$docker_channel], Telus_lib::Yum_channel[$addons_channel], Gpg_key[$key_name] ],
   }
 
   # Install docker compose
   class {'docker::compose':
     ensure  => present,
-    version => '1.9.0',
+    version => '1.26.0',
     proxy   => 'https://pac.tsl.telus.com:8080',
   }
 
@@ -50,29 +60,20 @@ class profile::pr_jira {
   class { 'apache':}
 
   # For reference, as provided by Cadmus svc_jira:x:16257:100:Ryan Chan a/r 1307258:/home/svc_jira:/usr/bin/ksh
-
   # Create the users group
-
   group { 'users':
     ensure => present,
     gid    => '100',
   }
 
-  group { 'docker':
-    ensure => present,
-    gid    => '991',
-  }
-
   # Create the svc_prov user for application account, set password
-
   user { 'svc_jira':
     uid        => '16257',
     gid        => 'users',
-    shell      => '/bin/bash',
+    groups     => 'docker',
     password   => pw_hash(lookup('jira::app_account_password'), 'SHA-512','mysalt'),
     managehome => true,
-    groups     => ['docker'],
-    require    => [ Group['users'], Group['docker'] ],
+    require    => [ Group['users'], Class['docker'] ],
   }
 
   # Adding Sudo rules for docker and apache
@@ -154,5 +155,3 @@ class profile::pr_jira {
   #   provider  => $provider,
   # }
 }
-
-# lint:endignore
