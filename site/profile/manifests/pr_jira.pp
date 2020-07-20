@@ -113,7 +113,7 @@ class profile::pr_jira {
       /usr/sbin/chkconfig mysqld on, \
       /usr/sbin/chkconfig mysqld off, \
       /usr/sbin/chkconfig docker on, \
-      /usr/sbin/chkconfig docker off,
+      /usr/sbin/chkconfig docker off
       | -EOT
   }
   sudo::conf { 'puppet_jira_mysql':
