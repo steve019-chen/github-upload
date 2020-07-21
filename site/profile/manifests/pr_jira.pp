@@ -104,6 +104,19 @@ class profile::pr_jira {
       /sbin/service mysqld stop, \
       /sbin/service mysqld restart, \
       /sbin/service mysqld status, \
+      /bin/systemctl enable mysqld.service, \
+      /bin/systemctl disable mysqld.service, \
+      /bin/systemctl start mysqld.service, \
+      /bin/systemctl stop mysqld.service, \
+      /bin/systemctl status mysqld.service, \
+      /sbin/service postgresql-11 start, \
+      /sbin/service postgresql-11 stop, \
+      /sbin/service postgresql-11 restart, \
+      /bin/systemctl enable postgresql-11.service, \
+      /bin/systemctl disable postgresql-11.service, \
+      /bin/systemctl start postgresql-11.service, \
+      /bin/systemctl stop postgresql-11, \
+      /bin/systemctl status postgresql-11, \
       /sbin/service jira start, \
       /sbin/service jira stop, \
       /sbin/service jira restart, \
@@ -112,6 +125,8 @@ class profile::pr_jira {
       /usr/sbin/chkconfig httpd off, \
       /usr/sbin/chkconfig mysqld on, \
       /usr/sbin/chkconfig mysqld off, \
+      /usr/sbin/chkconfig postgresql on, \
+      /usr/sbin/chkconfig postgresql off, \
       /usr/sbin/chkconfig docker on, \
       /usr/sbin/chkconfig docker off
       | -EOT
@@ -119,6 +134,10 @@ class profile::pr_jira {
   sudo::conf { 'puppet_jira_mysql':
     priority => 10,
     content  => 'svc_jira ALL=(mysql) NOPASSWD: ALL',
+  }
+  sudo::conf { 'puppet_jira_postgres':
+    priority => 10,
+    content  => 'svc_jira ALL=(postgres) NOPASSWD: ALL',
   }
   sudo::conf { 'puppet_agent':
     priority => 20,
