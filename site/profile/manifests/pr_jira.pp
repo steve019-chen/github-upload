@@ -58,6 +58,9 @@ class profile::pr_jira {
 
   # Install apache
   class { 'apache':}
+  class { 'apache::mod::ssl':
+    ssl_compression => true,
+  }
 
   $apache_dirs = ['/etc/httpd/conf',
     '/etc/httpd/conf.d',
@@ -76,6 +79,7 @@ class profile::pr_jira {
     owner   => 'svc_jira',
     group   => 'users',
     mode   => '0755',
+    require => Class['apache'],
   }
 
   # For reference, as provided by Cadmus svc_jira:x:16257:100:Ryan Chan a/r 1307258:/home/svc_jira:/usr/bin/ksh
