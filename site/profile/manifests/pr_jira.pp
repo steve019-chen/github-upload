@@ -61,6 +61,8 @@ class profile::pr_jira {
   class { 'apache::mod::ssl':
     ssl_compression => true,
   }
+  class { 'apache::mod::proxy':}
+  class { 'apache::mod::proxy_ajp':}
 
   $apache_dirs = ['/etc/httpd/conf',
     '/etc/httpd/conf.d',
