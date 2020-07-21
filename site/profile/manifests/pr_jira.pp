@@ -57,12 +57,9 @@ class profile::pr_jira {
   }
 
   # Install apache
-  class { 'apache':}
-  class { 'apache::mod::ssl':
-    ssl_compression => true,
+  package { 'httpd':
+    ensure  => present,
   }
-  class { 'apache::mod::proxy':}
-  class { 'apache::mod::proxy_ajp':}
 
   # For reference, as provided by Cadmus svc_jira:x:16257:100:Ryan Chan a/r 1307258:/home/svc_jira:/usr/bin/ksh
   # Create the users group
