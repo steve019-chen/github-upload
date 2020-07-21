@@ -170,6 +170,7 @@ class profile::pr_jira {
     '/apps/java',
     '/apps/scripts',
     '/apps/ssl',
+    '/apps/apache',
     '/data',
     '/data/jira',
     '/data/backups',
@@ -183,7 +184,8 @@ class profile::pr_jira {
     mode   => '0755',
   }
 
-  $apache_dirs = ['/etc/httpd/conf',
+  $apache_dirs = ['/etc/httpd',
+    '/etc/httpd/conf',
     '/etc/httpd/conf.d',
     '/etc/httpd/conf.modules.d',
     '/etc/httpd/logs',
