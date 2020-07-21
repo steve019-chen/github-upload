@@ -184,13 +184,20 @@ class profile::pr_jira {
     '/etc/httpd/conf',
     '/etc/httpd/conf.d',
     '/etc/httpd/conf.modules.d',
-    '/etc/httpd/logs',
     '/var/www',
     '/var/www/html',
     '/var/www/cgi-bin',
     '/var/log/httpd',
     '/data/httpd',
     '/data/httpd/log',]
+
+  file { '/etc/httpd/logs':
+    ensure => 'link',
+    target => '/data/httpd/log',
+    owner   => 'svc_jira',
+    group   => 'users',
+    mode   => '0755',
+  }
 
   file { $apache_dirs:
     ensure  => 'directory',
