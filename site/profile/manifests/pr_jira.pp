@@ -64,26 +64,6 @@ class profile::pr_jira {
   class { 'apache::mod::proxy':}
   class { 'apache::mod::proxy_ajp':}
 
-  $apache_dirs = ['/etc/httpd/conf',
-    '/etc/httpd/conf.d',
-    '/etc/httpd/conf.modules.d',
-    '/etc/httpd/logs',
-    '/var/www',
-    '/var/www/html',
-    '/var/www/cgi-bin',
-    '/var/log/httpd',
-    '/data',
-    '/data/httpd',
-    '/data/httpd/log',]
-
-  file { $apache_dirs:
-    ensure  => 'directory',
-    owner   => 'svc_jira',
-    group   => 'users',
-    mode   => '0755',
-    require => Class['apache'],
-  }
-
   # For reference, as provided by Cadmus svc_jira:x:16257:100:Ryan Chan a/r 1307258:/home/svc_jira:/usr/bin/ksh
   # Create the users group
   group { 'users':
@@ -201,6 +181,26 @@ class profile::pr_jira {
     owner   => 'svc_jira',
     group   => 'users',
     mode   => '0755',
+  }
+
+  $apache_dirs = ['/etc/httpd/conf',
+    '/etc/httpd/conf.d',
+    '/etc/httpd/conf.modules.d',
+    '/etc/httpd/logs',
+    '/var/www',
+    '/var/www/html',
+    '/var/www/cgi-bin',
+    '/var/log/httpd',
+    '/data',
+    '/data/httpd',
+    '/data/httpd/log',]
+
+  file { $apache_dirs:
+    ensure  => 'directory',
+    owner   => 'svc_jira',
+    group   => 'users',
+    mode   => '0755',
+    require => Class['apache'],
   }
 
   # file { '/etc/init.d/TELUS_jira_control':
