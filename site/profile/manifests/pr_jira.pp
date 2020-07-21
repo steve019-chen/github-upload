@@ -74,8 +74,8 @@ class profile::pr_jira {
   file { $apache_dirs:
     ensure  => 'directory',
     owner   => 'svc_jira',
-    group   => 'root',
-    mode   => '0770',
+    group   => 'users',
+    mode   => '0755',
   }
 
   # For reference, as provided by Cadmus svc_jira:x:16257:100:Ryan Chan a/r 1307258:/home/svc_jira:/usr/bin/ksh
