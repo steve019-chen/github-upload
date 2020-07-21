@@ -58,7 +58,7 @@ class profile::pr_jira {
 
   # Install apache
   class { 'apache':}
-  
+
   $apache_dirs = ['/etc/httpd/conf',
     '/etc/httpd/conf.d',
     '/etc/httpd/conf.modules.d',
