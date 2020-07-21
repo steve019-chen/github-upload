@@ -167,7 +167,6 @@ class profile::pr_jira {
     '/apps/java',
     '/apps/scripts',
     '/apps/ssl',
-    '/apps/apache',
     '/data',
     '/data/jira',
     '/data/backups',
@@ -190,16 +189,14 @@ class profile::pr_jira {
     '/var/www/html',
     '/var/www/cgi-bin',
     '/var/log/httpd',
-    '/data',
     '/data/httpd',
     '/data/httpd/log',]
 
   file { $apache_dirs:
     ensure  => 'directory',
     owner   => 'svc_jira',
-    group   => 'users',
-    mode   => '0755',
-    require => Class['apache'],
+    group   => 'root',
+    mode   => '0750',
   }
 
   # file { '/etc/init.d/TELUS_jira_control':
