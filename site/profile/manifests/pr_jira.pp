@@ -93,7 +93,7 @@ class profile::pr_jira {
       svc_jira ALL=NOPASSWD : \
       /etc/init.d/httpd, \
       /bin/docker, \
-      /bin/systemctl daemon-reload, \
+      /usr/bin/systemctl daemon-reload, \
       /usr/bin/systemctl enable docker, \
       /usr/bin/systemctl disable docker, \
       /usr/bin/systemctl start docker, \
@@ -123,7 +123,7 @@ class profile::pr_jira {
       /usr/bin/systemctl start jira, \
       /usr/bin/systemctl stop jira, \
       /usr/bin/systemctl restart jira, \
-      /usr/bin/systemctl status jira, \
+      /usr/bin/systemctl status jira \
       | -EOT
   }
   sudo::conf { 'puppet_jira_mysql':
