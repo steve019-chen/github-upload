@@ -223,6 +223,11 @@ include profile::pr_base
 # class { 'role::rl_dynatrace_st': }
 # }
 
+node btln007535,btln007399,ln98775,ln98776,btln007523,btln007524,btln007717,btln007718
+{
+class { 'role::rl_dynatrace_st': }
+}
+
 # node btln008024,ln99947,ln99948,ln99949,ln99978,ln99979,ln99942,ln99943,ln99944,ln99945,btln007986,btln007987,btln008084
 # {
 #   class { 'role::rl_dynatrace_st': }
