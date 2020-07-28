@@ -1,4 +1,4 @@
-# This profile contains the configuration for the ASAPNOC application servers
+# This profile contains the configuration for the Enterprise JIRA application servers
 #
 # Parameters:
 #
@@ -114,9 +114,9 @@ class profile::pr_jira {
       /bin/systemctl enable postgresql-11.service, \
       /bin/systemctl disable postgresql-11.service, \
       /bin/systemctl start postgresql-11.service, \
-      /bin/systemctl stop postgresql-11, \
-      /bin/systemctl restart postgresql-11, \
-      /bin/systemctl status postgresql-11, \
+      /bin/systemctl stop postgresql-11.service, \
+      /bin/systemctl restart postgresql-11.service, \
+      /bin/systemctl status postgresql-11.service, \
       /bin/systemctl enable jira, \
       /bin/systemctl disable jira, \
       /bin/systemctl start jira, \
@@ -130,11 +130,11 @@ class profile::pr_jira {
     content  => 'svc_jira ALL=(mysql) NOPASSWD: ALL',
   }
   sudo::conf { 'puppet_jira_postgres':
-    priority => 10,
+    priority => 20,
     content  => 'svc_jira ALL=(postgres) NOPASSWD: ALL',
   }
   sudo::conf { 'puppet_agent':
-    priority => 20,
+    priority => 30,
     content  => 'svc_jira ALL=NOPASSWD : /opt/puppetlabs/bin/puppet agent -t , /opt/puppetlabs/bin/puppet agent -t --debug',
   }
 
@@ -145,13 +145,6 @@ class profile::pr_jira {
     match              => 'svc_jira',
     append_on_no_match => 'true',
   }
-
-  # case $facts['os']['release']['major']  {
-  #   '5': { $provider = 'redhat' }
-  #   '6': { $provider = 'redhat' }
-  #   '7': { $provider = 'redhat' }   #switch to using systemd with a unit file
-  #   default:   { $provider = 'redhat' }
-  # }
 
   # Create application directories
   $jira_app_dirs = ['/apps',
@@ -199,18 +192,4 @@ class profile::pr_jira {
     recurse => 'true',
   }
 
-  # file { '/etc/init.d/TELUS_jira_control':
-  #   ensure => 'present',
-  #   owner  => 'root',
-  #   group  => 'root',
-  #   mode   => '0755',
-  #   source => 'puppet:///modules/profile/jira/TELUS_jira_control',
-  #   notify => Service['TELUS_jira_control'],
-  # }
-
-  # service { 'TELUS_jira_control':
-  #   enable    => true,
-  #   hasstatus => false,
-  #   provider  => $provider,
-  # }
 }
