@@ -53,7 +53,7 @@ class profile::pr_jira {
   class {'docker::compose':
     ensure  => present,
     version => '1.26.0',
-    proxy   => 'https://pac.tsl.telus.com:8080',
+    proxy   => 'http://pac.tsl.telus.com:8080',
   }
 
   # Install apache
