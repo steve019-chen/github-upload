@@ -117,12 +117,12 @@ class profile::pr_jira {
       /bin/systemctl stop postgresql-11.service, \
       /bin/systemctl restart postgresql-11.service, \
       /bin/systemctl status postgresql-11.service, \
-      /bin/systemctl enable jira, \
-      /bin/systemctl disable jira, \
-      /bin/systemctl start jira, \
-      /bin/systemctl stop jira, \
-      /bin/systemctl restart jira, \
-      /bin/systemctl status jira 
+      /bin/systemctl enable jira.service, \
+      /bin/systemctl disable jira.service, \
+      /bin/systemctl start jira.service, \
+      /bin/systemctl stop jira.service, \
+      /bin/systemctl restart jira.service, \
+      /bin/systemctl status jira.service 
       | -EOT
   }
   sudo::conf { 'puppet_jira_mysql':
