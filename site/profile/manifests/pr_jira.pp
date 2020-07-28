@@ -204,6 +204,7 @@ class profile::pr_jira {
     owner   => 'svc_jira',
     group   => 'root',
     mode   => '0750',
+    recurse => 'true',
   }
 
   # file { '/etc/init.d/TELUS_jira_control':
