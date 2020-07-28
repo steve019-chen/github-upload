@@ -93,44 +93,37 @@ class profile::pr_jira {
       svc_jira ALL=NOPASSWD : \
       /etc/init.d/httpd, \
       /bin/docker, \
-      /sbin/service httpd start, \
-      /sbin/service httpd stop, \
-      /sbin/service httpd restart, \
-      /sbin/service httpd status, \
       /bin/systemctl daemon-reload, \
-      /sbin/service docker start, \
-      /sbin/service httpd stop, \
-      /sbin/service docker restart, \
-      /sbin/service docker status, \
-      /sbin/service mysqld start, \
-      /sbin/service mysqld stop, \
-      /sbin/service mysqld restart, \
-      /sbin/service mysqld status, \
-      /bin/systemctl enable mysqld.service, \
-      /bin/systemctl disable mysqld.service, \
-      /bin/systemctl start mysqld.service, \
-      /bin/systemctl stop mysqld.service, \
-      /bin/systemctl status mysqld.service, \
-      /sbin/service postgresql-11 start, \
-      /sbin/service postgresql-11 stop, \
-      /sbin/service postgresql-11 restart, \
-      /bin/systemctl enable postgresql-11.service, \
-      /bin/systemctl disable postgresql-11.service, \
-      /bin/systemctl start postgresql-11.service, \
-      /bin/systemctl stop postgresql-11, \
-      /bin/systemctl status postgresql-11, \
-      /sbin/service jira start, \
-      /sbin/service jira stop, \
-      /sbin/service jira restart, \
-      /sbin/service jira status, \
-      /usr/sbin/chkconfig httpd on, \
-      /usr/sbin/chkconfig httpd off, \
-      /usr/sbin/chkconfig mysqld on, \
-      /usr/sbin/chkconfig mysqld off, \
-      /usr/sbin/chkconfig postgresql on, \
-      /usr/sbin/chkconfig postgresql off, \
-      /usr/sbin/chkconfig docker on, \
-      /usr/sbin/chkconfig docker off
+      /usr/bin/systemctl enable docker, \
+      /usr/bin/systemctl disable docker, \
+      /usr/bin/systemctl start docker, \
+      /usr/bin/systemctl stop docker, \
+      /usr/bin/systemctl restart docker, \
+      /usr/bin/systemctl status docker, \
+      /usr/bin/systemctl enable httpd, \
+      /usr/bin/systemctl disable httpd, \
+      /usr/bin/systemctl start httpd, \
+      /usr/bin/systemctl stop httpd, \
+      /usr/bin/systemctl restart httpd, \
+      /usr/bin/systemctl status httpd, \
+      /usr/bin/systemctl enable mysqld.service, \
+      /usr/bin/systemctl disable mysqld.service, \
+      /usr/bin/systemctl start mysqld.service, \
+      /usr/bin/systemctl stop mysqld.service, \
+      /usr/bin/systemctl restart mysqld.service, \
+      /usr/bin/systemctl status mysqld.service, \
+      /usr/bin/systemctl enable postgresql-11.service, \
+      /usr/bin/systemctl disable postgresql-11.service, \
+      /usr/bin/systemctl start postgresql-11.service, \
+      /usr/bin/systemctl stop postgresql-11, \
+      /usr/bin/systemctl restart postgresql-11, \
+      /usr/bin/systemctl status postgresql-11, \
+      /usr/bin/systemctl enable jira, \
+      /usr/bin/systemctl disable jira, \
+      /usr/bin/systemctl start jira, \
+      /usr/bin/systemctl stop jira, \
+      /usr/bin/systemctl restart jira, \
+      /usr/bin/systemctl status jira, \
       | -EOT
   }
   sudo::conf { 'puppet_jira_mysql':
