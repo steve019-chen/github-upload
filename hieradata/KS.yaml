@@ -551,6 +551,11 @@
 #-----------------------------------------------------------------------------#
 # RHN:  (yes==register or no==don't_register)
 #-----------------------------------------------------------------------------#
+###########################XXXXXXXXXXXXXXXXXX##################################
+#-----------------------------------------------------------------------------#
+# CrowdStrike Falcon Sensor:  (yes==install or no==don't_install)
+# Currently disabled by default for for BT, TS, and MITS 
+#-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
 # yum_update (if  satellite==no or spacewalk==no)
 #-----------------------------------------------------------------------------#
@@ -1267,7 +1272,7 @@ PROFILE::kidc_bt_prod_be-tr:
  dns_search:    corp.ads tmi.telus.com ent.agt.ab.ca corptools.ads tsl.telus.com
  bkp_suffix:    -bkp
  mail_relay:    bcmsg.tsl.telus.com
- dmz:   1 
+ dmz:   yes 
 
 # BE-TR is deprecated. Keep for rebuilding old server only.
 
@@ -1275,7 +1280,7 @@ PROFILE::kidc_bt_nonprod_be-tr:
  context:      PROFILE
  dns_servers:           216.7.222.14  
  puppet_server:         tslp000578.corptools.ads
- dmz:   1 
+ dmz:   yes 
  included:               kidc_bt_nonprod
  mgmt_scope:    kidc_bt_nonprod_oMgmt
  nas_scope:     kidc_bt_nonprod_oStorage
@@ -1335,7 +1340,7 @@ PROFILE::kidc_bt_prod_oss_dmz:
  dns_search:    corp.ads tmi.telus.com ent.agt.ab.ca corptools.ads tsl.telus.com
  bkp_suffix:    -bkp
  mail_relay:    bcmsg.tsl.telus.com
- dmz:   1 
+ dmz:   yes 
 
 
 PROFILE::kidc_bt_prod_be-nt:
@@ -1344,7 +1349,7 @@ PROFILE::kidc_bt_prod_be-nt:
  primary_nic_type:      be
  fe_scope:              kidc_bt_prod_fe
  puppet_server:         tslp000578.corptools.ads
- dmz:   1 
+ dmz:   yes 
  included:               kidc_bt_prod
  mgmt_scope:    kidc_bt_prod_oMgmt
  nas_scope:     kidc_bt_prod_oStorage
@@ -1378,7 +1383,7 @@ PROFILE::kidc_bt_nonprod_be-nt:
  primary_nic_type:      be
  fe_scope:              kidc_bt_nonprod_fe
  puppet_server:         tslp000578.corptools.ads
- dmz:   1 
+ dmz:   yes 
  included:               kidc_bt_nonprod
  mgmt_scope:    kidc_bt_nonprod_oMgmt
  nas_scope:     kidc_bt_nonprod_oStorage
@@ -2649,7 +2654,7 @@ PROFILE::qidc_bt_prod_be-tr:
  context:      PROFILE
  dns_servers:   216.7.223.138 
  puppet_server: tslp000443.corptools.ads
- dmz:   1 
+ dmz:   yes 
  included:       qidc_bt_prod
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
@@ -2682,7 +2687,7 @@ PROFILE::qidc_bt_nonprod_be-tr:
  context:      PROFILE
  dns_servers:           216.7.223.10 
  puppet_server:         tslp000443.corptools.ads
- dmz:   1 
+ dmz:   yes 
  included:               qidc_bt_nonprod
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
@@ -2730,7 +2735,7 @@ PROFILE::qidc_bt_prod_be-nt:
  primary_nic_type:      be
  fe_scope:              qidc_bt_prod_fe
  puppet_server:         tslp000443.corptools.ads
- dmz:   1 
+ dmz:   yes 
  included:               qidc_bt_prod
  mgmt_scope:    qidc_bt_prod_oMgmt
  nas_scope:     qidc_bt_prod_oStorage
@@ -2764,7 +2769,7 @@ PROFILE::qidc_bt_nonprod_be-nt:
  primary_nic_type:      be
  fe_scope:              qidc_bt_nonprod_fe
  puppet_server:         tslp000443.corptools.ads
- dmz:   1 
+ dmz:   yes 
  included:               qidc_bt_nonprod
  mgmt_scope:    qidc_bt_nonprod_oMgmt
  nas_scope:     qidc_bt_nonprod_oStorage
@@ -3687,6 +3692,17 @@ NETWORK::100-66-180-0:
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2229 - "BT non-prod PWAN-OpenShift"
+
+NETWORK::100-66-198-0:
+ context:      PWAN_NETWORK
+ scope:         kidc_bt_nonprod_pwan
+ vlan:          2229
+ netmask:       255.255.255.0
+ router:        100.66.198.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
 # KIDC BT - VLAN 2012:2013 - "VDI" (Treat like PWAN)
 
 NETWORK::142-174-205-0:
@@ -3751,6 +3767,17 @@ NETWORK::100-66-164-0:
  vlan:          2018:2019
  netmask:       255.255.252.0
  router:        100.66.164.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
+# KIDC BT - VLAN 2026:2027 - "BT prod PWAN-OpenShift"
+
+NETWORK::100-66-197-0:
+ context:      PWAN_NETWORK
+ scope:         kidc_bt_prod_pwan
+ vlan:          2026:2027
+ netmask:       255.255.255.0
+ router:        100.66.197.1
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
@@ -6969,6 +6996,16 @@ NETWORK::100-70-45-128:
  router:        100.70.45.129
 
 #-----------------------------------------------------------------------------#
+# QIDC TS - VLAN 1655 - "OSS-Polling for Falcon TOCP"
+
+NETWORK::100-125-171-32:
+ context:      NETWORK
+ scope:         qidc_ts_pub
+ vlan:          1655
+ netmask:       255.255.255.224
+ router:        100.125.171.33
+
+#-----------------------------------------------------------------------------#
 # QIDC TS - VLAN 1598 - "Cienna Production" 
 
 NETWORK::100-70-33-208:
@@ -7465,6 +7502,17 @@ NETWORK::100-66-148-0:
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
+# QIDC BT - VLAN 2229 - "BT non-prod PWAN-OpenShift"
+
+NETWORK::100-66-226-0:
+ context:      PWAN_NETWORK
+ scope:         qidc_bt_nonprod_pwan
+ vlan:          2229
+ netmask:       255.255.255.0
+ router:        100.66.226.1
+ mtu:           9000
+
+#-----------------------------------------------------------------------------#
 # This VLAN is for VDI desktops. 
 # QIDC BT - VLAN 2225 - "BT VDI" (treat like PWAN)
 
@@ -7531,6 +7579,16 @@ NETWORK::100-66-132-0:
  vlan:          2028:2029
  netmask:       255.255.252.0
  router:        100.66.132.1
+ mtu:           9000
+#-----------------------------------------------------------------------------#
+# QIDC BT - VLAN 2026:2027 - "BT prod PWAN-OpenShift"
+
+NETWORK::100-66-225-0:
+ context:      PWAN_NETWORK
+ scope:         qidc_bt_prod_pwan
+ vlan:          2026:2027
+ netmask:       255.255.255.0
+ router:        100.66.225.1
  mtu:           9000
 
 #-----------------------------------------------------------------------------#
