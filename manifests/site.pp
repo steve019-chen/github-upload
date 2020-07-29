@@ -8,7 +8,7 @@ include profile::pr_base
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
 
-node ln-test11, ln-test16, btln-test02
+node btln001294, btln001295, btln002172, btln002173, btln002179, btln007031, btln007032, btln007455, btln007456, btln007457, btln007458, btln007550, btln007556, btln007551, btln007557, btln007552, btln007558, btln007553, btln007559, btln007560, btln007719, btln007548, btln007549
 {
   include role::rl_gcnet
 }
@@ -228,10 +228,10 @@ node ln-test11, ln-test16, btln-test02
 # class { 'role::rl_dynatrace_st': }
 # }
 
-node btln007535,btln007399,ln98775,ln98776,btln007523,btln007524,btln007717,btln007718
-{
-class { 'role::rl_dynatrace_st': }
-}
+# node btln007535,btln007399,ln98775,ln98776,btln007523,btln007524,btln007717,btln007718
+# {
+# class { 'role::rl_dynatrace_st': }
+# }
 
 # node btln008024,ln99947,ln99948,ln99949,ln99978,ln99979,ln99942,ln99943,ln99944,ln99945,btln007986,btln007987,btln008084
 # {
