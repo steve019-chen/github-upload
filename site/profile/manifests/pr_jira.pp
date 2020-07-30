@@ -42,9 +42,12 @@ class profile::pr_jira {
   # Note: proxy just sets the configuration after installing docker
   # this does not get used when downloading the package, this proxy 
   # is used when connecting to docker hub to download the images
+
+  $docker_version = '19.03.12-3.el7'
+
   class { 'docker':
     use_upstream_package_source => false,
-    version                     => '19.03.12-3.el7',
+    version                     => $docker_version,
     proxy                       => 'http://pac.tsl.telus.com:8080',
     no_proxy                    => '.corp.ads,.tsl.telus.com,localhost,127.0.0.1',
     log_driver                  => 'json-file',
@@ -59,13 +62,13 @@ class profile::pr_jira {
 
   exec { 'yum versionlock docker-ce':
     path    => '/bin:/usr/bin:/usr/sbin:/bin',
-    unless  => 'cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce | grep -v cli > /dev/null',
+    unless  => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce-${docker_version} > /dev/null",
     require => Package['yum-plugin-versionlock'],
   }
 
   exec { 'yum versionlock docker-ce-cli':
     path    => '/bin:/usr/bin:/usr/sbin:/bin',
-    unless  => 'cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce-cli > /dev/null',
+    unless  => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce-cli-${docker_version} > /dev/null",
     require => Package['yum-plugin-versionlock'],
   }
 
