@@ -60,6 +60,15 @@ mod 'puppet-gpg_key',
   :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/puppet-gpg_key.git',
   :tag => '0.1.0'
 
+mod 'augeasproviders_core',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/herculesteam-augeasproviders_core.git',
+  :tag => '2.5.0'
+
+mod 'augeasproviders_ssh',
+  :git => 'ssh://git@bitbucket-pr.tsl.telus.com/forge_clean/herculesteam-augeasproviders_ssh.git',
+  :tag => '4.0.0'
+
+
 # Windows modules
 
 mod 'puppetlabs-acl',
