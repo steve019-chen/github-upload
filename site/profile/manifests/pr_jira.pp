@@ -44,7 +44,7 @@ class profile::pr_jira {
   # is used when connecting to docker hub to download the images
   class { 'docker':
     use_upstream_package_source => false,
-    version                     => '18.09.3-3.el7',
+    version                     => '19.03.12-3.el7',
     proxy                       => 'http://pac.tsl.telus.com:8080',
     no_proxy                    => '.corp.ads,.tsl.telus.com,localhost,127.0.0.1',
     log_driver                  => 'json-file',
