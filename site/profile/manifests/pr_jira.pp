@@ -63,13 +63,13 @@ class profile::pr_jira {
   exec { 'yum versionlock docker-ce':
     path    => '/bin:/usr/bin:/usr/sbin:/bin',
     unless  => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce-${docker_version} > /dev/null",
-    require => Package['yum-plugin-versionlock'],
+    require => [ Package['yum-plugin-versionlock'], Class['docker'] ],
   }
 
   exec { 'yum versionlock docker-ce-cli':
     path    => '/bin:/usr/bin:/usr/sbin:/bin',
     unless  => "cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce-cli-${docker_version} > /dev/null",
-    require => Package['yum-plugin-versionlock'],
+    require => [ Package['yum-plugin-versionlock'], Class['docker'] ],
   }
 
   file_line { 'yum_versionlock_config':
@@ -78,7 +78,7 @@ class profile::pr_jira {
     line               => 'show_hint = 0',
     match              => 'show_hint = 1',
     append_on_no_match => false,
-    require            => Package['yum-plugin-versionlock'],
+    require            => [ Package['yum-plugin-versionlock'], Class['docker'] ],
   }
 
   # Install docker compose
