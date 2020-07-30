@@ -72,12 +72,12 @@ class profile::pr_jira {
     require            => Package['yum-plugin-versionlock'],
   }
 
-    # Install docker compose
-    class {'docker::compose':
-      ensure  => present,
-      version => '1.26.0',
-      proxy   => 'http://pac.tsl.telus.com:8080',
-    }
+  # Install docker compose
+  class {'docker::compose':
+    ensure  => present,
+    version => '1.26.0',
+    proxy   => 'http://pac.tsl.telus.com:8080',
+  }
 
   # Install apache
   package { 'httpd':
