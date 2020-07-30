@@ -8,7 +8,7 @@ include profile::pr_base
 
 # lint:ignore:unquoted_node_name lint:ignore:140chars lint:ignore:puppet_url_without_modules
 
-node btln007202
+node btlp007859
 {
   include role::rl_jira
 }
