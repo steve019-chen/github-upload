@@ -59,7 +59,13 @@ class profile::pr_jira {
 
   exec { 'yum versionlock docker-ce':
     path    => '/bin:/usr/bin:/usr/sbin:/bin',
-    unless  => 'cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce > /dev/null',
+    unless  => 'cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce | grep -v cli > /dev/null',
+    require => Package['yum-plugin-versionlock'],
+  }
+
+  exec { 'yum versionlock docker-ce-cli':
+    path    => '/bin:/usr/bin:/usr/sbin:/bin',
+    unless  => 'cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce-cli > /dev/null',
     require => Package['yum-plugin-versionlock'],
   }
 
