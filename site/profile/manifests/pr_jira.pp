@@ -5,7 +5,10 @@
 # Actions:
 #   - Configure application account
 #   - Create application account home directory
+#   - Install Docker
+#   - Install Apache
 #   - Add sudo rules
+#   - Create application directory structure
 
 class profile::pr_jira {
 
@@ -159,9 +162,9 @@ class profile::pr_jira {
     '/data/wwwroot',]
 
   file { $jira_app_dirs:
-    ensure  => 'directory',
-    owner   => 'svc_jira',
-    group   => 'users',
+    ensure => 'directory',
+    owner  => 'svc_jira',
+    group  => 'users',
     mode   => '0755',
   }
 
@@ -179,8 +182,8 @@ class profile::pr_jira {
   file { '/etc/httpd/logs':
     ensure => 'link',
     target => '/data/httpd/log',
-    owner   => 'svc_jira',
-    group   => 'users',
+    owner  => 'svc_jira',
+    group  => 'users',
     mode   => '0755',
   }
 
@@ -188,7 +191,7 @@ class profile::pr_jira {
     ensure  => 'directory',
     owner   => 'svc_jira',
     group   => 'root',
-    mode   => '0750',
+    mode    => '0750',
     recurse => 'true',
   }
 
