@@ -52,6 +52,32 @@ class profile::pr_jira {
     require                     => [ Telus_lib::Yum_channel[$docker_channel], Telus_lib::Yum_channel[$addons_channel], Gpg_key[$key_name] ],
   }
 
+  #Add version lock to docker package
+  package {'yum-plugin-versionlock':
+    ensure => present,
+  }
+
+  exec { 'yum versionlock docker-ce':
+    path    => '/bin:/usr/bin:/usr/sbin:/bin',
+    unless  => 'cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce | grep -v cli > /dev/null',
+    require => Package['yum-plugin-versionlock'],
+  }
+
+  exec { 'yum versionlock docker-ce-cli':
+    path    => '/bin:/usr/bin:/usr/sbin:/bin',
+    unless  => 'cat /etc/yum/pluginconf.d/versionlock.list | grep -q docker-ce-cli > /dev/null',
+    require => Package['yum-plugin-versionlock'],
+  }
+
+  file_line { 'yum_versionlock_config':
+    ensure             => present,
+    path               => '/etc/yum/pluginconf.d/versionlock.conf',
+    line               => 'show_hint = 0',
+    match              => 'show_hint = 1',
+    append_on_no_match => false,
+    require            => Package['yum-plugin-versionlock'],
+  }
+
   # Install docker compose
   class {'docker::compose':
     ensure  => present,
