@@ -33,15 +33,15 @@ include profile::pr_base
 #}
 
 # CRQ116004 Server Build for Enterprise JIRA new PR blade
-#node btlp007859
-#{
-#  include role::rl_jira
-#}
+node btlp007859
+{
+  include role::rl_jira
+}
 
-#node btln001294, btln001295, btln002172, btln002173, btln002179, btln007031, btln007032, btln007455, btln007456, btln007457, btln007458, btln007550, btln007556, btln007551, btln007557, btln007552, btln007558, btln007553, btln007559, btln007560, btln007719, btln007548, btln007549
-#{
-#  include role::rl_gcnet
-#}
+node btln001294, btln001295, btln002172, btln002173, btln002179, btln007031, btln007032, btln007455, btln007456, btln007457, btln007458, btln007550, btln007556, btln007551, btln007557, btln007552, btln007558, btln007553, btln007559, btln007560, btln007719, btln007548, btln007549
+{
+  include role::rl_gcnet
+}
 
 
 
