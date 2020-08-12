@@ -151,7 +151,7 @@ Integer $osversion = Integer.new(($facts['os']['release']['major']) * 100 + ($fa
           path    => ['/sbin','/bin','/usr/sbin','/usr/bin'],
           cwd     => "/var/tmp/${installdir}",
           creates => "/var/tmp/TSCO_${hostname}_Install.txt",
-          timeout => 2400,
+          timeout => 1200,
           require => Exec["untar ${installtar}"],
         }
       }
