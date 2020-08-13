@@ -188,9 +188,12 @@ node btln001294, btln001295, btln002172, btln002173, btln002179, btln007031, btl
 # Phase 1
 # node btln002912, btln007315, btln002878, btln002870, btln007294, btln002860, btln002877, btln007244, btln007225, btln002831, btln007239, btln007331, btln002853, btln003011, btln007316, btln007243, btln007322, btln002864, btln007141, btln007231, btln002747, btln007151, btln007092, btln007172, btln002967, btln002819, btln007176, btln007397, btln007165, btln007068, btln007095, btln002728, btln002786, btln007422, btln007291, btln007167, btln007245, btln002861, btln007004, btln002829, btln007321, btln002791, btln002741, btln007139, btln002815, btln007223, btln007349, btln007094, btln002865, btln007069, btln002707, btln007099, btln007437, btln007306, btln002582, btln002427, btln007155, btln007394, btln007389, btln002538, btln002592, btln002694, btln002901, btln002420, btln007051, btln002561, btln002470, btln007157, btln002692, btln007073, btln007043, btln007156, btln007414, btln002693, btln007101, btln002708, btln007096, btln007153, btln002468, btln002537, btln007410, btln002419, btln002415, btln007220, btln002634, btln003019, btln007270, btln007097, btln002667, btln007049, btln002589, btln007412, btln002629, btln002586, btln007408, btln007308, btln002976, btln007375, btln007129, btln007393
 # node btln008192
-# {
-#   include role::rl_static_route
-# }
+#  CRQ120387- add static route for vulnerability scanner in KIDC/QIDC DMZ by using puppet ( 10pm PST Aug 12th – Wed ) night 1st servers
+node btln001503, btlp000746, btln007351, btln000950, btln003005, btlp002338, btln000689, btlp001550, btlp000788, btln003006, btlp007279, btln002400, btlp006398, btlp000719, btlp006255, btlp008001, btlp003172, btln007601, btlp000514, btln001361, btln000946, btln000951, btln002766, btlp000513, btlp007444, btlp007014, btln007791, btln002106, btln002024, btln000948, btln002735, btlp006263,
+btlp000698, btlp002131, btlp001915, btlp006164, btlp002673, btlp002192, btlp001402, btlp001204, btlp002675, btlp002676, btlp002132, btlp002672, btlp001914, btlp000830, btlp002677, btlp000699, btlp002674, btlp000831
+{
+  include role::rl_static_route
+}
 
 # # 20190425 CRQ45615 - Project ASAPNOC
 # node btln007808, btln007809, btln007769, btln007770, btlp007033, btlp007034, btlp007037, btlp007038
